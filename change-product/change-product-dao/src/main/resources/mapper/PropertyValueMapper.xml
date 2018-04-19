@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.cathub.change.product.bean.PropertyValue">
+
+    <cache/>
+    <resultMap id="propertyValue" type="propertyValue">
+        <id property="id" column="id"/>
+        <result property="value" column="value"/>
+        <result property="createDate" column="createDate"/>
+        <result property="updateDate" column="updateDate"/>
+
+        <result property="property_id" column="property_id"/>
+        <result property="product_id" column="product_id"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="propertyValue">
+        INSERT INTO propertyValue_${tableIndex} (
+          id,
+          value,
+          property_id,
+          product_id,
+          createDate,
+          yn
+        )VALUES(
+          #{id, jdbcType=BIGINT},
+          #{value, jdbcType=VARCHAR},
+          #{property.id, jdbcType=BIGINT},
+          #{product.id, jdbcType=BIGINT},
+          NOW(),
+          1
+        )
+    </insert>
+
+    <update id="deleteL" parameterType="propertyValue">
+        UPDATE propertyValue_${tableIndex} SET
+          yn=0
+        WHERE
+          id=#{id, jdbcType=BIGINT}
+        and
+          yn=1
+    </update>
+
+    <update id="restore" parameterType="propertyValue">
+        UPDATE propertyValue_${tableIndex} SET
+        yn=1
+        WHERE
+        id=#{id, jdbcType=BIGINT}
+        AND
+        yn=0
+    </update>
+
+    <delete id="deleteP" parameterType="propertyValue">
+        DELETE FROM propertyValue_${tableIndex} WHERE id=#{id, jdbcType=BIGINT} and yn=0
+    </delete>
+
+    <update id="update" parameterType="propertyValue">
+        UPDATE propertyValue_${tableIndex} SET
+          value=#{value, jdbcType=VARCHAR},
+          property_id=#{property.id, jdbcType=VARCHAR},
+          product_id=#{product.id, jdbcType=VARCHAR},
+          updateDate=NOW()
+        WHERE
+          id=#{id, jdbcType=BIGINT}
+        and
+          yn=1
+    </update>
+
+    <select id="select" parameterType="propertyValue" resultMap="propertyValue">
+        SELECT * FROM propertyValue_${tableIndex} WHERE id=#{id, jdbcType=BIGINT} AND yn=1
+    </select>
+
+    <select id="list" parameterType="int" resultMap="propertyValue">
+        SELECT * FROM propertyValue_${_parameter} WHERE yn=1
+    </select>
+
+    <select id="count" parameterType="int" resultType="long">
+        SELECT COUNT(*) FROM propertyValue_${_parameter} WHERE yn=1
+    </select>
+
+    <delete id="clear" parameterType="int">
+        DELETE FROM propertyValue_${_parameter} WHERE yn=0
+    </delete>
+</mapper>
