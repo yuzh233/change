@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.cathub.change.storehouse.bean.Storehouse">
+
+    <cache/>
+    <resultMap id="storehouse" type="storehouse">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="address" column="address"/>
+        <result property="description" column="description"/>
+        <result property="createDate" column="createDate"/>
+        <result property="updateDate" column="updateDate"/>
+
+        <result property="storehouseCountry_id" column="storehouseCountry_id"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="storehouse">
+        INSERT INTO storehouse_${tableIndex} (
+          id,
+          name,
+          address,
+          description,
+          storehouseCountry_id,
+          createDate,
+          yn
+        )VALUES(
+          #{id, jdbcType=BIGINT},
+          #{name, jdbcType=VARCHAR},
+          #{address, jdbcType=VARCHAR},
+          #{description, jdbcType=VARCHAR},
+          #{storehouseCountry.id, jdbcType=BIGINT},
+          NOW(),
+          1
+        )
+    </insert>
+
+    <update id="deleteL" parameterType="storehouse">
+        UPDATE storehouse_${tableIndex} SET
+          yn=0
+        WHERE
+          id=#{id, jdbcType=BIGINT}
+        and
+          yn=1
+    </update>
+
+    <update id="restore" parameterType="storehouse">
+        UPDATE storehouse_${tableIndex} SET
+          yn=1
+        WHERE
+          id=#{id, jdbcType=BIGINT}
+        AND
+          yn=0
+    </update>
+
+    <delete id="deleteP" parameterType="storehouse">
+        DELETE FROM storehouse_${tableIndex} WHERE id=#{id, jdbcType=BIGINT} and yn=0
+    </delete>
+
+    <update id="update" parameterType="storehouse">
+        UPDATE storehouse_${tableIndex} SET
+          name=#{name, jdbcType=VARCHAR},
+          address=#{address, jdbcType=VARCHAR},
+          description=#{description, jdbcType=VARCHAR},
+          storehouseCountry_id=#{storehouseCountry.id, jdbcType=BIGINT},
+          updateDate=NOW()
+        WHERE
+          id=#{id, jdbcType=BIGINT}
+        and
+          yn=1
+    </update>
+
+    <select id="select" parameterType="storehouse" resultMap="storehouse">
+        SELECT * FROM storehouse_${tableIndex} WHERE id=#{id, jdbcType=BIGINT} AND yn=1
+    </select>
+
+    <select id="list" parameterType="int" resultMap="storehouse">
+        SELECT * FROM storehouse_${_parameter} WHERE yn=1
+    </select>
+
+    <select id="count" parameterType="int" resultType="long">
+        SELECT COUNT(*) FROM storehouse_${_parameter} WHERE yn=1
+    </select>
+
+    <delete id="clear" parameterType="int">
+        DELETE FROM storehouse_${_parameter} WHERE yn=0
+    </delete>
+
+    <select id="listByStorehouseCountryId" parameterType="map" resultMap="storehouse">
+        SELECT * FROM storehouse_${tableIndex} WHERE yn=1 AND storehouseCountry_id=#{storehouseCountry_id, jdbcType=BIGINT}
+    </select>
+
+    <select id="countByStorehouseCountryId" parameterType="map" resultType="int">
+        SELECT COUNT(*) FROM storehouse_${tableIndex} WHERE yn=1 AND storehouseCountry_id=#{storehouseCountry_id, jdbcType=BIGINT}
+    </select>
+</mapper>
