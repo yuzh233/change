@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.cathub.change.user.bean.BrandQuotient">
+
+    <cache/>
+    <resultMap id="brandQuotient" type="brandQuotient">
+        <id property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="createDate" column="createDate"/>
+        <result property="updateDate" column="updateDate"/>
+        <result property="status" column="status"/>
+
+        <result property="role_id" column="role_id"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="brandQuotient">
+        INSERT INTO brandQuotient_${_parameter} (
+          id,
+          username,
+          password,
+          role_id,
+          company_id,
+          status,
+          createDate,
+          yn
+        )VALUES(
+          #{id, jdbcType=BIGINT},
+          #{username, jdbcType=VARCHAR},
+          #{password, jdbcType=VARCHAR},
+          #{role.id, jdbcType=BIGINT},
+          #{company.id, jdbcType=BIGINT},
+          0,
+          NOW(),
+          1
+        )
+    </insert>
+
+    <update id="deleteL" parameterType="brandQuotient">
+        UPDATE brandQuotient_${_parameter} SET
+          yn=0
+        WHERE
+          id=#{id, jdbcType=BIGINT}
+        and
+          yn=1
+    </update>
+
+    <update id="restore" parameterType="brandQuotient">
+        UPDATE brandQuotient_${_parameter} SET
+        yn=1
+        WHERE
+        id=#{id, jdbcType=BIGINT}
+        AND
+        yn=0
+    </update>
+
+    <delete id="deleteP" parameterType="brandQuotient">
+        DELETE FROM brandQuotient_${_parameter} WHERE id=#{id, jdbcType=BIGINT} and yn=0
+    </delete>
+
+    <update id="update" parameterType="brandQuotient">
+        UPDATE brandQuotient_${_parameter} SET
+          password=#{password, jdbcType=VARCHAR},
+          status=#{status, jdbcType=INTEGER},
+          role_id=#{role.id, jdbcType=BIGINT},
+          updateDate=NOW()
+        WHERE
+          id=#{id, jdbcType=BIGINT}
+        and
+          yn=1
+    </update>
+
+    <select id="select" parameterType="brandQuotient" resultMap="brandQuotient">
+        SELECT * FROM brandQuotient_${_parameter} WHERE id=#{id, jdbcType=BIGINT} AND yn=1
+    </select>
+
+    <select id="list" parameterType="int" resultMap="brandQuotient">
+        SELECT * FROM brandQuotient_${_parameter} WHERE yn=1
+    </select>
+
+    <select id="count" parameterType="int" resultType="long">
+        SELECT COUNT(*) FROM brandQuotient_${_parameter} WHERE yn=1
+    </select>
+
+    <select id="login" parameterType="brandQuotient" resultMap="brandQuotient">
+        SELECT * FROM brandQuotient_${_parameter} where yn=1 AND username=#{username, jdbcType=VARCHAR} AND password=#{password, jdbcType=VARCHAR}
+    </select>
+
+    <delete id="clear" parameterType="int">
+        DELETE FROM brandQuotient_${_parameter} WHERE yn=0
+    </delete>
+</mapper>

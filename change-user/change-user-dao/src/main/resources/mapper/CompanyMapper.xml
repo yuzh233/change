@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.cathub.change.user.bean.Company">
+
+    <cache/>
+    <resultMap id="company" type="company">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="address" column="address"/>
+        <result property="service" column="service"/>
+        <result property="createDate" column="createDate"/>
+        <result property="updateDate" column="updateDate"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="company">
+        INSERT INTO company_${_parameter} (
+          id,
+          name,
+          address,
+          service,
+          createDate,
+          yn
+        )VALUES(
+          #{id, jdbcType=BIGINT},
+          #{name, jdbcType=VARCHAR},
+          #{address, jdbcType=VARCHAR},
+          #{service, jdbcType=VARCHAR},
+          NOW(),
+          1
+        )
+    </insert>
+
+    <update id="deleteL" parameterType="company">
+        UPDATE company_${_parameter} SET
+          yn=0
+        WHERE
+          id=#{id, jdbcType=BIGINT}
+        and
+          yn=1
+    </update>
+
+    <update id="restore" parameterType="company">
+        UPDATE company_${_parameter} SET
+        yn=1
+        WHERE
+        id=#{id, jdbcType=BIGINT}
+        AND
+        yn=0
+    </update>
+
+    <delete id="deleteP" parameterType="company">
+        DELETE FROM company_${_parameter} WHERE id=#{id, jdbcType=BIGINT} and yn=0
+    </delete>
+
+    <update id="update" parameterType="company">
+        UPDATE company_${_parameter} SET
+          address=#{address, jdbcType=VARCHAR},
+          service=#{service, jdbcType=VARCHAR},
+          updateDate=NOW()
+        WHERE
+          id=#{id, jdbcType=BIGINT}
+        and
+          yn=1
+    </update>
+
+    <select id="select" parameterType="company" resultMap="company">
+        SELECT * FROM company_${_parameter} WHERE id=#{id, jdbcType=BIGINT} AND yn=1
+    </select>
+
+    <select id="list" parameterType="int" resultMap="company">
+        SELECT * FROM company_${_parameter} WHERE yn=1
+    </select>
+
+    <select id="count" parameterType="int" resultType="long">
+        SELECT COUNT(*) FROM company_${_parameter} WHERE yn=1
+    </select>
+
+    <delete id="clear" parameterType="int">
+        DELETE FROM company_${_parameter} WHERE yn=0
+    </delete>
+</mapper>
