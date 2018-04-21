@@ -1,14 +1,12 @@
 package me.cathub.change.admin.brandquotient.web.controller.product;
 
 import me.cathub.change.api.rpc.server.product.ProductImageRpcServer;
-import org.springframework.beans.factory.annotation.Autowired;
+import me.cathub.change.common.base.BaseControllerImpl;
+import me.cathub.change.product.bean.ProductImage;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/productImage")
-public class ProductImageController {
-
-    @Autowired
-    private ProductImageRpcServer productImageRpcServer;
+public class ProductImageController extends BaseControllerImpl<ProductImage, ProductImageRpcServer> {
 }

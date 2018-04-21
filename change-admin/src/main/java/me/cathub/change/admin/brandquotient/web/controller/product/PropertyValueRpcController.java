@@ -1,14 +1,12 @@
 package me.cathub.change.admin.brandquotient.web.controller.product;
 
 import me.cathub.change.api.rpc.server.product.PropertyValueRpcServer;
-import org.springframework.beans.factory.annotation.Autowired;
+import me.cathub.change.common.base.BaseControllerImpl;
+import me.cathub.change.product.bean.PropertyValue;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/propertyValue")
-public class PropertyValueRpcController {
-
-    @Autowired
-    private PropertyValueRpcServer propertyValueRpcServer;
+public class PropertyValueRpcController extends BaseControllerImpl<PropertyValue, PropertyValueRpcServer> {
 }

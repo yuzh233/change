@@ -10,7 +10,4 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/order")
 public class OrderController extends BaseControllerImpl<Order, OrderRpcServer> {
-
-    @Autowired
-    private OrderRpcServer orderRpcServer;
 }
