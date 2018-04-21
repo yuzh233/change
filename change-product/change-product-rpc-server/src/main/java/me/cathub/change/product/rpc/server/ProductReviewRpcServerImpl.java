@@ -65,7 +65,9 @@ public class ProductReviewRpcServerImpl implements ProductReviewRpcServer {
     @Override
     public ProductReview fill(ProductReview bean) {
         try {
-            bean.setProduct(productRpcServer.select(new Product(bean.getProduct_id())));
+            Product product = productRpcServer.select(new Product(bean.getProduct_id()));
+
+            bean.setProduct(product);
         } catch (Exception e) {
             e.printStackTrace();
         }

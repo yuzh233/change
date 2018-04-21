@@ -76,8 +76,11 @@ public class BrandQuotientRpcServerImpl implements BrandQuotientRpcServer {
     @Override
     public BrandQuotient fill(BrandQuotient bean) {
         try {
-            bean.setCompany(companyRpcServer.select(new Company(bean.getCompany_id())));
-            bean.setRole(roleRpcServer.select(new Role(bean.getRole_id())));
+            Company company = companyRpcServer.select(new Company(bean.getCompany_id()));
+            Role role = roleRpcServer.select(new Role(bean.getRole_id()));
+
+            bean.setCompany(company);
+            bean.setRole(role);
         } catch (Exception e) {
             e.printStackTrace();
         }

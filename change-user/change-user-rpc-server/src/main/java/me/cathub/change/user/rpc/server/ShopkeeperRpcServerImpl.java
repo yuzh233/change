@@ -71,7 +71,9 @@ public class ShopkeeperRpcServerImpl implements ShopkeeperRpcServer {
     @Override
     public Shopkeeper fill(Shopkeeper bean) {
         try {
-            bean.setRole(roleRpcServer.select(new Role(bean.getRole_id())));
+            Role role = roleRpcServer.select(new Role(bean.getRole_id()));
+
+            bean.setRole(role);
         } catch (Exception e) {
             e.printStackTrace();
         }

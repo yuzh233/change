@@ -76,8 +76,11 @@ public class StorehouseProductStockRpcServerImpl implements StorehouseProductSto
     @Override
     public StorehouseProductStock fill(StorehouseProductStock bean) {
         try {
-            bean.setProduct(productRpcServer.select(new Product(bean.getProduct_id())));
-            bean.setStorehouse(storehouseRpcServer.select(new Storehouse(bean.getStorehouse_id())));
+            Product product = productRpcServer.select(new Product(bean.getProduct_id()));
+            Storehouse storehouse = storehouseRpcServer.select(new Storehouse(bean.getStorehouse_id()));
+
+            bean.setProduct(product);
+            bean.setStorehouse(storehouse);
         } catch (Exception e) {
             e.printStackTrace();
         }

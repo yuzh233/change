@@ -71,7 +71,9 @@ public class AdminRpcServerImpl implements AdminRpcServer {
     @Override
     public Admin fill(Admin bean) {
         try {
-            bean.setRole(roleRpcServer.select(new Role(bean.getRole_id())));
+            Role role = roleRpcServer.select(new Role(bean.getRole_id()));
+
+            bean.setRole(role);
         } catch (Exception e) {
             e.printStackTrace();
         }

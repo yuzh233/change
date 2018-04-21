@@ -76,8 +76,11 @@ public class PropertyValueRpcServerImpl implements PropertyValueRpcServer {
     @Override
     public PropertyValue fill(PropertyValue bean) {
         try {
-            bean.setProperty(propertyRpcServer.select(new Property(bean.getProduct_id())));
-            bean.setProduct(productRpcServer.select(new Product(bean.getProduct_id())));
+            Property property = propertyRpcServer.select(new Property(bean.getProduct_id()));
+            Product product = productRpcServer.select(new Product(bean.getProduct_id()));
+
+            bean.setProperty(property);
+            bean.setProduct(product);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -76,8 +76,11 @@ public class ProductRpcServerImpl implements ProductRpcServer {
     @Override
     public Product fill(Product bean) {
         try {
-            bean.setProductCategory(productCategoryRpcServer.select(new ProductCategory(bean.getProductCategory_id())));
-            bean.setBrandQuotient(brandQuotientRpcServer.select(new BrandQuotient(bean.getBrandQuotient_id())));
+            ProductCategory productCategory = productCategoryRpcServer.select(new ProductCategory(bean.getProductCategory_id()));
+            BrandQuotient brandQuotient = brandQuotientRpcServer.select(new BrandQuotient(bean.getBrandQuotient_id()));
+
+            bean.setProductCategory(productCategory);
+            bean.setBrandQuotient(brandQuotient);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -71,7 +71,9 @@ public class PropertyRpcServerImpl implements PropertyRpcServer {
     @Override
     public Property fill(Property bean) {
         try {
-            bean.setProductCategory(productCategoryRpcServer.select(new ProductCategory(bean.getProductCategory_id())));
+            ProductCategory productCategory = productCategoryRpcServer.select(new ProductCategory(bean.getProductCategory_id()));
+
+            bean.setProductCategory(productCategory);
         } catch (Exception e) {
             e.printStackTrace();
         }

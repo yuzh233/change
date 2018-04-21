@@ -80,8 +80,11 @@ public class OrderItemRpcServerImpl implements OrderItemRpcServer {
             /*
                 填充关联对象
              */
-            bean.setProduct(productRpcServer.select(new Product(bean.getProduct_id())));
-            bean.setOrder(orderRpcServer.select(new Order(bean.getOrder_id())));
+            Product product = productRpcServer.select(new Product(bean.getProduct_id()));
+            Order order = orderRpcServer.select(new Order(bean.getOrder_id()));
+
+            bean.setProduct(product);
+            bean.setOrder(order);
         } catch (Exception e) {
             e.printStackTrace();
         }

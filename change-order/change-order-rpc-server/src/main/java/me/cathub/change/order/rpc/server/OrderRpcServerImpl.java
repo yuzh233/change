@@ -82,9 +82,13 @@ public class OrderRpcServerImpl implements OrderRpcServer {
     @Override
     public Order fill(Order bean) {
         try {
-            bean.setStorehouse(storehouseRpcServer.select(new Storehouse(bean.getStorehouse_id())));
-            bean.setShopkeeper(shopkeeperRpcServer.select(new Shopkeeper(bean.getShopkeeper_id())));
-            bean.setBrandQuotient(brandQuotientRpcServer.select(new BrandQuotient(bean.getBrandQuotient_id())));
+            Storehouse storehouse = storehouseRpcServer.select(new Storehouse(bean.getStorehouse_id()));
+            Shopkeeper shopkeeper = shopkeeperRpcServer.select(new Shopkeeper(bean.getShopkeeper_id()));
+            BrandQuotient brandQuotient = brandQuotientRpcServer.select(new BrandQuotient(bean.getBrandQuotient_id()));
+
+            bean.setStorehouse(storehouse);
+            bean.setShopkeeper(shopkeeper);
+            bean.setBrandQuotient(brandQuotient);
         } catch (Exception e) {
             e.printStackTrace();
         }

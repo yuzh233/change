@@ -71,7 +71,9 @@ public class StorehouseRpcServerImpl implements StorehouseRpcServer {
     @Override
     public Storehouse fill(Storehouse bean) {
         try {
-            bean.setStorehouseCountry(storehouseCountryRpcServer.select(new StorehouseCountry(bean.getStorehouseCountry_id())));
+            StorehouseCountry storehouseCountry = storehouseCountryRpcServer.select(new StorehouseCountry(bean.getStorehouseCountry_id()));
+
+            bean.setStorehouseCountry(storehouseCountry);
         } catch (Exception e) {
             e.printStackTrace();
         }

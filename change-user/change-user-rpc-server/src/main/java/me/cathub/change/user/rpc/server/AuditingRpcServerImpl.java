@@ -6,10 +6,7 @@ import me.cathub.change.api.rpc.server.user.AuditingRpcServer;
 import me.cathub.change.api.rpc.server.user.BrandQuotientRpcServer;
 import me.cathub.change.api.rpc.server.user.ShopkeeperRpcServer;
 import me.cathub.change.common.base.FillAssociationDate;
-import me.cathub.change.user.bean.Admin;
-import me.cathub.change.user.bean.Auditing;
-import me.cathub.change.user.bean.BrandQuotient;
-import me.cathub.change.user.bean.Shopkeeper;
+import me.cathub.change.user.bean.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -82,11 +79,15 @@ public class AuditingRpcServerImpl implements AuditingRpcServer {
     @Override
     public Auditing fill(Auditing bean) {
         try {
-            bean.setAdmin(adminRpcServer.select(new Admin(bean.getAdmin_id())));
+            Admin admin = adminRpcServer.select(new Admin(bean.getAdmin_id()));
+            bean.setAdmin(admin);
+
+            User user = null;
             if (bean.getType() == Auditing.TYPE_BRANDQUOTIENT)
-                bean.setUser(brandQuotientRpcServer.select(new BrandQuotient(bean.getUser_id())));
+                user = brandQuotientRpcServer.select(new BrandQuotient(bean.getUser_id()));
             else if(bean.getType() == Auditing.TYPE_SHOPKEEPER)
-                bean.setUser(shopkeeperRpcServer.select(new Shopkeeper(bean.getUser_id())));
+                user = shopkeeperRpcServer.select(new Shopkeeper(bean.getUser_id()));
+            bean.setUser(user);
         } catch (Exception e) {
             e.printStackTrace();
         }

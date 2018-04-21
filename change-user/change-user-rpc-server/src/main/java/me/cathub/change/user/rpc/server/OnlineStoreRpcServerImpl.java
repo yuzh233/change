@@ -71,7 +71,9 @@ public class OnlineStoreRpcServerImpl implements OnlineStoreRpcServer {
     @Override
     public OnlineStore fill(OnlineStore bean) {
         try {
-            bean.setShopkeeper(shopkeeperRpcServer.select(new Shopkeeper(bean.getShopkeeper_id())));
+            Shopkeeper shopkeeper = shopkeeperRpcServer.select(new Shopkeeper(bean.getShopkeeper_id()));
+
+            bean.setShopkeeper(shopkeeper);
         } catch (Exception e) {
             e.printStackTrace();
         }
