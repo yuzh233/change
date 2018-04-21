@@ -4,6 +4,7 @@ import me.cathub.change.api.dao.storehouse.StorehouseProductStockDao;
 import me.cathub.change.api.rpc.server.product.ProductRpcServer;
 import me.cathub.change.api.rpc.server.storehouse.StorehouseProductStockRpcServer;
 import me.cathub.change.api.rpc.server.storehouse.StorehouseRpcServer;
+import me.cathub.change.common.tool.Sequence;
 import me.cathub.change.product.bean.Product;
 import me.cathub.change.storehouse.bean.Storehouse;
 import me.cathub.change.storehouse.bean.StorehouseProductStock;
@@ -26,8 +27,12 @@ public class StorehouseProductStockRpcServerImpl implements StorehouseProductSto
     @Autowired
     private StorehouseRpcServer storehouseRpcServer;
 
+    @Autowired
+    private Sequence sequence;
+
     @Override
     public boolean insert(StorehouseProductStock bean) throws Exception {
+        bean.setId(sequence.nextId());
         return storehouseProductStockDao.insert(bean);
     }
 

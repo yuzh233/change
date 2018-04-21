@@ -7,11 +7,17 @@
         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-     <!--组件扫描(注解) -->
-    <context:component-scan base-package="me.cathub.change.user.rpc.server" />
-
     <!-- spring dao -->
     <import resource="spring-user-dao.xml"/>
+
+    <!-- id 生成器 -->
+    <bean id="sequence" class="me.cathub.change.common.tool.Sequence">
+        <constructor-arg index="0" value="0"/>
+        <constructor-arg index="1" value="0"/>
+    </bean>
+
+     <!--组件扫描(注解) -->
+    <context:component-scan base-package="me.cathub.change.user.rpc.server" />
 
     <!-- dubbo -->
     <import resource="dubbo-user-server.xml"/>

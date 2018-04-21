@@ -3,6 +3,7 @@ package me.cathub.change.user.rpc.server;
 import me.cathub.change.api.dao.user.OnlineStoreDao;
 import me.cathub.change.api.rpc.server.user.OnlineStoreRpcServer;
 import me.cathub.change.api.rpc.server.user.ShopkeeperRpcServer;
+import me.cathub.change.common.tool.Sequence;
 import me.cathub.change.user.bean.OnlineStore;
 import me.cathub.change.user.bean.Shopkeeper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,12 @@ public class OnlineStoreRpcServerImpl implements OnlineStoreRpcServer {
     @Autowired
     private ShopkeeperRpcServer shopkeeperRpcServer;
 
+    @Autowired
+    private Sequence sequence;
+
     @Override
     public boolean insert(OnlineStore bean) throws Exception {
+        bean.setId(sequence.nextId());
         return onlineStoreDao.insert(bean);
     }
 

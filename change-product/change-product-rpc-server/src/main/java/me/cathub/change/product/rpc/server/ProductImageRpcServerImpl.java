@@ -3,6 +3,7 @@ package me.cathub.change.product.rpc.server;
 import me.cathub.change.api.dao.product.ProductImageDao;
 import me.cathub.change.api.rpc.server.product.ProductImageRpcServer;
 import me.cathub.change.api.rpc.server.product.ProductRpcServer;
+import me.cathub.change.common.tool.Sequence;
 import me.cathub.change.product.bean.Product;
 import me.cathub.change.product.bean.ProductImage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,12 @@ public class ProductImageRpcServerImpl implements ProductImageRpcServer {
     @Autowired
     private ProductRpcServer productRpcServer;
 
+    @Autowired
+    private Sequence sequence;
+
     @Override
     public boolean insert(ProductImage bean) throws Exception {
+        bean.setId(sequence.nextId());
         return productImageDao.insert(bean);
     }
 

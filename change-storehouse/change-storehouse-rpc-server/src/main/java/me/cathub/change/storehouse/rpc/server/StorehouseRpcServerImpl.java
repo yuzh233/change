@@ -3,6 +3,7 @@ package me.cathub.change.storehouse.rpc.server;
 import me.cathub.change.api.dao.storehouse.StorehouseDao;
 import me.cathub.change.api.rpc.server.storehouse.StorehouseCountryRpcServer;
 import me.cathub.change.api.rpc.server.storehouse.StorehouseRpcServer;
+import me.cathub.change.common.tool.Sequence;
 import me.cathub.change.storehouse.bean.Storehouse;
 import me.cathub.change.storehouse.bean.StorehouseCountry;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,12 @@ public class StorehouseRpcServerImpl implements StorehouseRpcServer {
     @Autowired
     private StorehouseCountryRpcServer storehouseCountryRpcServer;
 
+    @Autowired
+    private Sequence sequence;
+
     @Override
     public boolean insert(Storehouse bean) throws Exception {
+        bean.setId(sequence.nextId());
         return storehouseDao.insert(bean);
     }
 

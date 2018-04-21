@@ -3,6 +3,7 @@ package me.cathub.change.user.rpc.server;
 import me.cathub.change.api.dao.user.ShopkeeperDao;
 import me.cathub.change.api.rpc.server.upms.RoleRpcServer;
 import me.cathub.change.api.rpc.server.user.ShopkeeperRpcServer;
+import me.cathub.change.common.tool.Sequence;
 import me.cathub.change.upms.bean.Role;
 import me.cathub.change.user.bean.Shopkeeper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,12 @@ public class ShopkeeperRpcServerImpl implements ShopkeeperRpcServer {
     @Autowired
     private RoleRpcServer roleRpcServer;
 
+    @Autowired
+    private Sequence sequence;
+
     @Override
     public boolean insert(Shopkeeper bean) throws Exception {
+        bean.setId(sequence.nextId());
         return shopkeeperDao.insert(bean);
     }
 

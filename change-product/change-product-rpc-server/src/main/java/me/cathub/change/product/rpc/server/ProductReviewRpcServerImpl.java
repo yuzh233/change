@@ -3,6 +3,7 @@ package me.cathub.change.product.rpc.server;
 import me.cathub.change.api.dao.product.ProductReviewDao;
 import me.cathub.change.api.rpc.server.product.ProductReviewRpcServer;
 import me.cathub.change.api.rpc.server.product.ProductRpcServer;
+import me.cathub.change.common.tool.Sequence;
 import me.cathub.change.product.bean.Product;
 import me.cathub.change.product.bean.ProductReview;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,12 @@ public class ProductReviewRpcServerImpl implements ProductReviewRpcServer {
     @Autowired
     private ProductRpcServer productRpcServer;
 
+    @Autowired
+    private Sequence sequence;
+
     @Override
     public boolean insert(ProductReview bean) throws Exception {
+        bean.setId(sequence.nextId());
         return productReviewDao.insert(bean);
     }
 

@@ -4,6 +4,7 @@ import me.cathub.change.api.dao.product.ProductDao;
 import me.cathub.change.api.rpc.server.product.ProductCategoryRpcServer;
 import me.cathub.change.api.rpc.server.product.ProductRpcServer;
 import me.cathub.change.api.rpc.server.user.BrandQuotientRpcServer;
+import me.cathub.change.common.tool.Sequence;
 import me.cathub.change.product.bean.Product;
 import me.cathub.change.product.bean.ProductCategory;
 import me.cathub.change.user.bean.BrandQuotient;
@@ -26,8 +27,12 @@ public class ProductRpcServerImpl implements ProductRpcServer {
     @Autowired
     private BrandQuotientRpcServer brandQuotientRpcServer;
 
+    @Autowired
+    private Sequence sequence;
+
     @Override
     public boolean insert(Product bean) throws Exception {
+        bean.setId(sequence.nextId());
         return productDao.insert(bean);
     }
 

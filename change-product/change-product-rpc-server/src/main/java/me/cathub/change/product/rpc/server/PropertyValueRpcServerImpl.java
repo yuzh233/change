@@ -4,6 +4,7 @@ import me.cathub.change.api.dao.product.PropertyValueDao;
 import me.cathub.change.api.rpc.server.product.ProductRpcServer;
 import me.cathub.change.api.rpc.server.product.PropertyRpcServer;
 import me.cathub.change.api.rpc.server.product.PropertyValueRpcServer;
+import me.cathub.change.common.tool.Sequence;
 import me.cathub.change.product.bean.Product;
 import me.cathub.change.product.bean.Property;
 import me.cathub.change.product.bean.PropertyValue;
@@ -26,8 +27,12 @@ public class PropertyValueRpcServerImpl implements PropertyValueRpcServer {
     @Autowired
     private ProductRpcServer productRpcServer;
 
+    @Autowired
+    private Sequence sequence;
+
     @Override
     public boolean insert(PropertyValue bean) throws Exception {
+        bean.setId(sequence.nextId());
         return propertyValueDao.insert(bean);
     }
 

@@ -3,6 +3,7 @@ package me.cathub.change.product.rpc.server;
 import me.cathub.change.api.dao.product.PropertyDao;
 import me.cathub.change.api.rpc.server.product.ProductCategoryRpcServer;
 import me.cathub.change.api.rpc.server.product.PropertyRpcServer;
+import me.cathub.change.common.tool.Sequence;
 import me.cathub.change.product.bean.ProductCategory;
 import me.cathub.change.product.bean.Property;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,12 @@ public class PropertyRpcServerImpl implements PropertyRpcServer {
     @Autowired
     private ProductCategoryRpcServer productCategoryRpcServer;
 
+    @Autowired
+    private Sequence sequence;
+
     @Override
     public boolean insert(Property bean) throws Exception {
+        bean.setId(sequence.nextId());
         return propertyDao.insert(bean);
     }
 

@@ -3,6 +3,7 @@ package me.cathub.change.upms.rpc.server;
 import me.cathub.change.api.dao.upms.PermissionDao;
 import me.cathub.change.api.rpc.server.upms.PermissionRpcServer;
 import me.cathub.change.api.rpc.server.upms.RoleRpcServer;
+import me.cathub.change.common.tool.Sequence;
 import me.cathub.change.upms.bean.Permission;
 import me.cathub.change.upms.bean.Role;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,12 @@ public class PermissionRpcServerImpl implements PermissionRpcServer {
     @Autowired
     private RoleRpcServer roleRpcServer;
 
+    @Autowired
+    private Sequence sequence;
+
     @Override
     public boolean insert(Permission bean) throws Exception {
+        bean.setId(sequence.nextId());
         return permissionDao.insert(bean);
     }
 

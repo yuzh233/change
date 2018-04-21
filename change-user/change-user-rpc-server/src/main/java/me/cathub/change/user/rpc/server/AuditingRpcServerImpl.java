@@ -6,6 +6,7 @@ import me.cathub.change.api.rpc.server.user.AuditingRpcServer;
 import me.cathub.change.api.rpc.server.user.BrandQuotientRpcServer;
 import me.cathub.change.api.rpc.server.user.ShopkeeperRpcServer;
 import me.cathub.change.common.base.FillAssociationDate;
+import me.cathub.change.common.tool.Sequence;
 import me.cathub.change.user.bean.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,8 +30,12 @@ public class AuditingRpcServerImpl implements AuditingRpcServer {
     @Autowired
     private ShopkeeperRpcServer shopkeeperRpcServer;
 
+    @Autowired
+    private Sequence sequence;
+
     @Override
     public boolean insert(Auditing bean) throws Exception {
+        bean.setId(sequence.nextId());
         return auditingDao.insert(bean);
     }
 

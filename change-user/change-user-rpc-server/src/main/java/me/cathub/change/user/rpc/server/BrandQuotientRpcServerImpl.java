@@ -4,6 +4,7 @@ import me.cathub.change.api.dao.user.BrandQuotientDao;
 import me.cathub.change.api.rpc.server.upms.RoleRpcServer;
 import me.cathub.change.api.rpc.server.user.BrandQuotientRpcServer;
 import me.cathub.change.api.rpc.server.user.CompanyRpcServer;
+import me.cathub.change.common.tool.Sequence;
 import me.cathub.change.upms.bean.Role;
 import me.cathub.change.user.bean.BrandQuotient;
 import me.cathub.change.user.bean.Company;
@@ -26,8 +27,12 @@ public class BrandQuotientRpcServerImpl implements BrandQuotientRpcServer {
     @Autowired
     private RoleRpcServer roleRpcServer;
 
+    @Autowired
+    private Sequence sequence;
+
     @Override
     public boolean insert(BrandQuotient bean) throws Exception {
+        bean.setId(sequence.nextId());
         return brandQuotientDao.insert(bean);
     }
 

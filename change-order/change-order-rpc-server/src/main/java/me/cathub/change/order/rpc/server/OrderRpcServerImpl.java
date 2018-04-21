@@ -6,6 +6,7 @@ import me.cathub.change.api.rpc.server.storehouse.StorehouseRpcServer;
 import me.cathub.change.api.rpc.server.user.BrandQuotientRpcServer;
 import me.cathub.change.api.rpc.server.user.ShopkeeperRpcServer;
 import me.cathub.change.common.base.FillAssociationDate;
+import me.cathub.change.common.tool.Sequence;
 import me.cathub.change.order.bean.Order;
 import me.cathub.change.storehouse.bean.Storehouse;
 import me.cathub.change.user.bean.BrandQuotient;
@@ -32,8 +33,12 @@ public class OrderRpcServerImpl implements OrderRpcServer {
     @Autowired
     private BrandQuotientRpcServer brandQuotientRpcServer;
 
+    @Autowired
+    private Sequence sequence;
+
     @Override
     public boolean insert(Order bean) throws Exception {
+        bean.setId(sequence.nextId());
         return orderDao.insert(bean);
     }
 
