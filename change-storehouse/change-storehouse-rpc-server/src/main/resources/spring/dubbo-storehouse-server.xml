@@ -17,13 +17,13 @@
     <dubbo:protocol name="dubbo" port="20881" />
 
     <!-- 暴露的服务接口 -->
-    <dubbo:service interface="me.cathub.change.api.rpc.server.storehouse.StorehouseRpcRpcServer" ref="storehouseRpcServer" />
-    <dubbo:service interface="me.cathub.change.api.rpc.server.storehouse.StorehouseCountryRpcRpcServer" ref="storehouseCountryRpcServer" />
-    <dubbo:service interface="me.cathub.change.api.rpc.server.storehouse.StorehouseProductStockRpcRpcServer" ref="storehouseProductStockRpcServer" />
+    <dubbo:service interface="me.cathub.change.api.rpc.server.storehouse.StorehouseRpcServer" ref="storehouseRpcServer" />
+    <dubbo:service interface="me.cathub.change.api.rpc.server.storehouse.StorehouseCountryRpcServer" ref="storehouseCountryRpcServer" />
+    <dubbo:service interface="me.cathub.change.api.rpc.server.storehouse.StorehouseProductStockRpcServer" ref="storehouseProductStockRpcServer" />
 
-    <bean id="storehouseRpcServer" class="me.cathub.change.storehouse.rpc.server.StorehouseRpcRpcServerImpl"/>
-    <bean id="storehouseCountryRpcServer" class="me.cathub.change.storehouse.rpc.server.StorehouseCountryRpcRpcServerImpl"/>
-    <bean id="storehouseProductStockRpcServer" class="me.cathub.change.storehouse.rpc.server.StorehouseProductStockRpcRpcServerImpl"/>
+    <bean id="storehouseRpcServer" class="me.cathub.change.storehouse.rpc.server.StorehouseRpcServerImpl"/>
+    <bean id="storehouseCountryRpcServer" class="me.cathub.change.storehouse.rpc.server.StorehouseCountryRpcServerImpl"/>
+    <bean id="storehouseProductStockRpcServer" class="me.cathub.change.storehouse.rpc.server.StorehouseProductStockRpcServerImpl"/>
 
-    <dubbo:reference id="productRpcServer" interface="me.cathub.change.api.rpc.server.product.ProductRpcRpcServer" />
+    <dubbo:reference id="productRpcServer" interface="me.cathub.change.api.rpc.server.product.ProductRpcServer" />
 </beans>

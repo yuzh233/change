@@ -1,6 +1,6 @@
 package me.cathub.change.admin.brandquotient.web.controller.storehouse;
 
-import me.cathub.change.api.rpc.server.storehouse.StorehouseRpcRpcServer;
+import me.cathub.change.api.rpc.server.storehouse.StorehouseRpcServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,5 +10,5 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class StorehouseController {
 
     @Autowired
-    private StorehouseRpcRpcServer storehouseRpcServer;
+    private StorehouseRpcServer storehouseRpcServer;
 }

@@ -1,6 +1,6 @@
 package me.cathub.change.admin.brandquotient.web.controller.user;
 
-import me.cathub.change.api.rpc.server.user.BrandQuotientRpcRpcServer;
+import me.cathub.change.api.rpc.server.user.BrandQuotientRpcServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,5 +10,5 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class BrandQuotientController {
 
     @Autowired
-    private BrandQuotientRpcRpcServer brandQuotientRpcServer;
+    private BrandQuotientRpcServer brandQuotientRpcServer;
 }

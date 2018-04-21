@@ -11,27 +11,27 @@
 
     <dubbo:registry address="zookeeper://192.168.36.136:2181" />
 
-    <dubbo:reference id="permissionRpcServer" interface="me.cathub.change.api.rpc.server.upms.PermissionRpcRpcServer" />
-    <dubbo:reference id="roleRpcServer" interface="me.cathub.change.api.rpc.server.upms.RoleRpcRpcServer" />
+    <dubbo:reference id="permissionRpcServer" interface="me.cathub.change.api.rpc.server.upms.PermissionRpcServer" />
+    <dubbo:reference id="roleRpcServer" interface="me.cathub.change.api.rpc.server.upms.RoleRpcServer" />
 
-    <dubbo:reference id="onlineStoreRpcServer" interface="me.cathub.change.api.rpc.server.user.OnlineStoreRpcRpcServer" />
-    <dubbo:reference id="companyRpcServer" interface="me.cathub.change.api.rpc.server.user.CompanyRpcRpcServer" />
-    <dubbo:reference id="auditingRpcServer" interface="me.cathub.change.api.rpc.server.user.AuditingRpcRpcServer" />
-    <dubbo:reference id="adminRpcServer" interface="me.cathub.change.api.rpc.server.user.AdminRpcRpcServer" />
-    <dubbo:reference id="shopkeeperRpcServer" interface="me.cathub.change.api.rpc.server.user.ShopkeeperRpcRpcServer" />
-    <dubbo:reference id="brandQuotientRpcServer" interface="me.cathub.change.api.rpc.server.user.BrandQuotientRpcRpcServer" />
+    <dubbo:reference id="onlineStoreRpcServer" interface="me.cathub.change.api.rpc.server.user.OnlineStoreRpcServer" />
+    <dubbo:reference id="companyRpcServer" interface="me.cathub.change.api.rpc.server.user.CompanyRpcServer" />
+    <dubbo:reference id="auditingRpcServer" interface="me.cathub.change.api.rpc.server.user.AuditingRpcServer" />
+    <dubbo:reference id="adminRpcServer" interface="me.cathub.change.api.rpc.server.user.AdminRpcServer" />
+    <dubbo:reference id="shopkeeperRpcServer" interface="me.cathub.change.api.rpc.server.user.ShopkeeperRpcServer" />
+    <dubbo:reference id="brandQuotientRpcServer" interface="me.cathub.change.api.rpc.server.user.BrandQuotientRpcServer" />
 
-    <dubbo:reference id="productReviewRpcServer" interface="me.cathub.change.api.rpc.server.product.ProductReviewRpcRpcServer" />
-    <dubbo:reference id="productRpcServer" interface="me.cathub.change.api.rpc.server.product.ProductRpcRpcServer" />
-    <dubbo:reference id="productImageRpcServer" interface="me.cathub.change.api.rpc.server.product.ProductImageRpcRpcServer" />
-    <dubbo:reference id="propertyRpcServer" interface="me.cathub.change.api.rpc.server.product.PropertyRpcRpcServer" />
-    <dubbo:reference id="productCategoryRpcServer" interface="me.cathub.change.api.rpc.server.product.ProductCategoryRpcRpcServer" />
-    <dubbo:reference id="propertyValueRpcServer" interface="me.cathub.change.api.rpc.server.product.PropertyValueRpcRpcServer" />
+    <dubbo:reference id="productReviewRpcServer" interface="me.cathub.change.api.rpc.server.product.ProductReviewRpcServer" />
+    <dubbo:reference id="productRpcServer" interface="me.cathub.change.api.rpc.server.product.ProductRpcServer" />
+    <dubbo:reference id="productImageRpcServer" interface="me.cathub.change.api.rpc.server.product.ProductImageRpcServer" />
+    <dubbo:reference id="propertyRpcServer" interface="me.cathub.change.api.rpc.server.product.PropertyRpcServer" />
+    <dubbo:reference id="productCategoryRpcServer" interface="me.cathub.change.api.rpc.server.product.ProductCategoryRpcServer" />
+    <dubbo:reference id="propertyValueRpcServer" interface="me.cathub.change.api.rpc.server.product.PropertyValueRpcServer" />
 
-    <dubbo:reference id="storehouseProductStockRpcServer" interface="me.cathub.change.api.rpc.server.storehouse.StorehouseProductStockRpcRpcServer" />
-    <dubbo:reference id="storehouseRpcServer" interface="me.cathub.change.api.rpc.server.storehouse.StorehouseRpcRpcServer" />
-    <dubbo:reference id="storehouseCountryRpcServer" interface="me.cathub.change.api.rpc.server.storehouse.StorehouseCountryRpcRpcServer" />
+    <dubbo:reference id="storehouseProductStockRpcServer" interface="me.cathub.change.api.rpc.server.storehouse.StorehouseProductStockRpcServer" />
+    <dubbo:reference id="storehouseRpcServer" interface="me.cathub.change.api.rpc.server.storehouse.StorehouseRpcServer" />
+    <dubbo:reference id="storehouseCountryRpcServer" interface="me.cathub.change.api.rpc.server.storehouse.StorehouseCountryRpcServer" />
 
-    <dubbo:reference id="orderItemRpcServer" interface="me.cathub.change.api.rpc.server.order.OrderItemRpcRpcServer" />
-    <dubbo:reference id="orderRpcServer" interface="me.cathub.change.api.rpc.server.order.OrderRpcRpcServer" />
+    <dubbo:reference id="orderItemRpcServer" interface="me.cathub.change.api.rpc.server.order.OrderItemRpcServer" />
+    <dubbo:reference id="orderRpcServer" interface="me.cathub.change.api.rpc.server.order.OrderRpcServer" />
 </beans>

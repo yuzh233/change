@@ -17,14 +17,14 @@
     <dubbo:protocol name="dubbo" port="20883" />
 
     <!-- 暴露的服务接口 -->
-    <dubbo:service interface="me.cathub.change.api.rpc.server.order.OrderRpcRpcServer" ref="orderRpcServer" />
-    <dubbo:service interface="me.cathub.change.api.rpc.server.order.OrderItemRpcRpcServer" ref="orderItemRpcServer" />
+    <dubbo:service interface="me.cathub.change.api.rpc.server.order.OrderRpcServer" ref="orderRpcServer" />
+    <dubbo:service interface="me.cathub.change.api.rpc.server.order.OrderItemRpcServer" ref="orderItemRpcServer" />
 
-    <bean id="orderRpcServer" class="me.cathub.change.order.rpc.server.OrderRpcRpcServerImpl"/>
-    <bean id="orderItemRpcServer" class="me.cathub.change.order.rpc.server.OrderItemRpcRpcServerImpl"/>
+    <bean id="orderRpcServer" class="me.cathub.change.order.rpc.server.OrderRpcServerImpl"/>
+    <bean id="orderItemRpcServer" class="me.cathub.change.order.rpc.server.OrderItemRpcServerImpl"/>
 
-    <dubbo:reference id="productRpcServer" interface="me.cathub.change.api.rpc.server.product.ProductRpcRpcServer" />
-    <dubbo:reference id="storehouseRpcServer" interface="me.cathub.change.api.rpc.server.storehouse.StorehouseRpcRpcServer" />
-    <dubbo:reference id="shopkeeperRpcServer" interface="me.cathub.change.api.rpc.server.user.ShopkeeperRpcRpcServer" />
-    <dubbo:reference id="brandQuotientRpcServer" interface="me.cathub.change.api.rpc.server.user.BrandQuotientRpcRpcServer" />
+    <dubbo:reference id="productRpcServer" interface="me.cathub.change.api.rpc.server.product.ProductRpcServer" />
+    <dubbo:reference id="storehouseRpcServer" interface="me.cathub.change.api.rpc.server.storehouse.StorehouseRpcServer" />
+    <dubbo:reference id="shopkeeperRpcServer" interface="me.cathub.change.api.rpc.server.user.ShopkeeperRpcServer" />
+    <dubbo:reference id="brandQuotientRpcServer" interface="me.cathub.change.api.rpc.server.user.BrandQuotientRpcServer" />
 </beans>

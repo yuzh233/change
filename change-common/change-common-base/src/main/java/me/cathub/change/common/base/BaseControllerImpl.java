@@ -23,49 +23,49 @@ public abstract class BaseControllerImpl<B extends Serializable, S extends BaseR
     @ResponseBody
     @Override
     public boolean deleteL(B bean) throws Exception {
-        return false;
+        return service.deleteL(bean);
     }
 
     @RequestMapping("/restore")
     @ResponseBody
     @Override
     public boolean restore(B bean) throws Exception {
-        return false;
+        return service.restore(bean);
     }
 
     @RequestMapping("/deleteP")
     @ResponseBody
     @Override
     public boolean deleteP(B bean) throws Exception {
-        return false;
+        return service.deleteP(bean);
     }
 
     @RequestMapping("/update")
     @ResponseBody
     @Override
     public boolean update(B bean) throws Exception {
-        return false;
+        return service.update(bean);
     }
 
     @RequestMapping("/select")
     @ResponseBody
     @Override
     public B select(B bean) throws Exception {
-        return null;
+        return (B) service.select(bean);
     }
 
     @RequestMapping("/list")
     @ResponseBody
     @Override
     public List<B> list(int page, int count, int tableIndex) throws Exception {
-        return null;
+        return service.list(page, count, tableIndex);
     }
 
     @RequestMapping("/count")
     @ResponseBody
     @Override
     public long count(int tableIndex) throws Exception {
-        return 0;
+        return service.count(tableIndex);
     }
 
     @RequestMapping("/clear")

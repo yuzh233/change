@@ -1,6 +1,6 @@
 package me.cathub.change.admin.brandquotient.web.controller.upms;
 
-import me.cathub.change.api.rpc.server.upms.PermissionRpcRpcServer;
+import me.cathub.change.api.rpc.server.upms.PermissionRpcServer;
 import me.cathub.change.upms.bean.Permission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +14,7 @@ import java.util.List;
 public class PermissionController {
 
     @Autowired
-    private PermissionRpcRpcServer permissionRpcServer;
+    private PermissionRpcServer permissionRpcServer;
 
     @RequestMapping("/insert")
     @ResponseBody
