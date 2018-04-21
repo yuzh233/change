@@ -1,13 +1,13 @@
-import me.cathub.change.api.dao.user.AdminDao;
+import me.cathub.change.api.dao.user.AdminCrud;
 import me.cathub.change.common.tool.Sequence;
-import me.cathub.change.user.dao.AdminDaoImpl;
+import me.cathub.change.user.dao.AdminCrudImpl;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class UserModelTest {
     ApplicationContext context = new ClassPathXmlApplicationContext("spring/spring-user-dao.xml");
-    AdminDao adminDao = context.getBean(AdminDaoImpl.class);
+    AdminCrud adminDao = context.getBean(AdminCrudImpl.class);
 
     Sequence sequence = new Sequence(0, 0);
 

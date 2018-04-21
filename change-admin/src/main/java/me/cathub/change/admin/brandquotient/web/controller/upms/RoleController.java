@@ -1,6 +1,6 @@
 package me.cathub.change.admin.brandquotient.web.controller.upms;
 
-import me.cathub.change.api.rpc.server.upms.RoleRpcServer;
+import me.cathub.change.api.rpc.server.upms.RoleRpcRpcServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,5 +10,5 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class RoleController {
 
     @Autowired
-    private RoleRpcServer roleRpcServer;
+    private RoleRpcRpcServer roleRpcServer;
 }

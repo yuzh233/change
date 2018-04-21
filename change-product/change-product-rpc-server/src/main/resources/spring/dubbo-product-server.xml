@@ -17,19 +17,19 @@
     <dubbo:protocol name="dubbo" port="20882" />
 
     <!-- 暴露的服务接口 -->
-    <dubbo:service interface="me.cathub.change.api.rpc.server.product.ProductRpcServer" ref="productRpcServer" />
-    <dubbo:service interface="me.cathub.change.api.rpc.server.product.ProductCategoryRpcServer" ref="productCategoryRpcServer" />
-    <dubbo:service interface="me.cathub.change.api.rpc.server.product.ProductImageRpcServer" ref="productImageRpcServer" />
-    <dubbo:service interface="me.cathub.change.api.rpc.server.product.ProductReviewRpcServer" ref="productReviewRpcServer" />
-    <dubbo:service interface="me.cathub.change.api.rpc.server.product.PropertyRpcServer" ref="propertyRpcServer" />
-    <dubbo:service interface="me.cathub.change.api.rpc.server.product.PropertyValueRpcServer" ref="propertyValueRpcServer" />
+    <dubbo:service interface="me.cathub.change.api.rpc.server.product.ProductRpcRpcServer" ref="productRpcServer" />
+    <dubbo:service interface="me.cathub.change.api.rpc.server.product.ProductCategoryRpcRpcServer" ref="productCategoryRpcServer" />
+    <dubbo:service interface="me.cathub.change.api.rpc.server.product.ProductImageRpcRpcServer" ref="productImageRpcServer" />
+    <dubbo:service interface="me.cathub.change.api.rpc.server.product.ProductReviewRpcRpcServer" ref="productReviewRpcServer" />
+    <dubbo:service interface="me.cathub.change.api.rpc.server.product.PropertyRpcRpcServer" ref="propertyRpcServer" />
+    <dubbo:service interface="me.cathub.change.api.rpc.server.product.PropertyValueRpcRpcServer" ref="propertyValueRpcServer" />
 
-    <bean id="productRpcServer" class="me.cathub.change.product.rpc.server.ProductRpcServerImpl"/>
-    <bean id="productCategoryRpcServer" class="me.cathub.change.product.rpc.server.ProductCategoryRpcServerImpl"/>
-    <bean id="productImageRpcServer" class="me.cathub.change.product.rpc.server.ProductImageRpcServerImpl"/>
-    <bean id="productReviewRpcServer" class="me.cathub.change.product.rpc.server.ProductReviewRpcServerImpl"/>
-    <bean id="propertyRpcServer" class="me.cathub.change.product.rpc.server.PropertyRpcServerImpl"/>
-    <bean id="propertyValueRpcServer" class="me.cathub.change.product.rpc.server.PropertyValueRpcServerImpl"/>
+    <bean id="productRpcServer" class="me.cathub.change.product.rpc.server.ProductRpcRpcServerImpl"/>
+    <bean id="productCategoryRpcServer" class="me.cathub.change.product.rpc.server.ProductCategoryRpcRpcServerImpl"/>
+    <bean id="productImageRpcServer" class="me.cathub.change.product.rpc.server.ProductImageRpcRpcServerImpl"/>
+    <bean id="productReviewRpcServer" class="me.cathub.change.product.rpc.server.ProductReviewRpcRpcServerImpl"/>
+    <bean id="propertyRpcServer" class="me.cathub.change.product.rpc.server.PropertyRpcRpcServerImpl"/>
+    <bean id="propertyValueRpcServer" class="me.cathub.change.product.rpc.server.PropertyValueRpcRpcServerImpl"/>
 
-    <dubbo:reference id="brandQuotientRpcServer" interface="me.cathub.change.api.rpc.server.user.BrandQuotientRpcServer" />
+    <dubbo:reference id="brandQuotientRpcServer" interface="me.cathub.change.api.rpc.server.user.BrandQuotientRpcRpcServer" />
 </beans>

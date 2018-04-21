@@ -17,19 +17,19 @@
     <dubbo:protocol name="dubbo" port="20884" />
 
     <!-- 暴露的服务接口 -->
-    <dubbo:service interface="me.cathub.change.api.rpc.server.user.AdminRpcServer" ref="adminRpcServer" />
-    <dubbo:service interface="me.cathub.change.api.rpc.server.user.AuditingRpcServer" ref="auditingRpcServer" />
-    <dubbo:service interface="me.cathub.change.api.rpc.server.user.BrandQuotientRpcServer" ref="brandQuotientRpcServer" />
-    <dubbo:service interface="me.cathub.change.api.rpc.server.user.CompanyRpcServer" ref="companyRpcServer" />
-    <dubbo:service interface="me.cathub.change.api.rpc.server.user.OnlineStoreRpcServer" ref="onlineStoreRpcServer" />
-    <dubbo:service interface="me.cathub.change.api.rpc.server.user.ShopkeeperRpcServer" ref="shopkeeperRpcServer" />
+    <dubbo:service interface="me.cathub.change.api.rpc.server.user.AdminRpcRpcServer" ref="adminRpcServer" />
+    <dubbo:service interface="me.cathub.change.api.rpc.server.user.AuditingRpcRpcServer" ref="auditingRpcServer" />
+    <dubbo:service interface="me.cathub.change.api.rpc.server.user.BrandQuotientRpcRpcServer" ref="brandQuotientRpcServer" />
+    <dubbo:service interface="me.cathub.change.api.rpc.server.user.CompanyRpcRpcServer" ref="companyRpcServer" />
+    <dubbo:service interface="me.cathub.change.api.rpc.server.user.OnlineStoreRpcRpcServer" ref="onlineStoreRpcServer" />
+    <dubbo:service interface="me.cathub.change.api.rpc.server.user.ShopkeeperRpcRpcServer" ref="shopkeeperRpcServer" />
 
-    <bean id="adminRpcServer" class="me.cathub.change.user.rpc.server.AdminRpcServerImpl"/>
-    <bean id="auditingRpcServer" class="me.cathub.change.user.rpc.server.AuditingRpcServerImpl"/>
-    <bean id="brandQuotientRpcServer" class="me.cathub.change.user.rpc.server.BrandQuotientRpcServerImpl"/>
-    <bean id="companyRpcServer" class="me.cathub.change.user.rpc.server.CompanyRpcServerImpl"/>
-    <bean id="onlineStoreRpcServer" class="me.cathub.change.user.rpc.server.OnlineStoreRpcServerImpl"/>
-    <bean id="shopkeeperRpcServer" class="me.cathub.change.user.rpc.server.ShopkeeperRpcServerImpl"/>
+    <bean id="adminRpcServer" class="me.cathub.change.user.rpc.server.AdminRpcRpcServerImpl"/>
+    <bean id="auditingRpcServer" class="me.cathub.change.user.rpc.server.AuditingRpcRpcServerImpl"/>
+    <bean id="brandQuotientRpcServer" class="me.cathub.change.user.rpc.server.BrandQuotientRpcRpcServerImpl"/>
+    <bean id="companyRpcServer" class="me.cathub.change.user.rpc.server.CompanyRpcRpcServerImpl"/>
+    <bean id="onlineStoreRpcServer" class="me.cathub.change.user.rpc.server.OnlineStoreRpcRpcServerImpl"/>
+    <bean id="shopkeeperRpcServer" class="me.cathub.change.user.rpc.server.ShopkeeperRpcRpcServerImpl"/>
 
-    <dubbo:reference id="roleRpcServer" interface="me.cathub.change.api.rpc.server.upms.RoleRpcServer" />
+    <dubbo:reference id="roleRpcServer" interface="me.cathub.change.api.rpc.server.upms.RoleRpcRpcServer" />
 </beans>

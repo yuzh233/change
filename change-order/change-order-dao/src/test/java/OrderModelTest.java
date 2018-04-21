@@ -1,10 +1,9 @@
-import me.cathub.change.api.dao.order.OrderDao;
-import me.cathub.change.api.dao.order.OrderItemDao;
+import me.cathub.change.api.dao.order.OrderCrud;
+import me.cathub.change.api.dao.order.OrderItemCrud;
 import me.cathub.change.common.tool.Sequence;
 import me.cathub.change.order.bean.Order;
-import me.cathub.change.order.bean.OrderItem;
-import me.cathub.change.order.dao.OrderDaoImpl;
-import me.cathub.change.order.dao.OrderItemDaoImpl;
+import me.cathub.change.order.dao.OrderCrudImpl;
+import me.cathub.change.order.dao.OrderItemCrudImpl;
 import me.cathub.change.storehouse.bean.Storehouse;
 import me.cathub.change.user.bean.BrandQuotient;
 import me.cathub.change.user.bean.Shopkeeper;
@@ -14,8 +13,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class OrderModelTest {
     ApplicationContext context = new ClassPathXmlApplicationContext("spring/spring-order-dao.xml");
-    OrderDao orderDao = context.getBean(OrderDaoImpl.class);
-    OrderItemDao orderItemDao = context.getBean(OrderItemDaoImpl.class);
+    OrderCrud orderDao = context.getBean(OrderCrudImpl.class);
+    OrderItemCrud orderItemDao = context.getBean(OrderItemCrudImpl.class);
 
     Sequence sequence = new Sequence(0, 0);
 

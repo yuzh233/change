@@ -1,6 +1,6 @@
 package me.cathub.change.admin.brandquotient.web.controller.product;
 
-import me.cathub.change.api.rpc.server.product.ProductCategoryRpcServer;
+import me.cathub.change.api.rpc.server.product.ProductCategoryRpcRpcServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,5 +10,5 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ProductCategoryController {
 
     @Autowired
-    private ProductCategoryRpcServer productCategoryRpcServer;
+    private ProductCategoryRpcRpcServer productCategoryRpcServer;
 }

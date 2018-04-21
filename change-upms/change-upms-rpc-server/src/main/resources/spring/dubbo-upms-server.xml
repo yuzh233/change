@@ -17,9 +17,9 @@
     <dubbo:protocol name="dubbo" port="20880" />
 
     <!-- 暴露的服务接口 -->
-    <dubbo:service interface="me.cathub.change.api.rpc.server.upms.RoleRpcServer" ref="roleRpcServer" />
-    <dubbo:service interface="me.cathub.change.api.rpc.server.upms.PermissionRpcServer" ref="permissionRpcServer" />
+    <dubbo:service interface="me.cathub.change.api.rpc.server.upms.RoleRpcRpcServer" ref="roleRpcServer" />
+    <dubbo:service interface="me.cathub.change.api.rpc.server.upms.PermissionRpcRpcServer" ref="permissionRpcServer" />
 
-    <bean id="roleRpcServer" class="me.cathub.change.upms.rpc.server.RoleRpcServerImpl"/>
-    <bean id="permissionRpcServer" class="me.cathub.change.upms.rpc.server.PermissionRpcServerImpl"/>
+    <bean id="roleRpcServer" class="me.cathub.change.upms.rpc.server.RoleRpcRpcServerImpl"/>
+    <bean id="permissionRpcServer" class="me.cathub.change.upms.rpc.server.PermissionRpcRpcServerImpl"/>
 </beans>

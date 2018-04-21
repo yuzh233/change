@@ -1,6 +1,6 @@
 package me.cathub.change.admin.brandquotient.web.controller.order;
 
-import me.cathub.change.api.rpc.server.order.OrderRpcServer;
+import me.cathub.change.api.rpc.server.order.OrderRpcRpcServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,5 +10,5 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class OrderController {
 
     @Autowired
-    private OrderRpcServer orderRpcServer;
+    private OrderRpcRpcServer orderRpcServer;
 }
