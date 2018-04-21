@@ -1,0 +1,29 @@
+[
+    {
+        "id": 1,
+        "username": "change",
+        "password": "123456",
+        "createDate": "2018-4-16",
+        "updateDate": "2018-4-16",
+        "status": "正常",
+        "phone": "15200350702"
+    },
+    {
+        "id": 2,
+        "username": "change",
+        "password": "123456",
+        "createDate": "2018-4-16",
+        "updateDate": "2018-4-16",
+        "status": "正常",
+        "phone": "15200350702"
+    },
+    {
+        "id": 3,
+        "username": "change",
+        "password": "123456",
+        "createDate": "2018-4-16",
+        "updateDate": "2018-4-16",
+        "status": "正常",
+        "phone": "15200350702"
+    }
+]
