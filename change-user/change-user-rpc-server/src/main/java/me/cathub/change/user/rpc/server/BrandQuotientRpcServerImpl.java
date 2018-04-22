@@ -1,6 +1,6 @@
 package me.cathub.change.user.rpc.server;
 
-import me.cathub.change.api.dao.user.BrandQuotientCrud;
+import me.cathub.change.api.dao.user.BrandQuotientDao;
 import me.cathub.change.api.rpc.server.upms.RoleRpcServer;
 import me.cathub.change.api.rpc.server.user.BrandQuotientRpcServer;
 import me.cathub.change.api.rpc.server.user.CompanyRpcServer;
@@ -19,7 +19,7 @@ import static java.util.stream.Collectors.toList;
 public class BrandQuotientRpcServerImpl implements BrandQuotientRpcServer {
 
     @Autowired
-    private BrandQuotientCrud brandQuotientDao;
+    private BrandQuotientDao brandQuotientDao;
 
     @Autowired
     private CompanyRpcServer companyRpcServer;

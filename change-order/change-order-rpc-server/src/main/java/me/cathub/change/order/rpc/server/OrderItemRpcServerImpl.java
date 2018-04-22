@@ -1,6 +1,6 @@
 package me.cathub.change.order.rpc.server;
 
-import me.cathub.change.api.dao.order.OrderItemCrud;
+import me.cathub.change.api.dao.order.OrderItemDao;
 import me.cathub.change.api.rpc.server.order.OrderItemRpcServer;
 import me.cathub.change.api.rpc.server.order.OrderRpcServer;
 import me.cathub.change.api.rpc.server.product.ProductRpcServer;
@@ -19,7 +19,7 @@ import static java.util.stream.Collectors.toList;
 public class OrderItemRpcServerImpl implements OrderItemRpcServer {
 
     @Autowired
-    private OrderItemCrud orderItemDao;
+    private OrderItemDao orderItemDao;
 
     @Autowired
     private OrderRpcServer orderRpcServer;

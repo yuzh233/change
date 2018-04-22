@@ -1,6 +1,6 @@
 package me.cathub.change.user.rpc.server;
 
-import me.cathub.change.api.dao.user.CompanyCrud;
+import me.cathub.change.api.dao.user.CompanyDao;
 import me.cathub.change.api.rpc.server.user.CompanyRpcServer;
 import me.cathub.change.common.tool.Sequence;
 import me.cathub.change.user.bean.Company;
@@ -13,7 +13,7 @@ import java.util.List;
 public class CompanyRpcServerImpl implements CompanyRpcServer {
 
     @Autowired
-    private CompanyCrud companyDao;
+    private CompanyDao companyDao;
 
     @Autowired
     private Sequence sequence;

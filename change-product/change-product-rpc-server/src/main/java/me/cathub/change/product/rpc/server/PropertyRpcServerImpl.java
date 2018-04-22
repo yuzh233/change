@@ -1,6 +1,6 @@
 package me.cathub.change.product.rpc.server;
 
-import me.cathub.change.api.dao.product.PropertyCrud;
+import me.cathub.change.api.dao.product.PropertyDao;
 import me.cathub.change.api.rpc.server.product.ProductCategoryRpcServer;
 import me.cathub.change.api.rpc.server.product.PropertyRpcServer;
 import me.cathub.change.common.tool.Sequence;
@@ -17,7 +17,7 @@ import static java.util.stream.Collectors.toList;
 public class PropertyRpcServerImpl implements PropertyRpcServer {
 
     @Autowired
-    private PropertyCrud propertyDao;
+    private PropertyDao propertyDao;
 
     @Autowired
     private ProductCategoryRpcServer productCategoryRpcServer;

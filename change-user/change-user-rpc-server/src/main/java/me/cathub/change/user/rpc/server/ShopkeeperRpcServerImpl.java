@@ -1,6 +1,6 @@
 package me.cathub.change.user.rpc.server;
 
-import me.cathub.change.api.dao.user.ShopkeeperCrud;
+import me.cathub.change.api.dao.user.ShopkeeperDao;
 import me.cathub.change.api.rpc.server.upms.RoleRpcServer;
 import me.cathub.change.api.rpc.server.user.ShopkeeperRpcServer;
 import me.cathub.change.common.tool.Sequence;
@@ -17,7 +17,7 @@ import static java.util.stream.Collectors.toList;
 public class ShopkeeperRpcServerImpl implements ShopkeeperRpcServer {
 
     @Autowired
-    private ShopkeeperCrud shopkeeperDao;
+    private ShopkeeperDao shopkeeperDao;
 
     @Autowired
     private RoleRpcServer roleRpcServer;

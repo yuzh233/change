@@ -1,6 +1,6 @@
 package me.cathub.change.upms.rpc.server;
 
-import me.cathub.change.api.dao.upms.RoleCrud;
+import me.cathub.change.api.dao.upms.RoleDao;
 import me.cathub.change.api.rpc.server.upms.RoleRpcServer;
 import me.cathub.change.common.tool.Sequence;
 import me.cathub.change.upms.bean.Role;
@@ -13,7 +13,7 @@ import java.util.List;
 public class RoleRpcServerImpl implements RoleRpcServer {
 
     @Autowired
-    private RoleCrud roleDao;
+    private RoleDao roleDao;
 
     @Autowired
     private Sequence sequence;

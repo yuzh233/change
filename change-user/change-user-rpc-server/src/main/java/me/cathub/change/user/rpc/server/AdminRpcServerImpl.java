@@ -1,6 +1,6 @@
 package me.cathub.change.user.rpc.server;
 
-import me.cathub.change.api.dao.user.AdminCrud;
+import me.cathub.change.api.dao.user.AdminDao;
 import me.cathub.change.api.rpc.server.upms.RoleRpcServer;
 import me.cathub.change.api.rpc.server.user.AdminRpcServer;
 import me.cathub.change.common.tool.Sequence;
@@ -17,7 +17,7 @@ import static java.util.stream.Collectors.toList;
 public class AdminRpcServerImpl implements AdminRpcServer {
 
     @Autowired
-    private AdminCrud adminDao;
+    private AdminDao adminDao;
 
     @Autowired
     private RoleRpcServer roleRpcServer;

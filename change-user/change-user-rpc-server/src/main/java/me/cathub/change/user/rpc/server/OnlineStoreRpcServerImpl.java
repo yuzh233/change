@@ -1,6 +1,6 @@
 package me.cathub.change.user.rpc.server;
 
-import me.cathub.change.api.dao.user.OnlineStoreCrud;
+import me.cathub.change.api.dao.user.OnlineStoreDao;
 import me.cathub.change.api.rpc.server.user.OnlineStoreRpcServer;
 import me.cathub.change.api.rpc.server.user.ShopkeeperRpcServer;
 import me.cathub.change.common.tool.Sequence;
@@ -17,7 +17,7 @@ import static java.util.stream.Collectors.toList;
 public class OnlineStoreRpcServerImpl implements OnlineStoreRpcServer {
 
     @Autowired
-    private OnlineStoreCrud onlineStoreDao;
+    private OnlineStoreDao onlineStoreDao;
 
     @Autowired
     private ShopkeeperRpcServer shopkeeperRpcServer;

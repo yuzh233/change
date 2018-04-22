@@ -1,6 +1,6 @@
 package me.cathub.change.user.rpc.server;
 
-import me.cathub.change.api.dao.user.AuditingCrud;
+import me.cathub.change.api.dao.user.AuditingDao;
 import me.cathub.change.api.rpc.server.user.AdminRpcServer;
 import me.cathub.change.api.rpc.server.user.AuditingRpcServer;
 import me.cathub.change.api.rpc.server.user.BrandQuotientRpcServer;
@@ -18,7 +18,7 @@ import static java.util.stream.Collectors.toList;
 public class AuditingRpcServerImpl implements AuditingRpcServer {
 
     @Autowired
-    private AuditingCrud auditingDao;
+    private AuditingDao auditingDao;
 
     @Autowired
     private AdminRpcServer adminRpcServer;

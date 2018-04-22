@@ -31,5 +31,6 @@
         <module>change-api</module>
         <module>change-upms</module>
         <module>change-admin</module>
+        <module>change-db-collection</module>
     </modules>
 </project>

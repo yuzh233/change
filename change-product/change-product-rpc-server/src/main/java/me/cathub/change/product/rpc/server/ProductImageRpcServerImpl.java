@@ -1,6 +1,6 @@
 package me.cathub.change.product.rpc.server;
 
-import me.cathub.change.api.dao.product.ProductImageCrud;
+import me.cathub.change.api.dao.product.ProductImageDao;
 import me.cathub.change.api.rpc.server.product.ProductImageRpcServer;
 import me.cathub.change.api.rpc.server.product.ProductRpcServer;
 import me.cathub.change.common.tool.Sequence;
@@ -15,7 +15,7 @@ import static java.util.stream.Collectors.toList;
 public class ProductImageRpcServerImpl implements ProductImageRpcServer {
 
     @Autowired
-    private ProductImageCrud productImageDao;
+    private ProductImageDao productImageDao;
 
     @Autowired
     private ProductRpcServer productRpcServer;

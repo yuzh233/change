@@ -1,6 +1,6 @@
 package me.cathub.change.product.rpc.server;
 
-import me.cathub.change.api.dao.product.ProductCrud;
+import me.cathub.change.api.dao.product.ProductDao;
 import me.cathub.change.api.rpc.server.product.ProductCategoryRpcServer;
 import me.cathub.change.api.rpc.server.product.ProductRpcServer;
 import me.cathub.change.api.rpc.server.user.BrandQuotientRpcServer;
@@ -19,7 +19,7 @@ import static java.util.stream.Collectors.toList;
 public class ProductRpcServerImpl implements ProductRpcServer {
 
     @Autowired
-    private ProductCrud productDao;
+    private ProductDao productDao;
 
     @Autowired
     private ProductCategoryRpcServer productCategoryRpcServer;

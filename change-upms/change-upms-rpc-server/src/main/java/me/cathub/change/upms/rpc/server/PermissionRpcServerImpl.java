@@ -1,6 +1,6 @@
 package me.cathub.change.upms.rpc.server;
 
-import me.cathub.change.api.dao.upms.PermissionCrud;
+import me.cathub.change.api.dao.upms.PermissionDao;
 import me.cathub.change.api.rpc.server.upms.PermissionRpcServer;
 import me.cathub.change.api.rpc.server.upms.RoleRpcServer;
 import me.cathub.change.common.tool.Sequence;
@@ -17,7 +17,7 @@ import static java.util.stream.Collectors.toList;
 public class PermissionRpcServerImpl implements PermissionRpcServer {
 
     @Autowired
-    private PermissionCrud permissionDao;
+    private PermissionDao permissionDao;
 
     @Autowired
     private RoleRpcServer roleRpcServer;

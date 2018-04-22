@@ -1,6 +1,6 @@
 package me.cathub.change.product.rpc.server;
 
-import me.cathub.change.api.dao.product.ProductCategoryCrud;
+import me.cathub.change.api.dao.product.ProductCategoryDao;
 import me.cathub.change.api.rpc.server.product.ProductCategoryRpcServer;
 import me.cathub.change.common.tool.Sequence;
 import me.cathub.change.product.bean.ProductCategory;
@@ -13,7 +13,7 @@ import java.util.List;
 public class ProductCategoryRpcServerImpl implements ProductCategoryRpcServer {
 
     @Autowired
-    private ProductCategoryCrud productCategoryDao;
+    private ProductCategoryDao productCategoryDao;
 
     @Autowired
     private Sequence sequence;

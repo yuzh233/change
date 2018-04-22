@@ -10,7 +10,7 @@ change
 |       |—— change-api-rpc-server
 |—— change-common — 公共模块
 |       |—— change-common-base
-|       |—— change-common-tool
+|       |—— change-common-me.cathub.tool
 |—— change-user — 用户模块
 |       |—— change-user-common
 |       |—— change-user-dao

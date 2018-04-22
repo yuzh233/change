@@ -1,6 +1,6 @@
 package me.cathub.change.storehouse.rpc.server;
 
-import me.cathub.change.api.dao.storehouse.StorehouseProductStockCrud;
+import me.cathub.change.api.dao.storehouse.StorehouseProductStockDao;
 import me.cathub.change.api.rpc.server.product.ProductRpcServer;
 import me.cathub.change.api.rpc.server.storehouse.StorehouseProductStockRpcServer;
 import me.cathub.change.api.rpc.server.storehouse.StorehouseRpcServer;
@@ -19,7 +19,7 @@ import static java.util.stream.Collectors.toList;
 public class StorehouseProductStockRpcServerImpl implements StorehouseProductStockRpcServer {
 
     @Autowired
-    private StorehouseProductStockCrud storehouseProductStockDao;
+    private StorehouseProductStockDao storehouseProductStockDao;
 
     @Autowired
     private ProductRpcServer productRpcServer;

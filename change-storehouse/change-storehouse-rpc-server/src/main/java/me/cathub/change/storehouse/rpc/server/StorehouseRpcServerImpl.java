@@ -1,6 +1,6 @@
 package me.cathub.change.storehouse.rpc.server;
 
-import me.cathub.change.api.dao.storehouse.StorehouseCrud;
+import me.cathub.change.api.dao.storehouse.StorehouseDao;
 import me.cathub.change.api.rpc.server.storehouse.StorehouseCountryRpcServer;
 import me.cathub.change.api.rpc.server.storehouse.StorehouseRpcServer;
 import me.cathub.change.common.tool.Sequence;
@@ -17,7 +17,7 @@ import static java.util.stream.Collectors.toList;
 public class StorehouseRpcServerImpl implements StorehouseRpcServer {
 
     @Autowired
-    private StorehouseCrud storehouseDao;
+    private StorehouseDao storehouseDao;
 
     @Autowired
     private StorehouseCountryRpcServer storehouseCountryRpcServer;

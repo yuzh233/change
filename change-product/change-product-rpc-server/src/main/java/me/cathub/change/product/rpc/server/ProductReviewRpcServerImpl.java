@@ -1,6 +1,6 @@
 package me.cathub.change.product.rpc.server;
 
-import me.cathub.change.api.dao.product.ProductReviewCrud;
+import me.cathub.change.api.dao.product.ProductReviewDao;
 import me.cathub.change.api.rpc.server.product.ProductReviewRpcServer;
 import me.cathub.change.api.rpc.server.product.ProductRpcServer;
 import me.cathub.change.common.tool.Sequence;
@@ -13,7 +13,7 @@ import java.util.List;
 public class ProductReviewRpcServerImpl implements ProductReviewRpcServer {
 
     @Autowired
-    private ProductReviewCrud productReviewDao;
+    private ProductReviewDao productReviewDao;
 
     @Autowired
     private ProductRpcServer productRpcServer;
