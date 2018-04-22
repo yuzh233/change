@@ -5,7 +5,9 @@ import me.cathub.change.common.base.BaseCrudMyBatisImpl;
 import me.cathub.change.storehouse.bean.StorehouseCountry;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class StorehouseCountryDaoImpl extends BaseCrudMyBatisImpl<StorehouseCountry> implements StorehouseCountryDao {
@@ -53,5 +55,19 @@ public class StorehouseCountryDaoImpl extends BaseCrudMyBatisImpl<StorehouseCoun
     @Override
     public long clear(int tableIndex) throws Exception {
         return clear(NAME_SPACE, tableIndex);
+    }
+
+    @Override
+    public StorehouseCountry selectByName(String name, int tableIndex) throws Exception {
+        StorehouseCountry result = null;
+        try {
+            Map<String, Object> map = new HashMap<>();
+            map.put("name", name);
+            map.put("tableIndex", tableIndex);
+            result = sqlSessionTemplate.selectOne(NAME_SPACE + SELECT_BY_NAME, map);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 }

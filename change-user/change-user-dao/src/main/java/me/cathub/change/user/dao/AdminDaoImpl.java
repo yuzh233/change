@@ -5,7 +5,9 @@ import me.cathub.change.common.base.BaseCrudMyBatisImpl;
 import me.cathub.change.user.bean.Admin;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class AdminDaoImpl extends BaseCrudMyBatisImpl<Admin> implements AdminDao {
@@ -60,6 +62,20 @@ public class AdminDaoImpl extends BaseCrudMyBatisImpl<Admin> implements AdminDao
         Admin result = null;
         try {
             result = sqlSessionTemplate.selectOne(NAME_SPACE + LOGIN, admin);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    @Override
+    public Admin selectByName(String name, int tableIndex) throws Exception {
+        Admin result = null;
+        try {
+            Map<String, Object> map = new HashMap<>();
+            map.put("name", name);
+            map.put("tableIndex", tableIndex);
+            result = sqlSessionTemplate.selectOne(NAME_SPACE + SELECT_BY_NAME, map);
         } catch (Exception e) {
             e.printStackTrace();
         }

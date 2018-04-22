@@ -14,7 +14,7 @@
     </resultMap>
 
     <insert id="insert" parameterType="auditing">
-        INSERT INTO auditing_${_parameter} (
+        INSERT INTO auditing_${tableIndex} (
           id,
           type,
           shopkeeper_id,
@@ -30,7 +30,7 @@
     </insert>
 
     <update id="deleteL" parameterType="auditing">
-        UPDATE auditing_${_parameter} SET
+        UPDATE auditing_${tableIndex} SET
           yn=0
         WHERE
           id=#{id, jdbcType=BIGINT}
@@ -39,7 +39,7 @@
     </update>
 
     <update id="restore" parameterType="auditing">
-        UPDATE auditing_${_parameter} SET
+        UPDATE auditing_${tableIndex} SET
         yn=1
         WHERE
         id=#{id, jdbcType=BIGINT}
@@ -48,11 +48,11 @@
     </update>
 
     <delete id="deleteP" parameterType="auditing">
-        DELETE FROM auditing_${_parameter} WHERE id=#{id, jdbcType=BIGINT} and yn=0
+        DELETE FROM auditing_${tableIndex} WHERE id=#{id, jdbcType=BIGINT} and yn=0
     </delete>
 
     <update id="update" parameterType="auditing">
-        UPDATE auditing_${_parameter} SET
+        UPDATE auditing_${tableIndex} SET
           auditAllowDate=#{auditAllowDate, jdbcType=TIMESTAMP},
           admin_id=#{admin.id, jdbcType=BIGINT}
         WHERE
@@ -62,7 +62,7 @@
     </update>
 
     <select id="select" parameterType="auditing" resultMap="auditing">
-        SELECT * FROM auditing_${_parameter} WHERE id=#{id, jdbcType=BIGINT} AND yn=1
+        SELECT * FROM auditing_${tableIndex} WHERE id=#{id, jdbcType=BIGINT} AND yn=1
     </select>
 
     <select id="list" parameterType="int" resultMap="auditing">

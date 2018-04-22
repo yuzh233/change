@@ -149,4 +149,18 @@ public class ProductDaoImpl extends BaseCrudMyBatisImpl<Product> implements Prod
         }
         return count;
     }
+
+    @Override
+    public Product selectByName(String name, int tableIndex) throws Exception {
+        Product result = null;
+        try {
+            Map<String, Object> map = new HashMap<>();
+            map.put("name", name);
+            map.put("tableIndex", tableIndex);
+            result = sqlSessionTemplate.selectOne(NAME_SPACE + SELECT_BY_NAME, map);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 }

@@ -14,7 +14,7 @@
     </resultMap>
 
     <insert id="insert" parameterType="admin">
-        INSERT INTO admin_${_parameter} (
+        INSERT INTO admin_${tableIndex} (
           id,
           username,
           password,
@@ -32,7 +32,7 @@
     </insert>
 
     <update id="deleteL" parameterType="admin">
-        UPDATE admin_${_parameter} SET
+        UPDATE admin_${tableIndex} SET
           yn=0
         WHERE
           id=#{id, jdbcType=BIGINT}
@@ -41,11 +41,11 @@
     </update>
 
     <delete id="deleteP" parameterType="admin">
-        DELETE FROM admin_${_parameter} WHERE id=#{id, jdbcType=BIGINT} and yn=0
+        DELETE FROM admin_${tableIndex} WHERE id=#{id, jdbcType=BIGINT} and yn=0
     </delete>
 
     <update id="update" parameterType="admin">
-        UPDATE admin_${_parameter} SET
+        UPDATE admin_${tableIndex} SET
           password=#{password, jdbcType=VARCHAR},
           role_id=#{role.id, jdbcType=BIGINT},
           updateDate=NOW()
@@ -56,11 +56,11 @@
     </update>
 
     <select id="select" parameterType="admin" resultMap="admin">
-        SELECT * FROM admin_${_parameter} WHERE id=#{id, jdbcType=BIGINT} AND yn=1
+        SELECT * FROM admin_${tableIndex} WHERE id=#{id, jdbcType=BIGINT} AND yn=1
     </select>
 
     <update id="restore" parameterType="admin">
-        UPDATE admin_${_parameter} SET
+        UPDATE admin_${tableIndex} SET
         yn=1
         WHERE
         id=#{id, jdbcType=BIGINT}
@@ -77,7 +77,7 @@
     </select>
 
     <select id="login" parameterType="admin" resultMap="admin">
-        SELECT * FROM admin_${_parameter} where yn=1 AND username=#{username, jdbcType=VARCHAR} AND password=#{password, jdbcType=VARCHAR}
+        SELECT * FROM admin_${tableIndex} where yn=1 AND username=#{username, jdbcType=VARCHAR} AND password=#{password, jdbcType=VARCHAR}
     </select>
 
     <delete id="clear" parameterType="int">
