@@ -2,26 +2,27 @@ package me.cathub.change.db.collection.processor;
 
 import cn.hutool.poi.excel.ExcelReader;
 import cn.hutool.poi.excel.ExcelUtil;
+import me.cathub.change.api.dao.user.CompanyDao;
+import me.cathub.change.common.tool.Sequence;
 import me.cathub.change.db.collection.BasePageProcessor;
-import me.cathub.change.api.rpc.server.user.CompanyRpcServer;
 import me.cathub.change.user.bean.Company;
+import me.cathub.change.user.dao.CompanyDaoImpl;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-@Service
 public class ProductListPageProcessor extends BasePageProcessor<List> {
 
-    @Autowired
-    static CompanyCurd companyCurd;
+    static CompanyDao companyDao;
+    static Sequence sequence = new Sequence(1, 0);
 
-    static List<String> urls = new ArrayList<>();
+    static Map<String, String> urls = new HashMap();
 
     public ProductListPageProcessor() {
     }
@@ -52,23 +53,27 @@ public class ProductListPageProcessor extends BasePageProcessor<List> {
                     if (! url.contains("http"))
                         continue;
 
-                    Company company = new Company();
-                    String name = (String) row.get(0);
-                    String server = (String) row.get(2);
-                    String address = (String) row.get(3);
-
-                    company.setName(name);
-                    company.setService(server);
-                    company.setAddress(address);
-                    companyRpcServer.insert(company);
-                    System.out.println(company);
+//                    urls.put(url);
+//                    Company company = new Company();
+//                    String name = (String) row.get(0);
+//                    String server = (String) row.get(2);
+//                    String address = (String) row.get(3);
+//
+//                    company.setId(sequence.nextId());
+//                    company.setName(name);
+//                    company.setService(server.trim().replace(";", ""));
+//                    company.setAddress(address);
+//                    company.setTableIndex(0);
+//                    companyDao.insert(company);
+//                    System.out.println(company);
                 }
             }
         }
     }
 
     public static void main(String[] args) throws Exception {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:/spring/spring.xml");
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:/spring/spring-user-dao.xml");
+        companyDao = context.getBean(CompanyDaoImpl.class);
         init();
     }
 }

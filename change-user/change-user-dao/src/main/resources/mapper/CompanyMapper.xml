@@ -13,7 +13,7 @@
     </resultMap>
 
     <insert id="insert" parameterType="company">
-        INSERT INTO company_${_parameter} (
+        INSERT INTO company_${tableIndex} (
           id,
           name,
           address,
@@ -31,7 +31,7 @@
     </insert>
 
     <update id="deleteL" parameterType="company">
-        UPDATE company_${_parameter} SET
+        UPDATE company_${tableIndex} SET
           yn=0
         WHERE
           id=#{id, jdbcType=BIGINT}
@@ -40,7 +40,7 @@
     </update>
 
     <update id="restore" parameterType="company">
-        UPDATE company_${_parameter} SET
+        UPDATE company_${tableIndex} SET
         yn=1
         WHERE
         id=#{id, jdbcType=BIGINT}
@@ -49,11 +49,11 @@
     </update>
 
     <delete id="deleteP" parameterType="company">
-        DELETE FROM company_${_parameter} WHERE id=#{id, jdbcType=BIGINT} and yn=0
+        DELETE FROM company_${tableIndex} WHERE id=#{id, jdbcType=BIGINT} and yn=0
     </delete>
 
     <update id="update" parameterType="company">
-        UPDATE company_${_parameter} SET
+        UPDATE company_${tableIndex} SET
           address=#{address, jdbcType=VARCHAR},
           service=#{service, jdbcType=VARCHAR},
           updateDate=NOW()
@@ -64,7 +64,7 @@
     </update>
 
     <select id="select" parameterType="company" resultMap="company">
-        SELECT * FROM company_${_parameter} WHERE id=#{id, jdbcType=BIGINT} AND yn=1
+        SELECT * FROM company_${tableIndex} WHERE id=#{id, jdbcType=BIGINT} AND yn=1
     </select>
 
     <select id="list" parameterType="int" resultMap="company">
