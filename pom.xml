@@ -30,6 +30,5 @@
         <module>change-user</module>
         <module>change-api</module>
         <module>change-upms</module>
-        <module>change-admin</module>
     </modules>
 </project>
