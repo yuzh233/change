@@ -91,4 +91,9 @@ public class BrandQuotientRpcServerImpl implements BrandQuotientRpcServer {
         }
         return bean;
     }
+
+    @Override
+    public BrandQuotient selectByName(String name, int tableIndex) throws Exception {
+        return brandQuotientDao.selectByName(name, tableIndex);
+    }
 }

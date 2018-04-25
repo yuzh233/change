@@ -95,4 +95,14 @@ public class OrderItemRpcServerImpl implements OrderItemRpcServer {
 
         return bean;
     }
+
+    @Override
+    public List<OrderItem> listByOrderId(long order_id, int page, int count, int tableIndex) throws Exception {
+        return orderItemDao.listByOrderId(order_id, page, count, tableIndex);
+    }
+
+    @Override
+    public int countByOrderId(long order_id, int tableIndex) throws Exception {
+        return orderItemDao.countByOrderId(order_id, tableIndex);
+    }
 }

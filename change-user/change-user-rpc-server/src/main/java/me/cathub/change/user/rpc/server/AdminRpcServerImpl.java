@@ -84,4 +84,9 @@ public class AdminRpcServerImpl implements AdminRpcServer {
         }
         return bean;
     }
+
+    @Override
+    public Admin selectByName(String name, int tableIndex) throws Exception {
+        return adminDao.selectByName(name, tableIndex);
+    }
 }

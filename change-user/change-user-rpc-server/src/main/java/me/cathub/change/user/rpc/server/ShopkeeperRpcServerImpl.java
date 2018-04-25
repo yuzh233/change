@@ -84,4 +84,9 @@ public class ShopkeeperRpcServerImpl implements ShopkeeperRpcServer {
         }
         return bean;
     }
+
+    @Override
+    public Shopkeeper selectByName(String name, int tableIndex) throws Exception {
+        return shopkeeperDao.selectByName(name, tableIndex);
+    }
 }

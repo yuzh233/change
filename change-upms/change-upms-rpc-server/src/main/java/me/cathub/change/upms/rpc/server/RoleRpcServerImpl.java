@@ -63,4 +63,9 @@ public class RoleRpcServerImpl implements RoleRpcServer {
     public long clear(int tableIndex) throws Exception {
         return roleDao.count(tableIndex);
     }
+
+    @Override
+    public Role selectByName(String name, int tableIndex) throws Exception {
+        return roleDao.selectByName(name, tableIndex);
+    }
 }

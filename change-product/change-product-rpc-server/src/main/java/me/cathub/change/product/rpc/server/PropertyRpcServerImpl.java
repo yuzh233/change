@@ -84,4 +84,19 @@ public class PropertyRpcServerImpl implements PropertyRpcServer {
         }
         return bean;
     }
+
+    @Override
+    public Property selectByName(String name, int tableIndex) throws Exception {
+        return propertyDao.selectByName(name, tableIndex);
+    }
+
+    @Override
+    public List<Property> listByProductCategoryId(long productCategory_id, int page, int count, int tableIndex) throws Exception {
+        return propertyDao.listByProductCategoryId(productCategory_id, page, count, tableIndex);
+    }
+
+    @Override
+    public int countByProductCategoryId(long productCategory_id, int tableIndex) throws Exception {
+        return propertyDao.countByProductCategoryId(productCategory_id, tableIndex);
+    }
 }

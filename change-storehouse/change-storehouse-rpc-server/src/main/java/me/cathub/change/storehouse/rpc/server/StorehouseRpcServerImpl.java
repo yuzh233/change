@@ -84,4 +84,19 @@ public class StorehouseRpcServerImpl implements StorehouseRpcServer {
         }
         return bean;
     }
+
+    @Override
+    public Storehouse selectByName(String name, int tableIndex) throws Exception {
+        return storehouseDao.selectByName(name, tableIndex);
+    }
+
+    @Override
+    public List<Storehouse> listByStorehouseCountryId(long storehouseCountry_id, int page, int count, int tableIndex) throws Exception {
+        return storehouseDao.listByStorehouseCountryId(storehouseCountry_id, page, count, tableIndex);
+    }
+
+    @Override
+    public int countByStorehouseCountryId(long storehouseCountry_id, int tableIndex) throws Exception {
+        return storehouseDao.countByStorehouseCountryId(storehouseCountry_id, tableIndex);
+    }
 }

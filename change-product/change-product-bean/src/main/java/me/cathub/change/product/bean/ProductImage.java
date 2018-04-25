@@ -7,6 +7,10 @@ import java.util.Date;
  * 产品图片
  */
 public class ProductImage implements Serializable {
+    public static final int TYPE_ONE = 1;
+    public static final int TYPE_SHOW = 2;
+    public static final int TYPE_INFO = 3;
+
     private long id;
     private String url;
     private int type;
@@ -17,6 +21,13 @@ public class ProductImage implements Serializable {
     private long product_id;
 
     private Product product;
+
+    public ProductImage() {
+    }
+
+    public ProductImage(long id) {
+        this.id = id;
+    }
 
     public long getProduct_id() {
         return product_id;

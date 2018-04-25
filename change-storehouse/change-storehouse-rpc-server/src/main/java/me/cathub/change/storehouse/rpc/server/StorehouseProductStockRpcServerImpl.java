@@ -91,4 +91,19 @@ public class StorehouseProductStockRpcServerImpl implements StorehouseProductSto
         }
         return bean;
     }
+
+    @Override
+    public StorehouseProductStock selectByStorehouseIdAndProductId(long storehouse_id, long product_id, int tableIndex) throws Exception {
+        return storehouseProductStockDao.selectByStorehouseIdAndProductId(storehouse_id, product_id, tableIndex);
+    }
+
+    @Override
+    public List<StorehouseProductStock> listByStorehouseId(long storehouse_id, int page, int count, int tableIndex) throws Exception {
+        return storehouseProductStockDao.listByStorehouseId(storehouse_id, page, count, tableIndex);
+    }
+
+    @Override
+    public int countByStorehouseId(long storehouse_id, int tableIndex) throws Exception {
+        return storehouseProductStockDao.countByStorehouseId(storehouse_id, tableIndex);
+    }
 }

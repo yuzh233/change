@@ -63,4 +63,19 @@ public class ProductCategoryRpcServerImpl implements ProductCategoryRpcServer {
     public long clear(int tableIndex) throws Exception {
         return productCategoryDao.clear(tableIndex);
     }
+
+    @Override
+    public ProductCategory selectByName(String name, int tableIndex) throws Exception {
+        return productCategoryDao.selectByName(name, tableIndex);
+    }
+
+    @Override
+    public List<ProductCategory> childListById(long id, int page, int count, int tableIndex) throws Exception {
+        return productCategoryDao.childListById(id, page, count, tableIndex);
+    }
+
+    @Override
+    public int childCountById(long id, int tableIndex) throws Exception {
+        return productCategoryDao.childCountById(id, tableIndex);
+    }
 }

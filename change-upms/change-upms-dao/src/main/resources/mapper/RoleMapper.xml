@@ -71,4 +71,8 @@
     <delete id="clear" parameterType="int">
         DELETE FROM role_${_parameter} WHERE yn=0
     </delete>
+
+    <select id="selectByName" parameterType="map" resultType="role">
+        SELECT * FROM role_${tableIndex} WHERE yn=1 AND name=#{name, jdbcType=VARCHAR}
+    </select>
 </mapper>

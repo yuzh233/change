@@ -87,7 +87,7 @@ public class AuditingRpcServerImpl implements AuditingRpcServer {
             bean.setAdmin(admin);
 
             User user = null;
-            if (bean.getType() == Auditing.TYPE_BRANDQUOTIENT)
+            if (bean.getType() == Auditing.TYPE_BRAND_QUOTIENT)
                 user = brandQuotientRpcServer.select(new BrandQuotient(bean.getUser_id()));
             else if(bean.getType() == Auditing.TYPE_SHOPKEEPER)
                 user = shopkeeperRpcServer.select(new Shopkeeper(bean.getUser_id()));
@@ -96,5 +96,25 @@ public class AuditingRpcServerImpl implements AuditingRpcServer {
             e.printStackTrace();
         }
         return bean;
+    }
+
+    @Override
+    public List<Auditing> listByAdminIdAndUserType(long admin_id, int type, int page, int count, int tableIndex) throws Exception {
+        return auditingDao.listByAdminIdAndUserType(admin_id, type, page, count, tableIndex);
+    }
+
+    @Override
+    public int countByAdminIdAndUserType(long admin_id, int type, int tableIndex) throws Exception {
+        return auditingDao.countByAdminIdAndUserType(admin_id, type, tableIndex);
+    }
+
+    @Override
+    public List<Auditing> listByNotAuditing(int type, int page, int count, int tableIndex) throws Exception {
+        return auditingDao.listByNotAuditing(type, page, count, tableIndex);
+    }
+
+    @Override
+    public int countByNotAuditing(int type, int tableIndex) throws Exception {
+        return 0;
     }
 }

@@ -63,4 +63,9 @@ public class StorehouseCountryRpcServerImpl implements StorehouseCountryRpcServe
     public long clear(int tableIndex) throws Exception {
         return storehouseCountryDao.count(tableIndex);
     }
+
+    @Override
+    public StorehouseCountry selectByName(String name, int tableIndex) throws Exception {
+        return storehouseCountryDao.selectByName(name, tableIndex);
+    }
 }

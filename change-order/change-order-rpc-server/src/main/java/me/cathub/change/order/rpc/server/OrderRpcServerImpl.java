@@ -98,4 +98,34 @@ public class OrderRpcServerImpl implements OrderRpcServer {
         }
         return bean;
     }
+
+    @Override
+    public List<Order> listByStorehouseId(long storehouse_id, int page, int count, int tableIndex) throws Exception {
+        return orderDao.listByStorehouseId(storehouse_id, page, count, tableIndex);
+    }
+
+    @Override
+    public int countByStorehouseId(long storehouse_id, int tableIndex) throws Exception {
+        return orderDao.countByStorehouseId(storehouse_id, tableIndex);
+    }
+
+    @Override
+    public List<Order> listByShopkeeperId(long shopkeeper_id, int page, int count, int tableIndex) throws Exception {
+        return orderDao.listByShopkeeperId(shopkeeper_id, page, count, tableIndex);
+    }
+
+    @Override
+    public int countByShopkeeperId(long shopkeeper_id, int tableIndex) throws Exception {
+        return orderDao.countByStorehouseId(shopkeeper_id, tableIndex);
+    }
+
+    @Override
+    public List<Order> listByBrandQuotient(long brandQuotient_id, int page, int count, int tableIndex) throws Exception {
+        return null;
+    }
+
+    @Override
+    public int countBrandQuotientId(long brandQuotient_id, int tableIndex) {
+        return 0;
+    }
 }

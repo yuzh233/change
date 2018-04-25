@@ -10,7 +10,7 @@ public interface StorehouseProductStockDao extends BaseCrud<StorehouseProductSto
 
     String SELECT_BY_STOREHOUSE_ID_AND_PRODUCT_ID = ".selectByStorehouseIdAndProductId";
     String LIST_BY_STOREHOUSE_ID = ".listByStorehouseId";
-    String LIST_BY_STOREHOUSE_ID_AND_PRODUCT_CATEGORY_ID = ".listByStorehouseIdAndProductCategoryId";
+    String COUNT_BY_STOREHOUSE_ID = ".countByStorehouseId";
 
     /**
      * 根据仓库和产品查找库存
@@ -29,16 +29,10 @@ public interface StorehouseProductStockDao extends BaseCrud<StorehouseProductSto
     List<StorehouseProductStock> listByStorehouseId(long storehouse_id, int page, int count, int tableIndex) throws Exception;
 
     /**
-     * service
-     *
-     * 根据仓库得到某一类别的产品库存列表
+     * 根据仓库得到产品库存数量
      * @param storehouse_id
-     * @param productCategory_id
-     * @param page
-     * @param count
      * @return
      * @throws Exception
-
-    List<StorehouseProductStock> listByStorehouseIdAndProductCategoryId(long storehouse_id, long productCategory_id, int page, int count, int tableIndex) throws Exception;
      */
+    int countByStorehouseId(long storehouse_id, int tableIndex) throws Exception;
 }

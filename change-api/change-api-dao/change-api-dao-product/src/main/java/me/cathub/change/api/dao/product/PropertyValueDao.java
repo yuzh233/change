@@ -17,5 +17,5 @@ public interface PropertyValueDao extends BaseCrud<PropertyValue> {
      * @return
      * @throws Exception
      */
-    List<PropertyAndValue> listByProductId(long product_id, int page, int count, int tableIndex) throws Exception;
+    List<PropertyValue> listByProductId(long product_id, int page, int count, int tableIndex) throws Exception;
 }

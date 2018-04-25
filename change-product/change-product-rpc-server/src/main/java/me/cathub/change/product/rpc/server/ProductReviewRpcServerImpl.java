@@ -78,4 +78,14 @@ public class ProductReviewRpcServerImpl implements ProductReviewRpcServer {
         }
         return bean;
     }
+
+    @Override
+    public List<ProductReview> listByProductId(long product_id, int page, int count, int tableIndex) throws Exception {
+        return productReviewDao.listByProductId(product_id, page, count, tableIndex);
+    }
+
+    @Override
+    public int countByProductId(long product_id, int tableIndex) throws Exception {
+        return productReviewDao.countByProductId(product_id, tableIndex);
+    }
 }

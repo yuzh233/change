@@ -83,4 +83,19 @@ public class PermissionRpcServerImpl implements PermissionRpcServer {
         }
         return bean;
     }
+
+    @Override
+    public Permission selectByName(String name, int tableIndex) throws Exception {
+        return permissionDao.selectByName(name, tableIndex);
+    }
+
+    @Override
+    public List<Permission> listByRoleId(long role_id, int page, int count, int tableIndex) throws Exception {
+        return permissionDao.listByRoleId(role_id, page, count, tableIndex);
+    }
+
+    @Override
+    public int countByRoleId(long role_id, int tableIndex) throws Exception {
+        return permissionDao.countByRoleId(role_id, tableIndex);
+    }
 }

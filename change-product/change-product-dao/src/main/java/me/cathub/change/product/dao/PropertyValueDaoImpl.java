@@ -60,18 +60,20 @@ public class PropertyValueDaoImpl extends BaseCrudMyBatisImpl<PropertyValue> imp
     }
 
     @Override
-    public List<PropertyAndValue> listByProductId(long product_id, int page, int count, int tableIndex) throws Exception {
-        List<PropertyAndValue> results = null;
+    public List<PropertyValue> listByProductId(long product_id, int page, int count, int tableIndex) throws Exception {
+        List<PropertyValue> results = null;
+
         try {
-            Map<String,? super Number> map = new HashMap<>();
+            Map<String, ? super Number> map = new HashMap<>();
             map.put("product_id", product_id);
             map.put("tableIndex", tableIndex);
 
             PageHelper.startPage(page, count);
-            results =sqlSessionTemplate.selectList(NAME_SPACE + LIST_BY_PRODUCT_ID, map);
+            results = sqlSessionTemplate.selectList(NAME_SPACE + LIST_BY_PRODUCT_ID, map);
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         return results;
     }
 }

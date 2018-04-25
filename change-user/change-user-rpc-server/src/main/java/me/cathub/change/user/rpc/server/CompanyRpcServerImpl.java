@@ -63,4 +63,9 @@ public class CompanyRpcServerImpl implements CompanyRpcServer {
     public long clear(int tableIndex) throws Exception {
         return companyDao.count(tableIndex);
     }
+
+    @Override
+    public Company selectByName(String name, int tableIndex) throws Exception {
+        return companyDao.selectByName(name, tableIndex);
+    }
 }

@@ -30,7 +30,6 @@ public abstract class BaseCrudMyBatisImpl<T extends Serializable> implements Bas
             flag = sqlSessionTemplate.delete(namespace + DELETE_L, bean) > 0 ? flag : false;
         } catch (Exception e) {
             e.printStackTrace();
-            flag = false;
         }
         return flag;
     }
@@ -41,7 +40,6 @@ public abstract class BaseCrudMyBatisImpl<T extends Serializable> implements Bas
             flag = sqlSessionTemplate.update(namespace + RESTORE, bean) > 0 ? flag : false;
         } catch (Exception e) {
             e.printStackTrace();
-            flag = false;
         }
         return flag;
     }
@@ -52,7 +50,6 @@ public abstract class BaseCrudMyBatisImpl<T extends Serializable> implements Bas
             flag = sqlSessionTemplate.delete(namespace + DELETE_P, bean) > 0 ? flag : false;
         } catch (Exception e) {
             e.printStackTrace();
-            flag = false;
         }
         return flag;
     }
@@ -63,7 +60,6 @@ public abstract class BaseCrudMyBatisImpl<T extends Serializable> implements Bas
             flag = sqlSessionTemplate.update(namespace + UPDATE, bean) > 0 ? flag : false;
         } catch (Exception e) {
             e.printStackTrace();
-            flag = false;
         }
         return flag;
     }

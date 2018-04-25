@@ -63,6 +63,7 @@
           password=#{password, jdbcType=VARCHAR},
           status=#{status, jdbcType=INTEGER},
           role_id=#{role.id, jdbcType=BIGINT},
+          company_id=#{company.id, jdbcType=BIGINT},
           updateDate=NOW()
         WHERE
           id=#{id, jdbcType=BIGINT}
@@ -89,4 +90,8 @@
     <delete id="clear" parameterType="int">
         DELETE FROM brandQuotient_${_parameter} WHERE yn=0
     </delete>
+
+    <select id="selectByName" parameterType="map" resultType="brandQuotient">
+        SELECT * FROM brandQuotient_${tableIndex} WHERE yn=1 AND username=#{name, jdbcType=VARCHAR}
+    </select>
 </mapper>

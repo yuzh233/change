@@ -7,7 +7,7 @@ import java.util.Date;
  * 审核
  */
 public class Auditing implements Serializable {
-    public static final int TYPE_BRANDQUOTIENT = 1;
+    public static final int TYPE_BRAND_QUOTIENT = 1;
     public static final int TYPE_SHOPKEEPER = 2;
 
     private long id;
@@ -21,6 +21,13 @@ public class Auditing implements Serializable {
 
     private User user;
     private Admin admin;
+
+    public Auditing() {
+    }
+
+    public Auditing(long id) {
+        this.id = id;
+    }
 
     public long getUser_id() {
         return user_id;

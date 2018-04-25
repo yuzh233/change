@@ -84,4 +84,8 @@
     <select id="countByRoleId" parameterType="map" resultType="int">
         SELECT COUNT(*) FROM permission_${tableIndex} WHERE yn=1 AND role_id=#{role_id, jdbcType=BIGINT}
     </select>
+
+    <select id="selectByName" parameterType="map" resultType="permission">
+        SELECT * FROM permission_${tableIndex} WHERE yn=1 AND name=#{name, jdbcType=VARCHAR}
+    </select>
 </mapper>

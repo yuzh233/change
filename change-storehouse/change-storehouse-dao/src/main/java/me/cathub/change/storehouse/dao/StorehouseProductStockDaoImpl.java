@@ -4,10 +4,12 @@ import com.github.pagehelper.PageHelper;
 import me.cathub.change.api.dao.storehouse.StorehouseProductStockDao;
 import me.cathub.change.common.base.BaseCrudMyBatisImpl;
 import me.cathub.change.storehouse.bean.StorehouseProductStock;
+import org.apache.shiro.crypto.hash.Hash;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class StorehouseProductStockDaoImpl extends BaseCrudMyBatisImpl<StorehouseProductStock> implements StorehouseProductStockDao {
@@ -88,24 +90,19 @@ public class StorehouseProductStockDaoImpl extends BaseCrudMyBatisImpl<Storehous
         return results;
     }
 
-    /*
-    service
-
     @Override
-    public List<StorehouseProductStock> listByStorehouseIdAndProductCategoryId(long storehouse_id, long productCategory_id, int page, int count, int tableIndex) throws Exception {
-        List<StorehouseProductStock> results = null;
+    public int countByStorehouseId(long storehouse_id, int tableIndex) throws Exception {
+        int count = 0;
+
         try {
-            HashMap<String, ? super Number> map = new HashMap<>();
+            Map<String, ? super Number> map = new HashMap<>();
             map.put("storehouse_id", storehouse_id);
-            map.put("productCategory_id", productCategory_id);
             map.put("tableIndex", tableIndex);
 
-            PageHelper.startPage(page, count);
-            results = sqlSessionTemplate.selectList(NAME_SPACE + LIST_BY_STOREHOUSE_ID_AND_PRODUCT_CATEGORY_ID, map);
+            count = sqlSessionTemplate.selectOne(NAME_SPACE + COUNT_BY_STOREHOUSE_ID, map);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return results;
+        return count;
     }
-    */
 }

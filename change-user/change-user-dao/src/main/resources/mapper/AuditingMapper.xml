@@ -10,20 +10,20 @@
         <result property="type" column="type"/>
 
         <result property="admin_id" column="admin_id"/>
-        <result property="shopkeeper_id" column="shopkeeper_id"/>
+        <result property="user_id" column="user_id"/>
     </resultMap>
 
     <insert id="insert" parameterType="auditing">
         INSERT INTO auditing_${tableIndex} (
           id,
           type,
-          shopkeeper_id,
+          user_id,
           auditSubmitDate,
           yn
         )VALUES(
           #{id, jdbcType=BIGINT},
           #{type, jdbcType=INTEGER},
-          #{shopkeeper.id, jdbcType=BIGINT},
+          #{user.id, jdbcType=BIGINT},
           now(),
           1
         )

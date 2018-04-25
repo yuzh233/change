@@ -6,6 +6,8 @@
     <resultMap id="productCategory" type="productCategory">
         <id property="id" column="id"/>
         <result property="name" column="name"/>
+        <result property="storey" column="storey"/>
+        <result property="parent_id" column="parent_id"/>
         <result property="createDate" column="createDate"/>
         <result property="updateDate" column="updateDate"/>
     </resultMap>
@@ -14,11 +16,15 @@
         INSERT INTO productCategory_${tableIndex} (
           id,
           name,
+          storey,
+          parent_id,
           createDate,
           yn
         )VALUES(
           #{id, jdbcType=BIGINT},
           #{name, jdbcType=VARCHAR},
+          #{storey, jdbcType=INTEGER},
+          #{parent.id, jdbcType=BIGINT},
           NOW(),
           1
         )
@@ -71,4 +77,16 @@
     <delete id="clear" parameterType="int">
         DELETE FROM productCategory_${_parameter} WHERE yn=0
     </delete>
+
+    <select id="selectByName" parameterType="map" resultMap="productCategory">
+        SELECT * FROM productCategory_${tableIndex} WHERE yn=1 AND name=#{name, jdbcType=VARCHAR}
+    </select>
+
+    <select id="childListById" parameterType="map" resultMap="productCategory">
+        SELECT * FROM productCategory_${tableIndex} WHERE yn=1 AND parent_id=${id, jdbcType=BIGINT}
+    </select>
+
+    <select id="childCountById" parameterType="map" resultMap="productCategory">
+        SELECT COUNT(*) productCategory_${tableIndex} WHERE yn=1 AND parent_id=${id, jdbcType=BIGINT}
+    </select>
 </mapper>

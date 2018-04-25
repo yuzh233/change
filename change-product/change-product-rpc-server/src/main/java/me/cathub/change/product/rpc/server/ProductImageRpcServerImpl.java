@@ -82,4 +82,19 @@ public class ProductImageRpcServerImpl implements ProductImageRpcServer {
         }
         return bean;
     }
+
+    @Override
+    public List<ProductImage> listByProductIdAndImageType(long product_id, int type, int page, int count, int tableIndex) throws Exception {
+        return productImageDao.listByProductIdAndImageType(product_id, type, page, count, tableIndex);
+    }
+
+    @Override
+    public int countByProductIdAndImageType(long product_id, int type, int tableIndex) throws Exception {
+        return productImageDao.countByProductIdAndImageType(product_id, type, tableIndex);
+    }
+
+    @Override
+    public ProductImage selectByProductIdHead(long product_id, int tableIndex) throws Exception {
+        return productImageDao.selectByProductIdHead(product_id, tableIndex);
+    }
 }

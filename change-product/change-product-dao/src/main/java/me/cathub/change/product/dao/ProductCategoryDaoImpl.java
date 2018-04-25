@@ -1,5 +1,6 @@
 package me.cathub.change.product.dao;
 
+import com.github.pagehelper.PageHelper;
 import me.cathub.change.api.dao.product.ProductCategoryDao;
 import me.cathub.change.common.base.BaseCrudMyBatisImpl;
 import me.cathub.change.product.bean.ProductCategory;
@@ -69,5 +70,40 @@ public class ProductCategoryDaoImpl extends BaseCrudMyBatisImpl<ProductCategory>
             e.printStackTrace();
         }
         return result;
+    }
+
+    @Override
+    public List<ProductCategory> childListById(long id, int page, int count, int tableIndex) throws Exception {
+        List<ProductCategory> results = null;
+
+        try {
+            Map<String, ? super Number> map = new HashMap<>();
+            map.put("id", id);
+            map.put("tableIndex", tableIndex);
+
+            PageHelper.startPage(page, count);
+            results = sqlSessionTemplate.selectList(NAME_SPACE + CHILD_LIST_BY_ID, map);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return results;
+    }
+
+    @Override
+    public int childCountById(long id, int tableIndex) throws Exception {
+        int count = 0;
+
+        try {
+            Map<String, ? super Number> map = new HashMap<>();
+            map.put("id", id);
+            map.put("tableIndex", tableIndex);
+
+            count = sqlSessionTemplate.selectOne(NAME_SPACE + CHILD_COUNT_BY_ID, map);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return count;
     }
 }

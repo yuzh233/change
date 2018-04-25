@@ -87,4 +87,8 @@
     <delete id="clear" parameterType="int">
         DELETE FROM shopkeeper_${_parameter} WHERE yn=0
     </delete>
+
+    <select id="selectByName" parameterType="map" resultType="shopkeeper">
+        SELECT * FROM shopkeeper_${tableIndex} WHERE yn=1 AND username=#{name, jdbcType=VARCHAR}
+    </select>
 </mapper>

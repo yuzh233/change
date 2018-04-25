@@ -17,6 +17,13 @@ public class Permission implements Serializable {
 
     private Role role;
 
+    public Permission() {
+    }
+
+    public Permission(long id) {
+        this.id = id;
+    }
+
     public long getRole_id() {
         return role_id;
     }

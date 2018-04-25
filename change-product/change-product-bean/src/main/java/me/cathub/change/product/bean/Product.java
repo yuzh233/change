@@ -9,6 +9,9 @@ import java.util.Date;
  * 产品
  */
 public class Product implements Serializable {
+    public static final int STATUS_PRESELL = 0;         // 运输中, 国内发货 国外仓库未收到货 可预售
+    public static final int STATUS_IN_STOCK = 1;        // 国外仓收到货 可正常借卖
+
     private long id;
     private String name;
     private String subTitle;

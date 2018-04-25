@@ -84,4 +84,14 @@ public class OnlineStoreRpcServerImpl implements OnlineStoreRpcServer {
         }
         return bean;
     }
+
+    @Override
+    public List<OnlineStore> listByShopkeeperId(long shopkeeper_id, int page, int count, int tableIndex) throws Exception {
+        return onlineStoreDao.listByShopkeeperId(shopkeeper_id, page, count, tableIndex);
+    }
+
+    @Override
+    public int countByShopkeeperId(long shopkeeper_id, int tableIndex) throws Exception {
+        return onlineStoreDao.countByShopkeeperId(shopkeeper_id, tableIndex);
+    }
 }

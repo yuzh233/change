@@ -118,4 +118,8 @@
     <select id="countByProductCategoryId" parameterType="long" resultType="int">
         SELECT COUNT(*) FROM product WHERE yn=1 AND productCategory_id=#{productCategory_id, jdbcType=BIGINT}
     </select>
+
+    <select id="selectByName" parameterType="map" resultMap="product">
+        SELECT * FROM product_${tableIndex} WHERE yn=1 AND name=#{name, jdbcType=VARCHAR}
+    </select>
 </mapper>
