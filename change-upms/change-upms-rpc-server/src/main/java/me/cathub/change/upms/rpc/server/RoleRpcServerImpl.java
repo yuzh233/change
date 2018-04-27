@@ -55,12 +55,22 @@ public class RoleRpcServerImpl implements RoleRpcServer {
     }
 
     @Override
-    public long count(int tableIndex) throws Exception {
+    public int count(int tableIndex) throws Exception {
         return roleDao.count(tableIndex);
     }
 
     @Override
-    public long clear(int tableIndex) throws Exception {
+    public List<Role> listByDel(int page, int count, int tableIndex) throws Exception {
+        return roleDao.listByDel(page, count, tableIndex);
+    }
+
+    @Override
+    public int countByDel(int tableIndex) throws Exception {
+        return roleDao.countByDel(tableIndex);
+    }
+
+    @Override
+    public int clear(int tableIndex) throws Exception {
         return roleDao.count(tableIndex);
     }
 

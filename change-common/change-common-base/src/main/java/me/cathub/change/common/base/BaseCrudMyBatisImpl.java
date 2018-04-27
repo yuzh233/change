@@ -86,8 +86,8 @@ public abstract class BaseCrudMyBatisImpl<T extends Serializable> implements Bas
         return results;
     }
 
-    protected final long count(String namespace, int tableIndex) throws Exception {
-        long count = 0;
+    protected final int count(String namespace, int tableIndex) throws Exception {
+        int count = 0;
         try {
             count = sqlSessionTemplate.selectOne(namespace + COUNT, tableIndex);
         } catch (Exception e) {
@@ -96,8 +96,29 @@ public abstract class BaseCrudMyBatisImpl<T extends Serializable> implements Bas
         return count;
     }
 
-    protected final long clear(String namespace, int tableIndex) throws Exception {
-        long count = 0;
+    protected final List<T> listByDel(String namespace, int page, int count, int tableIndex) throws Exception {
+        List<T> results = null;
+        try {
+            PageHelper.startPage(page, count);
+            results = sqlSessionTemplate.selectList(namespace + LIST_BY_DEL, tableIndex);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return results;
+    }
+
+    protected final int countByDel(String namespace, int tableIndex) throws Exception {
+        int count = 0;
+        try {
+            count = sqlSessionTemplate.selectOne(namespace + COUNT_BY_DEL, tableIndex);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+    protected final int clear(String namespace, int tableIndex) throws Exception {
+        int count = 0;
         try {
             count = sqlSessionTemplate.delete(namespace + CLEAR, tableIndex);
         } catch (Exception e) {

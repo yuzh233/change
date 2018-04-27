@@ -55,12 +55,22 @@ public class StorehouseCountryRpcServerImpl implements StorehouseCountryRpcServe
     }
 
     @Override
-    public long count(int tableIndex) throws Exception {
+    public int count(int tableIndex) throws Exception {
         return storehouseCountryDao.count(tableIndex);
     }
 
     @Override
-    public long clear(int tableIndex) throws Exception {
+    public List<StorehouseCountry> listByDel(int page, int count, int tableIndex) throws Exception {
+        return storehouseCountryDao.listByDel(page, count, tableIndex);
+    }
+
+    @Override
+    public int countByDel(int tableIndex) throws Exception {
+        return storehouseCountryDao.countByDel(tableIndex);
+    }
+
+    @Override
+    public int clear(int tableIndex) throws Exception {
         return storehouseCountryDao.count(tableIndex);
     }
 

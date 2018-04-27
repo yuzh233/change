@@ -69,13 +69,66 @@ public class ProductRpcServerImpl implements ProductRpcServer {
     }
 
     @Override
-    public long count(int tableIndex) throws Exception {
+    public int count(int tableIndex) throws Exception {
         return productDao.count(tableIndex);
     }
 
     @Override
-    public long clear(int tableIndex) throws Exception {
+    public List<Product> listByDel(int page, int count, int tableIndex) throws Exception {
+        return productDao.listByDel(page, count, tableIndex).stream()
+                .map(bean -> fill(bean))
+                .collect(toList());
+    }
+
+    @Override
+    public int countByDel(int tableIndex) throws Exception {
+        return productDao.countByDel(tableIndex);
+    }
+
+    @Override
+    public int clear(int tableIndex) throws Exception {
         return productDao.count(tableIndex);
+    }
+
+    @Override
+    public Product selectByName(String name, int tableIndex) throws Exception {
+        return fill(productDao.selectByName(name, tableIndex));
+    }
+
+    @Override
+    public List<Product> listByBrandQuotientId(long brandQuotient_id, int page, int count, int tableIndex) throws Exception {
+        return productDao.listByBrandQuotientId(brandQuotient_id, page, count, tableIndex).stream()
+                .map(bean -> fill(bean))
+                .collect(toList());
+    }
+
+    @Override
+    public int countByBrandQuotientId(long brandQuotient_id, int tableIndex) throws Exception {
+        return productDao.countByBrandQuotientId(brandQuotient_id, tableIndex);
+    }
+
+    @Override
+    public List<Product> listByProductCategoryIdAndBrandQuotientId(long productCategory_id, long brandQuotient_id, int page, int count, int tableIndex) throws Exception {
+        return productDao.listByProductCategoryIdAndBrandQuotientId(productCategory_id, brandQuotient_id, page, count, tableIndex).stream()
+                .map(bean -> fill(bean))
+                .collect(toList());
+    }
+
+    @Override
+    public int countByProductCategoryIdAndBrandQuotientId(long productCategory_id, long brandQuotient_id, int tableIndex) throws Exception {
+        return productDao.countByProductCategoryIdAndBrandQuotientId(productCategory_id, brandQuotient_id, tableIndex);
+    }
+
+    @Override
+    public List<Product> listByProductCategoryId(long productCategory_id, int page, int count, int tableIndex) throws Exception {
+        return productDao.listByProductCategoryId(productCategory_id, page, count, tableIndex).stream()
+                .map(bean -> fill(bean))
+                .collect(toList());
+    }
+
+    @Override
+    public int countByProductCategoryId(long productCategory_id, int tableIndex) throws Exception {
+        return productDao.countByProductCategoryId(productCategory_id, tableIndex);
     }
 
     @Override
@@ -90,40 +143,5 @@ public class ProductRpcServerImpl implements ProductRpcServer {
             e.printStackTrace();
         }
         return bean;
-    }
-
-    @Override
-    public Product selectByName(String name, int tableIndex) throws Exception {
-        return productDao.selectByName(name, tableIndex);
-    }
-
-    @Override
-    public List<Product> listByBrandQuotientId(long brandQuotient_id, int page, int count, int tableIndex) throws Exception {
-        return productDao.listByBrandQuotientId(brandQuotient_id, page, count, tableIndex);
-    }
-
-    @Override
-    public int countByBrandQuotientId(long brandQuotient_id, int tableIndex) throws Exception {
-        return productDao.countByBrandQuotientId(brandQuotient_id, tableIndex);
-    }
-
-    @Override
-    public List<Product> listByProductCategoryIdAndBrandQuotientId(long productCategory_id, long brandQuotient_id, int page, int count, int tableIndex) throws Exception {
-        return productDao.listByProductCategoryIdAndBrandQuotientId(productCategory_id, brandQuotient_id, page, count, tableIndex);
-    }
-
-    @Override
-    public int countByProductCategoryIdAndBrandQuotientId(long productCategory_id, long brandQuotient_id, int tableIndex) throws Exception {
-        return productDao.countByProductCategoryIdAndBrandQuotientId(productCategory_id, brandQuotient_id, tableIndex);
-    }
-
-    @Override
-    public List<Product> listByProductCategoryId(long productCategory_id, int page, int count, int tableIndex) throws Exception {
-        return null;
-    }
-
-    @Override
-    public int countByProductCategoryId(long productCategory_id, int tableIndex) throws Exception {
-        return 0;
     }
 }

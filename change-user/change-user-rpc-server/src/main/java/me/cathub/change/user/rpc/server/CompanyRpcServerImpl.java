@@ -55,12 +55,22 @@ public class CompanyRpcServerImpl implements CompanyRpcServer {
     }
 
     @Override
-    public long count(int tableIndex) throws Exception {
+    public int count(int tableIndex) throws Exception {
         return companyDao.count(tableIndex);
     }
 
     @Override
-    public long clear(int tableIndex) throws Exception {
+    public List<Company> listByDel(int page, int count, int tableIndex) throws Exception {
+        return companyDao.listByDel(page, count, tableIndex);
+    }
+
+    @Override
+    public int countByDel(int tableIndex) throws Exception {
+        return companyDao.countByDel(tableIndex);
+    }
+
+    @Override
+    public int clear(int tableIndex) throws Exception {
         return companyDao.count(tableIndex);
     }
 

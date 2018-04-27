@@ -4,7 +4,6 @@ import me.cathub.change.api.dao.product.PropertyValueDao;
 import me.cathub.change.api.rpc.server.product.ProductRpcServer;
 import me.cathub.change.api.rpc.server.product.PropertyRpcServer;
 import me.cathub.change.api.rpc.server.product.PropertyValueRpcServer;
-import me.cathub.change.common.base.PropertyAndValue;
 import me.cathub.change.common.tool.Sequence;
 import me.cathub.change.product.bean.Product;
 import me.cathub.change.product.bean.Property;
@@ -70,13 +69,37 @@ public class PropertyValueRpcServerImpl implements PropertyValueRpcServer {
     }
 
     @Override
-    public long count(int tableIndex) throws Exception {
+    public int count(int tableIndex) throws Exception {
         return propertyValueDao.count(tableIndex);
     }
 
     @Override
-    public long clear(int tableIndex) throws Exception {
+    public List<PropertyValue> listByDel(int page, int count, int tableIndex) throws Exception {
+        return propertyValueDao.listByDel(page, count, tableIndex).stream()
+                .map(bean -> fill(bean))
+                .collect(toList());
+    }
+
+    @Override
+    public int countByDel(int tableIndex) throws Exception {
+        return propertyValueDao.countByDel(tableIndex);
+    }
+
+    @Override
+    public int clear(int tableIndex) throws Exception {
         return propertyValueDao.count(tableIndex);
+    }
+
+    @Override
+    public List<PropertyValue> listByProductId(long product_id, int page, int count, int tableIndex) throws Exception {
+        return propertyValueDao.listByProductId(product_id, page, count, tableIndex).stream()
+                .map(bean -> fill(bean))
+                .collect(toList());
+    }
+
+    @Override
+    public int countByProductId(long product_id, int tableIndex) throws Exception {
+        return propertyValueDao.countByDel(tableIndex);
     }
 
     @Override
@@ -91,10 +114,5 @@ public class PropertyValueRpcServerImpl implements PropertyValueRpcServer {
             e.printStackTrace();
         }
         return bean;
-    }
-
-    @Override
-    public List<PropertyValue> listByProductId(long product_id, int page, int count, int tableIndex) throws Exception {
-        return propertyValueDao.listByProductId(product_id, page, count, tableIndex);
     }
 }

@@ -64,13 +64,30 @@ public class AdminRpcServerImpl implements AdminRpcServer {
     }
 
     @Override
-    public long count(int tableIndex) throws Exception {
+    public int count(int tableIndex) throws Exception {
         return adminDao.count(tableIndex);
     }
 
     @Override
-    public long clear(int tableIndex) throws Exception {
+    public List<Admin> listByDel(int page, int count, int tableIndex) throws Exception {
+        return adminDao.listByDel(page, count, tableIndex).stream()
+                .map(bean -> fill(bean))
+                .collect(toList());
+    }
+
+    @Override
+    public int countByDel(int tableIndex) throws Exception {
+        return adminDao.countByDel(tableIndex);
+    }
+
+    @Override
+    public int clear(int tableIndex) throws Exception {
         return adminDao.count(tableIndex);
+    }
+
+    @Override
+    public Admin selectByName(String name, int tableIndex) throws Exception {
+        return adminDao.selectByName(name, tableIndex);
     }
 
     @Override
@@ -83,10 +100,5 @@ public class AdminRpcServerImpl implements AdminRpcServer {
             e.printStackTrace();
         }
         return bean;
-    }
-
-    @Override
-    public Admin selectByName(String name, int tableIndex) throws Exception {
-        return adminDao.selectByName(name, tableIndex);
     }
 }

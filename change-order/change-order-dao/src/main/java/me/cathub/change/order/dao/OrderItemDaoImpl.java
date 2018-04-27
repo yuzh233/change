@@ -48,12 +48,22 @@ public class OrderItemDaoImpl extends BaseCrudMyBatisImpl<OrderItem> implements 
     }
 
     @Override
-    public long count(int tableIndex) throws Exception {
+    public int count(int tableIndex) throws Exception {
         return count(NAME_SPACE, tableIndex);
     }
 
     @Override
-    public long clear(int tableIndex) throws Exception {
+    public List<OrderItem> listByDel(int page, int count, int tableIndex) throws Exception {
+        return listByDel(NAME_SPACE, page, count, tableIndex);
+    }
+
+    @Override
+    public int countByDel(int tableIndex) throws Exception {
+        return countByDel(NAME_SPACE, tableIndex);
+    }
+
+    @Override
+    public int clear(int tableIndex) throws Exception {
         return clear(NAME_SPACE, tableIndex);
     }
 
@@ -74,7 +84,7 @@ public class OrderItemDaoImpl extends BaseCrudMyBatisImpl<OrderItem> implements 
     }
 
     @Override
-    public int countByOrderId(long order_id, int tableIndex) throws Exception {
+    public long countByOrderId(long order_id, int tableIndex) throws Exception {
         int count = 0;
         try {
             HashMap<String, ? super Number> map = new HashMap<>();

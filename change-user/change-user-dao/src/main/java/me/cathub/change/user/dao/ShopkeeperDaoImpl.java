@@ -48,12 +48,22 @@ public class ShopkeeperDaoImpl extends BaseCrudMyBatisImpl<Shopkeeper> implement
     }
 
     @Override
-    public long count(int tableIndex) throws Exception {
+    public int count(int tableIndex) throws Exception {
         return count(NAME_SPACE, tableIndex);
     }
 
     @Override
-    public long clear(int tableIndex) throws Exception {
+    public List<Shopkeeper> listByDel(int page, int count, int tableIndex) throws Exception {
+        return listByDel(NAME_SPACE, page, count, tableIndex);
+    }
+
+    @Override
+    public int countByDel(int tableIndex) throws Exception {
+        return countByDel(NAME_SPACE, tableIndex);
+    }
+
+    @Override
+    public int clear(int tableIndex) throws Exception {
         return clear(NAME_SPACE, tableIndex);
     }
 

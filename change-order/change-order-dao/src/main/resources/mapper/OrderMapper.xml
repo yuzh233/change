@@ -85,7 +85,39 @@
         SELECT COUNT(*) FROM order_${_parameter} WHERE yn=1
     </select>
 
+    <select id="listByDel" parameterType="int" resultMap="order">
+        SELECT * FROM order_${_parameter} WHERE yn=0
+    </select>
+
+    <select id="countByDel" parameterType="int" resultType="int">
+        SELECT COUNT(*) FROM order_${_parameter} WHERE yn=0
+    </select>
+
     <delete id="clear" parameterType="int">
         DELETE FROM order_${_parameter} WHERE yn=0
     </delete>
+
+    <select id="listByStorehouseId" parameterType="map" resultMap="order">
+        SELECT * FROM order_${tableIndex} WHERE storehouse_id=#{storehouse_id, jdbcType=BIGINT}
+    </select>
+
+    <select id="countByStorehouseId" parameterType="map" resultType="int">
+        SELECT COUNT(*) order_${tableIndex} WHERE storehouse_id=#{storehouse_id, jdbcType=BIGINT}
+    </select>
+
+    <select id="listByShopkeeperId" parameterType="map" resultMap="order">
+        SELECT * FROM order_${tableIndex} WHERE shopkeeper_id=#{shopkeeper_id, jdbcType=BIGINT}
+    </select>
+
+    <select id="countByShopkeeperId" parameterType="map" resultType="int">
+        SELECT COUNT(*) order_${tableIndex} WHERE shopkeeper_id=#{shopkeeper_id, jdbcType=BIGINT}
+    </select>
+
+    <select id="listByBrandQuotient" parameterType="map" resultMap="order">
+        SELECT * FROM order_${tableIndex} WHERE brandQuotient_id=#{brandQuotient_id, jdbcType=BIGINT}
+    </select>
+
+    <select id="listByBrandQuotient" parameterType="map" resultType="int">
+        SELECT COUNT(*) FROM order_${tableIndex} WHERE brandQuotient_id=#{brandQuotient_id, jdbcType=BIGINT}
+    </select>
 </mapper>

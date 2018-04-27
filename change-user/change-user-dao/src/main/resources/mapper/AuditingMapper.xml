@@ -69,8 +69,16 @@
         SELECT * FROM auditing_${_parameter} WHERE yn=1
     </select>
 
-    <select id="count" parameterType="int" resultType="long">
+    <select id="count" parameterType="int" resultType="int">
         SELECT COUNT(*) FROM auditing_${_parameter} WHERE yn=1
+    </select>
+
+    <select id="listByPage" parameterType="int" resultMap="auditing">
+        SELECT * FROM auditing_${_parameter} WHERE yn=0
+    </select>
+
+    <select id="countByPage" parameterType="int" resultType="int">
+        SELECT COUNT(*) FROM auditing_${_parameter} WHERE yn=0
     </select>
 
     <delete id="clear" parameterType="int">

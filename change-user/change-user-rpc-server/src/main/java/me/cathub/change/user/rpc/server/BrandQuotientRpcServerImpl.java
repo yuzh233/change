@@ -69,13 +69,30 @@ public class BrandQuotientRpcServerImpl implements BrandQuotientRpcServer {
     }
 
     @Override
-    public long count(int tableIndex) throws Exception {
+    public int count(int tableIndex) throws Exception {
         return brandQuotientDao.count(tableIndex);
     }
 
     @Override
-    public long clear(int tableIndex) throws Exception {
+    public List<BrandQuotient> listByDel(int page, int count, int tableIndex) throws Exception {
+        return brandQuotientDao.listByDel(page, count, tableIndex).stream()
+                .map(bean -> fill(bean))
+                .collect(toList());
+    }
+
+    @Override
+    public int countByDel(int tableIndex) throws Exception {
+        return brandQuotientDao.countByDel(tableIndex);
+    }
+
+    @Override
+    public int clear(int tableIndex) throws Exception {
         return brandQuotientDao.count(tableIndex);
+    }
+
+    @Override
+    public BrandQuotient selectByName(String name, int tableIndex) throws Exception {
+        return fill(brandQuotientDao.selectByName(name, tableIndex));
     }
 
     @Override
@@ -90,10 +107,5 @@ public class BrandQuotientRpcServerImpl implements BrandQuotientRpcServer {
             e.printStackTrace();
         }
         return bean;
-    }
-
-    @Override
-    public BrandQuotient selectByName(String name, int tableIndex) throws Exception {
-        return brandQuotientDao.selectByName(name, tableIndex);
     }
 }

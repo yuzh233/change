@@ -74,13 +74,59 @@ public class OrderRpcServerImpl implements OrderRpcServer {
     }
 
     @Override
-    public long count(int tableIndex) throws Exception {
+    public int count(int tableIndex) throws Exception {
         return orderDao.count(tableIndex);
     }
 
     @Override
-    public long clear(int tableIndex) throws Exception {
+    public List<Order> listByDel(int page, int count, int tableIndex) throws Exception {
+        return orderDao.listByDel(page, count, tableIndex).stream()
+                .map(bean -> fill(bean))
+                .collect(toList());
+    }
+
+    @Override
+    public int countByDel(int tableIndex) throws Exception {
+        return orderDao.countByDel(tableIndex);
+    }
+
+    @Override
+    public int clear(int tableIndex) throws Exception {
         return orderDao.clear(tableIndex);
+    }
+
+    @Override
+    public List<Order> listByStorehouseId(long storehouse_id, int page, int count, int tableIndex) throws Exception {
+        return orderDao.listByStorehouseId(storehouse_id, page, count, tableIndex).stream()
+                .map(bean -> fill(bean))
+                .collect(toList());
+    }
+
+    @Override
+    public long countByStorehouseId(long storehouse_id, int tableIndex) throws Exception {
+        return orderDao.countByStorehouseId(storehouse_id, tableIndex);
+    }
+
+    @Override
+    public List<Order> listByShopkeeperId(long shopkeeper_id, int page, int count, int tableIndex) throws Exception {
+        return orderDao.listByShopkeeperId(shopkeeper_id, page, count, tableIndex).stream()
+                .map(bean -> fill(bean))
+                .collect(toList());
+    }
+
+    @Override
+    public long countByShopkeeperId(long shopkeeper_id, int tableIndex) throws Exception {
+        return orderDao.countByStorehouseId(shopkeeper_id, tableIndex);
+    }
+
+    @Override
+    public List<Order> listByBrandQuotient(long brandQuotient_id, int page, int count, int tableIndex) throws Exception {
+        return orderDao.listByBrandQuotient(brandQuotient_id, page, count, tableIndex);
+    }
+
+    @Override
+    public long countBrandQuotientId(long brandQuotient_id, int tableIndex) {
+        return orderDao.countBrandQuotientId(brandQuotient_id, tableIndex);
     }
 
     @Override
@@ -97,35 +143,5 @@ public class OrderRpcServerImpl implements OrderRpcServer {
             e.printStackTrace();
         }
         return bean;
-    }
-
-    @Override
-    public List<Order> listByStorehouseId(long storehouse_id, int page, int count, int tableIndex) throws Exception {
-        return orderDao.listByStorehouseId(storehouse_id, page, count, tableIndex);
-    }
-
-    @Override
-    public int countByStorehouseId(long storehouse_id, int tableIndex) throws Exception {
-        return orderDao.countByStorehouseId(storehouse_id, tableIndex);
-    }
-
-    @Override
-    public List<Order> listByShopkeeperId(long shopkeeper_id, int page, int count, int tableIndex) throws Exception {
-        return orderDao.listByShopkeeperId(shopkeeper_id, page, count, tableIndex);
-    }
-
-    @Override
-    public int countByShopkeeperId(long shopkeeper_id, int tableIndex) throws Exception {
-        return orderDao.countByStorehouseId(shopkeeper_id, tableIndex);
-    }
-
-    @Override
-    public List<Order> listByBrandQuotient(long brandQuotient_id, int page, int count, int tableIndex) throws Exception {
-        return null;
-    }
-
-    @Override
-    public int countBrandQuotientId(long brandQuotient_id, int tableIndex) {
-        return 0;
     }
 }

@@ -55,12 +55,22 @@ public class ProductCategoryRpcServerImpl implements ProductCategoryRpcServer {
     }
 
     @Override
-    public long count(int tableIndex) throws Exception {
+    public int count(int tableIndex) throws Exception {
         return productCategoryDao.count(tableIndex);
     }
 
     @Override
-    public long clear(int tableIndex) throws Exception {
+    public List<ProductCategory> listByDel(int page, int count, int tableIndex) throws Exception {
+        return productCategoryDao.listByDel(page, count, tableIndex);
+    }
+
+    @Override
+    public int countByDel(int tableIndex) throws Exception {
+        return productCategoryDao.countByDel(tableIndex);
+    }
+
+    @Override
+    public int clear(int tableIndex) throws Exception {
         return productCategoryDao.clear(tableIndex);
     }
 

@@ -69,21 +69,42 @@ public class OrderItemRpcServerImpl implements OrderItemRpcServer {
     }
 
     @Override
-    public long count(int tableIndex) throws Exception {
+    public int count(int tableIndex) throws Exception {
         return orderItemDao.count(tableIndex);
     }
 
     @Override
-    public long clear(int tableIndex) throws Exception {
+    public List<OrderItem> listByDel(int page, int count, int tableIndex) throws Exception {
+        return orderItemDao.listByDel(page, count, tableIndex).stream()
+                .map(bean -> fill(bean))
+                .collect(toList());
+    }
+
+    @Override
+    public int countByDel(int tableIndex) throws Exception {
+        return orderItemDao.countByDel(tableIndex);
+    }
+
+    @Override
+    public int clear(int tableIndex) throws Exception {
         return orderItemDao.clear(tableIndex);
+    }
+
+    @Override
+    public List<OrderItem> listByOrderId(long order_id, int page, int count, int tableIndex) throws Exception {
+        return orderItemDao.listByOrderId(order_id, page, count, tableIndex).stream()
+                .map(bean -> fill(bean))
+                .collect(toList());
+    }
+
+    @Override
+    public int countByOrderId(long order_id, int tableIndex) throws Exception {
+        return orderItemDao.countByOrderId(order_id, tableIndex);
     }
 
     @Override
     public OrderItem fill(OrderItem bean) {
         try {
-            /*
-                填充关联对象
-             */
             Product product = productRpcServer.select(new Product(bean.getProduct_id()));
             Order order = orderRpcServer.select(new Order(bean.getOrder_id()));
 
@@ -94,15 +115,5 @@ public class OrderItemRpcServerImpl implements OrderItemRpcServer {
         }
 
         return bean;
-    }
-
-    @Override
-    public List<OrderItem> listByOrderId(long order_id, int page, int count, int tableIndex) throws Exception {
-        return orderItemDao.listByOrderId(order_id, page, count, tableIndex);
-    }
-
-    @Override
-    public int countByOrderId(long order_id, int tableIndex) throws Exception {
-        return orderItemDao.countByOrderId(order_id, tableIndex);
     }
 }

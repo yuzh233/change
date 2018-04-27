@@ -70,8 +70,16 @@
         SELECT * FROM productCategory_${_parameter} WHERE yn=1
     </select>
 
-    <select id="count" parameterType="int" resultType="long">
+    <select id="count" parameterType="int" resultType="int">
         SELECT COUNT(*) FROM productCategory_${_parameter} WHERE yn=1
+    </select>
+
+    <select id="listByDel" parameterType="int" resultMap="productCategory">
+        SELECT * FROM productCategory_${_parameter} WHERE yn=0
+    </select>
+
+    <select id="countByDel" parameterType="int" resultType="int">
+        SELECT COUNT(*) FROM productCategory_${_parameter} WHERE yn=0
     </select>
 
     <delete id="clear" parameterType="int">

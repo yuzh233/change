@@ -7,6 +7,7 @@ import me.cathub.change.storehouse.bean.StorehouseProductStock;
 import org.apache.shiro.crypto.hash.Hash;
 import org.springframework.stereotype.Repository;
 
+import javax.naming.Name;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,12 +51,22 @@ public class StorehouseProductStockDaoImpl extends BaseCrudMyBatisImpl<Storehous
     }
 
     @Override
-    public long count(int tableIndex) throws Exception {
+    public int count(int tableIndex) throws Exception {
         return count(NAME_SPACE, tableIndex);
     }
 
     @Override
-    public long clear(int tableIndex) throws Exception {
+    public List<StorehouseProductStock> listByDel(int page, int count, int tableIndex) throws Exception {
+        return listByDel(NAME_SPACE, page, count, tableIndex);
+    }
+
+    @Override
+    public int countByDel(int tableIndex) throws Exception {
+        return countByDel(NAME_SPACE, tableIndex);
+    }
+
+    @Override
+    public int clear(int tableIndex) throws Exception {
         return clear(NAME_SPACE, tableIndex);
     }
 

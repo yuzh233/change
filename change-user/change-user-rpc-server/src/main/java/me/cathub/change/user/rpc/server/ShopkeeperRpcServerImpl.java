@@ -64,13 +64,30 @@ public class ShopkeeperRpcServerImpl implements ShopkeeperRpcServer {
     }
 
     @Override
-    public long count(int tableIndex) throws Exception {
+    public int count(int tableIndex) throws Exception {
         return shopkeeperDao.count(tableIndex);
     }
 
     @Override
-    public long clear(int tableIndex) throws Exception {
+    public List<Shopkeeper> listByDel(int page, int count, int tableIndex) throws Exception {
+        return shopkeeperDao.listByDel(page, count, tableIndex).stream()
+                .map(bean -> fill(bean))
+                .collect(toList());
+    }
+
+    @Override
+    public int countByDel(int tableIndex) throws Exception {
+        return shopkeeperDao.countByDel(tableIndex);
+    }
+
+    @Override
+    public int clear(int tableIndex) throws Exception {
         return shopkeeperDao.count(tableIndex);
+    }
+
+    @Override
+    public Shopkeeper selectByName(String name, int tableIndex) throws Exception {
+        return fill(shopkeeperDao.selectByName(name, tableIndex));
     }
 
     @Override
@@ -83,10 +100,5 @@ public class ShopkeeperRpcServerImpl implements ShopkeeperRpcServer {
             e.printStackTrace();
         }
         return bean;
-    }
-
-    @Override
-    public Shopkeeper selectByName(String name, int tableIndex) throws Exception {
-        return shopkeeperDao.selectByName(name, tableIndex);
     }
 }

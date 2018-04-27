@@ -50,12 +50,22 @@ public class OrderDaoImpl extends BaseCrudMyBatisImpl<Order> implements OrderDao
     }
 
     @Override
-    public long count(int tableIndex) throws Exception {
+    public int count(int tableIndex) throws Exception {
         return count(NAME_SPACE, tableIndex);
     }
 
     @Override
-    public long clear(int tableIndex) throws Exception {
+    public List<Order> listByDel(int page, int count, int tableIndex) throws Exception {
+        return listByDel(NAME_SPACE, page, count, tableIndex);
+    }
+
+    @Override
+    public int countByDel(int tableIndex) throws Exception {
+        return countByDel(NAME_SPACE, tableIndex);
+    }
+
+    @Override
+    public int clear(int tableIndex) throws Exception {
         return clear(NAME_SPACE, tableIndex);
     }
 
@@ -78,7 +88,7 @@ public class OrderDaoImpl extends BaseCrudMyBatisImpl<Order> implements OrderDao
     }
 
     @Override
-    public int countByStorehouseId(long storehouse_id, int tableIndex) throws Exception {
+    public long countByStorehouseId(long storehouse_id, int tableIndex) throws Exception {
         int count = 0;
 
         try {
@@ -113,7 +123,7 @@ public class OrderDaoImpl extends BaseCrudMyBatisImpl<Order> implements OrderDao
     }
 
     @Override
-    public int countByShopkeeperId(long shopkeeper_id, int tableIndex) throws Exception {
+    public long countByShopkeeperId(long shopkeeper_id, int tableIndex) throws Exception {
         int count = 0;
 
         try {
@@ -148,7 +158,7 @@ public class OrderDaoImpl extends BaseCrudMyBatisImpl<Order> implements OrderDao
     }
 
     @Override
-    public int countBrandQuotientId(long brandQuotient_id, int tableIndex) {
+    public long countBrandQuotientId(long brandQuotient_id, int tableIndex) {
         int count = 0;
 
         try {

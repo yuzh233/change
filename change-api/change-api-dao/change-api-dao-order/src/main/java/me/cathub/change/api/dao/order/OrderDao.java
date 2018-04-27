@@ -34,7 +34,7 @@ public interface OrderDao extends BaseCrud<Order> {
      * @return
      * @throws Exception
      */
-    int countByStorehouseId(long storehouse_id, int tableIndex) throws Exception;
+    long countByStorehouseId(long storehouse_id, int tableIndex) throws Exception;
 
     /**
      * 根据借卖方获取订单列表
@@ -54,7 +54,7 @@ public interface OrderDao extends BaseCrud<Order> {
      * @return
      * @throws Exception
      */
-    int countByShopkeeperId(long shopkeeper_id, int tableIndex) throws Exception;
+    long countByShopkeeperId(long shopkeeper_id, int tableIndex) throws Exception;
 
     /**
      * 根据品牌商获取订单列表
@@ -73,5 +73,5 @@ public interface OrderDao extends BaseCrud<Order> {
      * @param tableIndex
      * @return
      */
-    int countBrandQuotientId(long brandQuotient_id, int tableIndex);
+    long countBrandQuotientId(long brandQuotient_id, int tableIndex);
 }

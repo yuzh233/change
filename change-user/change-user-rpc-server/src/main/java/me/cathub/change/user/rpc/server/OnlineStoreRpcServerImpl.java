@@ -64,13 +64,37 @@ public class OnlineStoreRpcServerImpl implements OnlineStoreRpcServer {
     }
 
     @Override
-    public long count(int tableIndex) throws Exception {
+    public int count(int tableIndex) throws Exception {
         return onlineStoreDao.count(tableIndex);
     }
 
     @Override
-    public long clear(int tableIndex) throws Exception {
+    public List<OnlineStore> listByDel(int page, int count, int tableIndex) throws Exception {
+        return onlineStoreDao.listByDel(page, count, tableIndex).stream()
+                .map(bean -> fill(bean))
+                .collect(toList());
+    }
+
+    @Override
+    public int countByDel(int tableIndex) throws Exception {
+        return onlineStoreDao.countByDel(tableIndex);
+    }
+
+    @Override
+    public int clear(int tableIndex) throws Exception {
         return onlineStoreDao.count(tableIndex);
+    }
+
+    @Override
+    public List<OnlineStore> listByShopkeeperId(long shopkeeper_id, int page, int count, int tableIndex) throws Exception {
+        return onlineStoreDao.listByShopkeeperId(shopkeeper_id, page, count, tableIndex).stream()
+                .map(bean -> fill(bean))
+                .collect(toList());
+    }
+
+    @Override
+    public int countByShopkeeperId(long shopkeeper_id, int tableIndex) throws Exception {
+        return onlineStoreDao.countByShopkeeperId(shopkeeper_id, tableIndex);
     }
 
     @Override
@@ -83,15 +107,5 @@ public class OnlineStoreRpcServerImpl implements OnlineStoreRpcServer {
             e.printStackTrace();
         }
         return bean;
-    }
-
-    @Override
-    public List<OnlineStore> listByShopkeeperId(long shopkeeper_id, int page, int count, int tableIndex) throws Exception {
-        return onlineStoreDao.listByShopkeeperId(shopkeeper_id, page, count, tableIndex);
-    }
-
-    @Override
-    public int countByShopkeeperId(long shopkeeper_id, int tableIndex) throws Exception {
-        return onlineStoreDao.countByShopkeeperId(shopkeeper_id, tableIndex);
     }
 }

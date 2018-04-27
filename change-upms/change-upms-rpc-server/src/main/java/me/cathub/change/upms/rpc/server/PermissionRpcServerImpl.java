@@ -64,13 +64,42 @@ public class PermissionRpcServerImpl implements PermissionRpcServer {
     }
 
     @Override
-    public long count(int tableIndex) throws Exception {
+    public int count(int tableIndex) throws Exception {
         return permissionDao.count(tableIndex);
     }
 
     @Override
-    public long clear(int tableIndex) throws Exception {
+    public List<Permission> listByDel(int page, int count, int tableIndex) throws Exception {
+        return permissionDao.listByDel(page, count, tableIndex).stream()
+                .map(bean -> fill(bean))
+                .collect(toList());
+    }
+
+    @Override
+    public int countByDel(int tableIndex) throws Exception {
+        return permissionDao.countByDel(tableIndex);
+    }
+
+    @Override
+    public int clear(int tableIndex) throws Exception {
         return permissionDao.count(tableIndex);
+    }
+
+    @Override
+    public Permission selectByName(String name, int tableIndex) throws Exception {
+        return fill(permissionDao.selectByName(name, tableIndex));
+    }
+
+    @Override
+    public List<Permission> listByRoleId(long role_id, int page, int count, int tableIndex) throws Exception {
+        return permissionDao.listByRoleId(role_id, page, count, tableIndex).stream()
+                .map(bean -> fill(bean))
+                .collect(toList());
+    }
+
+    @Override
+    public int countByRoleId(long role_id, int tableIndex) throws Exception {
+        return permissionDao.countByRoleId(role_id, tableIndex);
     }
 
     @Override
@@ -82,20 +111,5 @@ public class PermissionRpcServerImpl implements PermissionRpcServer {
             e.printStackTrace();
         }
         return bean;
-    }
-
-    @Override
-    public Permission selectByName(String name, int tableIndex) throws Exception {
-        return permissionDao.selectByName(name, tableIndex);
-    }
-
-    @Override
-    public List<Permission> listByRoleId(long role_id, int page, int count, int tableIndex) throws Exception {
-        return permissionDao.listByRoleId(role_id, page, count, tableIndex);
-    }
-
-    @Override
-    public int countByRoleId(long role_id, int tableIndex) throws Exception {
-        return permissionDao.countByRoleId(role_id, tableIndex);
     }
 }

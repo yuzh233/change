@@ -16,6 +16,8 @@ public interface BaseCrud<T extends Serializable> {
     String LIST = ".list";
     String COUNT = ".count";
     String RESTORE = ".restore";
+    String LIST_BY_DEL = ".listByDel";
+    String COUNT_BY_DEL = ".countByDel";
     String CLEAR = ".clear";
 
     /**
@@ -78,12 +80,30 @@ public interface BaseCrud<T extends Serializable> {
      * @return
      * @throws Exception
      */
-    long count(int tableIndex) throws Exception;
+    int count(int tableIndex) throws Exception;
+
+    /**
+     * 返回已被逻辑删除的数据的列表
+     * @param page
+     * @param count
+     * @param tableIndex
+     * @return
+     * @throws Exception
+     */
+    List<T> listByDel(int page, int count, int tableIndex) throws Exception;
+
+    /**
+     * 返回以被逻辑删除的数据的数量
+     * @param tableIndex
+     * @return
+     * @throws Exception
+     */
+    int countByDel(int tableIndex) throws Exception;
 
     /**
      * 清空垃圾数据(已被逻辑删除的数据)
      * @return
      * @throws Exception
      */
-    long clear(int tableIndex) throws Exception;
+    int clear(int tableIndex) throws Exception;
 }

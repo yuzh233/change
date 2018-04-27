@@ -62,13 +62,42 @@ public class ProductImageRpcServerImpl implements ProductImageRpcServer {
     }
 
     @Override
-    public long count(int tableIndex) throws Exception {
+    public int count(int tableIndex) throws Exception {
         return productImageDao.count(tableIndex);
     }
 
     @Override
-    public long clear(int tableIndex) throws Exception {
+    public List<ProductImage> listByDel(int page, int count, int tableIndex) throws Exception {
+        return productImageDao.listByDel(page, count, tableIndex).stream()
+                .map(bean -> fill(bean))
+                .collect(toList());
+    }
+
+    @Override
+    public int countByDel(int tableIndex) throws Exception {
+        return productImageDao.countByDel(tableIndex);
+    }
+
+    @Override
+    public int clear(int tableIndex) throws Exception {
         return productImageDao.clear(tableIndex);
+    }
+
+    @Override
+    public List<ProductImage> listByProductIdAndImageType(long product_id, int type, int page, int count, int tableIndex) throws Exception {
+        return productImageDao.listByProductIdAndImageType(product_id, type, page, count, tableIndex).stream()
+                .map(bean -> fill(bean))
+                .collect(toList());
+    }
+
+    @Override
+    public int countByProductIdAndImageType(long product_id, int type, int tableIndex) throws Exception {
+        return productImageDao.countByProductIdAndImageType(product_id, type, tableIndex);
+    }
+
+    @Override
+    public ProductImage selectByProductIdHead(long product_id, int tableIndex) throws Exception {
+        return fill(productImageDao.selectByProductIdHead(product_id, tableIndex));
     }
 
     @Override
@@ -81,20 +110,5 @@ public class ProductImageRpcServerImpl implements ProductImageRpcServer {
             e.printStackTrace();
         }
         return bean;
-    }
-
-    @Override
-    public List<ProductImage> listByProductIdAndImageType(long product_id, int type, int page, int count, int tableIndex) throws Exception {
-        return productImageDao.listByProductIdAndImageType(product_id, type, page, count, tableIndex);
-    }
-
-    @Override
-    public int countByProductIdAndImageType(long product_id, int type, int tableIndex) throws Exception {
-        return productImageDao.countByProductIdAndImageType(product_id, type, tableIndex);
-    }
-
-    @Override
-    public ProductImage selectByProductIdHead(long product_id, int tableIndex) throws Exception {
-        return productImageDao.selectByProductIdHead(product_id, tableIndex);
     }
 }

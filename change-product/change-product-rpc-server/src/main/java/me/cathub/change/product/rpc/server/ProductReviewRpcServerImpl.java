@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
+
 public class ProductReviewRpcServerImpl implements ProductReviewRpcServer {
 
     @Autowired
@@ -49,22 +51,48 @@ public class ProductReviewRpcServerImpl implements ProductReviewRpcServer {
 
     @Override
     public ProductReview select(ProductReview bean) throws Exception {
-        return productReviewDao.select(bean);
+        return fill(productReviewDao.select(bean));
     }
 
     @Override
     public List<ProductReview> list(int page, int count, int tableIndex) throws Exception {
-        return productReviewDao.list(page, count, tableIndex);
+        return productReviewDao.list(page, count, tableIndex).stream()
+                .map(bean -> fill(bean))
+                .collect(toList());
     }
 
     @Override
-    public long count(int tableIndex) throws Exception {
+    public int count(int tableIndex) throws Exception {
         return productReviewDao.count(tableIndex);
     }
 
     @Override
-    public long clear(int tableIndex) throws Exception {
+    public List<ProductReview> listByDel(int page, int count, int tableIndex) throws Exception {
+        return productReviewDao.listByDel(page, count, tableIndex).stream()
+                .map(bean -> fill(bean))
+                .collect(toList());
+    }
+
+    @Override
+    public int countByDel(int tableIndex) throws Exception {
+        return productReviewDao.countByDel(tableIndex);
+    }
+
+    @Override
+    public int clear(int tableIndex) throws Exception {
         return productReviewDao.clear(tableIndex);
+    }
+
+    @Override
+    public List<ProductReview> listByProductId(long product_id, int page, int count, int tableIndex) throws Exception {
+        return productReviewDao.listByProductId(product_id, page, count, tableIndex).stream()
+                .map(bean -> fill(bean))
+                .collect(toList());
+    }
+
+    @Override
+    public int countByProductId(long product_id, int tableIndex) throws Exception {
+        return productReviewDao.countByProductId(product_id, tableIndex);
     }
 
     @Override
@@ -77,15 +105,5 @@ public class ProductReviewRpcServerImpl implements ProductReviewRpcServer {
             e.printStackTrace();
         }
         return bean;
-    }
-
-    @Override
-    public List<ProductReview> listByProductId(long product_id, int page, int count, int tableIndex) throws Exception {
-        return productReviewDao.listByProductId(product_id, page, count, tableIndex);
-    }
-
-    @Override
-    public int countByProductId(long product_id, int tableIndex) throws Exception {
-        return productReviewDao.countByProductId(product_id, tableIndex);
     }
 }

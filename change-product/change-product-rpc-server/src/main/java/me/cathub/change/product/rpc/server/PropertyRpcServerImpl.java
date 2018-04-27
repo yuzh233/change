@@ -64,13 +64,42 @@ public class PropertyRpcServerImpl implements PropertyRpcServer {
     }
 
     @Override
-    public long count(int tableIndex) throws Exception {
+    public int count(int tableIndex) throws Exception {
         return propertyDao.count(tableIndex);
     }
 
     @Override
-    public long clear(int tableIndex) throws Exception {
+    public List<Property> listByDel(int page, int count, int tableIndex) throws Exception {
+        return propertyDao.listByDel(page, count, tableIndex).stream()
+                .map(bean -> fill(bean))
+                .collect(toList());
+    }
+
+    @Override
+    public int countByDel(int tableIndex) throws Exception {
+        return propertyDao.countByDel(tableIndex);
+    }
+
+    @Override
+    public int clear(int tableIndex) throws Exception {
         return propertyDao.count(tableIndex);
+    }
+
+    @Override
+    public Property selectByName(String name, int tableIndex) throws Exception {
+        return fill(propertyDao.selectByName(name, tableIndex));
+    }
+
+    @Override
+    public List<Property> listByProductCategoryId(long productCategory_id, int page, int count, int tableIndex) throws Exception {
+        return propertyDao.listByProductCategoryId(productCategory_id, page, count, tableIndex).stream()
+                .map(bean -> fill(bean))
+                .collect(toList());
+    }
+
+    @Override
+    public int countByProductCategoryId(long productCategory_id, int tableIndex) throws Exception {
+        return propertyDao.countByProductCategoryId(productCategory_id, tableIndex);
     }
 
     @Override
@@ -83,20 +112,5 @@ public class PropertyRpcServerImpl implements PropertyRpcServer {
             e.printStackTrace();
         }
         return bean;
-    }
-
-    @Override
-    public Property selectByName(String name, int tableIndex) throws Exception {
-        return propertyDao.selectByName(name, tableIndex);
-    }
-
-    @Override
-    public List<Property> listByProductCategoryId(long productCategory_id, int page, int count, int tableIndex) throws Exception {
-        return propertyDao.listByProductCategoryId(productCategory_id, page, count, tableIndex);
-    }
-
-    @Override
-    public int countByProductCategoryId(long productCategory_id, int tableIndex) throws Exception {
-        return propertyDao.countByProductCategoryId(productCategory_id, tableIndex);
     }
 }

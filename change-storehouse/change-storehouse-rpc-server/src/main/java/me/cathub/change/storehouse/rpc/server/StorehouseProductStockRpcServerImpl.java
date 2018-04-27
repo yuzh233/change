@@ -69,13 +69,42 @@ public class StorehouseProductStockRpcServerImpl implements StorehouseProductSto
     }
 
     @Override
-    public long count(int tableIndex) throws Exception {
+    public int count(int tableIndex) throws Exception {
         return storehouseProductStockDao.count(tableIndex);
     }
 
     @Override
-    public long clear(int tableIndex) throws Exception {
+    public List<StorehouseProductStock> listByDel(int page, int count, int tableIndex) throws Exception {
+        return storehouseProductStockDao.listByDel(page, count, tableIndex).stream()
+                .map(bean -> fill(bean))
+                .collect(toList());
+    }
+
+    @Override
+    public int countByDel(int tableIndex) throws Exception {
+        return storehouseProductStockDao.countByDel(tableIndex);
+    }
+
+    @Override
+    public int clear(int tableIndex) throws Exception {
         return storehouseProductStockDao.count(tableIndex);
+    }
+
+    @Override
+    public StorehouseProductStock selectByStorehouseIdAndProductId(long storehouse_id, long product_id, int tableIndex) throws Exception {
+        return fill(storehouseProductStockDao.selectByStorehouseIdAndProductId(storehouse_id, product_id, tableIndex));
+    }
+
+    @Override
+    public List<StorehouseProductStock> listByStorehouseId(long storehouse_id, int page, int count, int tableIndex) throws Exception {
+        return storehouseProductStockDao.listByStorehouseId(storehouse_id, page, count, tableIndex).stream()
+                .map(bean -> fill(bean))
+                .collect(toList());
+    }
+
+    @Override
+    public int countByStorehouseId(long storehouse_id, int tableIndex) throws Exception {
+        return storehouseProductStockDao.countByStorehouseId(storehouse_id, tableIndex);
     }
 
     @Override
@@ -90,20 +119,5 @@ public class StorehouseProductStockRpcServerImpl implements StorehouseProductSto
             e.printStackTrace();
         }
         return bean;
-    }
-
-    @Override
-    public StorehouseProductStock selectByStorehouseIdAndProductId(long storehouse_id, long product_id, int tableIndex) throws Exception {
-        return storehouseProductStockDao.selectByStorehouseIdAndProductId(storehouse_id, product_id, tableIndex);
-    }
-
-    @Override
-    public List<StorehouseProductStock> listByStorehouseId(long storehouse_id, int page, int count, int tableIndex) throws Exception {
-        return storehouseProductStockDao.listByStorehouseId(storehouse_id, page, count, tableIndex);
-    }
-
-    @Override
-    public int countByStorehouseId(long storehouse_id, int tableIndex) throws Exception {
-        return storehouseProductStockDao.countByStorehouseId(storehouse_id, tableIndex);
     }
 }

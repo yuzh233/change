@@ -64,13 +64,42 @@ public class StorehouseRpcServerImpl implements StorehouseRpcServer {
     }
 
     @Override
-    public long count(int tableIndex) throws Exception {
+    public int count(int tableIndex) throws Exception {
         return storehouseDao.count(tableIndex);
     }
 
     @Override
-    public long clear(int tableIndex) throws Exception {
+    public List<Storehouse> listByDel(int page, int count, int tableIndex) throws Exception {
+        return storehouseDao.listByDel(page, count, tableIndex).stream()
+                .map(bean -> fill(bean))
+                .collect(toList());
+    }
+
+    @Override
+    public int countByDel(int tableIndex) throws Exception {
+        return storehouseDao.countByDel(tableIndex);
+    }
+
+    @Override
+    public int clear(int tableIndex) throws Exception {
         return storehouseDao.count(tableIndex);
+    }
+
+    @Override
+    public Storehouse selectByName(String name, int tableIndex) throws Exception {
+        return fill(storehouseDao.selectByName(name, tableIndex));
+    }
+
+    @Override
+    public List<Storehouse> listByStorehouseCountryId(long storehouseCountry_id, int page, int count, int tableIndex) throws Exception {
+        return storehouseDao.listByStorehouseCountryId(storehouseCountry_id, page, count, tableIndex).stream()
+                .map(bean -> fill(bean))
+                .collect(toList());
+    }
+
+    @Override
+    public int countByStorehouseCountryId(long storehouseCountry_id, int tableIndex) throws Exception {
+        return storehouseDao.countByStorehouseCountryId(storehouseCountry_id, tableIndex);
     }
 
     @Override
@@ -83,20 +112,5 @@ public class StorehouseRpcServerImpl implements StorehouseRpcServer {
             e.printStackTrace();
         }
         return bean;
-    }
-
-    @Override
-    public Storehouse selectByName(String name, int tableIndex) throws Exception {
-        return storehouseDao.selectByName(name, tableIndex);
-    }
-
-    @Override
-    public List<Storehouse> listByStorehouseCountryId(long storehouseCountry_id, int page, int count, int tableIndex) throws Exception {
-        return storehouseDao.listByStorehouseCountryId(storehouseCountry_id, page, count, tableIndex);
-    }
-
-    @Override
-    public int countByStorehouseCountryId(long storehouseCountry_id, int tableIndex) throws Exception {
-        return storehouseDao.countByStorehouseCountryId(storehouseCountry_id, tableIndex);
     }
 }

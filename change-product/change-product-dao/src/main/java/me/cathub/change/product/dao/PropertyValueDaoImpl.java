@@ -1,9 +1,9 @@
 package me.cathub.change.product.dao;
 
 import com.github.pagehelper.PageHelper;
+import com.sun.org.apache.xalan.internal.xsltc.compiler.util.NamedMethodGenerator;
 import me.cathub.change.api.dao.product.PropertyValueDao;
 import me.cathub.change.common.base.BaseCrudMyBatisImpl;
-import me.cathub.change.common.base.PropertyAndValue;
 import me.cathub.change.product.bean.PropertyValue;
 import org.springframework.stereotype.Repository;
 
@@ -50,12 +50,22 @@ public class PropertyValueDaoImpl extends BaseCrudMyBatisImpl<PropertyValue> imp
     }
 
     @Override
-    public long count(int tableIndex) throws Exception {
+    public int count(int tableIndex) throws Exception {
         return count(NAME_SPACE, tableIndex);
     }
 
     @Override
-    public long clear(int tableIndex) throws Exception {
+    public List<PropertyValue> listByDel(int page, int count, int tableIndex) throws Exception {
+        return listByDel(NAME_SPACE, page, count, tableIndex);
+    }
+
+    @Override
+    public int countByDel(int tableIndex) throws Exception {
+        return countByDel(NAME_SPACE, tableIndex);
+    }
+
+    @Override
+    public int clear(int tableIndex) throws Exception {
         return clear(NAME_SPACE, tableIndex);
     }
 
@@ -75,5 +85,22 @@ public class PropertyValueDaoImpl extends BaseCrudMyBatisImpl<PropertyValue> imp
         }
 
         return results;
+    }
+
+    @Override
+    public int countByProductId(long product_id, int tableIndex) throws Exception {
+        int count = 0;
+
+        try {
+            HashMap<String, ? super Number> map = new HashMap<>();
+            map.put("product_id", product_id);
+            map.put("tableIndex", tableIndex);
+
+            count = sqlSessionTemplate.selectOne(NAME_SPACE + COUNT_BY_PRODUCT_ID, map);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return count;
     }
 }

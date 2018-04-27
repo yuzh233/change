@@ -71,13 +71,49 @@ public class AuditingRpcServerImpl implements AuditingRpcServer {
     }
 
     @Override
-    public long count(int tableIndex) throws Exception {
+    public int count(int tableIndex) throws Exception {
         return auditingDao.count(tableIndex);
     }
 
     @Override
-    public long clear(int tableIndex) throws Exception {
+    public List<Auditing> listByDel(int page, int count, int tableIndex) throws Exception {
+        return auditingDao.listByDel(page, count, tableIndex).stream()
+                .map(bean -> fill(bean))
+                .collect(toList());
+    }
+
+    @Override
+    public int countByDel(int tableIndex) throws Exception {
+        return auditingDao.countByDel(tableIndex);
+    }
+
+    @Override
+    public int clear(int tableIndex) throws Exception {
         return auditingDao.count(tableIndex);
+    }
+
+    @Override
+    public List<Auditing> listByAdminIdAndUserType(long admin_id, int type, int page, int count, int tableIndex) throws Exception {
+        return auditingDao.listByAdminIdAndUserType(admin_id, type, page, count, tableIndex).stream()
+                .map(bean -> fill(bean))
+                .collect(toList());
+    }
+
+    @Override
+    public int countByAdminIdAndUserType(long admin_id, int type, int tableIndex) throws Exception {
+        return auditingDao.countByAdminIdAndUserType(admin_id, type, tableIndex);
+    }
+
+    @Override
+    public List<Auditing> listByNotAuditing(int type, int page, int count, int tableIndex) throws Exception {
+        return auditingDao.listByNotAuditing(type, page, count, tableIndex).stream()
+                .map(bean -> fill(bean))
+                .collect(toList());
+    }
+
+    @Override
+    public int countByNotAuditing(int type, int tableIndex) throws Exception {
+        return auditingDao.countByNotAuditing(type, tableIndex);
     }
 
     @Override
@@ -96,25 +132,5 @@ public class AuditingRpcServerImpl implements AuditingRpcServer {
             e.printStackTrace();
         }
         return bean;
-    }
-
-    @Override
-    public List<Auditing> listByAdminIdAndUserType(long admin_id, int type, int page, int count, int tableIndex) throws Exception {
-        return auditingDao.listByAdminIdAndUserType(admin_id, type, page, count, tableIndex);
-    }
-
-    @Override
-    public int countByAdminIdAndUserType(long admin_id, int type, int tableIndex) throws Exception {
-        return auditingDao.countByAdminIdAndUserType(admin_id, type, tableIndex);
-    }
-
-    @Override
-    public List<Auditing> listByNotAuditing(int type, int page, int count, int tableIndex) throws Exception {
-        return auditingDao.listByNotAuditing(type, page, count, tableIndex);
-    }
-
-    @Override
-    public int countByNotAuditing(int type, int tableIndex) throws Exception {
-        return 0;
     }
 }
