@@ -64,14 +64,14 @@ public abstract class BaseControllerImpl<B extends Serializable, S extends BaseR
     @RequestMapping("/count")
     @ResponseBody
     @Override
-    public long count(int tableIndex) throws Exception {
+    public int count(int tableIndex) throws Exception {
         return rpcService.count(tableIndex);
     }
 
     @RequestMapping("/clear")
     @ResponseBody
     @Override
-    public long clear(int tableIndex) throws Exception {
+    public int clear(int tableIndex) throws Exception {
         return rpcService.clear(tableIndex);
     }
 }

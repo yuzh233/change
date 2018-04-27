@@ -117,7 +117,7 @@
         SELECT * FROM order_${tableIndex} WHERE brandQuotient_id=#{brandQuotient_id, jdbcType=BIGINT}
     </select>
 
-    <select id="listByBrandQuotient" parameterType="map" resultType="int">
+    <select id="countByBrandQuotient" parameterType="map" resultType="int">
         SELECT COUNT(*) FROM order_${tableIndex} WHERE brandQuotient_id=#{brandQuotient_id, jdbcType=BIGINT}
     </select>
 </mapper>

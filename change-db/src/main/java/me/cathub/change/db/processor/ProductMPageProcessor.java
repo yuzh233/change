@@ -88,7 +88,7 @@ public class ProductMPageProcessor extends ProductPageProcessor {
                 Spider.create(new ProductMPageProcessor())
 //                        .setDownloader(httpClientDownloader)
                         .addUrl(urls)
-                        .addPipeline(new JsonFilePipeline(ProductMPageProcessor.class.getResource("/data/data_info").getPath() + category.getName()))
+                        .addPipeline(new JsonFilePipeline("C:\\Users\\cheng\\Desktop\\DATA\\data_info\\" + category.getName()))
                         .thread(8)
                         .run();
             }
