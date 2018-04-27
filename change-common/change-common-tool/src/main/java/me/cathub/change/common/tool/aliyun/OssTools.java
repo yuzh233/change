@@ -1,8 +1,7 @@
-package me.cathub.change.common.tool.aliyunoss;
+package me.cathub.change.common.tool.aliyun;
 
 import com.aliyun.oss.OSSClient;
 
-import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 public class OssTools {
