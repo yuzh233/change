@@ -5,7 +5,9 @@ import me.cathub.change.common.base.BaseControllerImpl;
 import me.cathub.change.product.bean.ProductReview;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+/**
+ * 产品模块 - 评论
+ */
 @Controller
 @RequestMapping("/productReview")
 public class ProductReviewController extends BaseControllerImpl<ProductReview, ProductReviewRpcServer> {

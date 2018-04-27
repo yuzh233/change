@@ -6,6 +6,9 @@ import me.cathub.change.storehouse.bean.Storehouse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**
+ * 仓库模块 - 仓库实体
+ */
 @Controller
 @RequestMapping("/storehouse")
 public class StorehouseController extends BaseControllerImpl<Storehouse, StorehouseRpcServer> {

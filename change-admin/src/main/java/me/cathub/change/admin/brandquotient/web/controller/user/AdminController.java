@@ -6,7 +6,13 @@ import me.cathub.change.user.bean.Admin;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**
+ * 用户模块下的管理crud
+ */
 @Controller
 @RequestMapping("/admin")
 public class AdminController extends BaseControllerImpl<Admin, AdminRpcServer> {
+
+
+
 }
