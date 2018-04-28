@@ -19,9 +19,9 @@ public class StorehouseCountryRpcServerImpl implements StorehouseCountryRpcServe
     private Sequence sequence;
 
     @Override
-    public boolean insert(StorehouseCountry bean) throws Exception {
+    public long insert(StorehouseCountry bean) throws Exception {
         bean.setId(sequence.nextId());
-        return storehouseCountryDao.insert(bean);
+        return storehouseCountryDao.insert(bean) ? bean.getId() : -1;
     }
 
     @Override

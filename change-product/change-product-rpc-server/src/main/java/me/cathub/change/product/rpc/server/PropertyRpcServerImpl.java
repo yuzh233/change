@@ -26,9 +26,9 @@ public class PropertyRpcServerImpl implements PropertyRpcServer {
     private Sequence sequence;
 
     @Override
-    public boolean insert(Property bean) throws Exception {
+    public long insert(Property bean) throws Exception {
         bean.setId(sequence.nextId());
-        return propertyDao.insert(bean);
+        return propertyDao.insert(bean) ? bean.getId() : -1;
     }
 
     @Override

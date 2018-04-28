@@ -26,9 +26,9 @@ public class PermissionRpcServerImpl implements PermissionRpcServer {
     private Sequence sequence;
 
     @Override
-    public boolean insert(Permission bean) throws Exception {
+    public long insert(Permission bean) throws Exception {
         bean.setId(sequence.nextId());
-        return permissionDao.insert(bean);
+        return permissionDao.insert(bean) ? bean.getId() : -1;
     }
 
     @Override

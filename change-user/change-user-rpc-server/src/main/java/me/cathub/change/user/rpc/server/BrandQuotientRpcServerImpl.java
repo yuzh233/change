@@ -31,9 +31,9 @@ public class BrandQuotientRpcServerImpl implements BrandQuotientRpcServer {
     private Sequence sequence;
 
     @Override
-    public boolean insert(BrandQuotient bean) throws Exception {
+    public long insert(BrandQuotient bean) throws Exception {
         bean.setId(sequence.nextId());
-        return brandQuotientDao.insert(bean);
+        return brandQuotientDao.insert(bean) ? bean.getId() : -1;
     }
 
     @Override

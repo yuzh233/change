@@ -26,9 +26,9 @@ public class AdminRpcServerImpl implements AdminRpcServer {
     private Sequence sequence;
 
     @Override
-    public boolean insert(Admin bean) throws Exception {
+    public long insert(Admin bean) throws Exception {
         bean.setId(sequence.nextId());
-        return adminDao.insert(bean);
+        return adminDao.insert(bean) ? bean.getId() : -1;
     }
 
     @Override

@@ -19,9 +19,9 @@ public class CompanyRpcServerImpl implements CompanyRpcServer {
     private Sequence sequence;
 
     @Override
-    public boolean insert(Company bean) throws Exception {
+    public long insert(Company bean) throws Exception {
         bean.setId(sequence.nextId());
-        return companyDao.insert(bean);
+        return companyDao.insert(bean) ? bean.getId() : -1;
     }
 
     @Override

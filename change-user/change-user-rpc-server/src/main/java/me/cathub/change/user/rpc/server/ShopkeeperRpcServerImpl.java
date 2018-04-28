@@ -26,9 +26,9 @@ public class ShopkeeperRpcServerImpl implements ShopkeeperRpcServer {
     private Sequence sequence;
 
     @Override
-    public boolean insert(Shopkeeper bean) throws Exception {
+    public long insert(Shopkeeper bean) throws Exception {
         bean.setId(sequence.nextId());
-        return shopkeeperDao.insert(bean);
+        return shopkeeperDao.insert(bean) ? bean.getId() : -1;
     }
 
     @Override

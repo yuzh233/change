@@ -26,9 +26,9 @@ public class OnlineStoreRpcServerImpl implements OnlineStoreRpcServer {
     private Sequence sequence;
 
     @Override
-    public boolean insert(OnlineStore bean) throws Exception {
+    public long insert(OnlineStore bean) throws Exception {
         bean.setId(sequence.nextId());
-        return onlineStoreDao.insert(bean);
+        return onlineStoreDao.insert(bean) ? bean.getId() : -1;
     }
 
     @Override

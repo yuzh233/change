@@ -31,9 +31,9 @@ public class OrderItemRpcServerImpl implements OrderItemRpcServer {
     private Sequence sequence;
 
     @Override
-    public boolean insert(OrderItem bean) throws Exception {
+    public long insert(OrderItem bean) throws Exception {
         bean.setId(sequence.nextId());
-        return orderItemDao.insert(bean);
+        return orderItemDao.insert(bean) ? bean.getId() : -1;
     }
 
     @Override

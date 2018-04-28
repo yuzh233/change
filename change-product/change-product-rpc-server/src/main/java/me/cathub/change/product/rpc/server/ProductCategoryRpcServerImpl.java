@@ -19,9 +19,9 @@ public class ProductCategoryRpcServerImpl implements ProductCategoryRpcServer {
     private Sequence sequence;
 
     @Override
-    public boolean insert(ProductCategory bean) throws Exception {
+    public long insert(ProductCategory bean) throws Exception {
         bean.setId(sequence.nextId());
-        return productCategoryDao.insert(bean);
+        return productCategoryDao.insert(bean) ? bean.getId() : -1;
     }
 
     @Override

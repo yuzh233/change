@@ -19,9 +19,9 @@ public class RoleRpcServerImpl implements RoleRpcServer {
     private Sequence sequence;
 
     @Override
-    public boolean insert(Role bean) throws Exception {
+    public long insert(Role bean) throws Exception {
         bean.setId(sequence.nextId());
-        return roleDao.insert(bean);
+        return roleDao.insert(bean) ? bean.getId() : -1;
     }
 
     @Override

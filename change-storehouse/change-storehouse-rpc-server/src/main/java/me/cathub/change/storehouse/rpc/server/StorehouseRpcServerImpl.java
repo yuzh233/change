@@ -26,9 +26,9 @@ public class StorehouseRpcServerImpl implements StorehouseRpcServer {
     private Sequence sequence;
 
     @Override
-    public boolean insert(Storehouse bean) throws Exception {
+    public long insert(Storehouse bean) throws Exception {
         bean.setId(sequence.nextId());
-        return storehouseDao.insert(bean);
+        return storehouseDao.insert(bean) ? bean.getId() : -1;
     }
 
     @Override

@@ -24,9 +24,9 @@ public class ProductImageRpcServerImpl implements ProductImageRpcServer {
     private Sequence sequence;
 
     @Override
-    public boolean insert(ProductImage bean) throws Exception {
+    public long insert(ProductImage bean) throws Exception {
         bean.setId(sequence.nextId());
-        return productImageDao.insert(bean);
+        return productImageDao.insert(bean) ? bean.getId() : -1;
     }
 
     @Override

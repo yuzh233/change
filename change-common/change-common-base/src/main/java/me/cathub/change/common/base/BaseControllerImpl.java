@@ -16,7 +16,7 @@ public abstract class BaseControllerImpl<B extends Serializable, S extends BaseR
     @ResponseBody
     @Override
     public boolean insert(B bean) throws Exception {
-        return rpcService.insert(bean);
+        return rpcService.insert(bean) != -1 ? true : false;
     }
 
     @RequestMapping("/deleteL")

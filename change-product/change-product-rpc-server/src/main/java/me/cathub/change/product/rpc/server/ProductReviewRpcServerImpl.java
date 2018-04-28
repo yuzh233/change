@@ -24,9 +24,9 @@ public class ProductReviewRpcServerImpl implements ProductReviewRpcServer {
     private Sequence sequence;
 
     @Override
-    public boolean insert(ProductReview bean) throws Exception {
+    public long insert(ProductReview bean) throws Exception {
         bean.setId(sequence.nextId());
-        return productReviewDao.insert(bean);
+        return productReviewDao.insert(bean) ? bean.getId() : -1;
     }
 
     @Override

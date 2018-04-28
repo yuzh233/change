@@ -33,9 +33,9 @@ public class AuditingRpcServerImpl implements AuditingRpcServer {
     private Sequence sequence;
 
     @Override
-    public boolean insert(Auditing bean) throws Exception {
+    public long insert(Auditing bean) throws Exception {
         bean.setId(sequence.nextId());
-        return auditingDao.insert(bean);
+        return auditingDao.insert(bean) ? bean.getId() : -1;
     }
 
     @Override

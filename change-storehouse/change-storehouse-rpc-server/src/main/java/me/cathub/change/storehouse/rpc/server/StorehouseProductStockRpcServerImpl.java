@@ -31,9 +31,9 @@ public class StorehouseProductStockRpcServerImpl implements StorehouseProductSto
     private Sequence sequence;
 
     @Override
-    public boolean insert(StorehouseProductStock bean) throws Exception {
+    public long insert(StorehouseProductStock bean) throws Exception {
         bean.setId(sequence.nextId());
-        return storehouseProductStockDao.insert(bean);
+        return storehouseProductStockDao.insert(bean) ? bean.getId() : -1;
     }
 
     @Override

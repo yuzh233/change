@@ -4,7 +4,6 @@ import com.ebay.sdk.ApiAccount;
 import com.ebay.sdk.ApiContext;
 import com.ebay.sdk.ApiCredential;
 import com.ebay.sdk.call.AddItemCall;
-import com.ebay.sdk.eBayAccount;
 import com.ebay.sdk.helper.ConsoleUtil;
 import com.ebay.sdk.util.eBayUtil;
 import com.ebay.soap.eBLBaseComponents.*;
@@ -17,7 +16,7 @@ public class EbayAPITools {
      * @return ApiContext 对象
      * @throws IOException
      */
-    private static ApiContext getApiContext() throws IOException {
+    private static ApiContext getApiContext() throws Exception {
         ApiContext apiContext = new ApiContext();
 
         // 设置API Token 访问 eBay API服务器
@@ -25,10 +24,11 @@ public class EbayAPITools {
         cred.seteBayToken(Constant.EBAY_TOKEN);
 
         // 设置API服务器URL
-        apiContext.setApiServerUrl("https://api.ebay.com/wsapi");
+        apiContext.setApiServerUrl("https://api.sandbox.ebay.com/wsapi");
 
         // 设置EPS图片服务器URL
         apiContext.setEpsServerUrl("https://api.sandbox.ebay.com/ws/api.dll");
+
         return apiContext;
     }
 
@@ -42,7 +42,7 @@ public class EbayAPITools {
         ItemType item = new ItemType();
 
         // 项目标题
-        item.setTitle(ConsoleUtil.readString("标题: "));
+        item.setTitle("change_product_test_1");
 
         // 画廊图片
         String[] paths = {"http://www.dilianidc.com/templets/twang/images/tw_11.jpg","http://www.dilianidc.com/templets/twang/images/tw_20.jpg"};
@@ -53,31 +53,30 @@ public class EbayAPITools {
         item.setPictureDetails(pic);
 
         // 项目SKU
-        item.setSKU(ConsoleUtil.readString("SKU: "));
+        item.setSKU("10");
 
         // 项目描述
-        item.setDescription(ConsoleUtil.readString("描述:"));
+        item.setDescription("info");
 
         // 类型
         item.setListingType(ListingTypeCodeType.CHINESE);
 
         // 货币
         item.setCurrency(CurrencyCodeType.USD);
-        input = ConsoleUtil.readString("价格: ");
         AmountType amount = new AmountType();
-        amount.setValue(Double.valueOf(input));
+        amount.setValue(Double.valueOf(998));
         item.setStartPrice(amount);
 
         //上市时间
         item.setListingDuration(ListingDurationCodeType.DAYS_3.value());
 
         //  项目地点和国家
-        item.setLocation(ConsoleUtil.readString("地点位置"));
         item.setCountry(CountryCodeType.US);
+        item.setLocation("SJC");
 
         //  分类
         CategoryType cat = new CategoryType();
-        cat.setCategoryID(ConsoleUtil.readString("eBay类别 (e.g., 30022): "));
+        cat.setCategoryID("357");
         item.setPrimaryCategory(cat);
 
         // 库存数量
@@ -92,7 +91,7 @@ public class EbayAPITools {
         item.setConditionID(1000);
 
         // 需要处理时间
-        item.  setDispatchTimeMax(Integer.valueOf(1));
+        item.setDispatchTimeMax(Integer.valueOf(1));
 
         // 运输细节
         item.setShippingDetails(buildShippingDetails());

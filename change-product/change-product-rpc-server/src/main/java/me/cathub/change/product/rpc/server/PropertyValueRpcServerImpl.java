@@ -31,9 +31,9 @@ public class PropertyValueRpcServerImpl implements PropertyValueRpcServer {
     private Sequence sequence;
 
     @Override
-    public boolean insert(PropertyValue bean) throws Exception {
+    public long insert(PropertyValue bean) throws Exception {
         bean.setId(sequence.nextId());
-        return propertyValueDao.insert(bean);
+        return propertyValueDao.insert(bean) ? bean.getId() : -1;
     }
 
     @Override

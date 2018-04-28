@@ -6,10 +6,10 @@ public interface BaseRpcServer<T> {
     /**
      * 插入数据
      * @param bean
-     * @return
+     * @return long success id error -1
      * @throws Exception
      */
-    boolean insert(T bean) throws Exception;
+    long insert(T bean) throws Exception;
 
     /**
      * 删除数据(逻辑)
