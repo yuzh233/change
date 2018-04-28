@@ -15,6 +15,11 @@ import java.util.List;
  * 企业:爬取产品 and 产品链接
  */
 public class CompanyPageProcessor extends BasePageProcessor {
+
+    public CompanyPageProcessor(String referer) {
+        super(referer);
+    }
+
     @Override
     public void process(Page page) {
         String company_name = page.getHtml().$("head > title").$("title", "text").get();
@@ -49,7 +54,7 @@ public class CompanyPageProcessor extends BasePageProcessor {
     }
 
     public static void main(String[] args) {
-        Spider.create(new CompanyPageProcessor())
+        Spider.create(new CompanyPageProcessor(""))
                 .addUrl(Constant.$9)
                 .addPipeline(new JsonFilePipeline("C:\\Users\\cheng\\Desktop\\DATA\\products"))
                 .thread(8)

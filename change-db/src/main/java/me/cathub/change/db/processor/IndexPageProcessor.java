@@ -19,6 +19,10 @@ import java.util.Map;
  */
 public class IndexPageProcessor extends BasePageProcessor implements PageProcessor {
 
+    public IndexPageProcessor(String referer) {
+        super(referer);
+    }
+
     @Override
     public void process(Page page) {
         List<String> category_urls = page.getHtml().xpath("/html/body/div[3]/div[3]/div/div/div/div/div/ul/li/div/a").links().all();
@@ -43,7 +47,7 @@ public class IndexPageProcessor extends BasePageProcessor implements PageProcess
     }
 
     public static void main(String[] args) {
-        Spider.create(new IndexPageProcessor())
+        Spider.create(new IndexPageProcessor(""))
                 .addUrl("https://kj.1688.com/?spm=a260k.635.jdlmjgub.5.6883436chpWfGO")
                 .addPipeline(new JsonFilePipeline("C:\\Users\\cheng\\Desktop\\DATA\\categorys"))
                 .thread(5)

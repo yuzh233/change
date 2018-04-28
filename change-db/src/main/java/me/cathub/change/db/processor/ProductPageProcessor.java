@@ -8,6 +8,10 @@ import us.codecraft.webmagic.Site;
  */
 public abstract class ProductPageProcessor extends BasePageProcessor {
 
+    public ProductPageProcessor(String referer) {
+        super(referer);
+    }
+
     @Override
     public Site getSite() {
         return site;

@@ -12,6 +12,10 @@ import us.codecraft.webmagic.processor.PageProcessor;
  */
 public class CompanyListPageProcessor extends BasePageProcessor implements PageProcessor {
 
+    public CompanyListPageProcessor(String referer) {
+        super(referer);
+    }
+
     @Override
     public void process(Page page) {
         System.out.println(page.getHtml());
@@ -23,7 +27,7 @@ public class CompanyListPageProcessor extends BasePageProcessor implements PageP
     }
 
     public static void main(String[] args) {
-        Spider.create(new CompanyListPageProcessor())
+        Spider.create(new CompanyListPageProcessor(""))
                 .addUrl("https://kj.1688.com/nvzhuang2.html?spm=a262gg.8864560.j3phhv0x.1.3a886510Q5yWUI")
                 .addPipeline(new JsonFilePipeline("C:\\Users\\cheng\\Desktop\\DATA"))
                 .thread(5)

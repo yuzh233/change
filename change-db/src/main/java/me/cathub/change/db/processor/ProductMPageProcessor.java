@@ -18,6 +18,10 @@ import static java.util.stream.Collectors.toList;
 
 public class ProductMPageProcessor extends ProductPageProcessor {
 
+    public ProductMPageProcessor(String referer) {
+        super(referer);
+    }
+
     @Override
     public void process(Page page) {
         String temp = page.getHtml().regex("\"companyName\":\"[\\u4e00-\\u9fa5]+\"").get();
@@ -32,7 +36,7 @@ public class ProductMPageProcessor extends ProductPageProcessor {
         List<String> info_images = page.getHtml().$("div.swipe-pane > img").$("img", "swipe-lazy-src").all();
 
         Product product = new Product();
-        price = price.substring(0, price.indexOf(" "));
+        price = price.trim().substring(0, price.indexOf(" "));
         product.setPrice(Float.parseFloat(price));
         product.setName(product_name);
         product.setCompany_name(company_name);
@@ -63,11 +67,8 @@ public class ProductMPageProcessor extends ProductPageProcessor {
 //        ));
 
         try {
-            File dir = new File(ProductMPageProcessor.class.getResource("/data/products").getPath());
+            File category = new File(ProductMPageProcessor.class.getResource("/data/products/girl").getPath());
 
-            File[] categorys = dir.listFiles();
-
-            for (File category:categorys) {
                 File[] jsonFiles = category.listFiles();
 
                 List<Product> products = new ArrayList<>();
@@ -85,10 +86,10 @@ public class ProductMPageProcessor extends ProductPageProcessor {
                 String[] urls = list.toArray(new String[list.size()]);
 
 
-                Spider.create(new ProductMPageProcessor())
-//                        .setDownloader(httpClientDownloader)
-                        .addUrl(urls)
-                        .addPipeline(new JsonFilePipeline("C:\\Users\\cheng\\Desktop\\DATA\\data_info\\" + category.getName()))
+            for (String url:urls) {
+                Spider.create(new ProductMPageProcessor(url))
+                        .addUrl(url)
+                        .addPipeline(new JsonFilePipeline("C:\\Users\\cheng\\Desktop\\DATA\\data\\" + category.getName()))
                         .thread(8)
                         .run();
             }
