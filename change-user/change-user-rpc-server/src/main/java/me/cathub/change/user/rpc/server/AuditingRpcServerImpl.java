@@ -59,13 +59,19 @@ public class AuditingRpcServerImpl implements AuditingRpcServer {
     }
 
     @Override
-    public Auditing select(Auditing bean) throws Exception {
-        return fill(auditingDao.select(bean));
+    public Auditing select(Auditing bean, boolean flag) throws Exception {
+        if (flag)
+            return auditingDao.select(bean);
+        else
+            return fill(auditingDao.select(bean));
     }
 
     @Override
-    public List<Auditing> list(int page, int count, int tableIndex) throws Exception {
-        return auditingDao.list(page, count, tableIndex).stream()
+    public List<Auditing> list(int page, int count, int tableIndex, boolean flag) throws Exception {
+        if (flag)
+            return auditingDao.list(page, count, tableIndex);
+        else
+            return auditingDao.list(page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
     }
@@ -76,8 +82,11 @@ public class AuditingRpcServerImpl implements AuditingRpcServer {
     }
 
     @Override
-    public List<Auditing> listByDel(int page, int count, int tableIndex) throws Exception {
-        return auditingDao.listByDel(page, count, tableIndex).stream()
+    public List<Auditing> listByDel(int page, int count, int tableIndex, boolean flag) throws Exception {
+        if (flag)
+            return auditingDao.listByDel(page, count, tableIndex);
+        else
+            return auditingDao.listByDel(page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
     }
@@ -93,8 +102,11 @@ public class AuditingRpcServerImpl implements AuditingRpcServer {
     }
 
     @Override
-    public List<Auditing> listByAdminIdAndUserType(long admin_id, int type, int page, int count, int tableIndex) throws Exception {
-        return auditingDao.listByAdminIdAndUserType(admin_id, type, page, count, tableIndex).stream()
+    public List<Auditing> listByAdminIdAndUserType(long admin_id, int type, int page, int count, int tableIndex, boolean flag) throws Exception {
+        if (flag)
+            return auditingDao.listByAdminIdAndUserType(admin_id, type, page, count, tableIndex);
+        else
+            return auditingDao.listByAdminIdAndUserType(admin_id, type, page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
     }
@@ -105,8 +117,11 @@ public class AuditingRpcServerImpl implements AuditingRpcServer {
     }
 
     @Override
-    public List<Auditing> listByNotAuditing(int type, int page, int count, int tableIndex) throws Exception {
-        return auditingDao.listByNotAuditing(type, page, count, tableIndex).stream()
+    public List<Auditing> listByNotAuditing(int type, int page, int count, int tableIndex, boolean flag) throws Exception {
+        if (flag)
+            return auditingDao.listByNotAuditing(type, page, count, tableIndex);
+        else
+            return auditingDao.listByNotAuditing(type, page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
     }
@@ -119,14 +134,14 @@ public class AuditingRpcServerImpl implements AuditingRpcServer {
     @Override
     public Auditing fill(Auditing bean) {
         try {
-            Admin admin = adminRpcServer.select(new Admin(bean.getAdmin_id()));
+            Admin admin = adminRpcServer.select(new Admin(bean.getAdmin_id()), true);
             bean.setAdmin(admin);
 
             User user = null;
             if (bean.getType() == Auditing.TYPE_BRAND_QUOTIENT)
-                user = brandQuotientRpcServer.select(new BrandQuotient(bean.getUser_id()));
+                user = brandQuotientRpcServer.select(new BrandQuotient(bean.getUser_id()), true);
             else if(bean.getType() == Auditing.TYPE_SHOPKEEPER)
-                user = shopkeeperRpcServer.select(new Shopkeeper(bean.getUser_id()));
+                user = shopkeeperRpcServer.select(new Shopkeeper(bean.getUser_id()), true);
             bean.setUser(user);
         } catch (Exception e) {
             e.printStackTrace();

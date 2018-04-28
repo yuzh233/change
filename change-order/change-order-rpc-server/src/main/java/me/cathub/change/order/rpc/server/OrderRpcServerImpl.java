@@ -62,12 +62,12 @@ public class OrderRpcServerImpl implements OrderRpcServer {
     }
 
     @Override
-    public Order select(Order bean) throws Exception {
+    public Order select(Order bean, boolean flag) throws Exception {
         return fill(orderDao.select(bean));
     }
 
     @Override
-    public List<Order> list(int page, int count, int tableIndex) throws Exception {
+    public List<Order> list(int page, int count, int tableIndex, boolean flag) throws Exception {
         return orderDao.list(page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
@@ -79,7 +79,7 @@ public class OrderRpcServerImpl implements OrderRpcServer {
     }
 
     @Override
-    public List<Order> listByDel(int page, int count, int tableIndex) throws Exception {
+    public List<Order> listByDel(int page, int count, int tableIndex, boolean flag) throws Exception {
         return orderDao.listByDel(page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
@@ -96,7 +96,7 @@ public class OrderRpcServerImpl implements OrderRpcServer {
     }
 
     @Override
-    public List<Order> listByStorehouseId(long storehouse_id, int page, int count, int tableIndex) throws Exception {
+    public List<Order> listByStorehouseId(long storehouse_id, int page, int count, int tableIndex, boolean flag) throws Exception {
         return orderDao.listByStorehouseId(storehouse_id, page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
@@ -108,7 +108,7 @@ public class OrderRpcServerImpl implements OrderRpcServer {
     }
 
     @Override
-    public List<Order> listByShopkeeperId(long shopkeeper_id, int page, int count, int tableIndex) throws Exception {
+    public List<Order> listByShopkeeperId(long shopkeeper_id, int page, int count, int tableIndex, boolean flag) throws Exception {
         return orderDao.listByShopkeeperId(shopkeeper_id, page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
@@ -120,7 +120,7 @@ public class OrderRpcServerImpl implements OrderRpcServer {
     }
 
     @Override
-    public List<Order> listByBrandQuotient(long brandQuotient_id, int page, int count, int tableIndex) throws Exception {
+    public List<Order> listByBrandQuotient(long brandQuotient_id, int page, int count, int tableIndex, boolean flag) throws Exception {
         return orderDao.listByBrandQuotient(brandQuotient_id, page, count, tableIndex);
     }
 
@@ -132,9 +132,9 @@ public class OrderRpcServerImpl implements OrderRpcServer {
     @Override
     public Order fill(Order bean) {
         try {
-            Storehouse storehouse = storehouseRpcServer.select(new Storehouse(bean.getStorehouse_id()));
-            Shopkeeper shopkeeper = shopkeeperRpcServer.select(new Shopkeeper(bean.getShopkeeper_id()));
-            BrandQuotient brandQuotient = brandQuotientRpcServer.select(new BrandQuotient(bean.getBrandQuotient_id()));
+            Storehouse storehouse = storehouseRpcServer.select(new Storehouse(bean.getStorehouse_id()), true);
+            Shopkeeper shopkeeper = shopkeeperRpcServer.select(new Shopkeeper(bean.getShopkeeper_id()), true);
+            BrandQuotient brandQuotient = brandQuotientRpcServer.select(new BrandQuotient(bean.getBrandQuotient_id()), true);
 
             bean.setStorehouse(storehouse);
             bean.setShopkeeper(shopkeeper);

@@ -1,7 +1,7 @@
 package me.cathub.change.user.dao;
 
 import me.cathub.change.api.dao.user.CompanyDao;
-import me.cathub.change.common.base.BaseCrudMyBatisImpl;
+import me.cathub.change.common.base.BaseDaoMyBatisImpl;
 import me.cathub.change.user.bean.Company;
 import org.springframework.stereotype.Repository;
 
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public class CompanyDaoImpl extends BaseCrudMyBatisImpl<Company> implements CompanyDao {
+public class CompanyDaoImpl extends BaseDaoMyBatisImpl<Company> implements CompanyDao {
 
     @Override
     public boolean insert(Company bean) throws Exception {

@@ -50,13 +50,19 @@ public class ProductReviewRpcServerImpl implements ProductReviewRpcServer {
     }
 
     @Override
-    public ProductReview select(ProductReview bean) throws Exception {
-        return fill(productReviewDao.select(bean));
+    public ProductReview select(ProductReview bean, boolean flag) throws Exception {
+        if (flag)
+            return productReviewDao.select(bean);
+        else
+            return fill(productReviewDao.select(bean));
     }
 
     @Override
-    public List<ProductReview> list(int page, int count, int tableIndex) throws Exception {
-        return productReviewDao.list(page, count, tableIndex).stream()
+    public List<ProductReview> list(int page, int count, int tableIndex, boolean flag) throws Exception {
+        if (flag)
+            return productReviewDao.list(page, count, tableIndex);
+        else
+            return productReviewDao.list(page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
     }
@@ -67,8 +73,11 @@ public class ProductReviewRpcServerImpl implements ProductReviewRpcServer {
     }
 
     @Override
-    public List<ProductReview> listByDel(int page, int count, int tableIndex) throws Exception {
-        return productReviewDao.listByDel(page, count, tableIndex).stream()
+    public List<ProductReview> listByDel(int page, int count, int tableIndex, boolean flag) throws Exception {
+        if (flag)
+            return productReviewDao.listByDel(page, count, tableIndex);
+        else
+            return productReviewDao.listByDel(page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
     }
@@ -84,8 +93,11 @@ public class ProductReviewRpcServerImpl implements ProductReviewRpcServer {
     }
 
     @Override
-    public List<ProductReview> listByProductId(long product_id, int page, int count, int tableIndex) throws Exception {
-        return productReviewDao.listByProductId(product_id, page, count, tableIndex).stream()
+    public List<ProductReview> listByProductId(long product_id, int page, int count, int tableIndex, boolean flag) throws Exception {
+        if (flag)
+            return productReviewDao.listByProductId(product_id, page, count, tableIndex);
+        else
+            return productReviewDao.listByProductId(product_id, page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
     }
@@ -98,7 +110,7 @@ public class ProductReviewRpcServerImpl implements ProductReviewRpcServer {
     @Override
     public ProductReview fill(ProductReview bean) {
         try {
-            Product product = productRpcServer.select(new Product(bean.getProduct_id()));
+            Product product = productRpcServer.select(new Product(bean.getProduct_id()), true);
 
             bean.setProduct(product);
         } catch (Exception e) {

@@ -2,7 +2,7 @@ package me.cathub.change.user.dao;
 
 import com.github.pagehelper.PageHelper;
 import me.cathub.change.api.dao.user.AuditingDao;
-import me.cathub.change.common.base.BaseCrudMyBatisImpl;
+import me.cathub.change.common.base.BaseDaoMyBatisImpl;
 import me.cathub.change.user.bean.Auditing;
 import org.springframework.stereotype.Repository;
 
@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public class AuditingDaoImpl extends BaseCrudMyBatisImpl<Auditing> implements AuditingDao {
+public class AuditingDaoImpl extends BaseDaoMyBatisImpl<Auditing> implements AuditingDao {
 
     @Override
     public boolean insert(Auditing bean) throws Exception {

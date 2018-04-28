@@ -2,7 +2,7 @@ package me.cathub.change.order.dao;
 
 import com.github.pagehelper.PageHelper;
 import me.cathub.change.api.dao.order.OrderItemDao;
-import me.cathub.change.common.base.BaseCrudMyBatisImpl;
+import me.cathub.change.common.base.BaseDaoMyBatisImpl;
 import me.cathub.change.order.bean.OrderItem;
 import org.springframework.stereotype.Repository;
 
@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @Repository
-public class OrderItemDaoImpl extends BaseCrudMyBatisImpl<OrderItem> implements OrderItemDao {
+public class OrderItemDaoImpl extends BaseDaoMyBatisImpl<OrderItem> implements OrderItemDao {
 
     @Override
     public boolean insert(OrderItem bean) throws Exception {

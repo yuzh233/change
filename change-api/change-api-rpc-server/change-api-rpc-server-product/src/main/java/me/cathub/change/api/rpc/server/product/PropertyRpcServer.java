@@ -2,12 +2,12 @@ package me.cathub.change.api.rpc.server.product;
 
 import me.cathub.change.common.base.BaseRpcServer;
 import me.cathub.change.common.base.FillAssociationDate;
-import me.cathub.change.common.base.SelectByName;
+import me.cathub.change.common.base.ServerSelectByName;
 import me.cathub.change.product.bean.Property;
 
 import java.util.List;
 
-public interface PropertyRpcServer extends BaseRpcServer<Property>, FillAssociationDate<Property>, SelectByName<Property> {
+public interface PropertyRpcServer extends BaseRpcServer<Property>, FillAssociationDate<Property>, ServerSelectByName<Property> {
 
     /**
      * 根据产品分类获取属性列表
@@ -17,7 +17,7 @@ public interface PropertyRpcServer extends BaseRpcServer<Property>, FillAssociat
      * @return
      * @throws Exception
      */
-    List<Property> listByProductCategoryId(long productCategory_id, int page, int count, int tableIndex) throws Exception;
+    List<Property> listByProductCategoryId(long productCategory_id, int page, int count, int tableIndex, boolean flag) throws Exception;
 
     /**
      * 根据产品分类获取属性数量

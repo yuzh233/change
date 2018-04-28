@@ -16,7 +16,7 @@ public interface AuditingRpcServer extends BaseRpcServer<Auditing>, FillAssociat
      * @return
      * @throws Exception
      */
-    List<Auditing> listByAdminIdAndUserType(long admin_id, int type, int page, int count, int tableIndex) throws Exception;
+    List<Auditing> listByAdminIdAndUserType(long admin_id, int type, int page, int count, int tableIndex, boolean flag) throws Exception;
 
     /**
      * 根据管理员和类型获取审核数量
@@ -35,7 +35,7 @@ public interface AuditingRpcServer extends BaseRpcServer<Auditing>, FillAssociat
      * @return
      * @throws Exception
      */
-    List<Auditing> listByNotAuditing(int type, int page, int count, int tableIndex) throws Exception;
+    List<Auditing> listByNotAuditing(int type, int page, int count, int tableIndex, boolean flag) throws Exception;
 
     /**
      * 根据用户类型获取未审核的数量

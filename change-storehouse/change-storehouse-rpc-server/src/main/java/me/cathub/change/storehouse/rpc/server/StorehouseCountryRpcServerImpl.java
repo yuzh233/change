@@ -45,12 +45,12 @@ public class StorehouseCountryRpcServerImpl implements StorehouseCountryRpcServe
     }
 
     @Override
-    public StorehouseCountry select(StorehouseCountry bean) throws Exception {
+    public StorehouseCountry select(StorehouseCountry bean, boolean flag) throws Exception {
         return storehouseCountryDao.select(bean);
     }
 
     @Override
-    public List<StorehouseCountry> list(int page, int count, int tableIndex) throws Exception {
+    public List<StorehouseCountry> list(int page, int count, int tableIndex, boolean flag) throws Exception {
         return storehouseCountryDao.list(page, count, tableIndex);
     }
 
@@ -60,7 +60,7 @@ public class StorehouseCountryRpcServerImpl implements StorehouseCountryRpcServe
     }
 
     @Override
-    public List<StorehouseCountry> listByDel(int page, int count, int tableIndex) throws Exception {
+    public List<StorehouseCountry> listByDel(int page, int count, int tableIndex, boolean flag) throws Exception {
         return storehouseCountryDao.listByDel(page, count, tableIndex);
     }
 
@@ -75,7 +75,7 @@ public class StorehouseCountryRpcServerImpl implements StorehouseCountryRpcServe
     }
 
     @Override
-    public StorehouseCountry selectByName(String name, int tableIndex) throws Exception {
+    public StorehouseCountry selectByName(String name, int tableIndex, boolean flag) throws Exception {
         return storehouseCountryDao.selectByName(name, tableIndex);
     }
 }

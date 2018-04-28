@@ -50,13 +50,19 @@ public class ProductImageRpcServerImpl implements ProductImageRpcServer {
     }
 
     @Override
-    public ProductImage select(ProductImage bean) throws Exception {
-        return fill(productImageDao.select(bean));
+    public ProductImage select(ProductImage bean, boolean flag) throws Exception {
+        if (flag)
+            return productImageDao.select(bean);
+        else
+            return fill(productImageDao.select(bean));
     }
 
     @Override
-    public List<ProductImage> list(int page, int count, int tableIndex) throws Exception {
-        return productImageDao.list(page, count, tableIndex).stream()
+    public List<ProductImage> list(int page, int count, int tableIndex, boolean flag) throws Exception {
+        if (flag)
+            return productImageDao.list(page, count, tableIndex);
+        else
+            return productImageDao.list(page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
     }
@@ -67,8 +73,11 @@ public class ProductImageRpcServerImpl implements ProductImageRpcServer {
     }
 
     @Override
-    public List<ProductImage> listByDel(int page, int count, int tableIndex) throws Exception {
-        return productImageDao.listByDel(page, count, tableIndex).stream()
+    public List<ProductImage> listByDel(int page, int count, int tableIndex, boolean flag) throws Exception {
+        if (flag)
+            return productImageDao.listByDel(page, count, tableIndex);
+        else
+            return productImageDao.listByDel(page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
     }
@@ -84,8 +93,11 @@ public class ProductImageRpcServerImpl implements ProductImageRpcServer {
     }
 
     @Override
-    public List<ProductImage> listByProductIdAndImageType(long product_id, int type, int page, int count, int tableIndex) throws Exception {
-        return productImageDao.listByProductIdAndImageType(product_id, type, page, count, tableIndex).stream()
+    public List<ProductImage> listByProductIdAndImageType(long product_id, int type, int page, int count, int tableIndex, boolean flag) throws Exception {
+        if (flag)
+            return productImageDao.listByProductIdAndImageType(product_id, type, page, count, tableIndex);
+        else
+            return productImageDao.listByProductIdAndImageType(product_id, type, page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
     }
@@ -96,14 +108,17 @@ public class ProductImageRpcServerImpl implements ProductImageRpcServer {
     }
 
     @Override
-    public ProductImage selectByProductIdHead(long product_id, int tableIndex) throws Exception {
-        return fill(productImageDao.selectByProductIdHead(product_id, tableIndex));
+    public ProductImage selectByProductIdHead(long product_id, int tableIndex, boolean flag) throws Exception {
+        if (flag)
+            return productImageDao.selectByProductIdHead(product_id, tableIndex);
+        else
+            return fill(productImageDao.selectByProductIdHead(product_id, tableIndex));
     }
 
     @Override
     public ProductImage fill(ProductImage bean) {
         try {
-            Product product = productRpcServer.select(new Product(bean.getProduct_id()));
+            Product product = productRpcServer.select(new Product(bean.getProduct_id()), true);
 
             bean.setProduct(product);
         } catch (Exception e) {

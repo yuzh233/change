@@ -57,13 +57,19 @@ public class BrandQuotientRpcServerImpl implements BrandQuotientRpcServer {
     }
 
     @Override
-    public BrandQuotient select(BrandQuotient bean) throws Exception {
-        return fill(brandQuotientDao.select(bean));
+    public BrandQuotient select(BrandQuotient bean, boolean flag) throws Exception {
+        if (flag)
+            return brandQuotientDao.select(bean);
+        else
+            return fill(brandQuotientDao.select(bean));
     }
 
     @Override
-    public List<BrandQuotient> list(int page, int count, int tableIndex) throws Exception {
-        return brandQuotientDao.list(page, count, tableIndex).stream()
+    public List<BrandQuotient> list(int page, int count, int tableIndex, boolean flag) throws Exception {
+        if (flag)
+            return brandQuotientDao.list(page, count, tableIndex);
+        else
+            return brandQuotientDao.list(page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
     }
@@ -74,8 +80,11 @@ public class BrandQuotientRpcServerImpl implements BrandQuotientRpcServer {
     }
 
     @Override
-    public List<BrandQuotient> listByDel(int page, int count, int tableIndex) throws Exception {
-        return brandQuotientDao.listByDel(page, count, tableIndex).stream()
+    public List<BrandQuotient> listByDel(int page, int count, int tableIndex, boolean flag) throws Exception {
+        if (flag)
+            return brandQuotientDao.listByDel(page, count, tableIndex);
+        else
+            return brandQuotientDao.listByDel(page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
     }
@@ -91,15 +100,18 @@ public class BrandQuotientRpcServerImpl implements BrandQuotientRpcServer {
     }
 
     @Override
-    public BrandQuotient selectByName(String name, int tableIndex) throws Exception {
-        return fill(brandQuotientDao.selectByName(name, tableIndex));
+    public BrandQuotient selectByName(String name, int tableIndex, boolean flag) throws Exception {
+        if (flag)
+            return brandQuotientDao.selectByName(name, tableIndex);
+        else
+            return fill(brandQuotientDao.selectByName(name, tableIndex));
     }
 
     @Override
     public BrandQuotient fill(BrandQuotient bean) {
         try {
-            Company company = companyRpcServer.select(new Company(bean.getCompany_id()));
-            Role role = roleRpcServer.select(new Role(bean.getRole_id()));
+            Company company = companyRpcServer.select(new Company(bean.getCompany_id()), true);
+            Role role = roleRpcServer.select(new Role(bean.getRole_id()), true);
 
             bean.setCompany(company);
             bean.setRole(role);

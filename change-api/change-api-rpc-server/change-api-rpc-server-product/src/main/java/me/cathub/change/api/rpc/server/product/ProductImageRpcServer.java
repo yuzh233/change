@@ -14,7 +14,7 @@ public interface ProductImageRpcServer extends BaseRpcServer<ProductImage>, Fill
      * @return
      * @throws Exception
      */
-    List<ProductImage> listByProductIdAndImageType(long product_id, int type, int page, int count, int tableIndex) throws Exception;
+    List<ProductImage> listByProductIdAndImageType(long product_id, int type, int page, int count, int tableIndex, boolean flag) throws Exception;
 
     /**
      * 根据产品和图片类型获取图片数量
@@ -31,5 +31,5 @@ public interface ProductImageRpcServer extends BaseRpcServer<ProductImage>, Fill
      * @return
      * @throws Exception
      */
-    ProductImage selectByProductIdHead(long product_id, int tableIndex) throws Exception;
+    ProductImage selectByProductIdHead(long product_id, int tableIndex, boolean flag) throws Exception;
 }

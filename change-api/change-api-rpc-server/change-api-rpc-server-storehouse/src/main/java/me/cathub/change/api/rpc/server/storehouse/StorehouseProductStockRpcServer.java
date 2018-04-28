@@ -14,7 +14,7 @@ public interface StorehouseProductStockRpcServer extends BaseRpcServer<Storehous
      * @param product_id
      * @return
      */
-    StorehouseProductStock selectByStorehouseIdAndProductId(long storehouse_id, long product_id, int tableIndex) throws Exception;
+    StorehouseProductStock selectByStorehouseIdAndProductId(long storehouse_id, long product_id, int tableIndex, boolean flag) throws Exception;
 
     /**
      * 根据仓库得到产品库存列表
@@ -22,7 +22,7 @@ public interface StorehouseProductStockRpcServer extends BaseRpcServer<Storehous
      * @return
      * @throws Exception
      */
-    List<StorehouseProductStock> listByStorehouseId(long storehouse_id, int page, int count, int tableIndex) throws Exception;
+    List<StorehouseProductStock> listByStorehouseId(long storehouse_id, int page, int count, int tableIndex, boolean flag) throws Exception;
 
     /**
      * 根据仓库得到产品库存数量

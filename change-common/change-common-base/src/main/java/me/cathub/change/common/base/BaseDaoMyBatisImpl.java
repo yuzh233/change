@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.io.Serializable;
 import java.util.List;
 
-public abstract class BaseCrudMyBatisImpl<T extends Serializable> implements BaseCrud<T> {
+public abstract class BaseDaoMyBatisImpl<T extends Serializable> implements BaseDao<T> {
     private static final String SET_ID = "setId";
 
     @Autowired

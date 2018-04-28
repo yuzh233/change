@@ -49,14 +49,14 @@ public interface BaseRpcServer<T> {
      * @return
      * @throws Exception
      */
-    T select(T bean) throws Exception;
+    T select(T bean, boolean flag) throws Exception;
 
     /**
      * 全部数据(分页)
      * @return
      * @throws Exception
      */
-    List<T> list(int page, int count, int tableIndex) throws Exception;
+    List<T> list(int page, int count, int tableIndex, boolean flag) throws Exception;
 
     /**
      * 全部数量
@@ -73,7 +73,7 @@ public interface BaseRpcServer<T> {
      * @return
      * @throws Exception
      */
-    List<T> listByDel(int page, int count, int tableIndex) throws Exception;
+    List<T> listByDel(int page, int count, int tableIndex, boolean flag) throws Exception;
 
     /**
      * 返回以被逻辑删除的数据的数量

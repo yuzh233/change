@@ -7,7 +7,7 @@ import java.util.List;
  * 通用Dao接口
  * @param <T> 具体Bean
  */
-public interface BaseCrud<T extends Serializable> {
+public interface BaseDao<T extends Serializable> {
     String INSERT = ".insert";
     String DELETE_L = ".deleteL";
     String DELETE_P = ".deleteP";

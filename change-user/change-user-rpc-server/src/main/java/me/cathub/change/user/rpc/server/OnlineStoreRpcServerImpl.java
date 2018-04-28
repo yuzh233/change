@@ -52,13 +52,19 @@ public class OnlineStoreRpcServerImpl implements OnlineStoreRpcServer {
     }
 
     @Override
-    public OnlineStore select(OnlineStore bean) throws Exception {
-        return fill(onlineStoreDao.select(bean));
+    public OnlineStore select(OnlineStore bean, boolean flag) throws Exception {
+        if (flag)
+            return onlineStoreDao.select(bean);
+        else
+            return fill(onlineStoreDao.select(bean));
     }
 
     @Override
-    public List<OnlineStore> list(int page, int count, int tableIndex) throws Exception {
-        return onlineStoreDao.list(page, count, tableIndex).stream()
+    public List<OnlineStore> list(int page, int count, int tableIndex, boolean flag) throws Exception {
+        if (flag)
+            return onlineStoreDao.list(page, count, tableIndex);
+        else
+            return onlineStoreDao.list(page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
     }
@@ -69,8 +75,11 @@ public class OnlineStoreRpcServerImpl implements OnlineStoreRpcServer {
     }
 
     @Override
-    public List<OnlineStore> listByDel(int page, int count, int tableIndex) throws Exception {
-        return onlineStoreDao.listByDel(page, count, tableIndex).stream()
+    public List<OnlineStore> listByDel(int page, int count, int tableIndex, boolean flag) throws Exception {
+        if (flag)
+            return onlineStoreDao.listByDel(page, count, tableIndex);
+        else
+            return onlineStoreDao.listByDel(page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
     }
@@ -86,8 +95,11 @@ public class OnlineStoreRpcServerImpl implements OnlineStoreRpcServer {
     }
 
     @Override
-    public List<OnlineStore> listByShopkeeperId(long shopkeeper_id, int page, int count, int tableIndex) throws Exception {
-        return onlineStoreDao.listByShopkeeperId(shopkeeper_id, page, count, tableIndex).stream()
+    public List<OnlineStore> listByShopkeeperId(long shopkeeper_id, int page, int count, int tableIndex, boolean flag) throws Exception {
+        if (flag)
+            return onlineStoreDao.listByShopkeeperId(shopkeeper_id, page, count, tableIndex);
+        else
+            return onlineStoreDao.listByShopkeeperId(shopkeeper_id, page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
     }
@@ -100,7 +112,7 @@ public class OnlineStoreRpcServerImpl implements OnlineStoreRpcServer {
     @Override
     public OnlineStore fill(OnlineStore bean) {
         try {
-            Shopkeeper shopkeeper = shopkeeperRpcServer.select(new Shopkeeper(bean.getShopkeeper_id()));
+            Shopkeeper shopkeeper = shopkeeperRpcServer.select(new Shopkeeper(bean.getShopkeeper_id()), true);
 
             bean.setShopkeeper(shopkeeper);
         } catch (Exception e) {

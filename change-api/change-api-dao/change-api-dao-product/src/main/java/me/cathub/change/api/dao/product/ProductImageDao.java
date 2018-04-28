@@ -1,11 +1,11 @@
 package me.cathub.change.api.dao.product;
 
-import me.cathub.change.common.base.BaseCrud;
+import me.cathub.change.common.base.BaseDao;
 import me.cathub.change.product.bean.ProductImage;
 
 import java.util.List;
 
-public interface ProductImageDao extends BaseCrud<ProductImage> {
+public interface ProductImageDao extends BaseDao<ProductImage> {
     String NAME_SPACE = "me.cathub.change.product.bean.ProductImage";
 
     String LIST_BY_PRODUCT_IMAGE_ID_AND_IMAGE_TYPE = ".listByProductIdAndImageType";

@@ -2,12 +2,12 @@ package me.cathub.change.api.rpc.server.product;
 
 import me.cathub.change.common.base.BaseRpcServer;
 import me.cathub.change.common.base.FillAssociationDate;
-import me.cathub.change.common.base.SelectByName;
+import me.cathub.change.common.base.ServerSelectByName;
 import me.cathub.change.product.bean.Product;
 
 import java.util.List;
 
-public interface ProductRpcServer extends BaseRpcServer<Product>, FillAssociationDate<Product>, SelectByName<Product> {
+public interface ProductRpcServer extends BaseRpcServer<Product>, FillAssociationDate<Product>, ServerSelectByName<Product> {
 
     /**
      * 根据品牌商获取产品列表
@@ -17,7 +17,7 @@ public interface ProductRpcServer extends BaseRpcServer<Product>, FillAssociatio
      * @return
      * @throws Exception
      */
-    List<Product> listByBrandQuotientId(long brandQuotient_id, int page, int count, int tableIndex) throws Exception;
+    List<Product> listByBrandQuotientId(long brandQuotient_id, int page, int count, int tableIndex, boolean flag) throws Exception;
 
     /**
      * 根据品牌商获取产品数量
@@ -36,7 +36,7 @@ public interface ProductRpcServer extends BaseRpcServer<Product>, FillAssociatio
      * @return
      * @throws Exception
      */
-    List<Product> listByProductCategoryIdAndBrandQuotientId(long productCategory_id, long brandQuotient_id, int page, int count, int tableIndex) throws Exception;
+    List<Product> listByProductCategoryIdAndBrandQuotientId(long productCategory_id, long brandQuotient_id, int page, int count, int tableIndex, boolean flag) throws Exception;
 
     /**
      * 根据产品分类和品牌商获取产品数量
@@ -53,7 +53,7 @@ public interface ProductRpcServer extends BaseRpcServer<Product>, FillAssociatio
      * @return
      * @throws Exception
      */
-    List<Product> listByProductCategoryId(long productCategory_id, int page, int count, int tableIndex) throws Exception;
+    List<Product> listByProductCategoryId(long productCategory_id, int page, int count, int tableIndex, boolean flag) throws Exception;
 
     /**
      * 根据产品分类获取产品数量

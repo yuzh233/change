@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.io.Serializable;
 import java.util.List;
 
-public abstract class BaseControllerImpl<B extends Serializable, S extends BaseRpcServer> implements BaseCrud<B> {
+public abstract class BaseControllerImpl<B extends Serializable, S extends BaseRpcServer> implements BaseDao<B> {
 
     @Autowired
     S rpcService;

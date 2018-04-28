@@ -3,7 +3,7 @@ package me.cathub.change.product.dao;
 
 import com.github.pagehelper.PageHelper;
 import me.cathub.change.api.dao.product.ProductImageDao;
-import me.cathub.change.common.base.BaseCrudMyBatisImpl;
+import me.cathub.change.common.base.BaseDaoMyBatisImpl;
 import me.cathub.change.product.bean.ProductImage;
 import org.springframework.stereotype.Repository;
 
@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @Repository
-public class ProductImageDaoImpl extends BaseCrudMyBatisImpl<ProductImage> implements ProductImageDao {
+public class ProductImageDaoImpl extends BaseDaoMyBatisImpl<ProductImage> implements ProductImageDao {
 
     @Override
     public boolean insert(ProductImage bean) throws Exception {

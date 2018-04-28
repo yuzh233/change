@@ -2,18 +2,16 @@ package me.cathub.change.storehouse.dao;
 
 import com.github.pagehelper.PageHelper;
 import me.cathub.change.api.dao.storehouse.StorehouseProductStockDao;
-import me.cathub.change.common.base.BaseCrudMyBatisImpl;
+import me.cathub.change.common.base.BaseDaoMyBatisImpl;
 import me.cathub.change.storehouse.bean.StorehouseProductStock;
-import org.apache.shiro.crypto.hash.Hash;
 import org.springframework.stereotype.Repository;
 
-import javax.naming.Name;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Repository
-public class StorehouseProductStockDaoImpl extends BaseCrudMyBatisImpl<StorehouseProductStock> implements StorehouseProductStockDao {
+public class StorehouseProductStockDaoImpl extends BaseDaoMyBatisImpl<StorehouseProductStock> implements StorehouseProductStockDao {
 
     @Override
     public boolean insert(StorehouseProductStock bean) throws Exception {

@@ -1,12 +1,11 @@
 package me.cathub.change.api.dao.user;
 
-import me.cathub.change.common.base.BaseCrud;
-import me.cathub.change.common.base.SelectByName;
+import me.cathub.change.common.base.BaseDao;
 import me.cathub.change.user.bean.Auditing;
 
 import java.util.List;
 
-public interface AuditingDao extends BaseCrud<Auditing> {
+public interface AuditingDao extends BaseDao<Auditing> {
     String NAME_SPACE = "me.cathub.change.user.bean.Auditing";
 
     String LIST_BY_ADMIN_AND_TYPE = ".listByAdminIdAndUserType";

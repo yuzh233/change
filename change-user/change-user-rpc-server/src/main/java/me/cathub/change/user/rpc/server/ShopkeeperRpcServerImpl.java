@@ -52,13 +52,19 @@ public class ShopkeeperRpcServerImpl implements ShopkeeperRpcServer {
     }
 
     @Override
-    public Shopkeeper select(Shopkeeper bean) throws Exception {
-        return fill(shopkeeperDao.select(bean));
+    public Shopkeeper select(Shopkeeper bean, boolean flag) throws Exception {
+        if (flag)
+            return shopkeeperDao.select(bean);
+        else
+            return fill(shopkeeperDao.select(bean));
     }
 
     @Override
-    public List<Shopkeeper> list(int page, int count, int tableIndex) throws Exception {
-        return shopkeeperDao.list(page, count, tableIndex).stream()
+    public List<Shopkeeper> list(int page, int count, int tableIndex, boolean flag) throws Exception {
+        if (flag)
+            return shopkeeperDao.list(page, count, tableIndex);
+        else
+            return shopkeeperDao.list(page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
     }
@@ -69,8 +75,11 @@ public class ShopkeeperRpcServerImpl implements ShopkeeperRpcServer {
     }
 
     @Override
-    public List<Shopkeeper> listByDel(int page, int count, int tableIndex) throws Exception {
-        return shopkeeperDao.listByDel(page, count, tableIndex).stream()
+    public List<Shopkeeper> listByDel(int page, int count, int tableIndex, boolean flag) throws Exception {
+        if (flag)
+            return shopkeeperDao.listByDel(page, count, tableIndex);
+        else
+            return shopkeeperDao.listByDel(page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
     }
@@ -87,13 +96,16 @@ public class ShopkeeperRpcServerImpl implements ShopkeeperRpcServer {
 
     @Override
     public Shopkeeper selectByName(String name, int tableIndex) throws Exception {
-        return fill(shopkeeperDao.selectByName(name, tableIndex));
+        if (false)
+            return shopkeeperDao.selectByName(name, tableIndex);
+        else
+            return fill(shopkeeperDao.selectByName(name, tableIndex));
     }
 
     @Override
     public Shopkeeper fill(Shopkeeper bean) {
         try {
-            Role role = roleRpcServer.select(new Role(bean.getRole_id()));
+            Role role = roleRpcServer.select(new Role(bean.getRole_id()), true);
 
             bean.setRole(role);
         } catch (Exception e) {

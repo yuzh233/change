@@ -10,7 +10,7 @@ import com.ebay.soap.eBLBaseComponents.*;
 
 import java.io.IOException;
 
-public class EbayAPITools {
+public class EbayTool {
     /**
      * 返回
      * @return ApiContext 对象

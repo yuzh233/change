@@ -29,9 +29,15 @@
         <aspectj.version>1.8.10</aspectj.version>
         <jackson.version>2.9.1</jackson.version>
         <logback.version>1.2.3</logback.version>
+        <hutool.version>4.0.9</hutool.version>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>${hutool.version}</version>
+        </dependency>
         <!-- commons -->
         <dependency>
             <groupId>commons-fileupload</groupId>

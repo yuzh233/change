@@ -1,12 +1,12 @@
 package me.cathub.change.api.dao.upms;
 
-import me.cathub.change.common.base.BaseCrud;
-import me.cathub.change.common.base.SelectByName;
+import me.cathub.change.common.base.BaseDao;
+import me.cathub.change.common.base.DaoSelectByName;
 import me.cathub.change.upms.bean.Permission;
 
 import java.util.List;
 
-public interface PermissionDao extends BaseCrud<Permission>, SelectByName<Permission> {
+public interface PermissionDao extends BaseDao<Permission>, DaoSelectByName<Permission> {
     String NAME_SPACE = "me.cathub.change.upms.bean.Permission";
 
     String LIST_BY_ROLE_ID = ".listByRoleId";

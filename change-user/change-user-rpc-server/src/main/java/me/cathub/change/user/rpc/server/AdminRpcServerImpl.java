@@ -52,13 +52,19 @@ public class AdminRpcServerImpl implements AdminRpcServer {
     }
 
     @Override
-    public Admin select(Admin bean) throws Exception {
-        return fill(adminDao.select(bean));
+    public Admin select(Admin bean, boolean flag) throws Exception {
+        if (flag)
+            return adminDao.select(bean);
+        else
+            return fill(adminDao.select(bean));
     }
 
     @Override
-    public List<Admin> list(int page, int count, int tableIndex) throws Exception {
-        return adminDao.list(page, count, tableIndex).stream()
+    public List<Admin> list(int page, int count, int tableIndex, boolean flag) throws Exception {
+        if (flag)
+            return adminDao.list(page, count, tableIndex);
+        else
+            return adminDao.list(page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
     }
@@ -69,8 +75,11 @@ public class AdminRpcServerImpl implements AdminRpcServer {
     }
 
     @Override
-    public List<Admin> listByDel(int page, int count, int tableIndex) throws Exception {
-        return adminDao.listByDel(page, count, tableIndex).stream()
+    public List<Admin> listByDel(int page, int count, int tableIndex, boolean flag) throws Exception {
+        if (flag)
+            return adminDao.listByDel(page, count, tableIndex);
+        else
+            return adminDao.listByDel(page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
     }
@@ -86,14 +95,17 @@ public class AdminRpcServerImpl implements AdminRpcServer {
     }
 
     @Override
-    public Admin selectByName(String name, int tableIndex) throws Exception {
-        return adminDao.selectByName(name, tableIndex);
+    public Admin selectByName(String name, int tableIndex, boolean flag) throws Exception {
+        if (flag)
+            return adminDao.selectByName(name, tableIndex);
+        else
+            return adminDao.selectByName(name, tableIndex);
     }
 
     @Override
     public Admin fill(Admin bean) {
         try {
-            Role role = roleRpcServer.select(new Role(bean.getRole_id()));
+            Role role = roleRpcServer.select(new Role(bean.getRole_id()), true);
 
             bean.setRole(role);
         } catch (Exception e) {

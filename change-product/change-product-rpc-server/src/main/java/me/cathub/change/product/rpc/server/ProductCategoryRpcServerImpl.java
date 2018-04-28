@@ -45,12 +45,12 @@ public class ProductCategoryRpcServerImpl implements ProductCategoryRpcServer {
     }
 
     @Override
-    public ProductCategory select(ProductCategory bean) throws Exception {
+    public ProductCategory select(ProductCategory bean, boolean flag) throws Exception {
         return productCategoryDao.select(bean);
     }
 
     @Override
-    public List<ProductCategory> list(int page, int count, int tableIndex) throws Exception {
+    public List<ProductCategory> list(int page, int count, int tableIndex, boolean flag) throws Exception {
         return productCategoryDao.list(page, count, tableIndex);
     }
 
@@ -60,7 +60,7 @@ public class ProductCategoryRpcServerImpl implements ProductCategoryRpcServer {
     }
 
     @Override
-    public List<ProductCategory> listByDel(int page, int count, int tableIndex) throws Exception {
+    public List<ProductCategory> listByDel(int page, int count, int tableIndex, boolean flag) throws Exception {
         return productCategoryDao.listByDel(page, count, tableIndex);
     }
 
@@ -75,12 +75,12 @@ public class ProductCategoryRpcServerImpl implements ProductCategoryRpcServer {
     }
 
     @Override
-    public ProductCategory selectByName(String name, int tableIndex) throws Exception {
-        return productCategoryDao.selectByName(name, tableIndex);
+    public ProductCategory selectByName(String name, int tableIndex, boolean flag) throws Exception {
+            return productCategoryDao.selectByName(name, tableIndex);
     }
 
     @Override
-    public List<ProductCategory> childListById(long id, int page, int count, int tableIndex) throws Exception {
+    public List<ProductCategory> childListById(long id, int page, int count, int tableIndex, boolean flag) throws Exception {
         return productCategoryDao.childListById(id, page, count, tableIndex);
     }
 

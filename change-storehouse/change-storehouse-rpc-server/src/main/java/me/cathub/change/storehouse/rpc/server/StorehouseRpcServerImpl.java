@@ -52,13 +52,19 @@ public class StorehouseRpcServerImpl implements StorehouseRpcServer {
     }
 
     @Override
-    public Storehouse select(Storehouse bean) throws Exception {
-        return fill(storehouseDao.select(bean));
+    public Storehouse select(Storehouse bean, boolean flag) throws Exception {
+        if (flag)
+            return storehouseDao.select(bean);
+        else
+            return fill(storehouseDao.select(bean));
     }
 
     @Override
-    public List<Storehouse> list(int page, int count, int tableIndex) throws Exception {
-        return storehouseDao.list(page, count, tableIndex).stream()
+    public List<Storehouse> list(int page, int count, int tableIndex, boolean flag) throws Exception {
+        if (flag)
+            return storehouseDao.list(page, count, tableIndex);
+        else
+            return storehouseDao.list(page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
     }
@@ -69,8 +75,11 @@ public class StorehouseRpcServerImpl implements StorehouseRpcServer {
     }
 
     @Override
-    public List<Storehouse> listByDel(int page, int count, int tableIndex) throws Exception {
-        return storehouseDao.listByDel(page, count, tableIndex).stream()
+    public List<Storehouse> listByDel(int page, int count, int tableIndex, boolean flag) throws Exception {
+        if (flag)
+            return storehouseDao.listByDel(page, count, tableIndex);
+        else
+            return storehouseDao.listByDel(page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
     }
@@ -86,12 +95,15 @@ public class StorehouseRpcServerImpl implements StorehouseRpcServer {
     }
 
     @Override
-    public Storehouse selectByName(String name, int tableIndex) throws Exception {
-        return fill(storehouseDao.selectByName(name, tableIndex));
+    public Storehouse selectByName(String name, int tableIndex, boolean flag) throws Exception {
+        if (flag)
+            return storehouseDao.selectByName(name, tableIndex);
+        else
+            return fill(storehouseDao.selectByName(name, tableIndex));
     }
 
     @Override
-    public List<Storehouse> listByStorehouseCountryId(long storehouseCountry_id, int page, int count, int tableIndex) throws Exception {
+    public List<Storehouse> listByStorehouseCountryId(long storehouseCountry_id, int page, int count, int tableIndex, boolean flag) throws Exception {
         return storehouseDao.listByStorehouseCountryId(storehouseCountry_id, page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
@@ -105,7 +117,7 @@ public class StorehouseRpcServerImpl implements StorehouseRpcServer {
     @Override
     public Storehouse fill(Storehouse bean) {
         try {
-            StorehouseCountry storehouseCountry = storehouseCountryRpcServer.select(new StorehouseCountry(bean.getStorehouseCountry_id()));
+            StorehouseCountry storehouseCountry = storehouseCountryRpcServer.select(new StorehouseCountry(bean.getStorehouseCountry_id()), true);
 
             bean.setStorehouseCountry(storehouseCountry);
         } catch (Exception e) {

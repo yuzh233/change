@@ -1,12 +1,12 @@
 package me.cathub.change.api.dao.product;
 
-import me.cathub.change.common.base.BaseCrud;
-import me.cathub.change.common.base.SelectByName;
+import me.cathub.change.common.base.BaseDao;
+import me.cathub.change.common.base.DaoSelectByName;
 import me.cathub.change.product.bean.ProductCategory;
 
 import java.util.List;
 
-public interface ProductCategoryDao extends BaseCrud<ProductCategory>, SelectByName<ProductCategory> {
+public interface ProductCategoryDao extends BaseDao<ProductCategory>, DaoSelectByName<ProductCategory> {
     String NAME_SPACE = "me.cathub.change.product.bean.ProductCategory";
 
     String CHILD_LIST_BY_ID = ".childListById";

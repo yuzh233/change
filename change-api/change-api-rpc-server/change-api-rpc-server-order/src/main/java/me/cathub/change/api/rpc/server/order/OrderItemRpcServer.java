@@ -14,7 +14,7 @@ public interface OrderItemRpcServer extends BaseRpcServer<OrderItem>,FillAssocia
      * @return
      * @throws Exception
      */
-    List<OrderItem> listByOrderId(long order_id, int page, int count, int tableIndex) throws Exception;
+    List<OrderItem> listByOrderId(long order_id, int page, int count, int tableIndex, boolean flag) throws Exception;
 
     /**
      * 根据订单获取订单项数量

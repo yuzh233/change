@@ -2,7 +2,7 @@ package me.cathub.change.product.dao;
 
 import com.github.pagehelper.PageHelper;
 import me.cathub.change.api.dao.product.PropertyDao;
-import me.cathub.change.common.base.BaseCrudMyBatisImpl;
+import me.cathub.change.common.base.BaseDaoMyBatisImpl;
 import me.cathub.change.product.bean.Property;
 import org.springframework.stereotype.Repository;
 
@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public class PropertyDaoImpl extends BaseCrudMyBatisImpl<Property> implements PropertyDao {
+public class PropertyDaoImpl extends BaseDaoMyBatisImpl<Property> implements PropertyDao {
 
     @Override
     public boolean insert(Property bean) throws Exception {

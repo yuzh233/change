@@ -45,12 +45,12 @@ public class CompanyRpcServerImpl implements CompanyRpcServer {
     }
 
     @Override
-    public Company select(Company bean) throws Exception {
+    public Company select(Company bean, boolean flag) throws Exception {
         return companyDao.select(bean);
     }
 
     @Override
-    public List<Company> list(int page, int count, int tableIndex) throws Exception {
+    public List<Company> list(int page, int count, int tableIndex, boolean flag) throws Exception {
         return companyDao.list(page, count, tableIndex);
     }
 
@@ -60,7 +60,7 @@ public class CompanyRpcServerImpl implements CompanyRpcServer {
     }
 
     @Override
-    public List<Company> listByDel(int page, int count, int tableIndex) throws Exception {
+    public List<Company> listByDel(int page, int count, int tableIndex, boolean flag) throws Exception {
         return companyDao.listByDel(page, count, tableIndex);
     }
 
@@ -75,7 +75,7 @@ public class CompanyRpcServerImpl implements CompanyRpcServer {
     }
 
     @Override
-    public Company selectByName(String name, int tableIndex) throws Exception {
+    public Company selectByName(String name, int tableIndex, boolean flag) throws Exception {
         return companyDao.selectByName(name, tableIndex);
     }
 }

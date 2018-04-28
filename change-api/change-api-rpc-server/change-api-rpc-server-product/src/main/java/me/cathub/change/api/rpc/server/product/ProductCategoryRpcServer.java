@@ -1,12 +1,12 @@
 package me.cathub.change.api.rpc.server.product;
 
 import me.cathub.change.common.base.BaseRpcServer;
-import me.cathub.change.common.base.SelectByName;
+import me.cathub.change.common.base.ServerSelectByName;
 import me.cathub.change.product.bean.ProductCategory;
 
 import java.util.List;
 
-public interface ProductCategoryRpcServer extends BaseRpcServer<ProductCategory>, SelectByName<ProductCategory> {
+public interface ProductCategoryRpcServer extends BaseRpcServer<ProductCategory>, ServerSelectByName<ProductCategory> {
 
     /**
      * 根据id获取子分类列表
@@ -14,7 +14,7 @@ public interface ProductCategoryRpcServer extends BaseRpcServer<ProductCategory>
      * @return
      * @throws Exception
      */
-    List<ProductCategory> childListById(long id, int page, int count, int tableIndex) throws Exception;
+    List<ProductCategory> childListById(long id, int page, int count, int tableIndex, boolean flag) throws Exception;
 
     /**
      * 根据id获取子分类数量

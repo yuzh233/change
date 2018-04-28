@@ -1,11 +1,11 @@
 package me.cathub.change.api.dao.product;
 
-import me.cathub.change.common.base.BaseCrud;
+import me.cathub.change.common.base.BaseDao;
 import me.cathub.change.product.bean.ProductReview;
 
 import java.util.List;
 
-public interface ProductReviewDao extends BaseCrud<ProductReview> {
+public interface ProductReviewDao extends BaseDao<ProductReview> {
     String NAME_SPACE = "me.cathub.change.product.bean.ProductReview";
 
     String LIST_BY_PRODUCT_ID = ".listByProductId";

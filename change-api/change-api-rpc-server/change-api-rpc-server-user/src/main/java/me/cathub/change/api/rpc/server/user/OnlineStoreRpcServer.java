@@ -16,7 +16,7 @@ public interface OnlineStoreRpcServer extends BaseRpcServer<OnlineStore>, FillAs
      * @return
      * @throws Exception
      */
-    List<OnlineStore> listByShopkeeperId(long shopkeeper_id, int page, int count, int tableIndex) throws Exception;
+    List<OnlineStore> listByShopkeeperId(long shopkeeper_id, int page, int count, int tableIndex, boolean flag) throws Exception;
 
     /**
      * 根据店主获取网店数量

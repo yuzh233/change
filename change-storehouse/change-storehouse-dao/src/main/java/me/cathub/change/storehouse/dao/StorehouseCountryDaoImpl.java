@@ -1,7 +1,7 @@
 package me.cathub.change.storehouse.dao;
 
 import me.cathub.change.api.dao.storehouse.StorehouseCountryDao;
-import me.cathub.change.common.base.BaseCrudMyBatisImpl;
+import me.cathub.change.common.base.BaseDaoMyBatisImpl;
 import me.cathub.change.storehouse.bean.StorehouseCountry;
 import org.springframework.stereotype.Repository;
 
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public class StorehouseCountryDaoImpl extends BaseCrudMyBatisImpl<StorehouseCountry> implements StorehouseCountryDao {
+public class StorehouseCountryDaoImpl extends BaseDaoMyBatisImpl<StorehouseCountry> implements StorehouseCountryDao {
 
     @Override
     public boolean insert(StorehouseCountry bean) throws Exception {

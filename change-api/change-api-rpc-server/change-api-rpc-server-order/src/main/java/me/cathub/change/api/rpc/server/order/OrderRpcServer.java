@@ -16,7 +16,7 @@ public interface OrderRpcServer extends BaseRpcServer<Order>, FillAssociationDat
      * @return
      * @throws Exception
      */
-    List<Order> listByStorehouseId(long storehouse_id, int page, int count, int tableIndex) throws Exception;
+    List<Order> listByStorehouseId(long storehouse_id, int page, int count, int tableIndex, boolean flag) throws Exception;
 
     /**
      * 根据仓库id获取订单数量
@@ -36,7 +36,7 @@ public interface OrderRpcServer extends BaseRpcServer<Order>, FillAssociationDat
      * @return
      * @throws Exception
      */
-    List<Order> listByShopkeeperId(long shopkeeper_id, int page, int count, int tableIndex) throws Exception;
+    List<Order> listByShopkeeperId(long shopkeeper_id, int page, int count, int tableIndex, boolean flag) throws Exception;
 
     /**
      * 根据借卖方获取订单数量
@@ -56,7 +56,7 @@ public interface OrderRpcServer extends BaseRpcServer<Order>, FillAssociationDat
      * @return
      * @throws Exception
      */
-    List<Order> listByBrandQuotient(long brandQuotient_id, int page, int count, int tableIndex) throws Exception;
+    List<Order> listByBrandQuotient(long brandQuotient_id, int page, int count, int tableIndex, boolean flag) throws Exception;
 
     /**
      * 根据品牌商获取订单数量

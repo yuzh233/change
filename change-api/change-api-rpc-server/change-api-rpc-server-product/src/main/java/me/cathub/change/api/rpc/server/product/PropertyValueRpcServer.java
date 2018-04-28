@@ -14,7 +14,7 @@ public interface PropertyValueRpcServer extends BaseRpcServer<PropertyValue>, Fi
      * @return
      * @throws Exception
      */
-    List<PropertyValue> listByProductId(long product_id, int page, int count, int tableIndex) throws Exception;
+    List<PropertyValue> listByProductId(long product_id, int page, int count, int tableIndex, boolean flag) throws Exception;
 
     /**
      * 根据产品获取属性值数量

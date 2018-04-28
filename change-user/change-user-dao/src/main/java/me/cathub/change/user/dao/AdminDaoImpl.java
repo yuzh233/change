@@ -1,7 +1,7 @@
 package me.cathub.change.user.dao;
 
 import me.cathub.change.api.dao.user.AdminDao;
-import me.cathub.change.common.base.BaseCrudMyBatisImpl;
+import me.cathub.change.common.base.BaseDaoMyBatisImpl;
 import me.cathub.change.user.bean.Admin;
 import org.springframework.stereotype.Repository;
 
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public class AdminDaoImpl extends BaseCrudMyBatisImpl<Admin> implements AdminDao {
+public class AdminDaoImpl extends BaseDaoMyBatisImpl<Admin> implements AdminDao {
 
     @Override
     public boolean insert(Admin bean) throws Exception {

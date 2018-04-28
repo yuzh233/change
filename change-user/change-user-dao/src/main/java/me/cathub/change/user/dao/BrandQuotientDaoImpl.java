@@ -1,7 +1,7 @@
 package me.cathub.change.user.dao;
 
 import me.cathub.change.api.dao.user.BrandQuotientDao;
-import me.cathub.change.common.base.BaseCrudMyBatisImpl;
+import me.cathub.change.common.base.BaseDaoMyBatisImpl;
 import me.cathub.change.user.bean.BrandQuotient;
 import org.springframework.stereotype.Repository;
 
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public class BrandQuotientDaoImpl extends BaseCrudMyBatisImpl<BrandQuotient> implements BrandQuotientDao {
+public class BrandQuotientDaoImpl extends BaseDaoMyBatisImpl<BrandQuotient> implements BrandQuotientDao {
 
     @Override
     public boolean insert(BrandQuotient bean) throws Exception {

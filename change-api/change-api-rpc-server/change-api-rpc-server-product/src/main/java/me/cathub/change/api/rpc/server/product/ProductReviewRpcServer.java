@@ -16,7 +16,7 @@ public interface ProductReviewRpcServer extends BaseRpcServer<ProductReview>, Fi
      * @return
      * @throws Exception
      */
-    List<ProductReview> listByProductId(long product_id, int page, int count, int tableIndex) throws Exception;
+    List<ProductReview> listByProductId(long product_id, int page, int count, int tableIndex, boolean flag) throws Exception;
 
     /**
      * 根据产品获取产品评论数量

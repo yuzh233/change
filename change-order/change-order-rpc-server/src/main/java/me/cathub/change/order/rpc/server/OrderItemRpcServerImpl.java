@@ -57,13 +57,19 @@ public class OrderItemRpcServerImpl implements OrderItemRpcServer {
     }
 
     @Override
-    public OrderItem select(OrderItem bean) throws Exception {
-        return fill(orderItemDao.select(bean));
+    public OrderItem select(OrderItem bean, boolean flag) throws Exception {
+        if (flag)
+            return orderItemDao.select(bean);
+        else
+            return fill(orderItemDao.select(bean));
     }
 
     @Override
-    public List<OrderItem> list(int page, int count, int tableIndex) throws Exception {
-        return orderItemDao.list(page, count, tableIndex).stream()
+    public List<OrderItem> list(int page, int count, int tableIndex, boolean flag) throws Exception {
+        if (flag)
+            return orderItemDao.list(page, count, tableIndex);
+        else
+            return orderItemDao.list(page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
     }
@@ -74,8 +80,11 @@ public class OrderItemRpcServerImpl implements OrderItemRpcServer {
     }
 
     @Override
-    public List<OrderItem> listByDel(int page, int count, int tableIndex) throws Exception {
-        return orderItemDao.listByDel(page, count, tableIndex).stream()
+    public List<OrderItem> listByDel(int page, int count, int tableIndex, boolean flag) throws Exception {
+        if (flag)
+            return orderItemDao.listByDel(page, count, tableIndex);
+        else
+            return orderItemDao.listByDel(page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
     }
@@ -91,8 +100,11 @@ public class OrderItemRpcServerImpl implements OrderItemRpcServer {
     }
 
     @Override
-    public List<OrderItem> listByOrderId(long order_id, int page, int count, int tableIndex) throws Exception {
-        return orderItemDao.listByOrderId(order_id, page, count, tableIndex).stream()
+    public List<OrderItem> listByOrderId(long order_id, int page, int count, int tableIndex, boolean flag) throws Exception {
+        if (flag)
+            return orderItemDao.listByOrderId(order_id, page, count, tableIndex);
+        else
+            return orderItemDao.listByOrderId(order_id, page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
     }
@@ -105,8 +117,8 @@ public class OrderItemRpcServerImpl implements OrderItemRpcServer {
     @Override
     public OrderItem fill(OrderItem bean) {
         try {
-            Product product = productRpcServer.select(new Product(bean.getProduct_id()));
-            Order order = orderRpcServer.select(new Order(bean.getOrder_id()));
+            Product product = productRpcServer.select(new Product(bean.getProduct_id()), true);
+            Order order = orderRpcServer.select(new Order(bean.getOrder_id()), true);
 
             bean.setProduct(product);
             bean.setOrder(order);

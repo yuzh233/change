@@ -1,11 +1,11 @@
 package me.cathub.change.api.dao.order;
 
-import me.cathub.change.common.base.BaseCrud;
+import me.cathub.change.common.base.BaseDao;
 import me.cathub.change.order.bean.OrderItem;
 
 import java.util.List;
 
-public interface OrderItemDao extends BaseCrud<OrderItem> {
+public interface OrderItemDao extends BaseDao<OrderItem> {
     String NAME_SPACE = "me.cathub.change.order.bean.OrderItem";
 
     String LIST_BY_ORDER_ID = ".listByOrderId";

@@ -52,13 +52,19 @@ public class PermissionRpcServerImpl implements PermissionRpcServer {
     }
 
     @Override
-    public Permission select(Permission bean) throws Exception {
-        return fill(permissionDao.select(bean));
+    public Permission select(Permission bean, boolean flag) throws Exception {
+        if (flag)
+            return permissionDao.select(bean);
+        else
+            return fill(permissionDao.select(bean));
     }
 
     @Override
-    public List<Permission> list(int page, int count, int tableIndex) throws Exception {
-        return permissionDao.list(page, count, tableIndex).stream()
+    public List<Permission> list(int page, int count, int tableIndex, boolean flag) throws Exception {
+        if (flag)
+            return permissionDao.list(page, count, tableIndex);
+        else
+            return permissionDao.list(page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
     }
@@ -69,8 +75,11 @@ public class PermissionRpcServerImpl implements PermissionRpcServer {
     }
 
     @Override
-    public List<Permission> listByDel(int page, int count, int tableIndex) throws Exception {
-        return permissionDao.listByDel(page, count, tableIndex).stream()
+    public List<Permission> listByDel(int page, int count, int tableIndex, boolean flag) throws Exception {
+        if (flag)
+            return permissionDao.listByDel(page, count, tableIndex);
+        else
+            return permissionDao.listByDel(page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
     }
@@ -86,13 +95,19 @@ public class PermissionRpcServerImpl implements PermissionRpcServer {
     }
 
     @Override
-    public Permission selectByName(String name, int tableIndex) throws Exception {
-        return fill(permissionDao.selectByName(name, tableIndex));
+    public Permission selectByName(String name, int tableIndex, boolean flag) throws Exception {
+        if (flag)
+            return permissionDao.selectByName(name, tableIndex);
+        else
+            return fill(permissionDao.selectByName(name, tableIndex));
     }
 
     @Override
-    public List<Permission> listByRoleId(long role_id, int page, int count, int tableIndex) throws Exception {
-        return permissionDao.listByRoleId(role_id, page, count, tableIndex).stream()
+    public List<Permission> listByRoleId(long role_id, int page, int count, int tableIndex, boolean flag) throws Exception {
+        if (flag)
+            return permissionDao.listByRoleId(role_id, page, count, tableIndex);
+        else
+            return permissionDao.listByRoleId(role_id, page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
     }
@@ -105,7 +120,7 @@ public class PermissionRpcServerImpl implements PermissionRpcServer {
     @Override
     public Permission fill(Permission bean) {
         try {
-            Role role = roleRpcServer.select(new Role(bean.getRole_id()));
+            Role role = roleRpcServer.select(new Role(bean.getRole_id()), true);
             bean.setRole(role);
         } catch (Exception e) {
             e.printStackTrace();

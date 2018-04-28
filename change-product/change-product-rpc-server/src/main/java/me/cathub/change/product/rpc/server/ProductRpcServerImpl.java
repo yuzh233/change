@@ -57,12 +57,15 @@ public class ProductRpcServerImpl implements ProductRpcServer {
     }
 
     @Override
-    public Product select(Product bean) throws Exception {
-        return fill(productDao.select(bean));
+    public Product select(Product bean, boolean flag) throws Exception {
+        if (flag)
+            return productDao.select(bean);
+        else
+            return fill(productDao.select(bean));
     }
 
     @Override
-    public List<Product> list(int page, int count, int tableIndex) throws Exception {
+    public List<Product> list(int page, int count, int tableIndex, boolean flag) throws Exception {
         return productDao.list(page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
@@ -74,8 +77,11 @@ public class ProductRpcServerImpl implements ProductRpcServer {
     }
 
     @Override
-    public List<Product> listByDel(int page, int count, int tableIndex) throws Exception {
-        return productDao.listByDel(page, count, tableIndex).stream()
+    public List<Product> listByDel(int page, int count, int tableIndex, boolean flag) throws Exception {
+        if (flag)
+            return productDao.listByDel(page, count, tableIndex);
+        else
+            return productDao.listByDel(page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
     }
@@ -91,13 +97,19 @@ public class ProductRpcServerImpl implements ProductRpcServer {
     }
 
     @Override
-    public Product selectByName(String name, int tableIndex) throws Exception {
-        return fill(productDao.selectByName(name, tableIndex));
+    public Product selectByName(String name, int tableIndex, boolean flag) throws Exception {
+        if (flag)
+            return productDao.selectByName(name, tableIndex);
+        else
+            return fill(productDao.selectByName(name, tableIndex));
     }
 
     @Override
-    public List<Product> listByBrandQuotientId(long brandQuotient_id, int page, int count, int tableIndex) throws Exception {
-        return productDao.listByBrandQuotientId(brandQuotient_id, page, count, tableIndex).stream()
+    public List<Product> listByBrandQuotientId(long brandQuotient_id, int page, int count, int tableIndex, boolean flag) throws Exception {
+        if (flag)
+            return productDao.listByBrandQuotientId(brandQuotient_id, page, count, tableIndex);
+        else
+            return productDao.listByBrandQuotientId(brandQuotient_id, page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
     }
@@ -108,8 +120,11 @@ public class ProductRpcServerImpl implements ProductRpcServer {
     }
 
     @Override
-    public List<Product> listByProductCategoryIdAndBrandQuotientId(long productCategory_id, long brandQuotient_id, int page, int count, int tableIndex) throws Exception {
-        return productDao.listByProductCategoryIdAndBrandQuotientId(productCategory_id, brandQuotient_id, page, count, tableIndex).stream()
+    public List<Product> listByProductCategoryIdAndBrandQuotientId(long productCategory_id, long brandQuotient_id, int page, int count, int tableIndex, boolean flag) throws Exception {
+        if (flag)
+            return productDao.listByProductCategoryIdAndBrandQuotientId(productCategory_id, brandQuotient_id, page, count, tableIndex);
+        else
+            return productDao.listByProductCategoryIdAndBrandQuotientId(productCategory_id, brandQuotient_id, page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
     }
@@ -120,8 +135,11 @@ public class ProductRpcServerImpl implements ProductRpcServer {
     }
 
     @Override
-    public List<Product> listByProductCategoryId(long productCategory_id, int page, int count, int tableIndex) throws Exception {
-        return productDao.listByProductCategoryId(productCategory_id, page, count, tableIndex).stream()
+    public List<Product> listByProductCategoryId(long productCategory_id, int page, int count, int tableIndex, boolean flag) throws Exception {
+        if (flag)
+            return productDao.listByProductCategoryId(productCategory_id, page, count, tableIndex);
+        else
+            return productDao.listByProductCategoryId(productCategory_id, page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
     }
@@ -134,8 +152,8 @@ public class ProductRpcServerImpl implements ProductRpcServer {
     @Override
     public Product fill(Product bean) {
         try {
-            ProductCategory productCategory = productCategoryRpcServer.select(new ProductCategory(bean.getProductCategory_id()));
-            BrandQuotient brandQuotient = brandQuotientRpcServer.select(new BrandQuotient(bean.getBrandQuotient_id()));
+            ProductCategory productCategory = productCategoryRpcServer.select(new ProductCategory(bean.getProductCategory_id()), true);
+            BrandQuotient brandQuotient = brandQuotientRpcServer.select(new BrandQuotient(bean.getBrandQuotient_id()), true);
 
             bean.setProductCategory(productCategory);
             bean.setBrandQuotient(brandQuotient);

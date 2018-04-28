@@ -45,12 +45,12 @@ public class RoleRpcServerImpl implements RoleRpcServer {
     }
 
     @Override
-    public Role select(Role bean) throws Exception {
+    public Role select(Role bean, boolean flag) throws Exception {
         return roleDao.select(bean);
     }
 
     @Override
-    public List<Role> list(int page, int count, int tableIndex) throws Exception {
+    public List<Role> list(int page, int count, int tableIndex, boolean flag) throws Exception {
         return roleDao.list(page, count, tableIndex);
     }
 
@@ -60,7 +60,7 @@ public class RoleRpcServerImpl implements RoleRpcServer {
     }
 
     @Override
-    public List<Role> listByDel(int page, int count, int tableIndex) throws Exception {
+    public List<Role> listByDel(int page, int count, int tableIndex, boolean flag) throws Exception {
         return roleDao.listByDel(page, count, tableIndex);
     }
 
@@ -75,7 +75,7 @@ public class RoleRpcServerImpl implements RoleRpcServer {
     }
 
     @Override
-    public Role selectByName(String name, int tableIndex) throws Exception {
+    public Role selectByName(String name, int tableIndex, boolean flag) throws Exception {
         return roleDao.selectByName(name, tableIndex);
     }
 }

@@ -1,7 +1,7 @@
 package me.cathub.change.user.dao;
 
 import me.cathub.change.api.dao.user.ShopkeeperDao;
-import me.cathub.change.common.base.BaseCrudMyBatisImpl;
+import me.cathub.change.common.base.BaseDaoMyBatisImpl;
 import me.cathub.change.user.bean.Shopkeeper;
 import org.springframework.stereotype.Repository;
 
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public class ShopkeeperDaoImpl extends BaseCrudMyBatisImpl<Shopkeeper> implements ShopkeeperDao {
+public class ShopkeeperDaoImpl extends BaseDaoMyBatisImpl<Shopkeeper> implements ShopkeeperDao {
 
     @Override
     public boolean insert(Shopkeeper bean) throws Exception {

@@ -2,12 +2,12 @@ package me.cathub.change.api.rpc.server.storehouse;
 
 import me.cathub.change.common.base.BaseRpcServer;
 import me.cathub.change.common.base.FillAssociationDate;
-import me.cathub.change.common.base.SelectByName;
+import me.cathub.change.common.base.ServerSelectByName;
 import me.cathub.change.storehouse.bean.Storehouse;
 
 import java.util.List;
 
-public interface StorehouseRpcServer extends BaseRpcServer<Storehouse>, FillAssociationDate<Storehouse>, SelectByName<Storehouse> {
+public interface StorehouseRpcServer extends BaseRpcServer<Storehouse>, FillAssociationDate<Storehouse>, ServerSelectByName<Storehouse> {
 
     /**
      * 根据国家获取仓库列表
@@ -15,7 +15,7 @@ public interface StorehouseRpcServer extends BaseRpcServer<Storehouse>, FillAsso
      * @return
      * @throws Exception
      */
-    List<Storehouse> listByStorehouseCountryId(long storehouseCountry_id, int page, int count, int tableIndex) throws Exception;
+    List<Storehouse> listByStorehouseCountryId(long storehouseCountry_id, int page, int count, int tableIndex, boolean flag) throws Exception;
 
     /**
      * 根据国家获取仓库数量

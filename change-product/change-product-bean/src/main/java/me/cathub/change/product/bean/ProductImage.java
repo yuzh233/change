@@ -7,9 +7,9 @@ import java.util.Date;
  * 产品图片
  */
 public class ProductImage implements Serializable {
-    public static final int TYPE_ONE = 1;
-    public static final int TYPE_SHOW = 2;
-    public static final int TYPE_INFO = 3;
+    public static final int TYPE_COVER = 0;
+    public static final int TYPE_SHOW = 1;
+    public static final int TYPE_INFO = 2;
 
     private long id;
     private String url;

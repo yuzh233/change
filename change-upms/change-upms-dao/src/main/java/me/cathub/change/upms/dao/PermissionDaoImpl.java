@@ -2,7 +2,7 @@ package me.cathub.change.upms.dao;
 
 import com.github.pagehelper.PageHelper;
 import me.cathub.change.api.dao.upms.PermissionDao;
-import me.cathub.change.common.base.BaseCrudMyBatisImpl;
+import me.cathub.change.common.base.BaseDaoMyBatisImpl;
 import me.cathub.change.upms.bean.Permission;
 import org.springframework.stereotype.Repository;
 
@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public class PermissionDaoImpl extends BaseCrudMyBatisImpl<Permission> implements PermissionDao {
+public class PermissionDaoImpl extends BaseDaoMyBatisImpl<Permission> implements PermissionDao {
 
     @Override
     public boolean insert(Permission bean) throws Exception {

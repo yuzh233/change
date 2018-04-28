@@ -1,7 +1,7 @@
 package me.cathub.change.upms.dao;
 
 import me.cathub.change.api.dao.upms.RoleDao;
-import me.cathub.change.common.base.BaseCrudMyBatisImpl;
+import me.cathub.change.common.base.BaseDaoMyBatisImpl;
 import me.cathub.change.upms.bean.Role;
 import org.springframework.stereotype.Repository;
 
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public class RoleDaoImpl extends BaseCrudMyBatisImpl<Role> implements RoleDao {
+public class RoleDaoImpl extends BaseDaoMyBatisImpl<Role> implements RoleDao {
 
     @Override
     public boolean insert(Role bean) throws Exception {

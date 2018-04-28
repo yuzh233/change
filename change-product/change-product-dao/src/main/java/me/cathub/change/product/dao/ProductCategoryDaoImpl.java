@@ -2,7 +2,7 @@ package me.cathub.change.product.dao;
 
 import com.github.pagehelper.PageHelper;
 import me.cathub.change.api.dao.product.ProductCategoryDao;
-import me.cathub.change.common.base.BaseCrudMyBatisImpl;
+import me.cathub.change.common.base.BaseDaoMyBatisImpl;
 import me.cathub.change.product.bean.ProductCategory;
 import org.springframework.stereotype.Repository;
 
@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public class ProductCategoryDaoImpl extends BaseCrudMyBatisImpl<ProductCategory> implements ProductCategoryDao {
+public class ProductCategoryDaoImpl extends BaseDaoMyBatisImpl<ProductCategory> implements ProductCategoryDao {
 
     @Override
     public boolean insert(ProductCategory bean) throws Exception {

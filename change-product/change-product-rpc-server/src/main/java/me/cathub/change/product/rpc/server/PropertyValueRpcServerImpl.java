@@ -57,13 +57,19 @@ public class PropertyValueRpcServerImpl implements PropertyValueRpcServer {
     }
 
     @Override
-    public PropertyValue select(PropertyValue bean) throws Exception {
-        return fill(propertyValueDao.select(bean));
+    public PropertyValue select(PropertyValue bean, boolean flag) throws Exception {
+        if (flag)
+            return propertyValueDao.select(bean);
+        else
+            return fill(propertyValueDao.select(bean));
     }
 
     @Override
-    public List<PropertyValue> list(int page, int count, int tableIndex) throws Exception {
-        return propertyValueDao.list(page, count, tableIndex).stream()
+    public List<PropertyValue> list(int page, int count, int tableIndex, boolean flag) throws Exception {
+        if (flag)
+            return propertyValueDao.list(page, count, tableIndex);
+        else
+            return propertyValueDao.list(page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
     }
@@ -74,8 +80,11 @@ public class PropertyValueRpcServerImpl implements PropertyValueRpcServer {
     }
 
     @Override
-    public List<PropertyValue> listByDel(int page, int count, int tableIndex) throws Exception {
-        return propertyValueDao.listByDel(page, count, tableIndex).stream()
+    public List<PropertyValue> listByDel(int page, int count, int tableIndex, boolean flag) throws Exception {
+        if (flag)
+            return propertyValueDao.listByDel(page, count, tableIndex);
+        else
+            return propertyValueDao.listByDel(page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
     }
@@ -91,8 +100,11 @@ public class PropertyValueRpcServerImpl implements PropertyValueRpcServer {
     }
 
     @Override
-    public List<PropertyValue> listByProductId(long product_id, int page, int count, int tableIndex) throws Exception {
-        return propertyValueDao.listByProductId(product_id, page, count, tableIndex).stream()
+    public List<PropertyValue> listByProductId(long product_id, int page, int count, int tableIndex, boolean flag) throws Exception {
+        if (flag)
+            return propertyValueDao.listByProductId(product_id, page, count, tableIndex);
+        else
+            return propertyValueDao.listByProductId(product_id, page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
     }
@@ -105,8 +117,8 @@ public class PropertyValueRpcServerImpl implements PropertyValueRpcServer {
     @Override
     public PropertyValue fill(PropertyValue bean) {
         try {
-            Property property = propertyRpcServer.select(new Property(bean.getProduct_id()));
-            Product product = productRpcServer.select(new Product(bean.getProduct_id()));
+            Property property = propertyRpcServer.select(new Property(bean.getProduct_id()), true);
+            Product product = productRpcServer.select(new Product(bean.getProduct_id()), true);
 
             bean.setProperty(property);
             bean.setProduct(product);

@@ -57,13 +57,19 @@ public class StorehouseProductStockRpcServerImpl implements StorehouseProductSto
     }
 
     @Override
-    public StorehouseProductStock select(StorehouseProductStock bean) throws Exception {
-        return fill(storehouseProductStockDao.select(bean));
+    public StorehouseProductStock select(StorehouseProductStock bean, boolean flag) throws Exception {
+        if (flag)
+            return storehouseProductStockDao.select(bean);
+        else
+            return fill(storehouseProductStockDao.select(bean));
     }
 
     @Override
-    public List<StorehouseProductStock> list(int page, int count, int tableIndex) throws Exception {
-        return storehouseProductStockDao.list(page, count, tableIndex).stream()
+    public List<StorehouseProductStock> list(int page, int count, int tableIndex, boolean flag) throws Exception {
+        if (flag)
+            return storehouseProductStockDao.list(page, count, tableIndex);
+        else
+            return storehouseProductStockDao.list(page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
     }
@@ -74,8 +80,11 @@ public class StorehouseProductStockRpcServerImpl implements StorehouseProductSto
     }
 
     @Override
-    public List<StorehouseProductStock> listByDel(int page, int count, int tableIndex) throws Exception {
-        return storehouseProductStockDao.listByDel(page, count, tableIndex).stream()
+    public List<StorehouseProductStock> listByDel(int page, int count, int tableIndex, boolean flag) throws Exception {
+        if (flag)
+            return storehouseProductStockDao.listByDel(page, count, tableIndex);
+        else
+            return storehouseProductStockDao.listByDel(page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
     }
@@ -91,13 +100,19 @@ public class StorehouseProductStockRpcServerImpl implements StorehouseProductSto
     }
 
     @Override
-    public StorehouseProductStock selectByStorehouseIdAndProductId(long storehouse_id, long product_id, int tableIndex) throws Exception {
-        return fill(storehouseProductStockDao.selectByStorehouseIdAndProductId(storehouse_id, product_id, tableIndex));
+    public StorehouseProductStock selectByStorehouseIdAndProductId(long storehouse_id, long product_id, int tableIndex, boolean flag) throws Exception {
+        if (flag)
+            return storehouseProductStockDao.selectByStorehouseIdAndProductId(storehouse_id, product_id, tableIndex);
+        else
+            return fill(storehouseProductStockDao.selectByStorehouseIdAndProductId(storehouse_id, product_id, tableIndex));
     }
 
     @Override
-    public List<StorehouseProductStock> listByStorehouseId(long storehouse_id, int page, int count, int tableIndex) throws Exception {
-        return storehouseProductStockDao.listByStorehouseId(storehouse_id, page, count, tableIndex).stream()
+    public List<StorehouseProductStock> listByStorehouseId(long storehouse_id, int page, int count, int tableIndex, boolean flag) throws Exception {
+        if (flag)
+            return storehouseProductStockDao.listByStorehouseId(storehouse_id, page, count, tableIndex);
+        else
+            return storehouseProductStockDao.listByStorehouseId(storehouse_id, page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
     }
@@ -110,8 +125,8 @@ public class StorehouseProductStockRpcServerImpl implements StorehouseProductSto
     @Override
     public StorehouseProductStock fill(StorehouseProductStock bean) {
         try {
-            Product product = productRpcServer.select(new Product(bean.getProduct_id()));
-            Storehouse storehouse = storehouseRpcServer.select(new Storehouse(bean.getStorehouse_id()));
+            Product product = productRpcServer.select(new Product(bean.getProduct_id()), true);
+            Storehouse storehouse = storehouseRpcServer.select(new Storehouse(bean.getStorehouse_id()), true);
 
             bean.setProduct(product);
             bean.setStorehouse(storehouse);

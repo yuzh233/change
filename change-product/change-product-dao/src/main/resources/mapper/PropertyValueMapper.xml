@@ -89,11 +89,11 @@
         DELETE FROM propertyValue_${_parameter} WHERE yn=0
     </delete>
 
-    <select id="listByProductId" parameterType="map" resultMap="productValue">
-        SELECT * FROM productValue_${tableIndex} WHERE yn=1 AND product_id=#{product_id, jdbcType=BIGINT}
+    <select id="listByProductId" parameterType="map" resultMap="propertyValue">
+        SELECT * FROM propertyValue_${tableIndex} WHERE yn=1 AND product_id=#{product_id, jdbcType=BIGINT}
     </select>
 
-    <select id="listByProductId" parameterType="map" resultType="int">
-        SELECT COUNT(*) FROM productValue_${tableIndex} WHERE yn=1 AND product_id=#{product_id, jdbcType=BIGINT}
+    <select id="countByProductId" parameterType="map" resultType="int">
+        SELECT COUNT(*) FROM propertyValue_${tableIndex} WHERE yn=1 AND product_id=#{product_id, jdbcType=BIGINT}
     </select>
 </mapper>
