@@ -33,6 +33,10 @@ public class OSSTool {
         ossClient.putObject(BUCKET_NAME, path, inputStream);
     }
 
+    public static void deleteObject(String key) {
+        ossClient.deleteObject(BUCKET_NAME, key);
+    }
+
     public static void main(String[] args) throws Exception {
         uploadResource("img/product/啊啊啊/test.jpg", HTTPTool.getInputStream("http://hutool.mydoc.io/?t=255667"));
     }

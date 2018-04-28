@@ -51,14 +51,14 @@ public abstract class BaseControllerImpl<B extends Serializable, S extends BaseR
     @ResponseBody
     @Override
     public B select(B bean) throws Exception {
-        return (B) rpcService.select(bean);
+        return (B) rpcService.select(bean, true);
     }
 
     @RequestMapping("/list")
     @ResponseBody
     @Override
     public List<B> list(int page, int count, int tableIndex) throws Exception {
-        return rpcService.list(page, count, tableIndex);
+        return rpcService.list(page, count, tableIndex, true);
     }
 
     @RequestMapping("/count")
