@@ -1,10 +1,7 @@
 import me.cathub.change.api.dao.product.*;
 import me.cathub.change.common.tool.Sequence;
-import me.cathub.change.product.bean.Product;
 import me.cathub.change.product.bean.ProductCategory;
-import me.cathub.change.product.bean.ProductImage;
 import me.cathub.change.product.dao.*;
-import me.cathub.change.user.bean.BrandQuotient;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

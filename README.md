@@ -11,6 +11,9 @@ change
 |—— change-common — 公共模块
 |       |—— change-common-base
 |       |—— change-common-me.cathub.tool
+|—— change-config — 配置模块
+|       |—— change-config-dao
+|       |—— change-config-rpc-server — rpc远程服务配置
 |—— change-user — 用户模块
 |       |—— change-user-common
 |       |—— change-user-dao

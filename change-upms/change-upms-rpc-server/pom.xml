@@ -26,6 +26,16 @@
             <artifactId>change-upms-dao</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>me.cathub</groupId>
+            <artifactId>change-common-tool</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>me.cathub</groupId>
+            <artifactId>change-config-rpc-server-upms</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
 
         <!-- dubbo -->
         <dependency>
@@ -50,11 +60,6 @@
             <groupId>org.javassist</groupId>
             <artifactId>javassist</artifactId>
             <version>3.18.2-GA</version>
-        </dependency>
-        <dependency>
-            <groupId>me.cathub</groupId>
-            <artifactId>change-common-tool</artifactId>
-            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>

@@ -1,10 +1,8 @@
 package me.cathub.change.common.tool.ebay;
 
-import com.ebay.sdk.ApiAccount;
 import com.ebay.sdk.ApiContext;
 import com.ebay.sdk.ApiCredential;
 import com.ebay.sdk.call.AddItemCall;
-import com.ebay.sdk.helper.ConsoleUtil;
 import com.ebay.sdk.util.eBayUtil;
 import com.ebay.soap.eBLBaseComponents.*;
 

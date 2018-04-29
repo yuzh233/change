@@ -7,7 +7,7 @@ import me.cathub.change.order.dao.OrderItemDaoImpl;
 import me.cathub.change.storehouse.bean.Storehouse;
 import me.cathub.change.user.bean.BrandQuotient;
 import me.cathub.change.user.bean.Shopkeeper;
-import org.junit.Test;
+import org.testng.annotations.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

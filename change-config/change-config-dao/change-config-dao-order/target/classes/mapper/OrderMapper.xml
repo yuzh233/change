@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.cathub.change.order.bean.Order">
+
+    <cache/>
+    <resultMap id="order" type="order">
+        <id property="id" column="id"/>
+        <result property="orderCode" column="orderCode"/>
+        <result property="totalPrice" column="totalPrice"/>
+        <result property="message" column="message"/>
+        <result property="createDate" column="createDate"/>
+        <result property="updateDate" column="updateDate"/>
+
+        <result property="storehouse_id" column="storehouse_id"/>
+        <result property="shopkeeper_id" column="shopkeeper_id"/>
+        <result property="brandQuotient_id" column="brandQuotient_id"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="order">
+        INSERT INTO order_${tableIndex} (
+          id,
+          orderCode,
+          totalPrice,
+          message,
+          storehouse_id,
+          shopkeeper_id,
+          brandQuotient_id,
+          createDate,
+          yn
+        )VALUES(
+          #{id, jdbcType=BIGINT},
+          #{orderCode, jdbcType=VARCHAR},
+          #{totalPrice, jdbcType=FLOAT},
+          #{message, jdbcType=VARCHAR},
+          #{storehouse.id, jdbcType=BIGINT},
+          #{shopkeeper.id, jdbcType=BIGINT},
+          #{brandQuotient.id, jdbcType=BIGINT},
+          NOW(),
+          1
+        )
+    </insert>
+
+    <update id="deleteL" parameterType="order">
+        UPDATE order_${tableIndex} SET
+          yn=0
+        WHERE
+          id=#{id, jdbcType=BIGINT}
+        and
+          yn=1
+    </update>
+
+    <update id="restore" parameterType="order">
+        UPDATE order_${tableIndex} SET
+        yn=1
+        WHERE
+        id=#{id, jdbcType=BIGINT}
+        AND
+        yn=0
+    </update>
+
+    <delete id="deleteP" parameterType="order">
+        DELETE FROM order_${tableIndex} WHERE id=#{id, jdbcType=BIGINT} and yn=0
+    </delete>
+
+    <update id="update" parameterType="order">
+        UPDATE order_${tableIndex} SET
+          totalPrice=#{totalPrice, jdbcType=FLOAT},
+          message=#{message, jdbcType=VARCHAR},
+          updateDate=NOW()
+        WHERE
+          id=#{id, jdbcType=BIGINT}
+        and
+          yn=1
+    </update>
+
+    <select id="select" parameterType="order" resultMap="order">
+        SELECT * FROM order_${tableIndex} WHERE id=#{id, jdbcType=BIGINT} AND yn=1
+    </select>
+
+    <select id="list" parameterType="int" resultMap="order">
+        SELECT * FROM order_${_parameter} WHERE yn=1
+    </select>
+
+    <select id="count" parameterType="int" resultType="long">
+        SELECT COUNT(*) FROM order_${_parameter} WHERE yn=1
+    </select>
+
+    <select id="listByDel" parameterType="int" resultMap="order">
+        SELECT * FROM order_${_parameter} WHERE yn=0
+    </select>
+
+    <select id="countByDel" parameterType="int" resultType="int">
+        SELECT COUNT(*) FROM order_${_parameter} WHERE yn=0
+    </select>
+
+    <delete id="clear" parameterType="int">
+        DELETE FROM order_${_parameter} WHERE yn=0
+    </delete>
+
+    <select id="listByStorehouseId" parameterType="map" resultMap="order">
+        SELECT * FROM order_${tableIndex} WHERE storehouse_id=#{storehouse_id, jdbcType=BIGINT}
+    </select>
+
+    <select id="countByStorehouseId" parameterType="map" resultType="int">
+        SELECT COUNT(*) order_${tableIndex} WHERE storehouse_id=#{storehouse_id, jdbcType=BIGINT}
+    </select>
+
+    <select id="listByShopkeeperId" parameterType="map" resultMap="order">
+        SELECT * FROM order_${tableIndex} WHERE shopkeeper_id=#{shopkeeper_id, jdbcType=BIGINT}
+    </select>
+
+    <select id="countByShopkeeperId" parameterType="map" resultType="int">
+        SELECT COUNT(*) order_${tableIndex} WHERE shopkeeper_id=#{shopkeeper_id, jdbcType=BIGINT}
+    </select>
+
+    <select id="listByBrandQuotient" parameterType="map" resultMap="order">
+        SELECT * FROM order_${tableIndex} WHERE brandQuotient_id=#{brandQuotient_id, jdbcType=BIGINT}
+    </select>
+
+    <select id="countByBrandQuotient" parameterType="map" resultType="int">
+        SELECT COUNT(*) FROM order_${tableIndex} WHERE brandQuotient_id=#{brandQuotient_id, jdbcType=BIGINT}
+    </select>
+</mapper>

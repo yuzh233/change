@@ -31,12 +31,27 @@
         </dependency>
         <dependency>
             <groupId>me.cathub</groupId>
+            <artifactId>change-config-rpc-server-order</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>me.cathub</groupId>
             <artifactId>change-api-dao-order</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>me.cathub</groupId>
             <artifactId>change-order-dao</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>me.cathub</groupId>
+            <artifactId>change-api-rpc-server-storehouse</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>me.cathub</groupId>
+            <artifactId>change-api-rpc-server-user</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
@@ -64,12 +79,7 @@
         </dependency>
         <dependency>
             <groupId>me.cathub</groupId>
-            <artifactId>change-api-rpc-server-storehouse</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>me.cathub</groupId>
-            <artifactId>change-api-rpc-server-user</artifactId>
+            <artifactId>change-common-tool</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
@@ -78,11 +88,6 @@
             <groupId>org.javassist</groupId>
             <artifactId>javassist</artifactId>
             <version>3.18.2-GA</version>
-        </dependency>
-        <dependency>
-            <groupId>me.cathub</groupId>
-            <artifactId>change-common-tool</artifactId>
-            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>
