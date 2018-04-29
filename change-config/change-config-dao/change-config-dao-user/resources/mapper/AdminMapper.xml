@@ -7,6 +7,8 @@
         <id property="id" column="id"/>
         <result property="username" column="username"/>
         <result property="password" column="password"/>
+        <result property="phone" column="phone"/>
+        <result property="email" column="email"/>
         <result property="createDate" column="createDate"/>
         <result property="updateDate" column="updateDate"/>
 
@@ -18,6 +20,8 @@
           id,
           username,
           password,
+          phone,
+          email,
           role_id,
           createDate,
           yn
@@ -25,6 +29,8 @@
           #{id, jdbcType=BIGINT},
           #{username, jdbcType=VARCHAR},
           #{password, jdbcType=VARCHAR},
+          #{phone, jdbcType=VARCHAR},
+          #{email, jdbcType=VARCHAR},
           #{role.id, jdbcType=BIGINT},
           NOW(),
           1
@@ -47,6 +53,8 @@
     <update id="update" parameterType="admin">
         UPDATE admin_${tableIndex} SET
           password=#{password, jdbcType=VARCHAR},
+          phone=#{phone, jdbcType=VARCHAR},
+          email=#{email, jdbcType=VARCHAR},
           role_id=#{role.id, jdbcType=BIGINT},
           updateDate=NOW()
         WHERE

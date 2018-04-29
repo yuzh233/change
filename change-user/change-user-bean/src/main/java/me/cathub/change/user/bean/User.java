@@ -12,6 +12,8 @@ public class User implements Serializable {
     protected long id;
     protected String username;
     protected String password;
+    protected String phone;
+    protected String email;
     protected Date createDate;
     protected Date updateDate;
     protected int status;
@@ -26,6 +28,22 @@ public class User implements Serializable {
 
     public User(long id) {
         this.id = id;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public long getRole_id() {

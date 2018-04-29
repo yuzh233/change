@@ -7,6 +7,8 @@
         <id property="id" column="id"/>
         <result property="username" column="username"/>
         <result property="password" column="password"/>
+        <result property="phone" column="phone"/>
+        <result property="email" column="email"/>
         <result property="createDate" column="createDate"/>
         <result property="updateDate" column="updateDate"/>
         <result property="status" column="status"/>
@@ -19,6 +21,8 @@
           id,
           username,
           password,
+          phone,
+          email,
           status,
           role_id,
           createDate,
@@ -27,6 +31,8 @@
           #{id, jdbcType=BIGINT},
           #{username, jdbcType=VARCHAR},
           #{password, jdbcType=VARCHAR},
+          #{phone, jdbcType=VARCHAR},
+          #{email, jdbcType=VARCHAR},
           0,
           #{role.id, jdbcType=BIGINT},
           NOW(),
@@ -59,6 +65,8 @@
     <update id="update" parameterType="shopkeeper">
         UPDATE shopkeeper_${tableIndex} SET
           password=#{password, jdbcType=VARCHAR},
+          phone=#{phone, jdbcType=VARCHAR},
+          email=#{email, jdbcType=VARCHAR},
           status=#{status, jdbcType=INTEGER},
           role_id=#{role.id, jdbcType=INTEGER},
           updateDate=NOW()

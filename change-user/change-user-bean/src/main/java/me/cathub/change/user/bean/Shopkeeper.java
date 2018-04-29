@@ -18,6 +18,8 @@ public class Shopkeeper extends User {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
                 ", createDate=" + createDate +
                 ", updateDate=" + updateDate +
                 ", status=" + status +

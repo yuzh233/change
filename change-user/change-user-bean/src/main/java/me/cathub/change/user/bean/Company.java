@@ -11,6 +11,8 @@ public class Company implements Serializable {
     private String name;
     private String service;
     private String address;
+    private String phone;
+    private String email;
     private Date createDate;
     private Date updateDate;
     private int tableIndex;
@@ -20,6 +22,22 @@ public class Company implements Serializable {
 
     public Company(long id) {
         this.id = id;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public int getTableIndex() {
