@@ -13,17 +13,22 @@ import me.cathub.change.api.rpc.server.storehouse.StorehouseRpcServer;
 import me.cathub.change.api.rpc.server.upms.PermissionRpcServer;
 import me.cathub.change.api.rpc.server.upms.RoleRpcServer;
 import me.cathub.change.api.rpc.server.user.*;
+import me.cathub.change.common.tool.HTTPTool;
+import me.cathub.change.common.tool.aliyun.OSSTool;
 import me.cathub.change.db.bean.Product;
+import me.cathub.change.db.bean.ProductImage;
 import me.cathub.change.product.bean.ProductCategory;
 import me.cathub.change.user.bean.BrandQuotient;
 import me.cathub.change.user.bean.Company;
 import me.cathub.change.user.bean.OnlineStore;
+import net.sf.ehcache.hibernate.regions.EhcacheQueryResultsRegion;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.File;
 import java.nio.charset.Charset;
+import java.util.List;
 
 /**
  * 填充数据
@@ -88,35 +93,105 @@ public class FillDate {
                 }
                 JSONArray products = JSONUtil.parseArray(temp_obj);
 
+                // 获取分类
+                ProductCategory category = productCategoryRpcServer.selectByName(jsonDir.getName(), 0, true);
+
+                long b_id = 0;
+                // 遍历该分类的产品
                 for (Object product:products) {
                     Product temp = JSONUtil.toBean(product.toString(), Product.class);
 
                     String company_name = temp.getCompany_name();
                     String image_url = temp.getImage_url();
+
+                    if (! image_url.contains(".jpg"))
+                        continue;
+
                     String name = temp.getName();
                     float price = temp.getPrice();
 
-                    ProductCategory category = productCategoryRpcServer.selectByName(jsonDir.getName(), 0);
-                    Company company = companyRpcServer.selectByName(company_name, 0);
+                    // 获取企业
+                    Company company = companyRpcServer.selectByName(company_name, 0, true);
+
+                    // 不存在则插入
                     if (company == null) {
                         company = new Company();
                         company.setName(company_name);
 
-                        companyRpcServer.insert(company);
+                        long c_id = companyRpcServer.insert(company);
+                        BrandQuotient brandQuotient = new BrandQuotient();
+                        brandQuotient.setUsername(c_id + "");
+                        brandQuotient.setPassword("root");
+                        brandQuotient.setRole(roleRpcServer.selectByName("用户-品牌商", 0, true));
+                        brandQuotient.setCompany(new Company(c_id));
 
-                        System.out.println(company.getId());
-                        System.out.println(company.getId());
+                        b_id = brandQuotientRpcServer.insert(brandQuotient);
+                        System.out.println(c_id);
                     }
 
+                    // 填充产品数据
+                    me.cathub.change.product.bean.Product p = new me.cathub.change.product.bean.Product();
+                    p.setName(name);
+                    p.setBrandQuotient(new BrandQuotient(b_id));
+                    p.setPrice(price);
+                    p.setProductCategory(category);
 
-//                    me.cathub.change.product.bean.Product p = new me.cathub.change.product.bean.Product();
-//                    p.setName(name);
-//                    p.setBrandQuotient();
+                    // 插入产品
+                    long p_id = productRpcServer.insert(p);
 
+                    // 填充产品图片数据
+                    me.cathub.change.product.bean.ProductImage productImage = new me.cathub.change.product.bean.ProductImage();
+                    productImage.setType(me.cathub.change.product.bean.ProductImage.TYPE_COVER);
+                    productImage.setUrl(OSSTool.getProductImgUrl(company_name, OSSTool.getSuffix(image_url)));
+                    productImage.setProduct(new me.cathub.change.product.bean.Product(p_id));
+
+                    // 保存图片到OSS
+                    OSSTool.uploadResource(productImage.getUrl(), HTTPTool.getInputStream(image_url));
+
+                    // 插入产品图片
+                    productImageRpcServer.insert(productImage);
                     count ++;
+                    System.out.println("SUCCESS :" + count);
                 }
             }
         }
         System.out.println("INFO COUNT:" + count);
+    }
+
+    @Test
+    public void delete() throws Exception {
+        int count = productImageRpcServer.count(0);
+        final int PAGE_COUNT = 200;
+
+        final int TOTAL_PAGE = count % PAGE_COUNT == 0 ? count / PAGE_COUNT : count / PAGE_COUNT + 1;
+
+        for (int p = 0; p < TOTAL_PAGE; p++) {
+            productImageRpcServer.list(p, PAGE_COUNT, 0, false).stream()
+                    .filter(bean -> bean.getProduct().getProductCategory_id() == 0)
+                    .forEach(bean -> {
+
+                        try {
+                            /**
+                             * 1. OSS 删除图片
+                             * 2. 数据库删除 产品 and 产品图片
+                             */
+//                            OSSTool.deleteObject(bean.getUrl());
+                            productRpcServer.deleteL(bean.getProduct());
+                            productImageRpcServer.deleteL(bean);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    });
+        }
+    }
+
+    @Test
+    public void testAddImage() throws Exception {
+        me.cathub.change.product.bean.Product product = new me.cathub.change.product.bean.Product();
+        long insert = productRpcServer.insert(product);
+        System.out.println(insert);
+        me.cathub.change.product.bean.ProductImage productImage = new me.cathub.change.product.bean.ProductImage();
+        productImage.setProduct(new me.cathub.change.product.bean.Product(insert));
+        System.out.println(productImageRpcServer.insert(productImage));
     }
 }
