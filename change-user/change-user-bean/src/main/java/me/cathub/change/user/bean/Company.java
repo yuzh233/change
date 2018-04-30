@@ -1,5 +1,7 @@
 package me.cathub.change.user.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -72,6 +74,7 @@ public class Company implements Serializable {
         this.address = address;
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss",timezone = "GMT+8")
     public Date getCreateDate() {
         return createDate;
     }
@@ -80,6 +83,7 @@ public class Company implements Serializable {
         this.createDate = createDate;
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss",timezone = "GMT+8")
     public Date getUpdateDate() {
         return updateDate;
     }

@@ -1,5 +1,6 @@
 package me.cathub.change.product.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import me.cathub.change.user.bean.BrandQuotient;
 
 import java.io.Serializable;
@@ -18,7 +19,9 @@ public class Product implements Serializable {
     private float price;
     private String description;
     private int status;
+    @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss",timezone = "GMT+8")
     private Date createDate;
+    @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss",timezone = "GMT+8")
     private Date updateDate;
     private int tableIndex;
 

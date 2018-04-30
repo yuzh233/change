@@ -1,34 +1,24 @@
 package me.cathub.change.db;
 
-import cn.hutool.json.JSON;
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
-import me.cathub.change.api.rpc.server.order.OrderItemRpcServer;
-import me.cathub.change.api.rpc.server.order.OrderRpcServer;
 import me.cathub.change.api.rpc.server.product.*;
-import me.cathub.change.api.rpc.server.storehouse.StorehouseCountryRpcServer;
-import me.cathub.change.api.rpc.server.storehouse.StorehouseProductStockRpcServer;
-import me.cathub.change.api.rpc.server.storehouse.StorehouseRpcServer;
 import me.cathub.change.api.rpc.server.upms.PermissionRpcServer;
 import me.cathub.change.api.rpc.server.upms.RoleRpcServer;
 import me.cathub.change.api.rpc.server.user.*;
 import me.cathub.change.common.tool.HTTPTool;
 import me.cathub.change.common.tool.aliyun.OSSTool;
 import me.cathub.change.db.bean.Product;
-import me.cathub.change.db.bean.ProductImage;
 import me.cathub.change.product.bean.ProductCategory;
 import me.cathub.change.user.bean.BrandQuotient;
 import me.cathub.change.user.bean.Company;
-import me.cathub.change.user.bean.OnlineStore;
-import net.sf.ehcache.hibernate.regions.EhcacheQueryResultsRegion;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.File;
 import java.nio.charset.Charset;
-import java.util.List;
 
 /**
  * 填充数据
@@ -53,12 +43,12 @@ public class FillDate {
     ProductCategoryRpcServer productCategoryRpcServer = (ProductCategoryRpcServer) context.getBean("productCategoryRpcServer");
     PropertyValueRpcServer propertyValueRpcServer = (PropertyValueRpcServer) context.getBean("propertyValueRpcServer");
 
-    StorehouseProductStockRpcServer storehouseProductStockRpcServer = (StorehouseProductStockRpcServer) context.getBean("storehouseProductStockRpcServer");
-    StorehouseRpcServer storehouseRpcServer = (StorehouseRpcServer) context.getBean("storehouseRpcServer");
-    StorehouseCountryRpcServer storehouseCountryRpcServer = (StorehouseCountryRpcServer) context.getBean("storehouseCountryRpcServer");
+//    StorehouseProductStockRpcServer storehouseProductStockRpcServer = (StorehouseProductStockRpcServer) context.getBean("storehouseProductStockRpcServer");
+//    StorehouseRpcServer storehouseRpcServer = (StorehouseRpcServer) context.getBean("storehouseRpcServer");
+//    StorehouseCountryRpcServer storehouseCountryRpcServer = (StorehouseCountryRpcServer) context.getBean("storehouseCountryRpcServer");
 
-    OrderItemRpcServer orderItemRpcServer = (OrderItemRpcServer) context.getBean("orderItemRpcServer");
-    OrderRpcServer orderRpcServer = (OrderRpcServer) context.getBean("orderRpcServer");
+//    OrderItemRpcServer orderItemRpcServer = (OrderItemRpcServer) context.getBean("orderItemRpcServer");
+//    OrderRpcServer orderRpcServer = (OrderRpcServer) context.getBean("orderRpcServer");
 
     @Test
     public void initCategory() throws Exception {
@@ -193,5 +183,11 @@ public class FillDate {
         me.cathub.change.product.bean.ProductImage productImage = new me.cathub.change.product.bean.ProductImage();
         productImage.setProduct(new me.cathub.change.product.bean.Product(insert));
         System.out.println(productImageRpcServer.insert(productImage));
+    }
+
+    @Test
+    public void foreachProduct() throws Exception {
+        adminRpcServer.list(0, 100, 0, true).stream()
+                .forEach(System.out::println);
     }
 }

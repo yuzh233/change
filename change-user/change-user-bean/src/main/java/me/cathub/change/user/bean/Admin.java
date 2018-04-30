@@ -21,6 +21,8 @@ public class Admin extends User {
                 ", email='" + email + '\'' +
                 ", createDate=" + createDate +
                 ", updateDate=" + updateDate +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
                 ", status=" + status +
                 ", tableIndex=" + tableIndex +
                 ", role_id=" + role_id +

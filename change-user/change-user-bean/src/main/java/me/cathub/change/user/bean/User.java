@@ -1,5 +1,6 @@
 package me.cathub.change.user.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import me.cathub.change.upms.bean.Role;
 
 import java.io.Serializable;
@@ -16,6 +17,7 @@ public class User implements Serializable {
     protected String email;
     protected Date createDate;
     protected Date updateDate;
+
     protected int status;
     protected int tableIndex;
 
@@ -94,6 +96,7 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss",timezone = "GMT+8")
     public Date getCreateDate() {
         return createDate;
     }
@@ -102,6 +105,7 @@ public class User implements Serializable {
         this.createDate = createDate;
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss",timezone = "GMT+8")
     public Date getUpdateDate() {
         return updateDate;
     }

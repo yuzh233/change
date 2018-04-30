@@ -1,0 +1,341 @@
+﻿<!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CRUD</title>
+
+    <link href="../../resources/plugins/bootstrap-3.3.0/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../../resources/plugins/material-design-iconic-font-2.2.0/css/material-design-iconic-font.min.css"
+          rel="stylesheet"/>
+    <link href="../../resources/plugins/bootstrap-table-1.11.0/bootstrap-table.min.css" rel="stylesheet"/>
+    <link href="../../resources/plugins/waves-0.7.5/waves.min.css" rel="stylesheet"/>
+    <link href="../../resources/plugins/jquery-confirm/jquery-confirm.min.css" rel="stylesheet"/>
+    <link href="../../resources/plugins/select2/css/select2.min.css" rel="stylesheet"/>
+
+    <link href="../../resources/css/common.css" rel="stylesheet"/>
+</head>
+<body>
+<div id="main">
+    <div id="toolbar">
+        <a class="waves-effect waves-button" href="javascript:;" onclick="createAction()"><i class="zmdi zmdi-plus"></i>
+            新增管理员</a>
+        <!-- <a class="waves-effect waves-button" href="javascript:;" onclick="updateAction()"><i class="zmdi zmdi-edit"></i>
+             编辑管理员</a>-->
+        <a class="waves-effect waves-button" href="javascript:;" onclick="deleteAction()"><i
+                class="zmdi zmdi-close"></i> 删除管理员</a>
+    </div>
+    <table id="table"></table>
+</div>
+<!-- 新增 -->
+<div id="createDialog" class="crudDialog" hidden>
+    <form class="createForm">
+        <div class="form-group">
+            <label for="create-username">账户</label>
+            <input id="create-username" type="text" class="form-control create-username" name="username">
+        </div>
+        <div class="form-group">
+            <label for="create-password">密码</label>
+            <input id="create-password" type="text" class="form-control" name="password">
+        </div>
+        <div class="form-group">
+            <label for="create-phone">手机号</label>
+            <input id="create-phone" type="text" class="form-control" name="phone">
+        </div>
+        <div class="form-group">
+            <label for="create-email">邮箱</label>
+            <input id="create-email" type="text" class="form-control" name="email">
+        </div>
+    </form>
+</div>
+
+<!-- 修改 -->
+<div id="updateDialog" class="crudDialog" hidden>
+    <form class="updateForm">
+        <div class="form-group">
+            <label for="update-username">账户</label>
+            <input id="update-username" type="text" class="form-control update-username" name="username">
+        </div>
+        <div class="form-group">
+            <label for="update-password">密码</label>
+            <input id="update-password" type="text" class="form-control update-password" name="password">
+        </div>
+        <div class="form-group">
+            <label for="update-phone">手机号</label>
+            <input id="update-phone" type="text" class="form-control update-phone" name="phone">
+        </div>
+        <div class="form-group">
+            <label for="update-email">邮箱</label>
+            <input id="update-email" type="text" class="form-control update-email" name="email">
+        </div>
+        <div class="form-group">
+            <label for="update-status">状态</label>
+            <input id="update-status" type="" class="form-control update-status" name="status">
+        </div>
+    </form>
+</div>
+<script src="../../resources/plugins/jquery.1.12.4.min.js"></script>
+<script src="../../resources/plugins/bootstrap-3.3.0/js/bootstrap.min.js"></script>
+<script src="../../resources/plugins/bootstrap-table-1.11.0/bootstrap-table.min.js"></script>
+<script src="../../resources/plugins/bootstrap-table-1.11.0/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="../../resources/plugins/waves-0.7.5/waves.min.js"></script>
+<script src="../../resources/plugins/jquery-confirm/jquery-confirm.min.js"></script>
+<script src="../../resources/plugins/select2/js/select2.min.js"></script>
+
+<script src="../../resources/js/common.js"></script>
+<script>
+    var $table = $('#table');
+    $(function () {
+        $(document).on('focus', 'input[type="text"]', function () {
+            $(this).parent().find('label').addClass('active');
+        }).on('blur', 'input[type="text"]', function () {
+            if ($(this).val() == '') {
+                $(this).parent().find('label').removeClass('active');
+            }
+        });
+        // bootstrap table初始化
+        // http://bootstrap-table.wenzhixin.net.cn/zh-cn/documentation/
+        $table.bootstrapTable({
+            url: '../../admin/list',
+            method: 'get',
+            // contentType: "application/x-www-form-urlencoded",
+            height: getHeight(),
+            striped: true,
+            search: false, // 客户端搜索，并非服务端搜索，如果是服务端只会搜索当前页的数据
+            searchOnEnterKey: true,
+            showRefresh: true,
+            showToggle: true,
+            showColumns: true,
+            minimumCountColumns: 2,
+            showPaginationSwitch: true,
+            clickToSelect: true,
+            detailView: true,
+            detailFormatter: 'detailFormatter',
+            pagination: true,
+            paginationLoop: false,
+            classes: 'table table-hover table-no-bordered',
+            sidePagination: 'server', //服务器端分页
+            //设置为undefined可以获取pageNumber，pageSize，searchText，sortName，sortOrder
+            //设置为limit可以获取limit, offset, search, sort, order
+            queryParamsType: "undefined",
+            pageNumber: 1, // 页码，点击上下页自动更改值
+            pageSize: 20,  // 页大小，点击大小自动更改值
+            smartDisplay: false,
+            //silentSort: false,
+            idField: 'id',
+            sortName: 'id',
+            sortOrder: 'desc',
+            escape: true,
+            searchOnEnterKey: true,
+            idField: 'systemId',
+            maintainSelected: true,
+            toolbar: '#toolbar',
+            queryParams: function queryParams(params) {
+                var temp = {  //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+                    page: params.pageNumber,
+                    count: params.pageSize,
+                    tableIndex: 0
+                };
+                return temp;
+            },
+            columns: [
+                {field: 'state', checkbox: true},
+                {field: 'id', title: '编号', sortable: true, halign: 'left'},
+                {field: 'username', title: '账户', sortable: true, halign: 'left'},
+                {field: 'password', title: '密码', sortable: true, halign: 'left'},
+                {field: 'phone', title: '电话', sortable: true, halign: 'left'},
+                {field: 'email', title: '邮箱', sortable: true, halign: 'left'},
+                {field: 'role.name', title: '角色', sortable: true, halign: 'left'},
+                {field: 'createDate', title: '创建时间', sortable: true, halign: 'left'},
+                {field: 'updateDate', title: '更新时间', sortable: true, halign: 'left'},
+                {field: 'status', title: '状态', sortable: true, halign: 'left'},
+                {
+                    field: 'action',
+                    title: '操作',
+                    sortable: false,
+                    halign: 'left',
+                    formatter: 'actionFormatter',
+                    events: 'actionEvents',
+                    clickToSelect: false
+                }
+            ]
+        }).on('all.bs.table', function (e, name, args) {
+            $('[data-toggle="tooltip"]').tooltip();
+            $('[data-toggle="popover"]').popover();
+        });
+    });
+
+    function actionFormatter(value, row, index) {
+        return [
+            //点赞
+            '<a class="like" href="javascript:void(0)" data-toggle="tooltip" title="Like"><i class="glyphicon glyphicon-heart"></i></a>　',
+            //编辑
+            '<a class="edit ml10" href="javascript:void(0)" data-toggle="tooltip" title="Edit"><i class="glyphicon glyphicon-edit"></i></a>　',
+            //删除
+            '<a class="remove ml10" href="javascript:void(0)" data-toggle="tooltip" title="Remove"><i class="glyphicon glyphicon-remove"></i></a>'
+        ].join('');
+    }
+
+    window.actionEvents = {
+        'click .like': function (e, value, row, index) {
+            alert('You click like icon, row: ' + JSON.stringify(row));
+            console.log(value, row, index);
+        },
+        'click .edit': function (e, value, row, index) {
+            // console.log(row.id);
+            // console.log(JSON.stringify(row));
+            updateAction(row.id);
+        },
+        'click .remove': function (e, value, row, index) {
+            console.log("转换成json字符串：" + JSON.stringify(row));
+            console.log(value, row, index);
+            console.log("被删除的id:" + row.id);
+            deleteAction(row.id);
+        }
+    };
+
+    function detailFormatter(index, row) {
+        var html = [];
+        $.each(row, function (key, value) {
+            html.push('<p><b>' + key + ':</b> ' + value + '</p>');
+        });
+        return html.join('');
+    }
+
+    // 新增
+    function createAction() {
+        $.confirm({
+            type: 'dark',
+            animationSpeed: 300,
+            title: '新增管理员',
+            content: $('#createDialog').html(),
+            /*
+            一个恶心的问题,jquery confirm 在通过content以指定的内容填充这个对话框时，点击确认按钮之后死活获取不到填充的内容的表单值！
+            原因： content: $('#createDialog').html() jQuery confirm 会复制上面的内容（这个div是隐藏的）填充到该对话框，而不是直接把前面的内容展现出来，
+            所以，会有两个一样的id，通过id获取值是不存在的！那么用class获取值，直接用class获取也是不存在的，因为用户填写的表单是写在复制之后的内容里面，
+            使用class还需要指定是这个class的第二个匹配项！晕死~
+             */
+            buttons: {
+                confirm: {
+                    text: '确认',
+                    btnClass: 'waves-effect waves-button',
+                    action: function () {
+                        $.ajax({
+                            url: "../../admin/inserts",
+                            type: "POST",
+                            contentType: "application/x-www-form-urlencoded",
+                            dataType: "json",
+                            data: $(".createForm:last").serialize(), //传递表单值
+                            success: function () {
+                                $table.bootstrapTable('refresh'); //刷新表格
+                            }
+                        });
+                    }
+                },
+                cancel: {
+                    text: '取消',
+                    btnClass: 'waves-effect waves-button'
+                }
+            }
+        });
+    }
+
+    // 编辑 id:用户编号
+    function updateAction(id) {
+        $.confirm({
+            type: 'blue',
+            animationSpeed: 300,
+            title: '编辑管理员',
+            content: $('#updateDialog').html(),
+            buttons: {
+                confirm: {
+                    text: '确认',
+                    btnClass: 'waves-effect waves-button',
+                    action: function () {
+                        $.ajax({
+                            url: "../../admin/updates",
+                            type: "POST",
+                            dataType: "json",
+                            data: {
+                                "id": id,
+                                "username": $(".update-username:last").val(),
+                                "password": $(".update-password:last").val(),
+                                "phone": $(".update-phone:last").val(),
+                                "email": $(".update-email:last").val(),
+                                "status": $(".update-status:last").val()
+                            },
+                            success: function () {
+                                $table.bootstrapTable('refresh');
+                            }
+                        });
+                    }
+                },
+                cancel: {
+                    text: '取消',
+                    btnClass: 'waves-effect waves-button'
+                }
+            }
+        });
+    }
+
+    // 删除
+    function deleteAction(id) {
+        var rows = $table.bootstrapTable('getSelections');
+        // debugger;
+        if (rows.length == 0 && id == null) {
+            $.confirm({
+                title: false,
+                content: '请至少选择一条记录！',
+                autoClose: 'cancel|3000',
+                backgroundDismiss: true,
+                buttons: {
+                    cancel: {
+                        text: '取消',
+                        btnClass: 'waves-effect waves-button'
+                    }
+                }
+            });
+        } else {
+            $.confirm({
+                type: 'red',
+                animationSpeed: 300,
+                title: false,
+                content: '确认删除吗？',
+                buttons: {
+                    confirm: {
+                        text: '确认',
+                        btnClass: 'waves-effect waves-button',
+                        action: function () {
+                            var ids = new Array();
+                            if (rows.length != 0) { //如果是多个删除
+                                for (var i in rows) {
+                                    ids.push(rows[i].id);
+                                }
+                            }else {
+                                ids.push(id);   //如果是单个删除
+                            }
+                            // $.alert('删除：id=' + ids);
+                            //异步删除
+                            $.ajax({
+                                url: "../../admin/delete",
+                                type: "POST",
+                                dataType: "json",
+                                data: {ids:ids},
+                                success: function () {
+                                    $table.bootstrapTable('refresh');
+                                }
+                            });
+                        }
+                    },
+                    cancel: {
+                        text: '取消',
+                        btnClass: 'waves-effect waves-button'
+                    }
+                }
+            });
+        }
+    }
+</script>
+</body>
+</html>
