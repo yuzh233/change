@@ -39,6 +39,7 @@ public class BrandQuotient extends User {
                 ", id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
                 ", createDate=" + createDate +

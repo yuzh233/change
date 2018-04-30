@@ -13,6 +13,7 @@ public class User implements Serializable {
     protected long id;
     protected String username;
     protected String password;
+    protected String name;
     protected String phone;
     protected String email;
     protected Date createDate;
@@ -30,6 +31,14 @@ public class User implements Serializable {
 
     public User(long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPhone() {
