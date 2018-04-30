@@ -101,7 +101,7 @@ public class ProductImageDaoImpl extends BaseDaoMyBatisImpl<ProductImage> implem
     }
 
     @Override
-    public ProductImage selectByProductIdHead(long product_id, int tableIndex) throws Exception {
+    public ProductImage selectByProductIdCover(long product_id, int tableIndex) throws Exception {
         ProductImage result = null;
         try {
             HashMap<String, ? super Number> map = new HashMap<>();

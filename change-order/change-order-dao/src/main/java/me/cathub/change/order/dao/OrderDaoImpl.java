@@ -87,7 +87,7 @@ public class OrderDaoImpl extends BaseDaoMyBatisImpl<Order> implements OrderDao 
     }
 
     @Override
-    public long countByStorehouseId(long storehouse_id, int tableIndex) throws Exception {
+    public int countByStorehouseId(long storehouse_id, int tableIndex) throws Exception {
         int count = 0;
 
         try {
@@ -122,7 +122,7 @@ public class OrderDaoImpl extends BaseDaoMyBatisImpl<Order> implements OrderDao 
     }
 
     @Override
-    public long countByShopkeeperId(long shopkeeper_id, int tableIndex) throws Exception {
+    public int countByShopkeeperId(long shopkeeper_id, int tableIndex) throws Exception {
         int count = 0;
 
         try {
@@ -157,7 +157,7 @@ public class OrderDaoImpl extends BaseDaoMyBatisImpl<Order> implements OrderDao 
     }
 
     @Override
-    public long countBrandQuotientId(long brandQuotient_id, int tableIndex) {
+    public int countBrandQuotientId(long brandQuotient_id, int tableIndex) {
         int count = 0;
 
         try {

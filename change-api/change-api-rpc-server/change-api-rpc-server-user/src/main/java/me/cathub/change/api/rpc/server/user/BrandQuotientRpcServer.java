@@ -6,4 +6,12 @@ import me.cathub.change.common.base.ServerSelectByName;
 import me.cathub.change.user.bean.BrandQuotient;
 
 public interface BrandQuotientRpcServer extends BaseRpcServer<BrandQuotient>, FillAssociationDate<BrandQuotient>, ServerSelectByName<BrandQuotient> {
+
+    /**
+     * 根据企业id获取品牌商账号
+     * @param company_id
+     * @param tableIndex
+     * @return
+     */
+    BrandQuotient selectByCompanyId(long company_id, int tableIndex, boolean flag);
 }

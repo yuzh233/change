@@ -10,7 +10,7 @@ public interface ProductImageDao extends BaseDao<ProductImage> {
 
     String LIST_BY_PRODUCT_IMAGE_ID_AND_IMAGE_TYPE = ".listByProductIdAndImageType";
     String COUNT_BY_PRODUCT_IMAGE_ID_AND_IMAGE_TYPE = ".countByProductIdAndImageType";
-    String SELECT_BY_PRODUCT_IMAGE_ID = ".selectByProductIdHead";
+    String SELECT_BY_PRODUCT_IMAGE_ID = ".selectByProductIdCover";
 
     /**
      * 根据产品和图片类型获取产品图片列表
@@ -35,5 +35,5 @@ public interface ProductImageDao extends BaseDao<ProductImage> {
      * @return
      * @throws Exception
      */
-    ProductImage selectByProductIdHead(long product_id, int tableIndex) throws Exception;
+    ProductImage selectByProductIdCover(long product_id, int tableIndex) throws Exception;
 }

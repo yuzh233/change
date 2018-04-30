@@ -91,4 +91,18 @@ public class BrandQuotientDaoImpl extends BaseDaoMyBatisImpl<BrandQuotient> impl
         }
         return result;
     }
+
+    @Override
+    public BrandQuotient selectByCompanyId(long company_id, int tableIndex) {
+        BrandQuotient result = null;
+        try {
+            Map<String, ? super Number> map = new HashMap<>();
+            map.put("company_id", company_id);
+            map.put("tableIndex", tableIndex);
+            result = sqlSessionTemplate.selectOne(NAME_SPACE + SELECT_BY_NAME, map);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 }

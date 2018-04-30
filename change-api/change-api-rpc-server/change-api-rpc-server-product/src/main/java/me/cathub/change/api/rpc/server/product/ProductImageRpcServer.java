@@ -31,5 +31,5 @@ public interface ProductImageRpcServer extends BaseRpcServer<ProductImage>, Fill
      * @return
      * @throws Exception
      */
-    ProductImage selectByProductIdHead(long product_id, int tableIndex, boolean flag) throws Exception;
+    ProductImage selectByProductIdCover(long product_id, int tableIndex, boolean flag) throws Exception;
 }

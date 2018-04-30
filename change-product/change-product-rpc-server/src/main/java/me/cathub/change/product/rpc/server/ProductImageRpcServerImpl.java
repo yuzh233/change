@@ -108,11 +108,11 @@ public class ProductImageRpcServerImpl implements ProductImageRpcServer {
     }
 
     @Override
-    public ProductImage selectByProductIdHead(long product_id, int tableIndex, boolean flag) throws Exception {
+    public ProductImage selectByProductIdCover(long product_id, int tableIndex, boolean flag) throws Exception {
         if (flag)
-            return productImageDao.selectByProductIdHead(product_id, tableIndex);
+            return productImageDao.selectByProductIdCover(product_id, tableIndex);
         else
-            return fill(productImageDao.selectByProductIdHead(product_id, tableIndex));
+            return fill(productImageDao.selectByProductIdCover(product_id, tableIndex));
     }
 
     @Override

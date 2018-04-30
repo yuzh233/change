@@ -108,6 +108,14 @@ public class BrandQuotientRpcServerImpl implements BrandQuotientRpcServer {
     }
 
     @Override
+    public BrandQuotient selectByCompanyId(long company_id, int tableIndex, boolean flag) {
+        if (flag)
+            return brandQuotientDao.selectByCompanyId(company_id, tableIndex);
+        else
+            return fill(brandQuotientDao.selectByCompanyId(company_id, tableIndex));
+    }
+
+    @Override
     public BrandQuotient fill(BrandQuotient bean) {
         try {
             Company company = companyRpcServer.select(new Company(bean.getCompany_id()), true);
