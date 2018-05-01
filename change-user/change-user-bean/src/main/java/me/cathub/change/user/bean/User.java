@@ -1,6 +1,8 @@
 package me.cathub.change.user.bean;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import me.cathub.change.common.tool.LongJsonSerializer;
 import me.cathub.change.upms.bean.Role;
 
 import java.io.Serializable;
@@ -10,6 +12,7 @@ import java.util.Date;
  * 用户
  */
 public class User implements Serializable {
+    @JsonSerialize(using = LongJsonSerializer.class) //作用在属性或getter上，用于在序列化json时嵌入自己的代码。比如long转成String
     protected long id;
     protected String username;
     protected String password;
@@ -105,7 +108,7 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss",timezone = "GMT+8")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public Date getCreateDate() {
         return createDate;
     }
@@ -114,7 +117,7 @@ public class User implements Serializable {
         this.createDate = createDate;
     }
 
-    @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss",timezone = "GMT+8")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public Date getUpdateDate() {
         return updateDate;
     }
