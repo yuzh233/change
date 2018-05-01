@@ -1,0 +1,58 @@
+#1：SpringMVC是可以接收数组类型的，前台通过json传入一个数组对象：data:{"ids":ids} ，后台入参 public void delete(@RequestParam("ids[]") long[] ids)
+       注意后台的参数名要与前台的一致，一个细节：由于id过长，后台不能用int类型接收，需要使用long类型（user类的id本身也是long类型的。）
+
+#2：json数据已经传到了前台，但是id与后台查出的id不一致！通过观察浏览器控制台看出 response和preview两个选项中的json数据不一致，response中是后台
+       原原本本传过来的数据，而preview中的json数据是浏览器把json字符串解析成json对象后展示给页面的显示数据，id不一致就是在preview的时候出问题的。
+      ##原因：后台传过来的id由于数值过大（long类型）在js解析成json对象时出现了“精度丢失”，解决办法是后台传数据过来之前把 long 类型转成 String 类型
+      ##解决方案：1. 新建一个继承JsonSerializer<T>的类(LongJsonSerializer)，泛型里是原来的数据类型，实现父类的抽象方法在方法里转成 String类型
+                            2.实体类的属性或geetter方法上添加 @JsonSerialize(using = LongJsonSerializer.class) 注解
+                            反序列化也是如此，继承的是JsonDeserializer。
+
+#3：* 项目依赖问题：由于该项目存在多个Moudle，有些Moudle之间存在依赖关系，需要在 Moudel Structure中添加模块依赖
+       * 存在某个配置文件但是加载上下文时死活报没有找到异常，很有可能是没有把该配置文件所在的文件夹设置为“资源文件夹”。
+
+#4：前台页面做删除的时候，因为使用的是 bootstrap table 在异步删除之后的success方法中刷新表格$('#table').bootstrapTable('refresh');无效，
+       ##原因是后台需要设置布尔值返回true才会调用success中的代码，否则不能删除。
+
+#5：前端编辑时，状态必须传数值，否则后台报错，需要添加校验！【记住】
+
+#6：执行更新操作时的一个坑，大坑！实际上是 ModelAttribute 注解的一个注意点。
+        #如何导致的#  用户点击更新按钮弹出更新窗口的表单项，由于表单值不回显，所以用户看到的是一个空的编辑表单项，但无关紧要。我们需要实现的
+        是只更新用户填写的那一项，但是！其他空白的没有填写的值不代表更新成空串！而是不更新这些字段！如果不使用 ModelAttribute 注解修饰的方法在修改操作前
+        初始化用户信息就执行修改的话用户没有填写的值全部更新没了，没了，只留下表单填写中更新的那一条数据。
+        #栗子#：编辑表单只填写了需要修改的邮箱地址，id放入了隐藏域，其他没有填写，执行调用更新方法先进入 ModelAttribute 修饰的方法根据id取到了完整用户数据
+        并且key匹配正确，然后进入目标方法（更新方法）却死活没有把初始化好的对象赋值到入参中，仅仅是前台传过来的值。
+        #原因#
+        一通排查之后发现：如果前台有对应的表单项（name与后台对象属性相同）但是没有填写值，传入到后台对象的时候值是空串，注意，空串！如果前台没有对应的表单项
+        传入到后台对象的时候值是null！
+       SpringMVC 把 ModelAttribute 中初始化好的对象赋值给目标方法的入参的时候，如果入参的属性是 null 才会注入对应的值，如果是 "" 不会注入值，这也是为什么自以为
+       ModelAttribute 注解失效的原因。
+       #解决办法#
+       js中，通过判断用户输入的表单是不是空串，即是否输入，如果是空串，不创建json对象的属性，如果不是空串，创建json对象对应的表单属性值。
+                        //创建json对象，注意： name = null 传入到后台还是 '' !
+                        var json = {};
+                        json.id = id;
+                        json.up_id = id;
+                        if (password != '') {
+                            json.password = password;
+                        }
+                        if (name != '') {
+                            json.name = name;
+                        }
+                        if (phone != '') {
+                            json.phone = phone;
+                        }
+                        if (email != '') {
+                            json.email = email;
+                        }
+                        if (status != '') {
+                            json.status = status;
+                        }
+	                    ......
+	                    $.ajax({
+                            ......
+                            data: json,
+                            success: function () {
+                                $table.bootstrapTable('refresh');
+                            }
+                        });

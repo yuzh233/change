@@ -40,6 +40,10 @@
             <input id="create-password" type="text" class="form-control" name="password">
         </div>
         <div class="form-group">
+            <label for="create-name">真实姓名</label>
+            <input id="create-name" type="text" class="form-control" name="name">
+        </div>
+        <div class="form-group">
             <label for="create-phone">手机号</label>
             <input id="create-phone" type="text" class="form-control" name="phone">
         </div>
@@ -62,6 +66,10 @@
             <input id="update-password" type="text" class="form-control update-password" name="password">
         </div>
         <div class="form-group">
+            <label for="update-name">真实姓名</label>
+            <input id="update-name" type="text" class="form-control update-name" name="name">
+        </div>
+        <div class="form-group">
             <label for="update-phone">手机号</label>
             <input id="update-phone" type="text" class="form-control update-phone" name="phone">
         </div>
@@ -71,7 +79,7 @@
         </div>
         <div class="form-group">
             <label for="update-status">状态</label>
-            <input id="update-status" type="" class="form-control update-status" name="status">
+            <input id="update-status" type="nubmer" class="form-control update-status" name="status" value="1">
         </div>
     </form>
 </div>
@@ -110,6 +118,7 @@
             minimumCountColumns: 2,
             showPaginationSwitch: true,
             clickToSelect: true,
+            cache: false, // 不使用缓存
             detailView: true,
             detailFormatter: 'detailFormatter',
             pagination: true,
@@ -120,7 +129,7 @@
             //设置为limit可以获取limit, offset, search, sort, order
             queryParamsType: "undefined",
             pageNumber: 1, // 页码，点击上下页自动更改值
-            pageSize: 20,  // 页大小，点击大小自动更改值
+            pageSize: 15,  // 页大小，点击大小自动更改值
             smartDisplay: false,
             //silentSort: false,
             idField: 'id',
@@ -141,9 +150,10 @@
             },
             columns: [
                 {field: 'state', checkbox: true},
-                {field: 'id', title: '编号', sortable: true, halign: 'left'},
+                {field: 'id', title: '编号', sortable: false, halign: 'left'},
                 {field: 'username', title: '账户', sortable: true, halign: 'left'},
                 {field: 'password', title: '密码', sortable: true, halign: 'left'},
+                {field: 'name', title: '真实姓名', sortable: true, halign: 'left'},
                 {field: 'phone', title: '电话', sortable: true, halign: 'left'},
                 {field: 'email', title: '邮箱', sortable: true, halign: 'left'},
                 {field: 'role.name', title: '角色', sortable: true, halign: 'left'},
@@ -222,7 +232,7 @@
                     btnClass: 'waves-effect waves-button',
                     action: function () {
                         $.ajax({
-                            url: "../../admin/inserts",
+                            url: "../../admin/insert",
                             type: "POST",
                             contentType: "application/x-www-form-urlencoded",
                             dataType: "json",
@@ -243,6 +253,7 @@
 
     // 编辑 id:用户编号
     function updateAction(id) {
+        console.log("编辑的id-> " + id);
         $.confirm({
             type: 'blue',
             animationSpeed: 300,
@@ -253,18 +264,37 @@
                     text: '确认',
                     btnClass: 'waves-effect waves-button',
                     action: function () {
+                        var username = $(".update-username:last").val();
+                        var password = $(".update-password:last").val();
+                        var name = $(".update-name:last").val();
+                        var phone = $(".update-phone:last").val();
+                        var email = $(".update-email:last").val();
+                        var status = $(".update-status:last").val();
+
+                        //创建json对象
+                        var json = {};
+                        json.id = id;
+                        json.up_id = id;
+                        if (password != '') {
+                            json.password = password;
+                        }
+                        if (name != '') {
+                            json.name = name;
+                        }
+                        if (phone != '') {
+                            json.phone = phone;
+                        }
+                        if (email != '') {
+                            json.email = email;
+                        }
+                        if (status != '') {
+                            json.status = status;
+                        }
                         $.ajax({
-                            url: "../../admin/updates",
+                            url: "../../admin/update",
                             type: "POST",
                             dataType: "json",
-                            data: {
-                                "id": id,
-                                "username": $(".update-username:last").val(),
-                                "password": $(".update-password:last").val(),
-                                "phone": $(".update-phone:last").val(),
-                                "email": $(".update-email:last").val(),
-                                "status": $(".update-status:last").val()
-                            },
+                            data: json,
                             success: function () {
                                 $table.bootstrapTable('refresh');
                             }
@@ -279,10 +309,9 @@
         });
     }
 
-    // 删除
+    // 删除 多个删除不会传入id，单个删除会传入id。
     function deleteAction(id) {
-        var rows = $table.bootstrapTable('getSelections');
-        // debugger;
+        var rows = $table.bootstrapTable('getSelections');//多个删除id自己获取，如果用户选中了多个，但是点击的单个文件的删除此时id会有值，并且会进行多个删除，用户会骂人的。在下面需要加入判断！
         if (rows.length == 0 && id == null) {
             $.confirm({
                 title: false,
@@ -307,23 +336,25 @@
                         text: '确认',
                         btnClass: 'waves-effect waves-button',
                         action: function () {
+                            //不管批量删除还是单个删除都用数组保存传递到后台。后台对应一个方法。
                             var ids = new Array();
-                            if (rows.length != 0) { //如果是多个删除
+                            //rows长度不为0，说明选中了多个，想要批量删除？呵~天真，我就要选择多个但是点击单个删除咋地？你不能给我批量删除。
+                            if (rows.length != 0 && id == null) {
                                 for (var i in rows) {
                                     ids.push(rows[i].id);
                                 }
-                            }else {
-                                ids.push(id);   //如果是单个删除
+                            } else { // 是点击右边的单个删除会传id过来
+                                ids.push(id);   //单个删除
                             }
-                            // $.alert('删除：id=' + ids);
+                            console.log('删除：id=' + ids);
                             //异步删除
                             $.ajax({
                                 url: "../../admin/delete",
-                                type: "POST",
+                                type: "post",
                                 dataType: "json",
-                                data: {ids:ids},
+                                data: {ids: ids},
                                 success: function () {
-                                    $table.bootstrapTable('refresh');
+                                    $('#table').bootstrapTable('refresh');
                                 }
                             });
                         }
