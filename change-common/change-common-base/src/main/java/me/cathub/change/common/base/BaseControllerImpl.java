@@ -1,35 +1,23 @@
 package me.cathub.change.common.base;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
 
-public abstract class BaseControllerImpl<B extends Serializable, S extends BaseRpcServer> implements BaseDao<B> {
+public abstract class BaseControllerImpl<B extends Serializable, S extends BaseRpcServer<B>> implements BaseController<B> {
 
     @Autowired
-    S rpcService;
-
-    public S getRpcService() {
-        return rpcService;
-    }
-
-    //抽象方法，删除/批量删除都在同一个方法，入参是long[],需要查询每个控制器对应的实体信息。
-    public abstract boolean delete(long[] ids) throws Exception;
+    protected S rpcService;
 
     @RequestMapping("/insert")
     @ResponseBody
     @Override
     public boolean insert(B bean) throws Exception {
-        return rpcService.insert(bean) != -1 ? true : false;
+        return rpcService.insert(bean) != -1;
     }
-
 
     @RequestMapping("/deleteL")
     @ResponseBody
@@ -52,15 +40,10 @@ public abstract class BaseControllerImpl<B extends Serializable, S extends BaseR
         return rpcService.deleteP(bean);
     }
 
-
-    @ModelAttribute
-    public abstract void update_modelAttribute(@RequestParam(value = "id",required = false)Long id, Map<String, Object> map) throws Exception;
-
     @RequestMapping("/update")
     @ResponseBody
     @Override
     public boolean update(B bean) throws Exception {
-        System.out.println(bean);
         return rpcService.update(bean);
     }
 
@@ -68,12 +51,22 @@ public abstract class BaseControllerImpl<B extends Serializable, S extends BaseR
     @ResponseBody
     @Override
     public B select(B bean) throws Exception {
-        return (B) rpcService.select(bean, true);
+        return rpcService.select(bean, true);
     }
 
+    @RequestMapping("/list")
+    @ResponseBody
     @Override
-    public List<B> list(int page, int count, int tableIndex) throws Exception {
-        return rpcService.list(page, count, tableIndex, false); // flag:是否关联查询（true：不关联）
+    public PageResult list(int page, int count, int tableIndex) throws Exception {
+        PageResult result = new PageResult();
+
+        List datas = rpcService.list(page, count, tableIndex, true);
+        int total = rpcService.count(tableIndex);
+
+        result.setRows(datas);
+        result.setTotal(total);
+
+        return result;
     }
 
     @RequestMapping("/count")
@@ -83,12 +76,26 @@ public abstract class BaseControllerImpl<B extends Serializable, S extends BaseR
         return rpcService.count(tableIndex);
     }
 
-    @RequestMapping("/list")
+    @RequestMapping("/listByDel")
     @ResponseBody
-    public PageResult list1(int page, int count, int tableIndex) throws Exception {
-        List rows = list(page, count, tableIndex);
-        int total = count(tableIndex);
-        return new PageResult(rows, total);
+    @Override
+    public PageResult listByDel(int page, int count, int tableIndex) throws Exception {
+        PageResult result = new PageResult();
+
+        List datas = rpcService.listByDel(page, count, tableIndex, true);
+        int total = rpcService.count(tableIndex);
+
+        result.setRows(datas);
+        result.setTotal(total);
+
+        return result;
+    }
+
+    @RequestMapping("/countByDel")
+    @ResponseBody
+    @Override
+    public int countByDel(int tableIndex) throws Exception {
+        return rpcService.countByDel(tableIndex);
     }
 
     @RequestMapping("/clear")
@@ -97,17 +104,4 @@ public abstract class BaseControllerImpl<B extends Serializable, S extends BaseR
     public int clear(int tableIndex) throws Exception {
         return rpcService.clear(tableIndex);
     }
-
-
-    @Override
-    public List<B> listByDel(int page, int count, int tableIndex) throws Exception {
-        return null;
-    }
-
-
-    @Override
-    public int countByDel(int tableIndex) throws Exception {
-        return 0;
-    }
-
 }

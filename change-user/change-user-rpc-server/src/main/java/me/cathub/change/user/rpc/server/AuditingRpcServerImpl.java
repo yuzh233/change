@@ -5,7 +5,7 @@ import me.cathub.change.api.rpc.server.user.AdminRpcServer;
 import me.cathub.change.api.rpc.server.user.AuditingRpcServer;
 import me.cathub.change.api.rpc.server.user.BrandQuotientRpcServer;
 import me.cathub.change.api.rpc.server.user.ShopkeeperRpcServer;
-import me.cathub.change.common.tool.Sequence;
+import me.cathub.change.common.base.BaseRpcServerImpl;
 import me.cathub.change.user.bean.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,10 +15,7 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 
 @Service
-public class AuditingRpcServerImpl implements AuditingRpcServer {
-
-    @Autowired
-    private AuditingDao auditingDao;
+public class AuditingRpcServerImpl extends BaseRpcServerImpl<Auditing, AuditingDao> implements AuditingRpcServer {
 
     @Autowired
     private AdminRpcServer adminRpcServer;
@@ -29,106 +26,34 @@ public class AuditingRpcServerImpl implements AuditingRpcServer {
     @Autowired
     private ShopkeeperRpcServer shopkeeperRpcServer;
 
-    @Autowired
-    private Sequence sequence;
-
-    @Override
-    public long insert(Auditing bean) throws Exception {
-        bean.setId(sequence.nextId());
-        return auditingDao.insert(bean) ? bean.getId() : -1;
-    }
-
-    @Override
-    public boolean deleteL(Auditing bean) throws Exception {
-        return auditingDao.deleteL(bean);
-    }
-
-    @Override
-    public boolean restore(Auditing bean) throws Exception {
-        return auditingDao.restore(bean);
-    }
-
-    @Override
-    public boolean deleteP(Auditing bean) throws Exception {
-        return auditingDao.deleteP(bean);
-    }
-
-    @Override
-    public boolean update(Auditing bean) throws Exception {
-        return auditingDao.update(bean);
-    }
-
-    @Override
-    public Auditing select(Auditing bean, boolean flag) throws Exception {
-        if (flag)
-            return auditingDao.select(bean);
-        else
-            return fill(auditingDao.select(bean));
-    }
-
-    @Override
-    public List<Auditing> list(int page, int count, int tableIndex, boolean flag) throws Exception {
-        if (flag)
-            return auditingDao.list(page, count, tableIndex);
-        else
-            return auditingDao.list(page, count, tableIndex).stream()
-                .map(bean -> fill(bean))
-                .collect(toList());
-    }
-
-    @Override
-    public int count(int tableIndex) throws Exception {
-        return auditingDao.count(tableIndex);
-    }
-
-    @Override
-    public List<Auditing> listByDel(int page, int count, int tableIndex, boolean flag) throws Exception {
-        if (flag)
-            return auditingDao.listByDel(page, count, tableIndex);
-        else
-            return auditingDao.listByDel(page, count, tableIndex).stream()
-                .map(bean -> fill(bean))
-                .collect(toList());
-    }
-
-    @Override
-    public int countByDel(int tableIndex) throws Exception {
-        return auditingDao.countByDel(tableIndex);
-    }
-
-    @Override
-    public int clear(int tableIndex) throws Exception {
-        return auditingDao.count(tableIndex);
-    }
-
     @Override
     public List<Auditing> listByAdminIdAndUserType(long admin_id, int type, int page, int count, int tableIndex, boolean flag) throws Exception {
         if (flag)
-            return auditingDao.listByAdminIdAndUserType(admin_id, type, page, count, tableIndex);
+            return dao.listByAdminIdAndUserType(admin_id, type, page, count, tableIndex);
         else
-            return auditingDao.listByAdminIdAndUserType(admin_id, type, page, count, tableIndex).stream()
+            return dao.listByAdminIdAndUserType(admin_id, type, page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
     }
 
     @Override
     public int countByAdminIdAndUserType(long admin_id, int type, int tableIndex) throws Exception {
-        return auditingDao.countByAdminIdAndUserType(admin_id, type, tableIndex);
+        return dao.countByAdminIdAndUserType(admin_id, type, tableIndex);
     }
 
     @Override
     public List<Auditing> listByNotAuditing(int type, int page, int count, int tableIndex, boolean flag) throws Exception {
         if (flag)
-            return auditingDao.listByNotAuditing(type, page, count, tableIndex);
+            return dao.listByNotAuditing(type, page, count, tableIndex);
         else
-            return auditingDao.listByNotAuditing(type, page, count, tableIndex).stream()
+            return dao.listByNotAuditing(type, page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
     }
 
     @Override
     public int countByNotAuditing(int type, int tableIndex) throws Exception {
-        return auditingDao.countByNotAuditing(type, tableIndex);
+        return dao.countByNotAuditing(type, tableIndex);
     }
 
     @Override

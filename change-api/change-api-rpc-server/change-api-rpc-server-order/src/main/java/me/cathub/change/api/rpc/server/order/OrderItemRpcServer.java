@@ -11,8 +11,8 @@ public interface OrderItemRpcServer extends BaseRpcServer<OrderItem>,FillAssocia
     /**
      * 根据订单获取订单项列表
      * @param order_id
-     * @return
-     * @throws Exception
+     * @returnException
+     * @throws
      */
     List<OrderItem> listByOrderId(long order_id, int page, int count, int tableIndex, boolean flag) throws Exception;
 

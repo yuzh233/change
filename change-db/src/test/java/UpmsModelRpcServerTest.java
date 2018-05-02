@@ -12,7 +12,7 @@ public class UpmsModelRpcServerTest {
 
     @Test
     public void foreachPermission() throws Exception {
-        permissionRpcServer.list(0, 100, 0, false).stream()
+        roleRpcServer.list(0, 100, 0, false).stream()
                 .forEach(System.out::println);
     }
 }

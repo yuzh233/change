@@ -12,8 +12,7 @@ public class PageResult {
     private List rows;
     private int total;
 
-    public PageResult() {
-    }
+    public PageResult() {}
 
     public PageResult(List rows, int total) {
         this.rows = rows;

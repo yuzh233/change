@@ -3,7 +3,7 @@ package me.cathub.change.user.rpc.server;
 import me.cathub.change.api.dao.user.OnlineStoreDao;
 import me.cathub.change.api.rpc.server.user.OnlineStoreRpcServer;
 import me.cathub.change.api.rpc.server.user.ShopkeeperRpcServer;
-import me.cathub.change.common.tool.Sequence;
+import me.cathub.change.common.base.BaseRpcServerImpl;
 import me.cathub.change.user.bean.OnlineStore;
 import me.cathub.change.user.bean.Shopkeeper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,99 +14,24 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 
 @Service
-public class OnlineStoreRpcServerImpl implements OnlineStoreRpcServer {
-
-    @Autowired
-    private OnlineStoreDao onlineStoreDao;
+public class OnlineStoreRpcServerImpl extends BaseRpcServerImpl<OnlineStore, OnlineStoreDao> implements OnlineStoreRpcServer {
 
     @Autowired
     private ShopkeeperRpcServer shopkeeperRpcServer;
 
-    @Autowired
-    private Sequence sequence;
-
-    @Override
-    public long insert(OnlineStore bean) throws Exception {
-        bean.setId(sequence.nextId());
-        return onlineStoreDao.insert(bean) ? bean.getId() : -1;
-    }
-
-    @Override
-    public boolean deleteL(OnlineStore bean) throws Exception {
-        return onlineStoreDao.deleteL(bean);
-    }
-
-    @Override
-    public boolean restore(OnlineStore bean) throws Exception {
-        return onlineStoreDao.restore(bean);
-    }
-
-    @Override
-    public boolean deleteP(OnlineStore bean) throws Exception {
-        return onlineStoreDao.deleteP(bean);
-    }
-
-    @Override
-    public boolean update(OnlineStore bean) throws Exception {
-        return onlineStoreDao.update(bean);
-    }
-
-    @Override
-    public OnlineStore select(OnlineStore bean, boolean flag) throws Exception {
-        if (flag)
-            return onlineStoreDao.select(bean);
-        else
-            return fill(onlineStoreDao.select(bean));
-    }
-
-    @Override
-    public List<OnlineStore> list(int page, int count, int tableIndex, boolean flag) throws Exception {
-        if (flag)
-            return onlineStoreDao.list(page, count, tableIndex);
-        else
-            return onlineStoreDao.list(page, count, tableIndex).stream()
-                .map(bean -> fill(bean))
-                .collect(toList());
-    }
-
-    @Override
-    public int count(int tableIndex) throws Exception {
-        return onlineStoreDao.count(tableIndex);
-    }
-
-    @Override
-    public List<OnlineStore> listByDel(int page, int count, int tableIndex, boolean flag) throws Exception {
-        if (flag)
-            return onlineStoreDao.listByDel(page, count, tableIndex);
-        else
-            return onlineStoreDao.listByDel(page, count, tableIndex).stream()
-                .map(bean -> fill(bean))
-                .collect(toList());
-    }
-
-    @Override
-    public int countByDel(int tableIndex) throws Exception {
-        return onlineStoreDao.countByDel(tableIndex);
-    }
-
-    @Override
-    public int clear(int tableIndex) throws Exception {
-        return onlineStoreDao.count(tableIndex);
-    }
-
     @Override
     public List<OnlineStore> listByShopkeeperId(long shopkeeper_id, int page, int count, int tableIndex, boolean flag) throws Exception {
         if (flag)
-            return onlineStoreDao.listByShopkeeperId(shopkeeper_id, page, count, tableIndex);
+            return dao.listByShopkeeperId(shopkeeper_id, page, count, tableIndex);
         else
-            return onlineStoreDao.listByShopkeeperId(shopkeeper_id, page, count, tableIndex).stream()
+            return dao.listByShopkeeperId(shopkeeper_id, page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
     }
 
     @Override
     public int countByShopkeeperId(long shopkeeper_id, int tableIndex) throws Exception {
-        return onlineStoreDao.countByShopkeeperId(shopkeeper_id, tableIndex);
+        return dao.countByShopkeeperId(shopkeeper_id, tableIndex);
     }
 
     @Override

@@ -20,6 +20,13 @@ public class OrderItem implements Serializable {
     private Product product;
     private Order order;
 
+    public OrderItem(long id) {
+        this.id = id;
+    }
+
+    public OrderItem() {
+    }
+
     public long getProduct_id() {
         return product_id;
     }

@@ -10,4 +10,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>change-common-base</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>me.cathub</groupId>
+            <artifactId>change-common-tool</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 </project>

@@ -1,151 +1,121 @@
 package me.cathub.change.common.base;
 
+import me.cathub.change.common.tool.Sequence;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.io.Serializable;
+import java.lang.reflect.Method;
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA.
- * User: z.yu
- * DateTime: 2018-04-28 19:45
- * Description:
- */
-public class BaseRpcServerImpl<T,E> implements BaseRpcServer<T> {
-    /**
-     * 插入数据
-     *
-     * @param bean
-     * @return long success id error -1
-     * @throws Exception
-     */
+import static java.util.stream.Collectors.toList;
+
+public abstract class BaseRpcServerImpl<B extends Serializable, D extends BaseDao<B>> implements BaseRpcServer<B>, FillAssociationDate<B> {
+
+    private static final String SET_ID = "setId";
+
+    @Autowired
+    protected D dao;
+
+    @Autowired
+    private Sequence sequence;
+
     @Override
-    public long insert(T bean) throws Exception {
-        return 0;
+    public long insert(B bean) throws Exception {
+        Long id = sequence.nextId();
+
+        Class<? extends Serializable> clazz = bean.getClass();
+        Method method = clazz.getMethod(SET_ID, long.class);
+        method.invoke(bean, id);
+
+        return id;
     }
 
-    /**
-     * 删除数据(逻辑)
-     *
-     * @param bean
-     * @return
-     * @throws Exception
-     */
     @Override
-    public boolean deleteL(T bean) throws Exception {
-        return false;
+    public boolean deleteL(B bean) throws Exception {
+        return dao.deleteL(bean);
     }
 
-    /**
-     * 恢复数据
-     *
-     * @param bean
-     * @return
-     * @throws Exception
-     */
     @Override
-    public boolean restore(T bean) throws Exception {
-        return false;
+    public boolean restore(B bean) throws Exception {
+        return dao.restore(bean);
     }
 
-    /**
-     * 删除数据(物理)
-     *
-     * @param bean
-     * @return
-     * @throws Exception
-     */
     @Override
-    public boolean deleteP(T bean) throws Exception {
-        return false;
+    public boolean deleteP(B bean) throws Exception {
+        return dao.deleteP(bean);
     }
 
-    /**
-     * 更新数据
-     *
-     * @param bean
-     * @return
-     * @throws Exception
-     */
     @Override
-    public boolean update(T bean) throws Exception {
-        return false;
+    public boolean update(B bean) throws Exception {
+        return dao.update(bean);
     }
 
-    /**
-     * 查询数据(ID)
-     *
-     * @param bean
-     * @param flag
-     * @return
-     * @throws Exception
-     */
     @Override
-    public T select(T bean, boolean flag) throws Exception {
-        return null;
+    public B select(B bean, boolean flag) throws Exception {
+        if (flag)
+            return dao.select(bean);
+        else
+            return fill(dao.select(bean));
     }
 
-    /**
-     * 全部数据(分页)
-     *
-     * @param page
-     * @param count
-     * @param tableIndex
-     * @param flag
-     * @return
-     * @throws Exception
-     */
     @Override
-    public List<T> list(int page, int count, int tableIndex, boolean flag) throws Exception {
-        return null;
+    public List<B> list(int page, int count, int tableIndex, boolean flag) throws Exception {
+        if (flag)
+            return dao.list(page, count, tableIndex);
+        else
+            return dao.list(page, count, tableIndex).stream()
+                    .map(bean -> fill(bean))
+                    .collect(toList());
     }
 
-    /**
-     * 全部数量
-     *
-     * @param tableIndex
-     * @return
-     * @throws Exception
-     */
     @Override
     public int count(int tableIndex) throws Exception {
-        return 0;
+        return dao.count(tableIndex);
     }
 
-    /**
-     * 返回已被逻辑删除的数据的列表
-     *
-     * @param page
-     * @param count
-     * @param tableIndex
-     * @param flag
-     * @return
-     * @throws Exception
-     */
     @Override
-    public List<T> listByDel(int page, int count, int tableIndex, boolean flag) throws Exception {
-        return null;
+    public List<B> listByDel(int page, int count, int tableIndex, boolean flag) throws Exception {
+        if (flag)
+            return dao.listByDel(page, count, tableIndex);
+        else
+            return dao.listByDel(page, count, tableIndex).stream()
+                    .map(bean -> fill(bean))
+                    .collect(toList());
     }
 
-
-    /**
-     * 返回以被逻辑删除的数据的数量
-     *
-     * @param tableIndex
-     * @return
-     * @throws Exception
-     */
     @Override
     public int countByDel(int tableIndex) throws Exception {
-        return 0;
+        return dao.countByDel(tableIndex);
     }
 
-    /**
-     * 清空垃圾数据(已被逻辑删除的数据)
-     *
-     * @param tableIndex
-     * @return
-     * @throws Exception
-     */
     @Override
     public int clear(int tableIndex) throws Exception {
-        return 0;
+        return dao.clear(tableIndex);
+    }
+
+    @Override
+    public int restores(long[] ids, B bean) throws Exception {
+        Class<? extends Serializable> clazz = bean.getClass();
+        for (long id:ids) {
+            clazz.getMethod(SET_ID, long.class).invoke(bean, id);
+            dao.restore(bean);
+        }
+        return ids.length;
+    }
+
+    @Override
+    public int deletes(long[] ids, B bean, boolean del_flag) throws Exception {
+        Class<? extends Serializable> clazz = bean.getClass();
+        if (del_flag)
+            for (long id:ids) {
+                clazz.getMethod(SET_ID, long.class).invoke(bean, id);
+                dao.deleteL(bean);
+            }
+        else
+            for (long id:ids) {
+                clazz.getMethod(SET_ID, long.class).invoke(bean, id);
+                dao.deleteP(bean);
+            }
+        return ids.length;
     }
 }

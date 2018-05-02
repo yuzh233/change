@@ -4,22 +4,16 @@ import me.cathub.change.api.dao.user.BrandQuotientDao;
 import me.cathub.change.api.rpc.server.upms.RoleRpcServer;
 import me.cathub.change.api.rpc.server.user.BrandQuotientRpcServer;
 import me.cathub.change.api.rpc.server.user.CompanyRpcServer;
-import me.cathub.change.common.tool.Sequence;
+import me.cathub.change.common.base.BaseRpcServerImpl;
 import me.cathub.change.upms.bean.Role;
 import me.cathub.change.user.bean.BrandQuotient;
 import me.cathub.change.user.bean.Company;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
-import static java.util.stream.Collectors.toList;
 
 @Service
-public class BrandQuotientRpcServerImpl implements BrandQuotientRpcServer {
-
-    @Autowired
-    private BrandQuotientDao brandQuotientDao;
+public class BrandQuotientRpcServerImpl extends BaseRpcServerImpl<BrandQuotient, BrandQuotientDao> implements BrandQuotientRpcServer {
 
     @Autowired
     private CompanyRpcServer companyRpcServer;
@@ -27,92 +21,20 @@ public class BrandQuotientRpcServerImpl implements BrandQuotientRpcServer {
     @Autowired
     private RoleRpcServer roleRpcServer;
 
-    @Autowired
-    private Sequence sequence;
-
-    @Override
-    public long insert(BrandQuotient bean) throws Exception {
-        bean.setId(sequence.nextId());
-        return brandQuotientDao.insert(bean) ? bean.getId() : -1;
-    }
-
-    @Override
-    public boolean deleteL(BrandQuotient bean) throws Exception {
-        return brandQuotientDao.deleteL(bean);
-    }
-
-    @Override
-    public boolean restore(BrandQuotient bean) throws Exception {
-        return brandQuotientDao.restore(bean);
-    }
-
-    @Override
-    public boolean deleteP(BrandQuotient bean) throws Exception {
-        return brandQuotientDao.deleteP(bean);
-    }
-
-    @Override
-    public boolean update(BrandQuotient bean) throws Exception {
-        return brandQuotientDao.update(bean);
-    }
-
-    @Override
-    public BrandQuotient select(BrandQuotient bean, boolean flag) throws Exception {
-        if (flag)
-            return brandQuotientDao.select(bean);
-        else
-            return fill(brandQuotientDao.select(bean));
-    }
-
-    @Override
-    public List<BrandQuotient> list(int page, int count, int tableIndex, boolean flag) throws Exception {
-        if (flag)
-            return brandQuotientDao.list(page, count, tableIndex);
-        else
-            return brandQuotientDao.list(page, count, tableIndex).stream()
-                .map(bean -> fill(bean))
-                .collect(toList());
-    }
-
-    @Override
-    public int count(int tableIndex) throws Exception {
-        return brandQuotientDao.count(tableIndex);
-    }
-
-    @Override
-    public List<BrandQuotient> listByDel(int page, int count, int tableIndex, boolean flag) throws Exception {
-        if (flag)
-            return brandQuotientDao.listByDel(page, count, tableIndex);
-        else
-            return brandQuotientDao.listByDel(page, count, tableIndex).stream()
-                .map(bean -> fill(bean))
-                .collect(toList());
-    }
-
-    @Override
-    public int countByDel(int tableIndex) throws Exception {
-        return brandQuotientDao.countByDel(tableIndex);
-    }
-
-    @Override
-    public int clear(int tableIndex) throws Exception {
-        return brandQuotientDao.count(tableIndex);
-    }
-
     @Override
     public BrandQuotient selectByName(String name, int tableIndex, boolean flag) throws Exception {
         if (flag)
-            return brandQuotientDao.selectByName(name, tableIndex);
+            return dao.selectByName(name, tableIndex);
         else
-            return fill(brandQuotientDao.selectByName(name, tableIndex));
+            return fill(dao.selectByName(name, tableIndex));
     }
 
     @Override
     public BrandQuotient selectByCompanyId(long company_id, int tableIndex, boolean flag) {
         if (flag)
-            return brandQuotientDao.selectByCompanyId(company_id, tableIndex);
+            return dao.selectByCompanyId(company_id, tableIndex);
         else
-            return fill(brandQuotientDao.selectByCompanyId(company_id, tableIndex));
+            return fill(dao.selectByCompanyId(company_id, tableIndex));
     }
 
     @Override
