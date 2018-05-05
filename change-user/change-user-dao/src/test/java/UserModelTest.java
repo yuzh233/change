@@ -45,9 +45,9 @@ public class UserModelTest {
     @Test
     public void test01() throws Exception {
         BrandQuotient brandQuotient = brandQuotientDao.selectByName("B_jjyt", 0);
-        Auditing auditing = new Auditing(sequence.nextId());
-        auditing.setType(Auditing.TYPE_BRAND_QUOTIENT);
-        auditing.setUser(brandQuotient);
-        auditingDao.insert(auditing);
+    }
+
+    @Test
+    public void test02() throws Exception {
     }
 }

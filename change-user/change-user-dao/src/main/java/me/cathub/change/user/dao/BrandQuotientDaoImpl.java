@@ -99,7 +99,7 @@ public class BrandQuotientDaoImpl extends BaseDaoMyBatisImpl<BrandQuotient> impl
             Map<String, ? super Number> map = new HashMap<>();
             map.put("company_id", company_id);
             map.put("tableIndex", tableIndex);
-            result = sqlSessionTemplate.selectOne(NAME_SPACE + SELECT_BY_NAME, map);
+            result = sqlSessionTemplate.selectOne(NAME_SPACE + SELECT_BY_COMPANY_ID, map);
         } catch (Exception e) {
             e.printStackTrace();
         }
