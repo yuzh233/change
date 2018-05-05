@@ -11,7 +11,6 @@
     <dubbo:application name="change-user-server"  />
 
     <!-- 使用广播注册中心暴露服务地址 -->
-    <!--<dubbo:registry address="zookeeper://120.77.159.152:2181" />-->
     <dubbo:registry address="zookeeper://120.77.159.152:2181" />
 
     <!-- 用dubbo协议在20880端口暴露服务 -->
