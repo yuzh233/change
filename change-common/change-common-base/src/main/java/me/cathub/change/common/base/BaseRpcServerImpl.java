@@ -27,6 +27,8 @@ public abstract class BaseRpcServerImpl<B extends Serializable, D extends BaseDa
         Method method = clazz.getMethod(SET_ID, long.class);
         method.invoke(bean, id);
 
+        dao.insert(bean);
+
         return id;
     }
 

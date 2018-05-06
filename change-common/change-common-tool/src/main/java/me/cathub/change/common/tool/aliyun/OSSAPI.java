@@ -6,7 +6,7 @@ import me.cathub.change.common.tool.Sequence;
 
 import java.io.InputStream;
 
-public class OSSTool {
+public class OSSAPI {
     private static final String BUCKET_NAME = "change-data";
     private static final String ACCESS_KEY_ID = "LTAIedWOs9wiM17u";
     private static final String ACCESS_KEY_SECRET = "a3xVvP9ELRp6Tp6HeTzVgwcUScgmm2";
