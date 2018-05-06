@@ -1,15 +1,15 @@
 package me.cathub.change.db.bean;
 
 public class Property {
-    private String property;
+    private String name;
     private String value;
 
-    public String getProperty() {
-        return property;
+    public String getName() {
+        return name;
     }
 
-    public void setProperty(String property) {
-        this.property = property;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getValue() {
@@ -23,7 +23,7 @@ public class Property {
     @Override
     public String toString() {
         return "Property{" +
-                "property='" + property + '\'' +
+                "name='" + name + '\'' +
                 ", value='" + value + '\'' +
                 '}';
     }

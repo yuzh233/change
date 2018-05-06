@@ -14,6 +14,7 @@ public class Auditing implements Serializable {
     private Date auditSubmitDate;
     private Date auditAllowDate;
     private int type;
+    private int status;
     private int tableIndex;
 
     private long user_id;
@@ -27,6 +28,14 @@ public class Auditing implements Serializable {
 
     public Auditing(long id) {
         this.id = id;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public long getUser_id() {
@@ -108,6 +117,7 @@ public class Auditing implements Serializable {
                 ", auditSubmitDate=" + auditSubmitDate +
                 ", auditAllowDate=" + auditAllowDate +
                 ", type=" + type +
+                ", status=" + status +
                 ", tableIndex=" + tableIndex +
                 ", user_id=" + user_id +
                 ", admin_id=" + admin_id +

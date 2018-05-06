@@ -16,6 +16,7 @@
         <result property="auditSubmitDate" column="auditSubmitDate"/>
         <result property="auditAllowDate" column="auditAllowDate"/>
         <result property="type" column="type"/>
+        <result property="status" column="status"/>
 
         <result property="admin_id" column="admin_id"/>
         <result property="user_id" column="user_id"/>
@@ -25,12 +26,14 @@
         INSERT INTO auditing_${tableIndex} (
           id,
           type,
+          status,
           user_id,
           auditSubmitDate,
           yn
         )VALUES(
           #{id, jdbcType=BIGINT},
           #{type, jdbcType=INTEGER},
+          #{status, jdbcType=INTEGER},
           #{user.id, jdbcType=BIGINT},
           now(),
           1
@@ -62,6 +65,7 @@
     <update id="update" parameterType="auditing">
         UPDATE auditing_${tableIndex} SET
           auditAllowDate=#{auditAllowDate, jdbcType=TIMESTAMP},
+          status=#{status, jdbcType=INTEGER},
           admin_id=#{admin.id, jdbcType=BIGINT}
         WHERE
           id=#{id, jdbcType=BIGINT}

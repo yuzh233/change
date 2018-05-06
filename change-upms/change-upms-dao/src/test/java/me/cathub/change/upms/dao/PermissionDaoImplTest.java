@@ -46,7 +46,8 @@ public class PermissionDaoImplTest {
 
     @Test
     public void list() throws Exception {
-        permissionDao.list(0, 10, 0).forEach( e -> System.out.println(e));
+        permissionDao.list(0, 100, 0).forEach( e -> System.out.println(e));
+        permissionDao.list(0, 100, 0).forEach( e -> System.out.println(e));
     }
 
     @Test

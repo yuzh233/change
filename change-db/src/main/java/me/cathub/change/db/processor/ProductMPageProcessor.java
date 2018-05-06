@@ -5,6 +5,7 @@ import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import me.cathub.change.db.bean.Product;
 import me.cathub.change.db.bean.ProductImage;
+import me.cathub.change.db.bean.Property;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.pipeline.JsonFilePipeline;
@@ -12,6 +13,7 @@ import us.codecraft.webmagic.pipeline.JsonFilePipeline;
 import java.io.File;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -28,6 +30,11 @@ public class ProductMPageProcessor extends ProductPageProcessor {
         temp = temp.substring(0, temp.lastIndexOf("\""));
         String company_name = temp.substring(temp.lastIndexOf("\"", temp.length()) + 1);
 
+        String propertyJson = page.getHtml().regex("productFeatureList\":(.+),\"rateAverageStarLevel\"", 1).get();
+
+        JSONArray propertyJsons = JSONUtil.parseArray(propertyJson);
+        ArrayList<Property> properties = propertyJsons.toList(Property.class);
+
         String price = page.getHtml().$("div.d-content.fd-clr > div > dl.d-price-discount.nobottom > dd").$("dd", "text").get();
 
         String product_name = page.getHtml().$("div.wing-view-title > div > div > h1 > span").$("span", "text").get();
@@ -36,7 +43,7 @@ public class ProductMPageProcessor extends ProductPageProcessor {
         List<String> info_images = page.getHtml().$("div.swipe-pane > img").$("img", "swipe-lazy-src").all();
 
         Product product = new Product();
-        price = price.trim().substring(0, price.indexOf(" "));
+        price = price.trim();
         product.setPrice(Float.parseFloat(price));
         product.setName(product_name);
         product.setCompany_name(company_name);
@@ -67,7 +74,7 @@ public class ProductMPageProcessor extends ProductPageProcessor {
 //        ));
 
         try {
-            File category = new File(ProductMPageProcessor.class.getResource("/data/products/girl").getPath());
+            File category = new File("C:\\Users\\cheng\\Desktop\\DATA\\products\\女装");
 
                 File[] jsonFiles = category.listFiles();
 
@@ -88,9 +95,9 @@ public class ProductMPageProcessor extends ProductPageProcessor {
 
             for (String url:urls) {
                 Spider.create(new ProductMPageProcessor(url))
-                        .addUrl(url)
+                        .addUrl("https://m.1688.com/offer/44705192943.html?spm=a262gg.8864560.jdcp6v53.5")
                         .addPipeline(new JsonFilePipeline("C:\\Users\\cheng\\Desktop\\DATA\\data\\" + category.getName()))
-                        .thread(8)
+                        .thread(1)
                         .run();
             }
         } catch (Exception e) {

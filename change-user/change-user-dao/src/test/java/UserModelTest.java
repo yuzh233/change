@@ -49,5 +49,13 @@ public class UserModelTest {
 
     @Test
     public void test02() throws Exception {
+        BrandQuotient brandQuotient = new BrandQuotient(sequence.nextId());
+        brandQuotient.setCompany(new Company(sequence.nextId()));
+        brandQuotient.setRole(new Role(sequence.nextId()));
+        brandQuotient.setUsername("测试");
+
+        brandQuotientDao.insert(brandQuotient);
+
+        System.out.println(brandQuotientDao.selectByName("测试", 0));
     }
 }

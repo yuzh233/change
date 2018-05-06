@@ -10,6 +10,15 @@ public class Product {
     private String image_url;
 
     private List<ProductImage> images;
+    private List<Property> propertys;
+
+    public List<Property> getPropertys() {
+        return propertys;
+    }
+
+    public void setPropertys(List<Property> propertys) {
+        this.propertys = propertys;
+    }
 
     public List<ProductImage> getImages() {
         return images;
@@ -68,6 +77,7 @@ public class Product {
                 ", company_name='" + company_name + '\'' +
                 ", image_url='" + image_url + '\'' +
                 ", images=" + images +
+                ", propertys=" + propertys +
                 '}';
     }
 }

@@ -8,7 +8,7 @@ import me.cathub.change.api.rpc.server.upms.PermissionRpcServer;
 import me.cathub.change.api.rpc.server.upms.RoleRpcServer;
 import me.cathub.change.api.rpc.server.user.*;
 import me.cathub.change.common.tool.HTTPTool;
-import me.cathub.change.common.tool.aliyun.OSSTool;
+import me.cathub.change.common.tool.aliyun.OSSAPI;
 import me.cathub.change.db.bean.Product;
 import me.cathub.change.product.bean.ProductCategory;
 import me.cathub.change.user.bean.BrandQuotient;
@@ -132,11 +132,11 @@ public class FillDate {
                     // 填充产品图片数据
                     me.cathub.change.product.bean.ProductImage productImage = new me.cathub.change.product.bean.ProductImage();
                     productImage.setType(me.cathub.change.product.bean.ProductImage.TYPE_COVER);
-                    productImage.setUrl(OSSTool.getProductImgUrl(company_name, OSSTool.getSuffix(image_url)));
+                    productImage.setUrl(OSSAPI.getProductImgUrl(company_name, OSSAPI.getSuffix(image_url)));
                     productImage.setProduct(new me.cathub.change.product.bean.Product(p_id));
 
                     // 保存图片到OSS
-                    OSSTool.uploadResource(productImage.getUrl(), HTTPTool.getInputStream(image_url));
+                    OSSAPI.uploadResource(productImage.getUrl(), HTTPTool.getInputStream(image_url));
 
                     // 插入产品图片
                     productImageRpcServer.insert(productImage);
@@ -165,7 +165,7 @@ public class FillDate {
                              * 1. OSS 删除图片
                              * 2. 数据库删除 产品 and 产品图片
                              */
-//                            OSSTool.deleteObject(bean.getUrl());
+//                            OSSAPI.deleteObject(bean.getUrl());
                             productRpcServer.deleteL(bean.getProduct());
                             productImageRpcServer.deleteL(bean);
                         } catch (Exception e) {
