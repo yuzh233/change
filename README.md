@@ -40,7 +40,7 @@ change
 |       |—— change-order-dao
 |       |—— change-order-service
 |       |—— change-order-rpc-server
-|—— change-pay — 支付模块
+|—— change-wallet — 钱包模块
 ```
 
 ### 技术选型

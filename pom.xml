@@ -33,5 +33,7 @@
         <module>change-admin</module>
         <module>change-db</module>
         <module>change-config</module>
+        <module>change-wallet</module>
+        <module>change-apply</module>
     </modules>
 </project>
