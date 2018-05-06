@@ -16,6 +16,7 @@
         <result property="url" column="url"/>
         <result property="createDate" column="createDate"/>
         <result property="updateDate" column="updateDate"/>
+        <result property="type" column="type"/>
 
         <result property="shopkeeper_id" column="shopkeeper_id"/>
     </resultMap>
@@ -24,12 +25,14 @@
         INSERT INTO onlineStore_${tableIndex} (
           id,
           url,
+          type,
           shopkeeper_id,
           createDate,
           yn
         )VALUES(
           #{id, jdbcType=BIGINT},
           #{url, jdbcType=VARCHAR},
+          #{type, jdbcType=INTEGER},
           #{shopkeeper.id, jdbcType=BIGINT},
           NOW(),
           1

@@ -7,15 +7,35 @@ import java.util.Date;
  * 网店
  */
 public class OnlineStore implements Serializable {
+    /**
+     * eBay
+     */
+    public static final int TYPE_EBAY = 1;
+
+    /**
+     * Amazon
+     */
+    public static final int TYPE_AMAZON = 2;
+
+
     private long id;
     private String url;
     private Date createDate;
     private Date updateDate;
+    private int type;
     private int tableIndex;
 
     private long shopkeeper_id;
 
     private Shopkeeper shopkeeper;
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
 
     public long getShopkeeper_id() {
         return shopkeeper_id;
@@ -80,6 +100,7 @@ public class OnlineStore implements Serializable {
                 ", url='" + url + '\'' +
                 ", createDate=" + createDate +
                 ", updateDate=" + updateDate +
+                ", type=" + type +
                 ", tableIndex=" + tableIndex +
                 ", shopkeeper_id=" + shopkeeper_id +
                 ", shopkeeper=" + shopkeeper +
