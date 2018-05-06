@@ -23,17 +23,17 @@
     </build>
 
     <modules>
+        <module>change-api</module>
         <module>change-common</module>
+        <module>change-config</module>
+        <module>change-upms</module>
+        <module>change-user</module>
         <module>change-product</module>
         <module>change-storehouse</module>
         <module>change-order</module>
-        <module>change-user</module>
-        <module>change-api</module>
-        <module>change-upms</module>
-        <module>change-admin</module>
-        <module>change-db</module>
-        <module>change-config</module>
         <module>change-wallet</module>
+        <module>change-db</module>
+        <module>change-admin</module>
         <module>change-apply</module>
     </modules>
 </project>

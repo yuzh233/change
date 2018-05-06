@@ -58,7 +58,6 @@ change
 | FluentValidator | 校验框架 | [URI](https://github.com/neoremind/fluent-validator) |
 | ZooKeeper | 分布式协调服务 | [URI](http://zookeeper.apache.org/) |
 | Dubbo | 分布式服务框架 | [URI](http://dubbo.io/) |
-| TBSchedule & elastic-job | 分布式调度框架 | [URI](https://github.com/dangdangdotcom/elastic-job) |
 | Redis | 分布式缓存数据库 | [URI](https://redis.io/) |
 | Solr & Elasticsearch | 分布式全文搜索引擎 | [URI](http://lucene.apache.org/solr/) [URL](https://www.elastic.co/) |
 | Quartz | 作业调度框架 | [URI](http://www.quartz-scheduler.org/) |
