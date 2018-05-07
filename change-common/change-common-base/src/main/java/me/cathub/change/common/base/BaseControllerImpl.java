@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public abstract class BaseControllerImpl<B extends Serializable, S extends BaseRpcServer<B>> implements BaseController<B> {
+    private static final String SET_ID = "setId";
 
     @Autowired
     protected S rpcService;
