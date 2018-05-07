@@ -99,16 +99,15 @@ public class ProductDaoImpl extends BaseDaoMyBatisImpl<Product> implements Produ
     }
 
     @Override
-    public List<Product> listByProductCategoryIdAndBrandQuotientId(long productCategory_id, long brandQuotient_id, int page, int count, int tableIndex) throws Exception {
+    public List<Product> listByCompanyId(long company_id, int page, int count, int tableIndex) throws Exception {
         List<Product> results = null;
         try {
             HashMap<String, ? super Number> map = new HashMap<>();
-            map.put("productCategory_id", productCategory_id);
-            map.put("brandQuotient_id", brandQuotient_id);
+            map.put("company_id", company_id);
             map.put("tableIndex", tableIndex);
 
             PageHelper.startPage(page, count);
-            results = sqlSessionTemplate.selectList(NAME_SPACE + LIST_BY_PRODUCT_CATEGORY_ID_AND_BRAND_QUOTIENT_ID, map);
+            results = sqlSessionTemplate.selectList(NAME_SPACE + LIST_BY_COMPANY_ID, map);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -116,14 +115,45 @@ public class ProductDaoImpl extends BaseDaoMyBatisImpl<Product> implements Produ
     }
 
     @Override
-    public int countByProductCategoryIdAndBrandQuotientId(long productCategory_id, long brandQuotient_id, int tableIndex) throws Exception {
+    public int countByCompanyId(long company_id, int tableIndex) throws Exception {
+        int count = 0;
+        try {
+            HashMap<String, ? super Number> map = new HashMap<>();
+            map.put("company_id", company_id);
+            map.put("tableIndex", tableIndex);
+            count = sqlSessionTemplate.selectOne(NAME_SPACE + COUNT_BY_COMPANY_ID, map);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+    @Override
+    public List<Product> listByProductCategoryIdAndCompanyId(long productCategory_id, long company_id, int page, int count, int tableIndex) throws Exception {
+        List<Product> results = null;
+        try {
+            HashMap<String, ? super Number> map = new HashMap<>();
+            map.put("productCategory_id", productCategory_id);
+            map.put("company_id", company_id);
+            map.put("tableIndex", tableIndex);
+
+            PageHelper.startPage(page, count);
+            results = sqlSessionTemplate.selectList(NAME_SPACE + LIST_BY_PRODUCT_CATEGORY_ID_AND_COMPANY_ID, map);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return results;
+    }
+
+    @Override
+    public int countByProductCategoryIdAndCompanyId(long productCategory_id, long company_id, int tableIndex) throws Exception {
         int count = 0;
         try {
             HashMap<String, ? super Number> map = new HashMap<>();
             map.put("productCategory_id", productCategory_id);
-            map.put("brandQuotient_id", brandQuotient_id);
+            map.put("company_id", company_id);
             map.put("tableIndex", tableIndex);
-            count = sqlSessionTemplate.selectOne(NAME_SPACE + COUNT_BY_PRODUCT_CATEGORY_ID_AND_BRAND_QUOTIENT_ID, map);
+            count = sqlSessionTemplate.selectOne(NAME_SPACE + COUNT_BY_PRODUCT_CATEGORY_ID_AND_COMPANY_ID, map);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -21,6 +21,7 @@
         <result property="updateDate" column="updateDate"/>
 
         <result property="productCategory_id" column="productCategory_id"/>
+        <result property="company_id" column="company_id"/>
         <result property="brandQuotient_id" column="brandQuotient_id"/>
     </resultMap>
 
@@ -33,6 +34,7 @@
           description,
           status,
           productCategory_id,
+          company_id,
           brandQuotient_id,
           createDate,
           yn
@@ -44,6 +46,7 @@
           #{description, jdbcType=VARCHAR},
           0,
           #{productCategory.id, jdbcType=BIGINT},
+          #{company.id, jdbcType=BIGINT},
           #{brandQuotient.id, jdbcType=BIGINT},
           NOW(),
           1
@@ -119,12 +122,20 @@
         SELECT COUNT(*) FROM product_${tableIndex} WHERE yn=1 AND brandQuotient_id=#{brandQuotient_id, jdbcType=BIGINT}
     </select>
 
-    <select id="listByProductCategoryIdAndBrandQuotientId" parameterType="map" resultMap="product">
-        SELECT * FROM product_${tableIndex} WHERE yn=1 AND productCategory_id=#{productCategory_id, jdbcType=BIGINT} AND brandQuotient_id=#{brandQuotient_id, jdbcType=BIGINT}
+    <select id="listByCompanyId" parameterType="map" resultMap="product">
+        SELECT * FROM product_${tableIndex} WHERE yn=1 AND company_id=#{company_id, jdbcType=BIGINT}
     </select>
 
-    <select id="countByProductCategoryIdAndBrandQuotientId" parameterType="map" resultType="int">
-        SELECT COUNT(*) FROM product_${tableIndex} WHERE yn=1 AND productCategory_id=#{productCategory_id, jdbcType=BIGINT} AND brandQuotient_id=#{brandQuotient_id, jdbcType=BIGINT}
+    <select id="countByCompanyId" parameterType="map" resultType="int">
+        SELECT COUNT(*) FROM product_${tableIndex} WHERE yn=1 AND company_id=#{company_id, jdbcType=BIGINT}
+    </select>
+
+    <select id="listByProductCategoryIdAndCompanyId" parameterType="map" resultMap="product">
+        SELECT * FROM product_${tableIndex} WHERE yn=1 AND productCategory_id=#{productCategory_id, jdbcType=BIGINT} AND company_id=#{company_id, jdbcType=BIGINT}
+    </select>
+
+    <select id="countByProductCategoryIdAndCompanyId" parameterType="map" resultType="int">
+        SELECT COUNT(*) FROM product_${tableIndex} WHERE yn=1 AND productCategory_id=#{productCategory_id, jdbcType=BIGINT} AND company_id=#{company_id, jdbcType=BIGINT}
     </select>
 
     <select id="listByProductCategoryId" parameterType="map" resultMap="product">

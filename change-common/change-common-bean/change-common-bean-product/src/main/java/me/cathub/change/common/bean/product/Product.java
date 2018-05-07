@@ -2,6 +2,7 @@ package me.cathub.change.common.bean.product;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import me.cathub.change.common.bean.user.BrandQuotient;
+import me.cathub.change.common.bean.user.Company;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -26,9 +27,11 @@ public class Product implements Serializable {
     private int tableIndex;
 
     private long productCategory_id;
+    private long company_id;
     private long brandQuotient_id;
 
     private ProductCategory productCategory;
+    private Company company;
     private BrandQuotient brandQuotient;
 
     public long getProductCategory_id() {
@@ -40,6 +43,30 @@ public class Product implements Serializable {
 
     public Product(long id) {
         this.id = id;
+    }
+
+    public static int getStatusPresell() {
+        return STATUS_PRESELL;
+    }
+
+    public static int getStatusInStock() {
+        return STATUS_IN_STOCK;
+    }
+
+    public long getCompany_id() {
+        return company_id;
+    }
+
+    public void setCompany_id(long company_id) {
+        this.company_id = company_id;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
     public void setProductCategory_id(long productCategory_id) {
@@ -155,8 +182,10 @@ public class Product implements Serializable {
                 ", updateDate=" + updateDate +
                 ", tableIndex=" + tableIndex +
                 ", productCategory_id=" + productCategory_id +
+                ", company_id=" + company_id +
                 ", brandQuotient_id=" + brandQuotient_id +
                 ", productCategory=" + productCategory +
+                ", company=" + company +
                 ", brandQuotient=" + brandQuotient +
                 '}';
     }

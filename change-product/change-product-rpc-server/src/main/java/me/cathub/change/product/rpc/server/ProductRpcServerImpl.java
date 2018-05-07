@@ -48,18 +48,33 @@ public class ProductRpcServerImpl extends BaseRpcServerImpl<Product, ProductDao>
     }
 
     @Override
-    public List<Product> listByProductCategoryIdAndBrandQuotientId(long productCategory_id, long brandQuotient_id, int page, int count, int tableIndex, boolean flag) throws Exception {
+    public List<Product> listByCompanyId(long company_id, int page, int count, int tableIndex, boolean flag) throws Exception {
         if (flag)
-            return dao.listByProductCategoryIdAndBrandQuotientId(productCategory_id, brandQuotient_id, page, count, tableIndex);
+            return dao.listByCompanyId(company_id, page, count, tableIndex);
         else
-            return dao.listByProductCategoryIdAndBrandQuotientId(productCategory_id, brandQuotient_id, page, count, tableIndex).stream()
+            return dao.listByCompanyId(company_id, page, count, tableIndex).stream()
+                    .map(bean -> fill(bean))
+                    .collect(toList());
+    }
+
+    @Override
+    public int countByCompanyId(long company_id, int tableIndex) throws Exception {
+        return dao.countByCompanyId(company_id, tableIndex);
+    }
+
+    @Override
+    public List<Product> listByProductCategoryIdAndCompanyId(long productCategory_id, long company_id, int page, int count, int tableIndex, boolean flag) throws Exception {
+        if (flag)
+            return dao.listByProductCategoryIdAndCompanyId(productCategory_id, company_id, page, count, tableIndex);
+        else
+            return dao.listByProductCategoryIdAndCompanyId(productCategory_id, company_id, page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
     }
 
     @Override
-    public int countByProductCategoryIdAndBrandQuotientId(long productCategory_id, long brandQuotient_id, int tableIndex) throws Exception {
-        return dao.countByProductCategoryIdAndBrandQuotientId(productCategory_id, brandQuotient_id, tableIndex);
+    public int countByProductCategoryIdAndCompanyId(long company_id, long brandQuotient_id, int tableIndex) throws Exception {
+        return dao.countByProductCategoryIdAndCompanyId(company_id, brandQuotient_id, tableIndex);
     }
 
     @Override
