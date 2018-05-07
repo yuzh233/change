@@ -2,12 +2,12 @@ package me.cathub.change.api.dao.user;
 
 
 import me.cathub.change.common.base.BaseDao;
-import me.cathub.change.user.bean.OnlineStore;
+import me.cathub.change.common.bean.user.OnlineStore;
 
 import java.util.List;
 
 public interface OnlineStoreDao extends BaseDao<OnlineStore> {
-    String NAME_SPACE = "me.cathub.change.user.bean.OnlineStore";
+    String NAME_SPACE = "OnlineStore";
 
     String LIST_BY_SHOPKEEPER_ID = ".listByShopkeeperId";
     String COUNT_BY_SHOPKEEPER_ID = ".countByShopkeeperId";

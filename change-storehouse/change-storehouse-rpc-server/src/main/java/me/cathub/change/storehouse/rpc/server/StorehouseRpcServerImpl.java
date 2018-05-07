@@ -4,8 +4,8 @@ import me.cathub.change.api.dao.storehouse.StorehouseDao;
 import me.cathub.change.api.rpc.server.storehouse.StorehouseCountryRpcServer;
 import me.cathub.change.api.rpc.server.storehouse.StorehouseRpcServer;
 import me.cathub.change.common.base.BaseRpcServerImpl;
-import me.cathub.change.storehouse.bean.Storehouse;
-import me.cathub.change.storehouse.bean.StorehouseCountry;
+import me.cathub.change.common.bean.storehouse.Storehouse;
+import me.cathub.change.common.bean.storehouse.StorehouseCountry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,12 +1,12 @@
 package me.cathub.change.api.dao.order;
 
 import me.cathub.change.common.base.BaseDao;
-import me.cathub.change.order.bean.OrderItem;
+import me.cathub.change.common.bean.order.OrderItem;
 
 import java.util.List;
 
 public interface OrderItemDao extends BaseDao<OrderItem> {
-    String NAME_SPACE = "me.cathub.change.order.bean.OrderItem";
+    String NAME_SPACE = "OrderItem";
 
     String LIST_BY_ORDER_ID = ".listByOrderId";
     String COUNT_BY_ORDER_ID = ".countByOrderId";

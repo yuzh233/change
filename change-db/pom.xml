@@ -44,27 +44,27 @@
         </dependency>
         <dependency>
             <groupId>me.cathub</groupId>
-            <artifactId>change-upms-bean</artifactId>
+            <artifactId>change-common-bean-upms</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>me.cathub</groupId>
-            <artifactId>change-user-bean</artifactId>
+            <artifactId>change-common-bean-user</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>me.cathub</groupId>
-            <artifactId>change-product-bean</artifactId>
+            <artifactId>change-common-bean-product</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>me.cathub</groupId>
-            <artifactId>change-storehouse-bean</artifactId>
+            <artifactId>change-common-bean-storehouse</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>me.cathub</groupId>
-            <artifactId>change-order-bean</artifactId>
+            <artifactId>change-common-bean-order</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 

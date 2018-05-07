@@ -3,10 +3,10 @@ package me.cathub.change.api.dao.user;
 import me.cathub.change.common.base.BaseDao;
 import me.cathub.change.common.base.LoginInterface;
 import me.cathub.change.common.base.DaoSelectByName;
-import me.cathub.change.user.bean.BrandQuotient;
+import me.cathub.change.common.bean.user.BrandQuotient;
 
 public interface BrandQuotientDao extends BaseDao<BrandQuotient>, LoginInterface<BrandQuotient>, DaoSelectByName<BrandQuotient> {
-    String NAME_SPACE = "me.cathub.change.user.bean.BrandQuotient";
+    String NAME_SPACE = "BrandQuotient";
     String SELECT_BY_COMPANY_ID = "selectByCompanyId";
 
     /**

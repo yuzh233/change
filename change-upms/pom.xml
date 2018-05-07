@@ -13,7 +13,6 @@
     <packaging>pom</packaging>
     <modules>
         <module>change-upms-dao</module>
-        <module>change-upms-bean</module>
         <module>change-upms-rpc-server</module>
     </modules>
 </project>

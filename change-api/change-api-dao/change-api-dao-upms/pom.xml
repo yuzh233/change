@@ -14,7 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>me.cathub</groupId>
-            <artifactId>change-upms-bean</artifactId>
+            <artifactId>change-common-bean-upms</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 

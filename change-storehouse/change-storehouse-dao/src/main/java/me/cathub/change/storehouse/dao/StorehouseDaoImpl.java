@@ -3,7 +3,7 @@ package me.cathub.change.storehouse.dao;
 import com.github.pagehelper.PageHelper;
 import me.cathub.change.api.dao.storehouse.StorehouseDao;
 import me.cathub.change.common.base.BaseDaoMyBatisImpl;
-import me.cathub.change.storehouse.bean.Storehouse;
+import me.cathub.change.common.bean.storehouse.Storehouse;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;

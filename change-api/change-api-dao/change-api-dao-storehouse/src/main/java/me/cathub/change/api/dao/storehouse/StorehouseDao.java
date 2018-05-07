@@ -2,12 +2,12 @@ package me.cathub.change.api.dao.storehouse;
 
 import me.cathub.change.common.base.BaseDao;
 import me.cathub.change.common.base.DaoSelectByName;
-import me.cathub.change.storehouse.bean.Storehouse;
+import me.cathub.change.common.bean.storehouse.Storehouse;
 
 import java.util.List;
 
 public interface StorehouseDao extends BaseDao<Storehouse>, DaoSelectByName<Storehouse> {
-    String NAME_SPACE = "me.cathub.change.storehouse.bean.Storehouse";
+    String NAME_SPACE = "Storehouse";
 
     String LIST_BY_STOREHOUSE_COUNTRY_ID = ".listByStorehouseCountryId";
     String COUNT_BY_STOREHOUSE_COUNTRY_ID = ".countByStorehouseCountryId";

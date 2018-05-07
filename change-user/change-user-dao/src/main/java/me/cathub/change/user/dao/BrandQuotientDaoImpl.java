@@ -2,7 +2,7 @@ package me.cathub.change.user.dao;
 
 import me.cathub.change.api.dao.user.BrandQuotientDao;
 import me.cathub.change.common.base.BaseDaoMyBatisImpl;
-import me.cathub.change.user.bean.BrandQuotient;
+import me.cathub.change.common.bean.user.BrandQuotient;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;

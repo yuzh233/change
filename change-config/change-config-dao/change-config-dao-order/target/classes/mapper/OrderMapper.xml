@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="me.cathub.change.order.bean.Order">
+<mapper namespace="Order">
 
-    <cache/>
+    <!--&lt;!&ndash;缓存&ndash;&gt;
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache">
+        <property name="timeToIdleSeconds" value="3600"/>
+        <property name="timeToLiveSeconds" value="3600"/>
+        <property name="maxEntriesLocalHeap" value="1000"/>
+        <property name="maxEntriesLocalDisk" value="10000000"/>
+        <property name="memoryStoreEvictionPolicy" value="LRU"/>
+    </cache>-->
+
     <resultMap id="order" type="order">
         <id property="id" column="id"/>
         <result property="orderCode" column="orderCode"/>
@@ -81,7 +89,7 @@
         SELECT * FROM order_${_parameter} WHERE yn=1
     </select>
 
-    <select id="count" parameterType="int" resultType="long">
+    <select id="count" parameterType="int" resultType="int">
         SELECT COUNT(*) FROM order_${_parameter} WHERE yn=1
     </select>
 
@@ -98,26 +106,26 @@
     </delete>
 
     <select id="listByStorehouseId" parameterType="map" resultMap="order">
-        SELECT * FROM order_${tableIndex} WHERE storehouse_id=#{storehouse_id, jdbcType=BIGINT}
+        SELECT * FROM order_${tableIndex} WHERE yn=1 AND storehouse_id=#{storehouse_id, jdbcType=BIGINT}
     </select>
 
     <select id="countByStorehouseId" parameterType="map" resultType="int">
-        SELECT COUNT(*) order_${tableIndex} WHERE storehouse_id=#{storehouse_id, jdbcType=BIGINT}
+        SELECT COUNT(*) order_${tableIndex} WHERE yn=1 AND storehouse_id=#{storehouse_id, jdbcType=BIGINT}
     </select>
 
     <select id="listByShopkeeperId" parameterType="map" resultMap="order">
-        SELECT * FROM order_${tableIndex} WHERE shopkeeper_id=#{shopkeeper_id, jdbcType=BIGINT}
+        SELECT * FROM order_${tableIndex} WHERE yn=1 AND shopkeeper_id=#{shopkeeper_id, jdbcType=BIGINT}
     </select>
 
     <select id="countByShopkeeperId" parameterType="map" resultType="int">
-        SELECT COUNT(*) order_${tableIndex} WHERE shopkeeper_id=#{shopkeeper_id, jdbcType=BIGINT}
+        SELECT COUNT(*) order_${tableIndex} WHERE yn=1 AND shopkeeper_id=#{shopkeeper_id, jdbcType=BIGINT}
     </select>
 
     <select id="listByBrandQuotient" parameterType="map" resultMap="order">
-        SELECT * FROM order_${tableIndex} WHERE brandQuotient_id=#{brandQuotient_id, jdbcType=BIGINT}
+        SELECT * FROM order_${tableIndex} WHERE yn=1 AND brandQuotient_id=#{brandQuotient_id, jdbcType=BIGINT}
     </select>
 
     <select id="countByBrandQuotient" parameterType="map" resultType="int">
-        SELECT COUNT(*) FROM order_${tableIndex} WHERE brandQuotient_id=#{brandQuotient_id, jdbcType=BIGINT}
+        SELECT COUNT(*) FROM order_${tableIndex} WHERE yn=1 AND brandQuotient_id=#{brandQuotient_id, jdbcType=BIGINT}
     </select>
 </mapper>

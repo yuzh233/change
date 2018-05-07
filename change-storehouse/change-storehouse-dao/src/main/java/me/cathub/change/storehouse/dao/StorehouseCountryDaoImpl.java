@@ -2,7 +2,7 @@ package me.cathub.change.storehouse.dao;
 
 import me.cathub.change.api.dao.storehouse.StorehouseCountryDao;
 import me.cathub.change.common.base.BaseDaoMyBatisImpl;
-import me.cathub.change.storehouse.bean.StorehouseCountry;
+import me.cathub.change.common.bean.storehouse.StorehouseCountry;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;

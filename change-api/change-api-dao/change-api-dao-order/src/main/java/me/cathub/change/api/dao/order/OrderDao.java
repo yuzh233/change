@@ -1,12 +1,12 @@
 package me.cathub.change.api.dao.order;
 
 import me.cathub.change.common.base.BaseDao;
-import me.cathub.change.order.bean.Order;
+import me.cathub.change.common.bean.order.Order;
 
 import java.util.List;
 
 public interface OrderDao extends BaseDao<Order> {
-    String NAME_SPACE = "me.cathub.change.order.bean.Order";
+    String NAME_SPACE = "Order";
 
     String LIST_BY_STOREHOUSE_ID = ".listByStorehouseId";
     String COUNT_BY_STOREHOUSE_ID = ".countByStorehouseId";
@@ -72,5 +72,5 @@ public interface OrderDao extends BaseDao<Order> {
      * @param tableIndex
      * @return
      */
-    int countBrandQuotientId(long brandQuotient_id, int tableIndex);
+    int countByBrandQuotientId(long brandQuotient_id, int tableIndex);
 }

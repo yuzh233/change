@@ -5,9 +5,9 @@ import me.cathub.change.api.rpc.server.product.ProductRpcServer;
 import me.cathub.change.api.rpc.server.storehouse.StorehouseProductStockRpcServer;
 import me.cathub.change.api.rpc.server.storehouse.StorehouseRpcServer;
 import me.cathub.change.common.base.BaseRpcServerImpl;
-import me.cathub.change.product.bean.Product;
-import me.cathub.change.storehouse.bean.Storehouse;
-import me.cathub.change.storehouse.bean.StorehouseProductStock;
+import me.cathub.change.common.bean.product.Product;
+import me.cathub.change.common.bean.storehouse.Storehouse;
+import me.cathub.change.common.bean.storehouse.StorehouseProductStock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

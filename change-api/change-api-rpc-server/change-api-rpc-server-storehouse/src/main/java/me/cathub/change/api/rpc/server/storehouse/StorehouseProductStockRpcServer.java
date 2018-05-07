@@ -2,7 +2,7 @@ package me.cathub.change.api.rpc.server.storehouse;
 
 import me.cathub.change.common.base.BaseRpcServer;
 import me.cathub.change.common.base.FillAssociationDate;
-import me.cathub.change.storehouse.bean.StorehouseProductStock;
+import me.cathub.change.common.bean.storehouse.StorehouseProductStock;
 
 import java.util.List;
 

@@ -4,8 +4,8 @@ import me.cathub.change.api.dao.product.ProductReviewDao;
 import me.cathub.change.api.rpc.server.product.ProductReviewRpcServer;
 import me.cathub.change.api.rpc.server.product.ProductRpcServer;
 import me.cathub.change.common.base.BaseRpcServerImpl;
-import me.cathub.change.product.bean.Product;
-import me.cathub.change.product.bean.ProductReview;
+import me.cathub.change.common.bean.product.Product;
+import me.cathub.change.common.bean.product.ProductReview;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;

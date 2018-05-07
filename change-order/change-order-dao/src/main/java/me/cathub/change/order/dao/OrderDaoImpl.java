@@ -3,7 +3,7 @@ package me.cathub.change.order.dao;
 import com.github.pagehelper.PageHelper;
 import me.cathub.change.api.dao.order.OrderDao;
 import me.cathub.change.common.base.BaseDaoMyBatisImpl;
-import me.cathub.change.order.bean.Order;
+import me.cathub.change.common.bean.order.Order;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
@@ -157,7 +157,7 @@ public class OrderDaoImpl extends BaseDaoMyBatisImpl<Order> implements OrderDao 
     }
 
     @Override
-    public int countBrandQuotientId(long brandQuotient_id, int tableIndex) {
+    public int countByBrandQuotientId(long brandQuotient_id, int tableIndex) {
         int count = 0;
 
         try {

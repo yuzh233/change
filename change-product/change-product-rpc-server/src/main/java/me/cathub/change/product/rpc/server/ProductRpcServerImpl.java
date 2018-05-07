@@ -5,9 +5,9 @@ import me.cathub.change.api.rpc.server.product.ProductCategoryRpcServer;
 import me.cathub.change.api.rpc.server.product.ProductRpcServer;
 import me.cathub.change.api.rpc.server.user.BrandQuotientRpcServer;
 import me.cathub.change.common.base.BaseRpcServerImpl;
-import me.cathub.change.product.bean.Product;
-import me.cathub.change.product.bean.ProductCategory;
-import me.cathub.change.user.bean.BrandQuotient;
+import me.cathub.change.common.bean.product.Product;
+import me.cathub.change.common.bean.product.ProductCategory;
+import me.cathub.change.common.bean.user.BrandQuotient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

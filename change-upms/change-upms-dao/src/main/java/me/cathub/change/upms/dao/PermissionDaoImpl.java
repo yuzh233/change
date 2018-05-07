@@ -3,7 +3,7 @@ package me.cathub.change.upms.dao;
 import com.github.pagehelper.PageHelper;
 import me.cathub.change.api.dao.upms.PermissionDao;
 import me.cathub.change.common.base.BaseDaoMyBatisImpl;
-import me.cathub.change.upms.bean.Permission;
+import me.cathub.change.common.bean.upms.Permission;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;

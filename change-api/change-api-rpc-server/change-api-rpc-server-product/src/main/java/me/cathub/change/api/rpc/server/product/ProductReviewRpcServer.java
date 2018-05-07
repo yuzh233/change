@@ -2,7 +2,7 @@ package me.cathub.change.api.rpc.server.product;
 
 import me.cathub.change.common.base.BaseRpcServer;
 import me.cathub.change.common.base.FillAssociationDate;
-import me.cathub.change.product.bean.ProductReview;
+import me.cathub.change.common.bean.product.ProductReview;
 
 import java.util.List;
 

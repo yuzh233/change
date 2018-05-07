@@ -14,6 +14,5 @@
     <modules>
         <module>change-user-dao</module>
         <module>change-user-rpc-server</module>
-        <module>change-user-bean</module>
     </modules>
 </project>

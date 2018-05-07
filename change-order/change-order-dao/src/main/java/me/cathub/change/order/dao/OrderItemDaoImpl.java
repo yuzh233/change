@@ -3,7 +3,7 @@ package me.cathub.change.order.dao;
 import com.github.pagehelper.PageHelper;
 import me.cathub.change.api.dao.order.OrderItemDao;
 import me.cathub.change.common.base.BaseDaoMyBatisImpl;
-import me.cathub.change.order.bean.OrderItem;
+import me.cathub.change.common.bean.order.OrderItem;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;

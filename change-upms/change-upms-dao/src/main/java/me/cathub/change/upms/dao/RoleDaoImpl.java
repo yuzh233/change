@@ -2,7 +2,7 @@ package me.cathub.change.upms.dao;
 
 import me.cathub.change.api.dao.upms.RoleDao;
 import me.cathub.change.common.base.BaseDaoMyBatisImpl;
-import me.cathub.change.upms.bean.Role;
+import me.cathub.change.common.bean.upms.Role;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;

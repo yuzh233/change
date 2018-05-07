@@ -31,11 +31,9 @@ public class ProductMPageProcessor extends ProductPageProcessor {
         String company_name = temp.substring(temp.lastIndexOf("\"", temp.length()) + 1);
 
         String propertyJson = page.getHtml().regex("productFeatureList\":(.+),\"rateAverageStarLevel\"", 1).get();
-
+        String price = page.getHtml().regex("\"price\":\"([0-9]{1,}[.][0-9]*)\"", 1).get();
         JSONArray propertyJsons = JSONUtil.parseArray(propertyJson);
         ArrayList<Property> properties = propertyJsons.toList(Property.class);
-
-        String price = page.getHtml().$("div.d-content.fd-clr > div > dl.d-price-discount.nobottom > dd").$("dd", "text").get();
 
         String product_name = page.getHtml().$("div.wing-view-title > div > div > h1 > span").$("span", "text").get();
 
@@ -43,7 +41,8 @@ public class ProductMPageProcessor extends ProductPageProcessor {
         List<String> info_images = page.getHtml().$("div.swipe-pane > img").$("img", "swipe-lazy-src").all();
 
         Product product = new Product();
-        price = price.trim();
+        product.setPropertys(properties);
+
         product.setPrice(Float.parseFloat(price));
         product.setName(product_name);
         product.setCompany_name(company_name);
@@ -75,31 +74,34 @@ public class ProductMPageProcessor extends ProductPageProcessor {
 
         try {
             File category = new File("C:\\Users\\cheng\\Desktop\\DATA\\products\\女装");
+//            File[] categorys = path.listFiles();
 
-                File[] jsonFiles = category.listFiles();
+//            for (File category:categorys) {
+            File[] jsonFiles = category.listFiles();
 
-                List<Product> products = new ArrayList<>();
-                for (File jsonFile: jsonFiles) {
-                    JSONObject jsonObject = JSONUtil.readJSONObject(jsonFile, Charset.defaultCharset());
+            List<Product> products = new ArrayList<>();
+            for (File jsonFile : jsonFiles) {
+                JSONObject jsonObject = JSONUtil.readJSONObject(jsonFile, Charset.defaultCharset());
 
-                    JSONArray jsonProducts = JSONUtil.parseArray(jsonObject.get("products"));
-                    for (Object jsonProduct : jsonProducts) {
-                        Product temp = JSONUtil.toBean(jsonProduct.toString(), Product.class);
+                JSONArray jsonProducts = JSONUtil.parseArray(jsonObject.get("products"));
+                for (Object jsonProduct : jsonProducts) {
+                    Product temp = JSONUtil.toBean(jsonProduct.toString(), Product.class);
 
-                        products.add(temp);
-                    }
+                    products.add(temp);
                 }
-                List<String> list = products.stream().map(product -> m(product.getUrl())).collect(toList());
-                String[] urls = list.toArray(new String[list.size()]);
+            }
+            List<String> list = products.stream().map(product -> m(product.getUrl())).collect(toList());
+            String[] urls = list.toArray(new String[list.size()]);
 
 
-            for (String url:urls) {
+            for (String url : urls) {
                 Spider.create(new ProductMPageProcessor(url))
-                        .addUrl("https://m.1688.com/offer/44705192943.html?spm=a262gg.8864560.jdcp6v53.5")
+                        .addUrl(urls)
                         .addPipeline(new JsonFilePipeline("C:\\Users\\cheng\\Desktop\\DATA\\data\\" + category.getName()))
                         .thread(1)
                         .run();
             }
+//            }
         } catch (Exception e) {
             e.printStackTrace();
         }

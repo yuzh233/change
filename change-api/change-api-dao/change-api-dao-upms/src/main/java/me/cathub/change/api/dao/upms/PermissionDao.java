@@ -2,12 +2,12 @@ package me.cathub.change.api.dao.upms;
 
 import me.cathub.change.common.base.BaseDao;
 import me.cathub.change.common.base.DaoSelectByName;
-import me.cathub.change.upms.bean.Permission;
+import me.cathub.change.common.bean.upms.Permission;
 
 import java.util.List;
 
 public interface PermissionDao extends BaseDao<Permission>, DaoSelectByName<Permission> {
-    String NAME_SPACE = "me.cathub.change.upms.bean.Permission";
+    String NAME_SPACE = "Permission";
 
     String LIST_BY_ROLE_ID = ".listByRoleId";
     String COUNT_BY_ROLE_ID = ".countByRoleId";

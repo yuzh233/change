@@ -4,8 +4,8 @@ import me.cathub.change.api.dao.user.OnlineStoreDao;
 import me.cathub.change.api.rpc.server.user.OnlineStoreRpcServer;
 import me.cathub.change.api.rpc.server.user.ShopkeeperRpcServer;
 import me.cathub.change.common.base.BaseRpcServerImpl;
-import me.cathub.change.user.bean.OnlineStore;
-import me.cathub.change.user.bean.Shopkeeper;
+import me.cathub.change.common.bean.user.OnlineStore;
+import me.cathub.change.common.bean.user.Shopkeeper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -5,9 +5,9 @@ import me.cathub.change.api.rpc.server.upms.RoleRpcServer;
 import me.cathub.change.api.rpc.server.user.BrandQuotientRpcServer;
 import me.cathub.change.api.rpc.server.user.CompanyRpcServer;
 import me.cathub.change.common.base.BaseRpcServerImpl;
-import me.cathub.change.upms.bean.Role;
-import me.cathub.change.user.bean.BrandQuotient;
-import me.cathub.change.user.bean.Company;
+import me.cathub.change.common.bean.upms.Role;
+import me.cathub.change.common.bean.user.BrandQuotient;
+import me.cathub.change.common.bean.user.Company;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,6 @@
 import me.cathub.change.api.dao.product.*;
 import me.cathub.change.common.tool.Sequence;
-import me.cathub.change.product.bean.ProductCategory;
+import me.cathub.change.common.bean.product.ProductCategory;
 import me.cathub.change.product.dao.*;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -19,8 +19,7 @@ public class ProductModelTest {
 
     @Test
     public void addProductTest() throws Exception {
-        ProductCategory sub = new ProductCategory(sequence.nextId());
-        sub.setName("内衣");
-        productCategoryDao.insert(sub);
+        ProductCategory sub = productCategoryDao.selectByName("男装",0);
+        System.out.println(sub);
     }
 }

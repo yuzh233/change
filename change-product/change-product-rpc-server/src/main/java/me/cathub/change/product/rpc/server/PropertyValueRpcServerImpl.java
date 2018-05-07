@@ -5,9 +5,9 @@ import me.cathub.change.api.rpc.server.product.ProductRpcServer;
 import me.cathub.change.api.rpc.server.product.PropertyRpcServer;
 import me.cathub.change.api.rpc.server.product.PropertyValueRpcServer;
 import me.cathub.change.common.base.BaseRpcServerImpl;
-import me.cathub.change.product.bean.Product;
-import me.cathub.change.product.bean.Property;
-import me.cathub.change.product.bean.PropertyValue;
+import me.cathub.change.common.bean.product.Product;
+import me.cathub.change.common.bean.product.Property;
+import me.cathub.change.common.bean.product.PropertyValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -3,7 +3,7 @@ package me.cathub.change.user.dao;
 import com.github.pagehelper.PageHelper;
 import me.cathub.change.api.dao.user.AuditingDao;
 import me.cathub.change.common.base.BaseDaoMyBatisImpl;
-import me.cathub.change.user.bean.Auditing;
+import me.cathub.change.common.bean.user.Auditing;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;

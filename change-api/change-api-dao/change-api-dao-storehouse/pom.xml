@@ -13,7 +13,7 @@
     <dependencies>
         <dependency>
             <groupId>me.cathub</groupId>
-            <artifactId>change-storehouse-bean</artifactId>
+            <artifactId>change-common-bean-storehouse</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>

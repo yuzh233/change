@@ -18,7 +18,7 @@
         </dependency>
         <dependency>
             <groupId>me.cathub</groupId>
-            <artifactId>change-product-bean</artifactId>
+            <artifactId>change-common-bean-product</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>

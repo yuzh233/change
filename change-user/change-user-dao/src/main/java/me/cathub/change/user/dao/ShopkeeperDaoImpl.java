@@ -2,7 +2,7 @@ package me.cathub.change.user.dao;
 
 import me.cathub.change.api.dao.user.ShopkeeperDao;
 import me.cathub.change.common.base.BaseDaoMyBatisImpl;
-import me.cathub.change.user.bean.Shopkeeper;
+import me.cathub.change.common.bean.user.Shopkeeper;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;

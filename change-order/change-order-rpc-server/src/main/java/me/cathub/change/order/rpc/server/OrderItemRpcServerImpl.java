@@ -5,9 +5,9 @@ import me.cathub.change.api.rpc.server.order.OrderItemRpcServer;
 import me.cathub.change.api.rpc.server.order.OrderRpcServer;
 import me.cathub.change.api.rpc.server.product.ProductRpcServer;
 import me.cathub.change.common.base.BaseRpcServerImpl;
-import me.cathub.change.order.bean.Order;
-import me.cathub.change.order.bean.OrderItem;
-import me.cathub.change.product.bean.Product;
+import me.cathub.change.common.bean.order.Order;
+import me.cathub.change.common.bean.order.OrderItem;
+import me.cathub.change.common.bean.product.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

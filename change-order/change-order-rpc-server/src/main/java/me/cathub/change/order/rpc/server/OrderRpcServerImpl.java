@@ -6,10 +6,10 @@ import me.cathub.change.api.rpc.server.storehouse.StorehouseRpcServer;
 import me.cathub.change.api.rpc.server.user.BrandQuotientRpcServer;
 import me.cathub.change.api.rpc.server.user.ShopkeeperRpcServer;
 import me.cathub.change.common.base.BaseRpcServerImpl;
-import me.cathub.change.order.bean.Order;
-import me.cathub.change.storehouse.bean.Storehouse;
-import me.cathub.change.user.bean.BrandQuotient;
-import me.cathub.change.user.bean.Shopkeeper;
+import me.cathub.change.common.bean.order.Order;
+import me.cathub.change.common.bean.storehouse.Storehouse;
+import me.cathub.change.common.bean.user.BrandQuotient;
+import me.cathub.change.common.bean.user.Shopkeeper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -60,7 +60,7 @@ public class OrderRpcServerImpl extends BaseRpcServerImpl<Order, OrderDao> imple
 
     @Override
     public long countBrandQuotientId(long brandQuotient_id, int tableIndex) {
-        return dao.countBrandQuotientId(brandQuotient_id, tableIndex);
+        return dao.countByBrandQuotientId(brandQuotient_id, tableIndex);
     }
 
     @Override

@@ -2,7 +2,7 @@ package me.cathub.change.user.dao;
 
 import me.cathub.change.api.dao.user.AdminDao;
 import me.cathub.change.common.base.BaseDaoMyBatisImpl;
-import me.cathub.change.user.bean.Admin;
+import me.cathub.change.common.bean.user.Admin;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;

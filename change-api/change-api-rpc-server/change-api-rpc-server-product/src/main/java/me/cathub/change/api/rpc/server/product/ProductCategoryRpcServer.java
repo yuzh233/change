@@ -2,7 +2,7 @@ package me.cathub.change.api.rpc.server.product;
 
 import me.cathub.change.common.base.BaseRpcServer;
 import me.cathub.change.common.base.ServerSelectByName;
-import me.cathub.change.product.bean.ProductCategory;
+import me.cathub.change.common.bean.product.ProductCategory;
 
 import java.util.List;
 

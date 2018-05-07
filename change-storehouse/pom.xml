@@ -12,7 +12,6 @@
     <artifactId>change-storehouse</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>change-storehouse-bean</module>
         <module>change-storehouse-dao</module>
         <module>change-storehouse-rpc-server</module>
     </modules>

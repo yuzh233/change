@@ -4,7 +4,7 @@ package me.cathub.change.product.dao;
 import com.github.pagehelper.PageHelper;
 import me.cathub.change.api.dao.product.ProductImageDao;
 import me.cathub.change.common.base.BaseDaoMyBatisImpl;
-import me.cathub.change.product.bean.ProductImage;
+import me.cathub.change.common.bean.product.ProductImage;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;

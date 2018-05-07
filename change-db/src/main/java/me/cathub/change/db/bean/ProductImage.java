@@ -1,6 +1,6 @@
 package me.cathub.change.db.bean;
 
-import me.cathub.change.product.bean.Product;
+import me.cathub.change.common.bean.product.Product;
 
 public class ProductImage {
     public static final int TYPE_COVER = 0;

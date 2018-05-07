@@ -2,12 +2,12 @@ package me.cathub.change.api.dao.product;
 
 import me.cathub.change.common.base.BaseDao;
 import me.cathub.change.common.base.DaoSelectByName;
-import me.cathub.change.product.bean.Product;
+import me.cathub.change.common.bean.product.Product;
 
 import java.util.List;
 
 public interface ProductDao extends BaseDao<Product>, DaoSelectByName<Product> {
-    String NAME_SPACE = "me.cathub.change.product.bean.Product";
+    String NAME_SPACE = "Product";
 
     String LIST_BY_PRODUCT_CATEGORY_ID_AND_BRAND_QUOTIENT_ID = ".listByProductCategoryIdAndBrandQuotientId";
     String COUNT_BY_PRODUCT_CATEGORY_ID_AND_BRAND_QUOTIENT_ID = ".countByProductCategoryIdAndBrandQuotientId";

@@ -1,12 +1,12 @@
 package me.cathub.change.api.dao.product;
 
 import me.cathub.change.common.base.BaseDao;
-import me.cathub.change.product.bean.ProductReview;
+import me.cathub.change.common.bean.product.ProductReview;
 
 import java.util.List;
 
 public interface ProductReviewDao extends BaseDao<ProductReview> {
-    String NAME_SPACE = "me.cathub.change.product.bean.ProductReview";
+    String NAME_SPACE = "ProductReview";
 
     String LIST_BY_PRODUCT_ID = ".listByProductId";
     String COUNT_BY_PRODUCT_ID = ".countByProductId";

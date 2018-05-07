@@ -3,7 +3,7 @@ package me.cathub.change.product.rpc.server;
 import me.cathub.change.api.dao.product.ProductCategoryDao;
 import me.cathub.change.api.rpc.server.product.ProductCategoryRpcServer;
 import me.cathub.change.common.base.BaseRpcServerImpl;
-import me.cathub.change.product.bean.ProductCategory;
+import me.cathub.change.common.bean.product.ProductCategory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

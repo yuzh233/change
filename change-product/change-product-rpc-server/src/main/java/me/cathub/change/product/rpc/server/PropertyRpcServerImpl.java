@@ -4,8 +4,8 @@ import me.cathub.change.api.dao.product.PropertyDao;
 import me.cathub.change.api.rpc.server.product.ProductCategoryRpcServer;
 import me.cathub.change.api.rpc.server.product.PropertyRpcServer;
 import me.cathub.change.common.base.BaseRpcServerImpl;
-import me.cathub.change.product.bean.ProductCategory;
-import me.cathub.change.product.bean.Property;
+import me.cathub.change.common.bean.product.ProductCategory;
+import me.cathub.change.common.bean.product.Property;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

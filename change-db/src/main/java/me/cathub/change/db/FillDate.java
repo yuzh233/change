@@ -7,12 +7,13 @@ import me.cathub.change.api.rpc.server.product.*;
 import me.cathub.change.api.rpc.server.upms.PermissionRpcServer;
 import me.cathub.change.api.rpc.server.upms.RoleRpcServer;
 import me.cathub.change.api.rpc.server.user.*;
+import me.cathub.change.common.bean.product.ProductImage;
 import me.cathub.change.common.tool.HTTPTool;
 import me.cathub.change.common.tool.aliyun.OSSAPI;
 import me.cathub.change.db.bean.Product;
-import me.cathub.change.product.bean.ProductCategory;
-import me.cathub.change.user.bean.BrandQuotient;
-import me.cathub.change.user.bean.Company;
+import me.cathub.change.common.bean.product.ProductCategory;
+import me.cathub.change.common.bean.user.BrandQuotient;
+import me.cathub.change.common.bean.user.Company;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -120,7 +121,7 @@ public class FillDate {
                     }
 
                     // 填充产品数据
-                    me.cathub.change.product.bean.Product p = new me.cathub.change.product.bean.Product();
+                    me.cathub.change.common.bean.product.Product p = new me.cathub.change.common.bean.product.Product();
                     p.setName(name);
                     p.setBrandQuotient(new BrandQuotient(b_id));
                     p.setPrice(price);
@@ -130,10 +131,10 @@ public class FillDate {
                     long p_id = productRpcServer.insert(p);
 
                     // 填充产品图片数据
-                    me.cathub.change.product.bean.ProductImage productImage = new me.cathub.change.product.bean.ProductImage();
-                    productImage.setType(me.cathub.change.product.bean.ProductImage.TYPE_COVER);
+                    ProductImage productImage = new ProductImage();
+                    productImage.setType(ProductImage.TYPE_COVER);
                     productImage.setUrl(OSSAPI.getProductImgUrl(company_name, OSSAPI.getSuffix(image_url)));
-                    productImage.setProduct(new me.cathub.change.product.bean.Product(p_id));
+                    productImage.setProduct(new me.cathub.change.common.bean.product.Product(p_id));
 
                     // 保存图片到OSS
                     OSSAPI.uploadResource(productImage.getUrl(), HTTPTool.getInputStream(image_url));
@@ -177,11 +178,11 @@ public class FillDate {
 
     @Test
     public void testAddImage() throws Exception {
-        me.cathub.change.product.bean.Product product = new me.cathub.change.product.bean.Product();
+        me.cathub.change.common.bean.product.Product product = new me.cathub.change.common.bean.product.Product();
         long insert = productRpcServer.insert(product);
         System.out.println(insert);
-        me.cathub.change.product.bean.ProductImage productImage = new me.cathub.change.product.bean.ProductImage();
-        productImage.setProduct(new me.cathub.change.product.bean.Product(insert));
+        ProductImage productImage = new ProductImage();
+        productImage.setProduct(new me.cathub.change.common.bean.product.Product(insert));
         System.out.println(productImageRpcServer.insert(productImage));
     }
 

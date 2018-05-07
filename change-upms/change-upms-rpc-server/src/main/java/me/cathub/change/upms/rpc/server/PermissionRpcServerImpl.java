@@ -4,8 +4,8 @@ import me.cathub.change.api.dao.upms.PermissionDao;
 import me.cathub.change.api.rpc.server.upms.PermissionRpcServer;
 import me.cathub.change.api.rpc.server.upms.RoleRpcServer;
 import me.cathub.change.common.base.BaseRpcServerImpl;
-import me.cathub.change.upms.bean.Permission;
-import me.cathub.change.upms.bean.Role;
+import me.cathub.change.common.bean.upms.Permission;
+import me.cathub.change.common.bean.upms.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

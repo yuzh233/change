@@ -12,7 +12,6 @@
     <artifactId>change-product</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>change-product-bean</module>
         <module>change-product-dao</module>
         <module>change-product-rpc-server</module>
     </modules>

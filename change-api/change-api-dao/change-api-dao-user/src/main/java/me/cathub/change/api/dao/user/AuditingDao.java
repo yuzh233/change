@@ -1,12 +1,12 @@
 package me.cathub.change.api.dao.user;
 
 import me.cathub.change.common.base.BaseDao;
-import me.cathub.change.user.bean.Auditing;
+import me.cathub.change.common.bean.user.Auditing;
 
 import java.util.List;
 
 public interface AuditingDao extends BaseDao<Auditing> {
-    String NAME_SPACE = "me.cathub.change.user.bean.Auditing";
+    String NAME_SPACE = "Auditing";
 
     String LIST_BY_ADMIN_AND_TYPE = ".listByAdminIdAndUserType";
     String COUNT_BY_ADMIN_AND_TYPE = ".countByAdminIdAndUserType";

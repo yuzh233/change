@@ -1,7 +1,7 @@
 package me.cathub.change.upms.dao;
 
 import me.cathub.change.common.tool.Sequence;
-import me.cathub.change.upms.bean.Role;
+import me.cathub.change.common.bean.upms.Role;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

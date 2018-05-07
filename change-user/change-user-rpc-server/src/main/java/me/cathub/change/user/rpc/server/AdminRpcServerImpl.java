@@ -4,8 +4,8 @@ import me.cathub.change.api.dao.user.AdminDao;
 import me.cathub.change.api.rpc.server.upms.RoleRpcServer;
 import me.cathub.change.api.rpc.server.user.AdminRpcServer;
 import me.cathub.change.common.base.BaseRpcServerImpl;
-import me.cathub.change.upms.bean.Role;
-import me.cathub.change.user.bean.Admin;
+import me.cathub.change.common.bean.upms.Role;
+import me.cathub.change.common.bean.user.Admin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

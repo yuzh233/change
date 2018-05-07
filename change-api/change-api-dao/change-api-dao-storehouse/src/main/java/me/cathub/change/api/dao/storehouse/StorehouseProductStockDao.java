@@ -1,12 +1,12 @@
 package me.cathub.change.api.dao.storehouse;
 
 import me.cathub.change.common.base.BaseDao;
-import me.cathub.change.storehouse.bean.StorehouseProductStock;
+import me.cathub.change.common.bean.storehouse.StorehouseProductStock;
 
 import java.util.List;
 
 public interface StorehouseProductStockDao extends BaseDao<StorehouseProductStock> {
-    String NAME_SPACE = "me.cathub.change.storehouse.bean.StorehouseProductStock";
+    String NAME_SPACE = "StorehouseProductStock";
 
     String SELECT_BY_STOREHOUSE_ID_AND_PRODUCT_ID = ".selectByStorehouseIdAndProductId";
     String LIST_BY_STOREHOUSE_ID = ".listByStorehouseId";
