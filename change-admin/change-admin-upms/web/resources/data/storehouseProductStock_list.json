@@ -1,0 +1,11 @@
+[
+  {
+    "id": 1,
+    "price": 1.12,
+    "stock": 999,
+    "product_name": "钛合金马桶",
+    "storehouse_name": "西部仓",
+    "createDate": "2018-4-18 9:32:11",
+    "updateDate": ""
+  }
+]
