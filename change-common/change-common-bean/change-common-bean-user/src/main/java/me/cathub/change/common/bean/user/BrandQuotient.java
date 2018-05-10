@@ -1,9 +1,13 @@
 package me.cathub.change.common.bean.user;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import me.cathub.change.common.tool.LongJsonSerializer;
+
 /**
  * 品牌商
  */
 public class BrandQuotient extends User {
+    @JsonSerialize(using = LongJsonSerializer.class)
     private long company_id;
 
     private Company company;        // 企业

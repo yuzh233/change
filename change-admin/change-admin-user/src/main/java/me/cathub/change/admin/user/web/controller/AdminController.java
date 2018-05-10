@@ -34,7 +34,14 @@ public class AdminController extends BaseControllerImpl<Admin, AdminRpcServer> {
     @ResponseBody
     @Override
     public int deletes(@RequestParam("ids[]")long[] ids, @RequestParam(value = "del_flag",required = false)boolean del_flag) throws Exception {
-        return rpcService.deletes(ids, new Admin(), del_flag);
+//        Admin bean = null;
+//        for (long id : ids) {
+//            bean = new Admin();
+//            bean.setId(id);
+//            rpcService.deleteL(bean);//逻辑删除
+//        }
+//        return 0;
+        return rpcService.deletes(ids, new Admin(), !del_flag);
     }
 
     @Override

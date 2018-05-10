@@ -19,7 +19,7 @@
 <div id="main">
 	<div id="toolbar">
 		<a class="waves-effect waves-button" href="javascript:;" onclick="createAction()"><i class="zmdi zmdi-plus"></i> 申请入驻</a>
-		<a class="waves-effect waves-button" href="javascript:;" onclick="deleteAction()"><i class="zmdi zmdi-close"></i> 删除申请</a>
+		<a class="waves-effect waves-button" href="javascript:;" onclick="deleteAction()"><i class="zmdi zmdi-close"></i> 批量删除</a>
 	</div>
 	<table id="table"></table>
 </div>
@@ -28,11 +28,11 @@
 	<form class="createForm">
 		<div class="form-group">
 			<label for="create-username">账户</label>
-			<input id="create-username" type="text" class="form-control">
+			<input id="create-username" type="text" class="form-control" name="user.id">
 		</div>
 		<div class="form-group">
-			<label for="create-type">类型（品牌商1/借卖方0）</label>
-			<input id="create-type" type="text" class="form-control">
+			<label for="create-type">类型（品牌商1/借卖方2）</label>
+			<input id="create-type" type="text" class="form-control" name="type">
 		</div>
 	</form>
 </div>
@@ -43,7 +43,7 @@
 		<p style="color: darkgray"> - 未审核0 / 审核中-1 / 审核通过1 - </p>
         <div class="form-group">
             <label for="update-status">审核状态</label>
-            <input id="update-status" type="text" class="form-control">
+            <input id="update-status" type="text" class="form-control update-status">
         </div>
     </form>
 </div>
@@ -97,6 +97,7 @@ $(function() {
 		idField: 'systemId',
 		maintainSelected: true,
 		toolbar: '#toolbar',
+        queryParamsType: "undefined",
         pageNumber: 1, // 页码，点击上下页自动更改值
         pageSize: 15,  // 页大小，点击大小自动更改值
         queryParams: function queryParams(params) {
@@ -111,7 +112,8 @@ $(function() {
 			{field: 'state', checkbox: true},
 			{field: 'id', title: '编号', sortable: true, halign: 'left'},
 			{field: 'type', title: '账户类型', sortable: true, halign: 'left'},
-			{field: 'user.name', title: '账户', sortable: true, halign: 'left'},
+			{field: 'user.username', title: '账户', sortable: true, halign: 'left'},
+			{field: 'user.name', title: '真实姓名', sortable: true, halign: 'left'},
 			{field: 'auditSubmitDate', title: '申请时间', sortable: true, halign: 'left'},
 			{field: 'auditAllowDate', title: '批准时间', sortable: true, halign: 'left'},
 			{field: 'admin.name', title: '经手人', sortable: true, halign: 'left'},
@@ -167,8 +169,13 @@ function createAction() {
                         contentType: "application/x-www-form-urlencoded",
                         dataType: "json",
                         data: $(".createForm:last").serialize(), //传递表单值
-                        success: function () {
-                            $table.bootstrapTable('refresh'); //刷新表格
+                        success: function (flag) {
+                            if(!flag){
+                                alert("账户不存在！");
+                                return false
+							}else {
+                                $table.bootstrapTable('refresh'); //刷新表格
+                            }
                         }
                     });
 				}

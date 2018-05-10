@@ -27,13 +27,7 @@ public class CompanyController extends BaseControllerImpl<Company, CompanyRpcSer
     @Override
     public int deletes(@RequestParam("ids[]")long[] ids, @RequestParam(value = "del_flag",required = false)boolean del_flag)
             throws Exception {
-        for (long id : ids) {
-            Company bean = new Company();
-            bean.setId(id);
-            bean = rpcService.select(bean,true);
-            rpcService.deleteL(bean);//逻辑删除
-        }
-        return 0;
+        return rpcService.deletes(ids, new Company(), !del_flag);
     }
 
     @Override

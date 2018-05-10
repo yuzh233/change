@@ -22,7 +22,7 @@ public class OnlineStoreController extends BaseControllerImpl<OnlineStore, Onlin
     @ResponseBody
     @Override
     public int deletes(@RequestParam("ids[]") long[] ids, @RequestParam(value = "del_flag", required = false)boolean del_flag) throws Exception {
-       return rpcService.deletes(ids, new OnlineStore(), del_flag);
+        return rpcService.deletes(ids, new OnlineStore(), !del_flag);
     }
 
     @Override

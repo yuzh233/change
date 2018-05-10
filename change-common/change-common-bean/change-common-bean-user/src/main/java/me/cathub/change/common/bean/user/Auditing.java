@@ -1,5 +1,9 @@
 package me.cathub.change.common.bean.user;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import me.cathub.change.common.tool.LongJsonSerializer;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -7,11 +11,14 @@ import java.util.Date;
  * 审核
  */
 public class Auditing implements Serializable {
-    public static final int TYPE_BRAND_QUOTIENT = 1;
-    public static final int TYPE_SHOPKEEPER = 2;
+    public static final int TYPE_BRAND_QUOTIENT = 1;  //品牌商申请入驻
+    public static final int TYPE_SHOPKEEPER = 2;      //店主申请入驻
 
+    @JsonSerialize(using = LongJsonSerializer.class)
     private long id;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date auditSubmitDate;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date auditAllowDate;
     private int type;
     private int status;

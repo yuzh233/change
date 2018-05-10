@@ -1,6 +1,9 @@
 package me.cathub.change.common.bean.product;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import me.cathub.change.common.bean.user.Shopkeeper;
+import me.cathub.change.common.tool.LongJsonSerializer;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -9,9 +12,12 @@ import java.util.Date;
  * 产品评论
  */
 public class ProductReview implements Serializable {
+    @JsonSerialize(using = LongJsonSerializer.class)
     private long id;
     private String content;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createDate;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date updateDate;
     private int tableIndex;
 

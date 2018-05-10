@@ -20,6 +20,9 @@
 
         <result property="shopkeeper_id" column="shopkeeper_id"/>
     </resultMap>
+<!--    <resultMap id="onlineStore_Shopkeeper" type="onlineStore" extends="onlineStore">
+        <association property="shopkeeper" resultMap="Shopkeeper.shopkeeper"></association>
+    </resultMap>-->
 
     <insert id="insert" parameterType="onlineStore">
         INSERT INTO onlineStore_${tableIndex} (
@@ -64,7 +67,8 @@
     <update id="update" parameterType="onlineStore">
         UPDATE onlineStore_${tableIndex} SET
           url=#{url, jdbcType=VARCHAR},
-          updateDate=NOW()
+          updateDate=NOW(),
+          type=#{type, jdbcType=BIGINT}
         WHERE
           id=#{id, jdbcType=BIGINT}
         and

@@ -1,6 +1,8 @@
 package me.cathub.change.common.bean.user;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import me.cathub.change.common.tool.LongJsonSerializer;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -9,13 +11,16 @@ import java.util.Date;
  * 企业
  */
 public class Company implements Serializable {
+    @JsonSerialize(using = LongJsonSerializer.class)
     private long id;
     private String name;
     private String service;
     private String address;
     private String phone;
     private String email;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createDate;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date updateDate;
     private int tableIndex;
 

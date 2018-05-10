@@ -1,8 +1,10 @@
 package me.cathub.change.common.bean.product;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import me.cathub.change.common.bean.user.BrandQuotient;
 import me.cathub.change.common.bean.user.Company;
+import me.cathub.change.common.tool.LongJsonSerializer;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -14,6 +16,7 @@ public class Product implements Serializable {
     public static final int STATUS_PRESELL = 0;         // 运输中, 国内发货 国外仓库未收到货 可预售
     public static final int STATUS_IN_STOCK = 1;        // 国外仓收到货 可正常借卖
 
+    @JsonSerialize(using = LongJsonSerializer.class)
     private long id;
     private String name;
     private String subTitle;

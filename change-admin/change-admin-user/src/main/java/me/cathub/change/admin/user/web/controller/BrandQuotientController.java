@@ -30,13 +30,7 @@ public class BrandQuotientController extends BaseControllerImpl<BrandQuotient, B
     @Override
     public int deletes(@RequestParam("ids[]") long[] ids, @RequestParam(value = "del_flag", required = false) boolean del_flag)
             throws Exception {
-        for (long id : ids) {
-            BrandQuotient bean = new BrandQuotient();
-            bean.setId(id);
-            bean = rpcService.select(bean, true);
-            rpcService.deleteL(bean);//逻辑删除
-        }
-        return 0;
+        return rpcService.deletes(ids, new BrandQuotient(), !del_flag);
     }
 
     @Override
@@ -47,10 +41,11 @@ public class BrandQuotientController extends BaseControllerImpl<BrandQuotient, B
     @ModelAttribute
     @Override
     public void update_modelAttribute(@RequestParam(value = "id", required = false) Long id, Map<String, Object> map) throws Exception {
+        BrandQuotient bean = null;
         if (id != null) {
-            BrandQuotient bean = new BrandQuotient();
+            bean = new BrandQuotient();
             bean.setId(id);
-            bean = select(bean);
+//            bean = select(bean);
             Company company = companyRpcServer.select(new Company(bean.getCompany_id()), true);
             bean.setCompany(company);
             map.put("brandQuotient", bean);
