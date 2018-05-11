@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>change-common-bean</artifactId>
+    <packaging>pom</packaging>
 
     <modules>
         <module>change-common-bean-upms</module>

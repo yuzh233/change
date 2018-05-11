@@ -1,3 +1,5 @@
+package me.cathub.change.storehouse.rpc.server;
+
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class OpenStorehouseServer {

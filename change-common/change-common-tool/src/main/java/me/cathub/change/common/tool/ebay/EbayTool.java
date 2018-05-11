@@ -40,7 +40,7 @@ public class EbayTool {
         ItemType item = new ItemType();
 
         // 项目标题
-        item.setTitle("change_product_test_1");
+        item.setTitle("change_product_test_2");
 
         // 画廊图片
         String[] paths = {"http://www.dilianidc.com/templets/twang/images/tw_11.jpg","http://www.dilianidc.com/templets/twang/images/tw_20.jpg"};

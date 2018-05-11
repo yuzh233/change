@@ -3,9 +3,11 @@ package me.cathub.change.product.rpc.server;
 import me.cathub.change.api.dao.product.ProductReviewDao;
 import me.cathub.change.api.rpc.server.product.ProductReviewRpcServer;
 import me.cathub.change.api.rpc.server.product.ProductRpcServer;
+import me.cathub.change.api.rpc.server.user.ShopkeeperRpcServer;
 import me.cathub.change.common.base.BaseRpcServerImpl;
 import me.cathub.change.common.bean.product.Product;
 import me.cathub.change.common.bean.product.ProductReview;
+import me.cathub.change.common.bean.user.Shopkeeper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -16,6 +18,9 @@ public class ProductReviewRpcServerImpl extends BaseRpcServerImpl<ProductReview,
 
     @Autowired
     private ProductRpcServer productRpcServer;
+
+    @Autowired
+    private ShopkeeperRpcServer shopkeeperRpcServer;
 
     @Override
     public List<ProductReview> listByProductId(long product_id, int page, int count, int tableIndex, boolean flag) throws Exception {
@@ -36,8 +41,10 @@ public class ProductReviewRpcServerImpl extends BaseRpcServerImpl<ProductReview,
     public ProductReview fill(ProductReview bean) {
         try {
             Product product = productRpcServer.select(new Product(bean.getProduct_id()), true);
+            Shopkeeper shopkeeper = shopkeeperRpcServer.select(new Shopkeeper(bean.getShopkeeper_id()), true);
 
             bean.setProduct(product);
+            bean.setShopkeeper(shopkeeper);
         } catch (Exception e) {
             e.printStackTrace();
         }
