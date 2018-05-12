@@ -118,5 +118,10 @@
             <artifactId>javassist</artifactId>
             <version>3.18.2-GA</version>
         </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>RELEASE</version>
+        </dependency>
     </dependencies>
 </project>

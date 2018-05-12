@@ -41,6 +41,8 @@
           #{price, jdbcType=FLOAT},
           #{product.id, jdbcType=BIGINT},
           #{storehouse.id, jdbcType=BIGINT},
+          #{productCategory.id, jdbcType=BIGINT},
+          #{company.id, jdbcType=BIGINT},
           NOW(),
           1
         )
