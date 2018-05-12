@@ -1,3 +1,5 @@
+package me.cathub.change.order.rpc.server;
+
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class OpenOrderServer {

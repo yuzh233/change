@@ -42,7 +42,7 @@ public class PropertyValueRpcServerImpl extends BaseRpcServerImpl<PropertyValue,
     @Override
     public PropertyValue fill(PropertyValue bean) {
         try {
-            Property property = propertyRpcServer.select(new Property(bean.getProduct_id()), true);
+            Property property = propertyRpcServer.select(new Property(bean.getProperty_id()), true);
             Product product = productRpcServer.select(new Product(bean.getProduct_id()), true);
 
             bean.setProperty(property);

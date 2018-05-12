@@ -32,4 +32,5 @@
     <bean id="propertyValueRpcServer" class="me.cathub.change.product.rpc.server.PropertyValueRpcServerImpl"/>
 
     <dubbo:reference id="brandQuotientRpcServer" interface="me.cathub.change.api.rpc.server.user.BrandQuotientRpcServer" />
+    <dubbo:reference id="shopkeeperRpcServer" interface="me.cathub.change.api.rpc.server.user.ShopkeeperRpcServer" />
 </beans>
