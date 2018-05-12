@@ -89,6 +89,6 @@
     </delete>
 
     <select id="selectByName" parameterType="map" resultMap="storehouseCountry">
-        SELECT * FROM storehouseCountry_${tableIndex} WHERE id=#{id, jdbcType=BIGINT} AND name=#{name, jdbcType=VARCHAR} AND yn=1
+        SELECT * FROM storehouseCountry_${tableIndex} WHERE name=#{name, jdbcType=VARCHAR} AND yn=1
     </select>
 </mapper>

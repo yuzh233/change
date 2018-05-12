@@ -17,8 +17,8 @@ public class ShopkeeperRpcServerImpl extends BaseRpcServerImpl<Shopkeeper, Shopk
     private RoleRpcServer roleRpcServer;
 
     @Override
-    public Shopkeeper selectByName(String name, int tableIndex) throws Exception {
-        if (false)
+    public Shopkeeper selectByName(String name, int tableIndex, boolean flag) throws Exception {
+        if (flag)
             return dao.selectByName(name, tableIndex);
         else
             return fill(dao.selectByName(name, tableIndex));
