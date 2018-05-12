@@ -11,8 +11,17 @@ import java.util.Date;
  * 仓库产品库存
  */
 public class StorehouseProductStock implements Serializable {
+
     private long id;
+
+    /**
+     * 库存量
+     */
     private int stock;
+
+    /**
+     * 价格
+     */
     private float price;
     private Date createDate;
     private Date updateDate;
@@ -23,10 +32,32 @@ public class StorehouseProductStock implements Serializable {
     private long productCategory_id;
     private long company_id;
 
+    /**
+     * 哪个仓库?
+     */
     private Storehouse storehouse;
+
+    /**
+     * 哪个产品?
+     */
     private Product product;
+
+    /**
+     * 产品所属分类
+     */
     private ProductCategory productCategory;
+
+    /**
+     * 产品所属企业
+     */
     private Company company;
+
+    public StorehouseProductStock() {
+    }
+
+    public StorehouseProductStock(long id) {
+        this.id = id;
+    }
 
     public long getProductCategory_id() {
         return productCategory_id;
@@ -142,17 +173,22 @@ public class StorehouseProductStock implements Serializable {
 
     @Override
     public String toString() {
-        return "StorehouseProductStock{" +
-                "id=" + id +
-                ", stock=" + stock +
-                ", price=" + price +
-                ", createDate=" + createDate +
-                ", updateDate=" + updateDate +
-                ", tableIndex=" + tableIndex +
-                ", product_id=" + product_id +
-                ", storehouse_id=" + storehouse_id +
-                ", product=" + product +
-                ", storehouse=" + storehouse +
-                '}';
+        final StringBuilder sb = new StringBuilder("StorehouseProductStock{");
+        sb.append("id=").append(id);
+        sb.append(", stock=").append(stock);
+        sb.append(", price=").append(price);
+        sb.append(", createDate=").append(createDate);
+        sb.append(", updateDate=").append(updateDate);
+        sb.append(", tableIndex=").append(tableIndex);
+        sb.append(", product_id=").append(product_id);
+        sb.append(", storehouse_id=").append(storehouse_id);
+        sb.append(", productCategory_id=").append(productCategory_id);
+        sb.append(", company_id=").append(company_id);
+        sb.append(", storehouse=").append(storehouse);
+        sb.append(", product=").append(product);
+        sb.append(", productCategory=").append(productCategory);
+        sb.append(", company=").append(company);
+        sb.append('}');
+        return sb.toString();
     }
 }

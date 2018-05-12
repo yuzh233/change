@@ -11,13 +11,29 @@ import java.util.Date;
  * 产品
  */
 public class Product implements Serializable {
-    public static final int STATUS_PRESELL = 0;         // 运输中, 国内发货 国外仓库未收到货 可预售
-    public static final int STATUS_IN_STOCK = 1;        // 国外仓收到货 可正常借卖
+
+    /**
+     * 状态为:运输中, 国内发货 国外仓库未收到货 可预售
+     */
+    public static final int STATUS_PRE_SELL = 0;
+
+    /**
+     * 状态为:国外仓收到货 可正常借卖
+     */
+    public static final int STATUS_IN_STOCK = 1;
 
     private long id;
     private String name;
+
+    /**
+     * 小标题
+     */
     private String subTitle;
     private float price;
+
+    /**
+     * 描述(存放富文本渲染后的HTML代码)
+     */
     private String description;
     private int status;
     @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss",timezone = "GMT+8")
@@ -30,27 +46,30 @@ public class Product implements Serializable {
     private long company_id;
     private long brandQuotient_id;
 
+    /**
+     * 属于哪个分类?
+     */
     private ProductCategory productCategory;
+
+    /**
+     * 属于哪个企业?
+     */
     private Company company;
+
+    /**
+     * 企业哪个账户发布的?
+     */
     private BrandQuotient brandQuotient;
+
+    public Product() {
+    }
 
     public long getProductCategory_id() {
         return productCategory_id;
     }
 
-    public Product() {
-    }
-
     public Product(long id) {
         this.id = id;
-    }
-
-    public static int getStatusPresell() {
-        return STATUS_PRESELL;
-    }
-
-    public static int getStatusInStock() {
-        return STATUS_IN_STOCK;
     }
 
     public long getCompany_id() {
@@ -171,22 +190,23 @@ public class Product implements Serializable {
 
     @Override
     public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", subTitle='" + subTitle + '\'' +
-                ", price=" + price +
-                ", description='" + description + '\'' +
-                ", status=" + status +
-                ", createDate=" + createDate +
-                ", updateDate=" + updateDate +
-                ", tableIndex=" + tableIndex +
-                ", productCategory_id=" + productCategory_id +
-                ", company_id=" + company_id +
-                ", brandQuotient_id=" + brandQuotient_id +
-                ", productCategory=" + productCategory +
-                ", company=" + company +
-                ", brandQuotient=" + brandQuotient +
-                '}';
+        final StringBuilder sb = new StringBuilder("Product{");
+        sb.append("id=").append(id);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", subTitle='").append(subTitle).append('\'');
+        sb.append(", price=").append(price);
+        sb.append(", description='").append(description).append('\'');
+        sb.append(", status=").append(status);
+        sb.append(", createDate=").append(createDate);
+        sb.append(", updateDate=").append(updateDate);
+        sb.append(", tableIndex=").append(tableIndex);
+        sb.append(", productCategory_id=").append(productCategory_id);
+        sb.append(", company_id=").append(company_id);
+        sb.append(", brandQuotient_id=").append(brandQuotient_id);
+        sb.append(", productCategory=").append(productCategory);
+        sb.append(", company=").append(company);
+        sb.append(", brandQuotient=").append(brandQuotient);
+        sb.append('}');
+        return sb.toString();
     }
 }

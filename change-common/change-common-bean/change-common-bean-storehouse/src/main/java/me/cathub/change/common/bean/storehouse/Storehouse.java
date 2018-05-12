@@ -7,9 +7,18 @@ import java.util.Date;
  * 仓库
  */
 public class Storehouse implements Serializable {
+
     private long id;
     private String name;
+
+    /**
+     * 仓库地址
+     */
     private String address;
+
+    /**
+     * 仓库描述
+     */
     private String description;
     private Date createDate;
     private Date updateDate;
@@ -17,6 +26,9 @@ public class Storehouse implements Serializable {
 
     private long storehouseCountry_id;
 
+    /**
+     * 哪个国家的仓库?
+     */
     private StorehouseCountry storehouseCountry;
 
     public Storehouse() {
@@ -100,16 +112,17 @@ public class Storehouse implements Serializable {
 
     @Override
     public String toString() {
-        return "Storehouse{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                ", description='" + description + '\'' +
-                ", createDate=" + createDate +
-                ", updateDate=" + updateDate +
-                ", tableIndex=" + tableIndex +
-                ", storehouseCountry_id=" + storehouseCountry_id +
-                ", storehouseCountry=" + storehouseCountry +
-                '}';
+        final StringBuilder sb = new StringBuilder("Storehouse{");
+        sb.append("id=").append(id);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", address='").append(address).append('\'');
+        sb.append(", description='").append(description).append('\'');
+        sb.append(", createDate=").append(createDate);
+        sb.append(", updateDate=").append(updateDate);
+        sb.append(", tableIndex=").append(tableIndex);
+        sb.append(", storehouseCountry_id=").append(storehouseCountry_id);
+        sb.append(", storehouseCountry=").append(storehouseCountry);
+        sb.append('}');
+        return sb.toString();
     }
 }

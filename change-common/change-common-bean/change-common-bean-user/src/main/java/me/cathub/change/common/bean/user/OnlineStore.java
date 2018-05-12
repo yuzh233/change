@@ -7,18 +7,22 @@ import java.util.Date;
  * 网店
  */
 public class OnlineStore implements Serializable {
+
     /**
-     * eBay
+     * 网店类型为:ebay
      */
     public static final int TYPE_EBAY = 1;
 
     /**
-     * Amazon
+     * 网店类型为:amazon
      */
     public static final int TYPE_AMAZON = 2;
 
-
     private long id;
+
+    /**
+     * 网店地址
+     */
     private String url;
     private Date createDate;
     private Date updateDate;
@@ -27,6 +31,9 @@ public class OnlineStore implements Serializable {
 
     private long shopkeeper_id;
 
+    /**
+     * 所属店主
+     */
     private Shopkeeper shopkeeper;
 
     public OnlineStore() {
@@ -102,15 +109,16 @@ public class OnlineStore implements Serializable {
 
     @Override
     public String toString() {
-        return "OnlineStore{" +
-                "id=" + id +
-                ", url='" + url + '\'' +
-                ", createDate=" + createDate +
-                ", updateDate=" + updateDate +
-                ", type=" + type +
-                ", tableIndex=" + tableIndex +
-                ", shopkeeper_id=" + shopkeeper_id +
-                ", shopkeeper=" + shopkeeper +
-                '}';
+        final StringBuilder sb = new StringBuilder("OnlineStore{");
+        sb.append("id=").append(id);
+        sb.append(", url='").append(url).append('\'');
+        sb.append(", createDate=").append(createDate);
+        sb.append(", updateDate=").append(updateDate);
+        sb.append(", type=").append(type);
+        sb.append(", tableIndex=").append(tableIndex);
+        sb.append(", shopkeeper_id=").append(shopkeeper_id);
+        sb.append(", shopkeeper=").append(shopkeeper);
+        sb.append('}');
+        return sb.toString();
     }
 }

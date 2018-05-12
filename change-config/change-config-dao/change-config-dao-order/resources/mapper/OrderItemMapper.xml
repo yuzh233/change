@@ -16,6 +16,7 @@
         <result property="unitPrice" column="unitPrice"/>
         <result property="count" column="count"/>
         <result property="totalPrice" column="totalPrice"/>
+        <result property="itemId" column="itemId"/>
 
         <result property="product_id" column="product_id"/>
         <result property="order_id" column="order_id"/>
@@ -27,6 +28,7 @@
           unitPrice,
           count,
           totalPrice,
+          itemId,
           product_id,
           order_id,
           createDate,
@@ -36,6 +38,7 @@
           #{unitPrice, jdbcType=FLOAT},
           #{count, jdbcType=INTEGER},
           #{totalPrice, jdbcType=FLOAT},
+          #{itemId, jdbcType=BIGINT},
           #{product.id, jdbcType=BIGINT},
           #{order.id, jdbcType=BIGINT},
           NOW(),
@@ -68,6 +71,7 @@
     <update id="update" parameterType="orderItem">
         UPDATE orderItem_${tableIndex} SET
           totalPrice=#{totalPrice, jdbcType=FLOAT},
+          itemId=#{itemId, jdbcType=BIGINT},
           updateDate=NOW()
         WHERE
           id=#{id, jdbcType=BIGINT}

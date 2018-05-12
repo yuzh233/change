@@ -16,8 +16,22 @@ public class PropertyValue implements Serializable {
     private long property_id;
     private long product_id;
 
+    /**
+     * 哪个属性的值?
+     */
     private Property property;
+
+    /**
+     * 属于哪个产品?
+     */
     private Product product;
+
+    public PropertyValue() {
+    }
+
+    public PropertyValue(long id) {
+        this.id = id;
+    }
 
     public long getProperty_id() {
         return property_id;
@@ -93,16 +107,17 @@ public class PropertyValue implements Serializable {
 
     @Override
     public String toString() {
-        return "PropertyValue{" +
-                "id=" + id +
-                ", value='" + value + '\'' +
-                ", createDate=" + createDate +
-                ", updateDate=" + updateDate +
-                ", tableIndex=" + tableIndex +
-                ", property_id=" + property_id +
-                ", product_id=" + product_id +
-                ", property=" + property +
-                ", product=" + product +
-                '}';
+        final StringBuilder sb = new StringBuilder("PropertyValue{");
+        sb.append("id=").append(id);
+        sb.append(", value='").append(value).append('\'');
+        sb.append(", createDate=").append(createDate);
+        sb.append(", updateDate=").append(updateDate);
+        sb.append(", tableIndex=").append(tableIndex);
+        sb.append(", property_id=").append(property_id);
+        sb.append(", product_id=").append(product_id);
+        sb.append(", property=").append(property);
+        sb.append(", product=").append(product);
+        sb.append('}');
+        return sb.toString();
     }
 }

@@ -8,23 +8,49 @@ import java.io.Serializable;
  * 订单项
  */
 public class OrderItem implements Serializable {
+
     private long id;
+
+    /**
+     * 单价
+     */
     private float unitPrice;
+
+    /**
+     * 数量
+     */
     private int count;
+
+    /**
+     * 总价
+     */
     private float totalPrice;
+
+    /**
+     * 第三方平台返回的item Id
+     */
+    private float itemId;
     private int tableIndex;
 
     private long product_id;
     private long order_id;
 
-    private Product product;
-    private Order order;
+    private Product product;    // 买的哪个产品?
+    private Order order;        // 属于哪个总订单?
+
+    public OrderItem() {
+    }
 
     public OrderItem(long id) {
         this.id = id;
     }
 
-    public OrderItem() {
+    public float getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(float itemId) {
+        this.itemId = itemId;
     }
 
     public long getProduct_id() {
@@ -101,16 +127,18 @@ public class OrderItem implements Serializable {
 
     @Override
     public String toString() {
-        return "OrderItem{" +
-                "id=" + id +
-                ", unitPrice=" + unitPrice +
-                ", count=" + count +
-                ", totalPrice=" + totalPrice +
-                ", tableIndex=" + tableIndex +
-                ", product_id=" + product_id +
-                ", order_id=" + order_id +
-                ", product=" + product +
-                ", order=" + order +
-                '}';
+        final StringBuilder sb = new StringBuilder("OrderItem{");
+        sb.append("id=").append(id);
+        sb.append(", unitPrice=").append(unitPrice);
+        sb.append(", count=").append(count);
+        sb.append(", totalPrice=").append(totalPrice);
+        sb.append(", itemId=").append(itemId);
+        sb.append(", tableIndex=").append(tableIndex);
+        sb.append(", product_id=").append(product_id);
+        sb.append(", order_id=").append(order_id);
+        sb.append(", product=").append(product);
+        sb.append(", order=").append(order);
+        sb.append('}');
+        return sb.toString();
     }
 }

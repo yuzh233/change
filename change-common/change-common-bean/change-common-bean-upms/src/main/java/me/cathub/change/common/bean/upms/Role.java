@@ -62,12 +62,13 @@ public class Role implements Serializable {
 
     @Override
     public String toString() {
-        return "Role{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", createDate=" + createDate +
-                ", updateDate=" + updateDate +
-                ", tableIndex=" + tableIndex +
-                '}';
+        final StringBuilder sb = new StringBuilder("Role{");
+        sb.append("id=").append(id);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", createDate=").append(createDate);
+        sb.append(", updateDate=").append(updateDate);
+        sb.append(", tableIndex=").append(tableIndex);
+        sb.append('}');
+        return sb.toString();
     }
 }

@@ -7,15 +7,23 @@ import java.util.Date;
  * 产品分类
  */
 public class ProductCategory implements Serializable {
+
     private long id;
     private String name;
-    private int storey;         // 所属层数
+
+    /**
+     * 所在层数
+     */
+    private int storey;
     private Date createDate;
     private Date updateDate;
     private int tableIndex;
 
-    private long parent_id;     // 父级分类
+    private long parent_id;
 
+    /**
+     * 父级分类
+     */
     private ProductCategory parent;
 
     public ProductCategory() {
@@ -91,15 +99,16 @@ public class ProductCategory implements Serializable {
 
     @Override
     public String toString() {
-        return "ProductCategory{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", storey=" + storey +
-                ", createDate=" + createDate +
-                ", updateDate=" + updateDate +
-                ", tableIndex=" + tableIndex +
-                ", parent_id=" + parent_id +
-                ", parent=" + parent +
-                '}';
+        final StringBuilder sb = new StringBuilder("ProductCategory{");
+        sb.append("id=").append(id);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", storey=").append(storey);
+        sb.append(", createDate=").append(createDate);
+        sb.append(", updateDate=").append(updateDate);
+        sb.append(", tableIndex=").append(tableIndex);
+        sb.append(", parent_id=").append(parent_id);
+        sb.append(", parent=").append(parent);
+        sb.append('}');
+        return sb.toString();
     }
 }

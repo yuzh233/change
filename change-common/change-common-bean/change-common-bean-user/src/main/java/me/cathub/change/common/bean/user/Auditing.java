@@ -4,23 +4,63 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 审核
+ * 入驻审核
  */
 public class Auditing implements Serializable {
+
+    /**
+     * 审核的用户类型为:品牌商
+     */
     public static final int TYPE_BRAND_QUOTIENT = 1;
+
+    /**
+     * 审核的用户类型为:借卖方
+     */
     public static final int TYPE_SHOPKEEPER = 2;
+
+    /**
+     * 状态为:没有管理员在处理审核
+     */
+    public static final int STATUS_NO_AUDIT = 0;
+
+    /**
+     * 状态为:管理员正在处理审核
+     */
+    public static final int STATUS_IN_THE_AUDIT = 1;
+
+    /**
+     * 状态为:审核通过
+     */
+    public static final int STATUS_ALLOW = 2;
+
+    /**
+     * 状态为:审核不通过
+     */
+    public static final int STATUS_NOT_ALLOW = 3;
 
     private long id;
     private Date auditSubmitDate;
     private Date auditAllowDate;
     private int type;
     private int status;
+
+    /**
+     * 审核不通过的原因
+     */
+    private String notAllowMessage;
     private int tableIndex;
 
     private long user_id;
     private long admin_id;
 
+    /**
+     * 谁发起入驻申请的?
+     */
     private User user;
+
+    /**
+     * 谁处理的这个申请?
+     */
     private Admin admin;
 
     public Auditing() {
@@ -28,6 +68,14 @@ public class Auditing implements Serializable {
 
     public Auditing(long id) {
         this.id = id;
+    }
+
+    public String getNotAllowMessage() {
+        return notAllowMessage;
+    }
+
+    public void setNotAllowMessage(String notAllowMessage) {
+        this.notAllowMessage = notAllowMessage;
     }
 
     public int getStatus() {
@@ -118,6 +166,7 @@ public class Auditing implements Serializable {
                 ", auditAllowDate=" + auditAllowDate +
                 ", type=" + type +
                 ", status=" + status +
+                ", notAllowMessage='" + notAllowMessage + '\'' +
                 ", tableIndex=" + tableIndex +
                 ", user_id=" + user_id +
                 ", admin_id=" + admin_id +

@@ -17,6 +17,7 @@
         <result property="auditAllowDate" column="auditAllowDate"/>
         <result property="type" column="type"/>
         <result property="status" column="status"/>
+        <result property="notAllowMessage" column="notAllowMessage"/>
 
         <result property="admin_id" column="admin_id"/>
         <result property="user_id" column="user_id"/>
@@ -27,6 +28,7 @@
           id,
           type,
           status,
+          notAllowMessage,
           user_id,
           auditSubmitDate,
           yn
@@ -34,6 +36,7 @@
           #{id, jdbcType=BIGINT},
           #{type, jdbcType=INTEGER},
           #{status, jdbcType=INTEGER},
+          #{notAllowMessage, jdbcType=VARCHAR},
           #{user.id, jdbcType=BIGINT},
           now(),
           1
@@ -66,6 +69,7 @@
         UPDATE auditing_${tableIndex} SET
           auditAllowDate=#{auditAllowDate, jdbcType=TIMESTAMP},
           status=#{status, jdbcType=INTEGER},
+          notAllowMessage=#{notAllowMessage, jdbcType=VARCHAR},
           admin_id=#{admin.id, jdbcType=BIGINT}
         WHERE
           id=#{id, jdbcType=BIGINT}

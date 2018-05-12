@@ -9,6 +9,7 @@ import java.util.Date;
  * 产品评论
  */
 public class ProductReview implements Serializable {
+
     private long id;
     private String content;
     private Date createDate;
@@ -18,8 +19,22 @@ public class ProductReview implements Serializable {
     private long shopkeeper_id;
     private long product_id;
 
+    /**
+     * 谁评论的?
+     */
     private Shopkeeper shopkeeper;
+
+    /**
+     * 评论的哪个产品?
+     */
     private Product product;
+
+    public ProductReview() {
+    }
+
+    public ProductReview(long id) {
+        this.id = id;
+    }
 
     public long getShopkeeper_id() {
         return shopkeeper_id;
@@ -95,16 +110,17 @@ public class ProductReview implements Serializable {
 
     @Override
     public String toString() {
-        return "ProductReview{" +
-                "id=" + id +
-                ", content='" + content + '\'' +
-                ", createDate=" + createDate +
-                ", updateDate=" + updateDate +
-                ", tableIndex=" + tableIndex +
-                ", shopkeeper_id=" + shopkeeper_id +
-                ", product_id=" + product_id +
-                ", shopkeeper=" + shopkeeper +
-                ", product=" + product +
-                '}';
+        final StringBuilder sb = new StringBuilder("ProductReview{");
+        sb.append("id=").append(id);
+        sb.append(", content='").append(content).append('\'');
+        sb.append(", createDate=").append(createDate);
+        sb.append(", updateDate=").append(updateDate);
+        sb.append(", tableIndex=").append(tableIndex);
+        sb.append(", shopkeeper_id=").append(shopkeeper_id);
+        sb.append(", product_id=").append(product_id);
+        sb.append(", shopkeeper=").append(shopkeeper);
+        sb.append(", product=").append(product);
+        sb.append('}');
+        return sb.toString();
     }
 }
