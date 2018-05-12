@@ -40,6 +40,14 @@ public class PropertyRpcServerImpl extends BaseRpcServerImpl<Property, PropertyD
     }
 
     @Override
+    public Property selectByNameAndProductCategory(String name, long productCategory_id, int tableIndex, boolean flag) throws Exception {
+        if (flag)
+            return dao.selectByNameAndProductCategory(name, productCategory_id, tableIndex);
+        else
+            return fill(dao.selectByNameAndProductCategory(name, productCategory_id, tableIndex));
+    }
+
+    @Override
     public Property fill(Property bean) {
         try {
             ProductCategory productCategory = productCategoryRpcServer.select(new ProductCategory(bean.getProductCategory_id()), true);

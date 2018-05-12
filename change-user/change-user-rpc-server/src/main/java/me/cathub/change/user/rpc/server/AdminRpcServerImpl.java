@@ -21,7 +21,7 @@ public class AdminRpcServerImpl extends BaseRpcServerImpl<Admin, AdminDao> imple
         if (flag)
             return dao.selectByName(name, tableIndex);
         else
-            return dao.selectByName(name, tableIndex);
+            return fill(dao.selectByName(name, tableIndex));
     }
 
     @Override

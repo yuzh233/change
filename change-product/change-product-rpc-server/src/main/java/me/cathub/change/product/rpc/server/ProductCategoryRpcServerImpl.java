@@ -13,7 +13,10 @@ public class ProductCategoryRpcServerImpl extends BaseRpcServerImpl<ProductCateg
 
     @Override
     public ProductCategory selectByName(String name, int tableIndex, boolean flag) throws Exception {
+        if (flag)
             return dao.selectByName(name, tableIndex);
+        else
+            return fill(dao.selectByName(name, tableIndex));
     }
 
     @Override

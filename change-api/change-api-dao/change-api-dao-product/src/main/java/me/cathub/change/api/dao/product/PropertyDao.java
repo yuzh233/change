@@ -12,6 +12,7 @@ public interface PropertyDao extends BaseDao<Property>, DaoSelectByName<Property
 
     String LIST_BY_PRODUCT_CATEGORY_ID = ".listByProductCategoryId";
     String COUNT__BY_PRODUCT_CATEGORY_ID = ".countByProductCategoryId";
+    String SELECT_BY_NAME_AND_PRODUCT_CATEGORY = ".selectByNameAndProductCategory";
 
     /**
      * 根据产品分类获取属性列表
@@ -30,4 +31,14 @@ public interface PropertyDao extends BaseDao<Property>, DaoSelectByName<Property
      * @throws Exception
      */
     int countByProductCategoryId(long productCategory_id, int tableIndex) throws Exception;
+
+    /**
+     * 根据属性名和产品分类获取属性
+     * @param name
+     * @param productCategory_id
+     * @param tableIndex
+     * @return
+     * @throws Exception
+     */
+    Property selectByNameAndProductCategory(String name, long productCategory_id, int tableIndex) throws Exception;
 }

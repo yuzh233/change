@@ -12,7 +12,10 @@ public class CompanyRpcServerImpl extends BaseRpcServerImpl<Company, CompanyDao>
 
     @Override
     public Company selectByName(String name, int tableIndex, boolean flag) throws Exception {
-        return dao.selectByName(name, tableIndex);
+        if (flag)
+            return dao.selectByName(name, tableIndex);
+        else
+            return fill(dao.selectByName(name, tableIndex));
     }
 
     @Override

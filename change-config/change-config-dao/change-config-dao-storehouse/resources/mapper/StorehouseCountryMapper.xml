@@ -87,4 +87,8 @@
     <delete id="clear" parameterType="int">
         DELETE FROM storehouseCountry_${_parameter} WHERE yn=0
     </delete>
+
+    <select id="selectByName" parameterType="map" resultMap="storehouseCountry">
+        SELECT * FROM storehouseCountry_${tableIndex} WHERE id=#{id, jdbcType=BIGINT} AND name=#{name, jdbcType=VARCHAR} AND yn=1
+    </select>
 </mapper>

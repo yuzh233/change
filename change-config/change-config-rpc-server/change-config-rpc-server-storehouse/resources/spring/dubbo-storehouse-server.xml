@@ -26,4 +26,6 @@
     <bean id="storehouseProductStockRpcServer" class="me.cathub.change.storehouse.rpc.server.StorehouseProductStockRpcServerImpl"/>
 
     <dubbo:reference id="productRpcServer" interface="me.cathub.change.api.rpc.server.product.ProductRpcServer" />
+    <dubbo:reference id="productCategoryRpcServer" interface="me.cathub.change.api.rpc.server.product.ProductCategoryRpcServer" />
+    <dubbo:reference id="companyRpcServer" interface="me.cathub.change.api.rpc.server.user.CompanyRpcServer" />
 </beans>

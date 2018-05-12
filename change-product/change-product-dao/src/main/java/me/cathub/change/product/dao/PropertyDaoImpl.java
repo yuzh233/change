@@ -99,6 +99,22 @@ public class PropertyDaoImpl extends BaseDaoMyBatisImpl<Property> implements Pro
     }
 
     @Override
+    public Property selectByNameAndProductCategory(String name, long productCategory_id, int tableIndex) throws Exception {
+        Property result = null;
+        try {
+            Map<String, Object> map = new HashMap<>();
+            map.put("name", name);
+            map.put("productCategory_id", productCategory_id);
+            map.put("tableIndex", tableIndex);
+
+            result  = sqlSessionTemplate.selectOne(NAME_SPACE + SELECT_BY_NAME_AND_PRODUCT_CATEGORY, map);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    @Override
     public Property selectByName(String name, int tableIndex) throws Exception {
         Property result = null;
         try {

@@ -1,6 +1,7 @@
 package me.cathub.change.api.dao.product;
 
 import me.cathub.change.common.base.BaseDao;
+import me.cathub.change.common.bean.product.PropertyKeyValue;
 import me.cathub.change.common.bean.product.PropertyValue;
 
 import java.util.List;

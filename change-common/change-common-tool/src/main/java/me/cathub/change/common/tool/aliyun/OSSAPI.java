@@ -30,6 +30,8 @@ public class OSSAPI {
     }
 
     public static void uploadResource(String path, InputStream inputStream) {
+        if (inputStream == null)
+            return;
         ossClient.putObject(BUCKET_NAME, path, inputStream);
     }
 

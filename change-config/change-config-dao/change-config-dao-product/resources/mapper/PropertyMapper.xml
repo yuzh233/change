@@ -28,7 +28,7 @@
           createDate,
           yn
         )VALUES(
-          #{id, jdbcType},
+          #{id, jdbcType=BIGINT},
           #{name, jdbcType=VARCHAR},
           #{productCategory.id, jdbcType=BIGINT},
           NOW(),
@@ -94,10 +94,14 @@
     </delete>
 
     <select id="listByProductCategoryId" parameterType="map" resultMap="property">
-        SELECT * FROM property_${tableIndex} WHERE yn=0 AND productCategory_id=#{productCategory_id, jdbcType=BIGINT}
+        SELECT * FROM property_${tableIndex} WHERE yn=1 AND productCategory_id=#{productCategory_id, jdbcType=BIGINT}
     </select>
 
     <select id="countByProductCategoryId" parameterType="map" resultType="int">
-        SELECT COUNT(*) FROM property_${tableIndex} WHERE yn=0 AND productCategory_id=#{productCategory_id, jdbcType=BIGINT}
+        SELECT COUNT(*) FROM property_${tableIndex} WHERE yn=1 AND productCategory_id=#{productCategory_id, jdbcType=BIGINT}
+    </select>
+
+    <select id="selectByNameAndProductCategory" parameterType="map" resultMap="property">
+        SELECT * FROM property_${tableIndex} WHERE yn=1 AND productCategory_id=#{productCategory_id, jdbcType=BIGINT} AND name=#{name, jdbcType=VARCHAR}
     </select>
 </mapper>

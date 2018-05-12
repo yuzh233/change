@@ -13,7 +13,6 @@ public class HTTPTool {
     public static String $(String url) {
         String suffix = url.substring(url.lastIndexOf("."));
         String temp_1 = url.substring(0, url.lastIndexOf("."));
-        System.out.println(temp_1);
         return temp_1.substring(0, temp_1.lastIndexOf(".")) + suffix;
     }
 

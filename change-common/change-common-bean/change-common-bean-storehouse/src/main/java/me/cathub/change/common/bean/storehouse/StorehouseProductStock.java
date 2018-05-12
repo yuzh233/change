@@ -1,6 +1,8 @@
 package me.cathub.change.common.bean.storehouse;
 
 import me.cathub.change.common.bean.product.Product;
+import me.cathub.change.common.bean.product.ProductCategory;
+import me.cathub.change.common.bean.user.Company;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -18,9 +20,45 @@ public class StorehouseProductStock implements Serializable {
 
     private long product_id;
     private long storehouse_id;
+    private long productCategory_id;
+    private long company_id;
 
-    private Product product;
     private Storehouse storehouse;
+    private Product product;
+    private ProductCategory productCategory;
+    private Company company;
+
+    public long getProductCategory_id() {
+        return productCategory_id;
+    }
+
+    public void setProductCategory_id(long productCategory_id) {
+        this.productCategory_id = productCategory_id;
+    }
+
+    public long getCompany_id() {
+        return company_id;
+    }
+
+    public void setCompany_id(long company_id) {
+        this.company_id = company_id;
+    }
+
+    public ProductCategory getProductCategory() {
+        return productCategory;
+    }
+
+    public void setProductCategory(ProductCategory productCategory) {
+        this.productCategory = productCategory;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
 
     public long getProduct_id() {
         return product_id;

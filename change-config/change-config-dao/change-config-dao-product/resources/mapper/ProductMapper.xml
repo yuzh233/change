@@ -83,6 +83,7 @@
           description=#{description, jdbcType=VARCHAR},
           status=#{status, jdbcType=VARCHAR},
           productCategory_id=#{productCategory.id, jdbcType=BIGINT},
+          company_id=#{company.id, jdbcType=BIGINT},
           updateDate=NOW()
         WHERE
           id=#{id, jdbcType=BIGINT}
