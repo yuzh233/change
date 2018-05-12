@@ -26,4 +26,15 @@ public interface PropertyRpcServer extends BaseRpcServer<Property>, FillAssociat
      * @throws Exception
      */
     int countByProductCategoryId(long productCategory_id, int tableIndex) throws Exception;
+
+    /**
+     * 根据属性名和产品分类获取属性
+     * @param name
+     * @param productCategory_id
+     * @param tableIndex
+     * @param flag
+     * @return
+     * @throws Exception
+     */
+    Property selectByNameAndProductCategory(String name, long productCategory_id, int tableIndex, boolean flag) throws Exception;
 }

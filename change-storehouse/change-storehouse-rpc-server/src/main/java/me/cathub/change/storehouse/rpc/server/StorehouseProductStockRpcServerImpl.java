@@ -1,13 +1,17 @@
 package me.cathub.change.storehouse.rpc.server;
 
 import me.cathub.change.api.dao.storehouse.StorehouseProductStockDao;
+import me.cathub.change.api.rpc.server.product.ProductCategoryRpcServer;
 import me.cathub.change.api.rpc.server.product.ProductRpcServer;
 import me.cathub.change.api.rpc.server.storehouse.StorehouseProductStockRpcServer;
 import me.cathub.change.api.rpc.server.storehouse.StorehouseRpcServer;
+import me.cathub.change.api.rpc.server.user.CompanyRpcServer;
 import me.cathub.change.common.base.BaseRpcServerImpl;
 import me.cathub.change.common.bean.product.Product;
+import me.cathub.change.common.bean.product.ProductCategory;
 import me.cathub.change.common.bean.storehouse.Storehouse;
 import me.cathub.change.common.bean.storehouse.StorehouseProductStock;
+import me.cathub.change.common.bean.user.Company;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +27,12 @@ public class StorehouseProductStockRpcServerImpl extends BaseRpcServerImpl<Store
 
     @Autowired
     private StorehouseRpcServer storehouseRpcServer;
+
+    @Autowired
+    private ProductCategoryRpcServer productCategoryRpcServer;
+
+    @Autowired
+    private CompanyRpcServer companyRpcServer;
 
     @Override
     public StorehouseProductStock selectByStorehouseIdAndProductId(long storehouse_id, long product_id, int tableIndex, boolean flag) throws Exception {
@@ -52,9 +62,13 @@ public class StorehouseProductStockRpcServerImpl extends BaseRpcServerImpl<Store
         try {
             Product product = productRpcServer.select(new Product(bean.getProduct_id()), true);
             Storehouse storehouse = storehouseRpcServer.select(new Storehouse(bean.getStorehouse_id()), true);
+            ProductCategory productCategory = productCategoryRpcServer.select(new ProductCategory(bean.getProductCategory_id()), true);
+            Company company = companyRpcServer.select(new Company(bean.getCompany_id()), true);
 
             bean.setProduct(product);
             bean.setStorehouse(storehouse);
+            bean.setProductCategory(productCategory);
+            bean.setCompany(company);
         } catch (Exception e) {
             e.printStackTrace();
         }

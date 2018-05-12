@@ -20,6 +20,8 @@
 
         <result property="product_id" column="product_id"/>
         <result property="storehouse_id" column="storehouse_id"/>
+        <result property="productCategory_id" column="productCategory_id"/>
+        <result property="company_id" column="company_id"/>
     </resultMap>
 
     <insert id="insert" parameterType="storehouseProductStock">
@@ -29,6 +31,8 @@
           price,
           product_id,
           storehouse_id,
+          productCategory_id,
+          company_id,
           createDate,
           yn
         )VALUES(
