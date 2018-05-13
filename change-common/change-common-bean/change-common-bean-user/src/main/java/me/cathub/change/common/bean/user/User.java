@@ -9,24 +9,54 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 用户
+ * 用户账户
  */
 public class User implements Serializable {
-    @JsonSerialize(using = LongJsonSerializer.class) //作用在属性或getter上，用于在序列化json时嵌入自己的代码。比如long转成String
+
+    /*
+        作用在属性或getter上，用于在序列化json时嵌入自己的代码。比如long转成String
+     */
+    @JsonSerialize(using = LongJsonSerializer.class)
     protected long id;
+
+    /**
+     * 用户名
+     */
     protected String username;
+
+    /**
+     * 密码
+     */
     protected String password;
+
+    /**
+     * 真实姓名
+     */
     protected String name;
+
+    /**
+     * 手机号码
+     */
     protected String phone;
+
+    /**
+     * 邮箱地址
+     */
     protected String email;
     protected Date createDate;
     protected Date updateDate;
 
+    /**
+     * 账户状态
+     */
     protected int status;
     protected int tableIndex;
 
     protected long role_id;
 
+    /**
+     * 什么角色?
+     */
     protected Role role;
 
     public User() {

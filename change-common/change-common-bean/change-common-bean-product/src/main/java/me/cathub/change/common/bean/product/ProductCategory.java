@@ -14,17 +14,24 @@ public class ProductCategory implements Serializable {
     @JsonSerialize(using = LongJsonSerializer.class)
     private long id;
     private String name;
-    private int storey;         // 所属层数（一级分类0、二级分类1）
+
+    /**
+     * 所在层数
+     */
+    private int storey;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createDate;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date updateDate;
     private int tableIndex;
 
+    @JsonSerialize(using = LongJsonSerializer.class)
     private long parent_id;     // 父级分类（即所属一级分类）
 
+    /**
+     * 父级分类
+     */
     private ProductCategory parent;
-
 
     public ProductCategory() {
     }
@@ -99,16 +106,16 @@ public class ProductCategory implements Serializable {
 
     @Override
     public String toString() {
-        return "ProductCategory{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", storey=" + storey +
-                ", createDate=" + createDate +
-                ", updateDate=" + updateDate +
-                ", tableIndex=" + tableIndex +
-                ", parent_id=" + parent_id +
-                ", parent=" + parent +
-                '}';
+        final StringBuilder sb = new StringBuilder("ProductCategory{");
+        sb.append("id=").append(id);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", storey=").append(storey);
+        sb.append(", createDate=").append(createDate);
+        sb.append(", updateDate=").append(updateDate);
+        sb.append(", tableIndex=").append(tableIndex);
+        sb.append(", parent_id=").append(parent_id);
+        sb.append(", parent=").append(parent);
+        sb.append('}');
+        return sb.toString();
     }
-
 }

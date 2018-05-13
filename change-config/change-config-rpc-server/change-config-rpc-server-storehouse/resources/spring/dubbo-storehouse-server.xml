@@ -8,18 +8,18 @@
        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
     <!-- 提供方应用信息，用于计算依赖关系 -->
-    <dubbo:application name="change-storehouse-server"  />
+    <dubbo:application name="change-storehouse-rpc-server"  />
 
     <!-- 使用广播注册中心暴露服务地址 -->
-    <dubbo:registry address="zookeeper://120.77.159.152:2181" />
+    <dubbo:registry address="zookeeper://120.77.159.152:2181" file="change_storehouse_rpc_server/dubbo-registry/dubbo-registry.properties" />
 
     <!-- 用dubbo协议在20880端口暴露服务 -->
-    <dubbo:protocol name="dubbo" port="20881" />
+    <dubbo:protocol name="dubbo" port="20883" />
 
     <!-- 暴露的服务接口 -->
-    <dubbo:service interface="me.cathub.change.api.rpc.server.storehouse.StorehouseRpcServer" ref="storehouseRpcServer" />
-    <dubbo:service interface="me.cathub.change.api.rpc.server.storehouse.StorehouseCountryRpcServer" ref="storehouseCountryRpcServer" />
-    <dubbo:service interface="me.cathub.change.api.rpc.server.storehouse.StorehouseProductStockRpcServer" ref="storehouseProductStockRpcServer" />
+    <dubbo:service interface="me.cathub.change.api.rpc.server.storehouse.StorehouseRpcServer" ref="storehouseRpcServer" timeout="15000" />
+    <dubbo:service interface="me.cathub.change.api.rpc.server.storehouse.StorehouseCountryRpcServer" ref="storehouseCountryRpcServer" timeout="15000" />
+    <dubbo:service interface="me.cathub.change.api.rpc.server.storehouse.StorehouseProductStockRpcServer" ref="storehouseProductStockRpcServer" timeout="15000" />
 
     <bean id="storehouseRpcServer" class="me.cathub.change.storehouse.rpc.server.StorehouseRpcServerImpl"/>
     <bean id="storehouseCountryRpcServer" class="me.cathub.change.storehouse.rpc.server.StorehouseCountryRpcServerImpl"/>

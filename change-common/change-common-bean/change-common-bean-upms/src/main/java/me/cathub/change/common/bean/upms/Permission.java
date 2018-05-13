@@ -22,6 +22,9 @@ public class Permission implements Serializable {
 
     private long role_id;
 
+    /**
+     * 所属角色
+     */
     private Role role;
 
     public Permission() {
@@ -89,14 +92,15 @@ public class Permission implements Serializable {
 
     @Override
     public String toString() {
-        return "Permission{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", createDate=" + createDate +
-                ", updateDate=" + updateDate +
-                ", tableIndex=" + tableIndex +
-                ", role_id=" + role_id +
-                ", role=" + role +
-                '}';
+        final StringBuilder sb = new StringBuilder("Permission{");
+        sb.append("id=").append(id);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", createDate=").append(createDate);
+        sb.append(", updateDate=").append(updateDate);
+        sb.append(", tableIndex=").append(tableIndex);
+        sb.append(", role_id=").append(role_id);
+        sb.append(", role=").append(role);
+        sb.append('}');
+        return sb.toString();
     }
 }

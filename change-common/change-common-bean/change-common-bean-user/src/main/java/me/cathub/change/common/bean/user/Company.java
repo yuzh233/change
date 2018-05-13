@@ -14,9 +14,25 @@ public class Company implements Serializable {
     @JsonSerialize(using = LongJsonSerializer.class)
     private long id;
     private String name;
+
+    /**
+     * 业务范围
+     */
     private String service;
+
+    /**
+     * 企业地址
+     */
     private String address;
+
+    /**
+     * 企业电话
+     */
     private String phone;
+
+    /**
+     * 企业邮箱
+     */
     private String email;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createDate;
@@ -107,14 +123,17 @@ public class Company implements Serializable {
 
     @Override
     public String toString() {
-        return "Company{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", service='" + service + '\'' +
-                ", address='" + address + '\'' +
-                ", createDate=" + createDate +
-                ", updateDate=" + updateDate +
-                ", tableIndex=" + tableIndex +
-                '}';
+        final StringBuilder sb = new StringBuilder("Company{");
+        sb.append("id=").append(id);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", service='").append(service).append('\'');
+        sb.append(", address='").append(address).append('\'');
+        sb.append(", phone='").append(phone).append('\'');
+        sb.append(", email='").append(email).append('\'');
+        sb.append(", createDate=").append(createDate);
+        sb.append(", updateDate=").append(updateDate);
+        sb.append(", tableIndex=").append(tableIndex);
+        sb.append('}');
+        return sb.toString();
     }
 }

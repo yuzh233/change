@@ -10,7 +10,10 @@ public class BrandQuotient extends User {
     @JsonSerialize(using = LongJsonSerializer.class)
     private long company_id;
 
-    private Company company;        // 企业
+    /**
+     * 所属企业
+     */
+    private Company company;
 
     public BrandQuotient() {
     }
@@ -37,21 +40,22 @@ public class BrandQuotient extends User {
 
     @Override
     public String toString() {
-        return "BrandQuotient{" +
-                "company_id=" + company_id +
-                ", company=" + company +
-                ", id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", name='" + name + '\'' +
-                ", phone='" + phone + '\'' +
-                ", email='" + email + '\'' +
-                ", createDate=" + createDate +
-                ", updateDate=" + updateDate +
-                ", status=" + status +
-                ", tableIndex=" + tableIndex +
-                ", role_id=" + role_id +
-                ", role=" + role +
-                '}';
+        final StringBuilder sb = new StringBuilder("BrandQuotient{");
+        sb.append("company_id=").append(company_id);
+        sb.append(", company=").append(company);
+        sb.append(", id=").append(id);
+        sb.append(", username='").append(username).append('\'');
+        sb.append(", password='").append(password).append('\'');
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", phone='").append(phone).append('\'');
+        sb.append(", email='").append(email).append('\'');
+        sb.append(", createDate=").append(createDate);
+        sb.append(", updateDate=").append(updateDate);
+        sb.append(", status=").append(status);
+        sb.append(", tableIndex=").append(tableIndex);
+        sb.append(", role_id=").append(role_id);
+        sb.append(", role=").append(role);
+        sb.append('}');
+        return sb.toString();
     }
 }

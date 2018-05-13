@@ -11,9 +11,21 @@ import java.util.Date;
  * 产品图片
  */
 public class ProductImage implements Serializable {
+
+    /**
+     * 封面图片 (位于产品列表:入口)
+     */
     @JsonSerialize(using = LongJsonSerializer.class)
     public static final int TYPE_COVER = 0;
+
+    /**
+     * 展示图片 (位于左边:可以按上去放大的那种)
+     */
     public static final int TYPE_SHOW = 1;
+
+    /**
+     * 信息图片 (位于详细描述)
+     */
     public static final int TYPE_INFO = 2;
 
     private long id;
@@ -27,6 +39,9 @@ public class ProductImage implements Serializable {
 
     private long product_id;
 
+    /**
+     * 哪个产品的图片?
+     */
     private Product product;
 
     public ProductImage() {
@@ -102,15 +117,16 @@ public class ProductImage implements Serializable {
 
     @Override
     public String toString() {
-        return "ProductImage{" +
-                "id=" + id +
-                ", url='" + url + '\'' +
-                ", type=" + type +
-                ", createDate=" + createDate +
-                ", updateDate=" + updateDate +
-                ", tableIndex=" + tableIndex +
-                ", product_id=" + product_id +
-                ", product=" + product +
-                '}';
+        final StringBuilder sb = new StringBuilder("ProductImage{");
+        sb.append("id=").append(id);
+        sb.append(", url='").append(url).append('\'');
+        sb.append(", type=").append(type);
+        sb.append(", createDate=").append(createDate);
+        sb.append(", updateDate=").append(updateDate);
+        sb.append(", tableIndex=").append(tableIndex);
+        sb.append(", product_id=").append(product_id);
+        sb.append(", product=").append(product);
+        sb.append('}');
+        return sb.toString();
     }
 }

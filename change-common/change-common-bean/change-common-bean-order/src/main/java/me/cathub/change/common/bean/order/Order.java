@@ -11,9 +11,22 @@ import java.util.Date;
  * 订单
  */
 public class Order implements Serializable {
+
     private long id;
+
+    /**
+     * 订单号(目前是弃用状态, id当作订单号在用)
+     */
     private String orderCode;
+
+    /**
+     * 订单总金额
+     */
     private float totalPrice;
+
+    /**
+     * 备注信息
+     */
     private String message;
     private Date createDate;
     private Date updateDate;
@@ -23,8 +36,19 @@ public class Order implements Serializable {
     private long shopkeeper_id;
     private long brandQuotient_id;
 
+    /**
+     * 在哪个仓库买的?
+     */
     private Storehouse storehouse;
+
+    /**
+     * 买家是谁?
+     */
     private Shopkeeper shopkeeper;
+
+    /**
+     * 卖家是谁?
+     */
     private BrandQuotient brandQuotient;
 
     public Order() {
@@ -140,20 +164,21 @@ public class Order implements Serializable {
 
     @Override
     public String toString() {
-        return "Order{" +
-                "id=" + id +
-                ", orderCode='" + orderCode + '\'' +
-                ", totalPrice=" + totalPrice +
-                ", message='" + message + '\'' +
-                ", createDate=" + createDate +
-                ", updateDate=" + updateDate +
-                ", tableIndex=" + tableIndex +
-                ", storehouse_id=" + storehouse_id +
-                ", shopkeeper_id=" + shopkeeper_id +
-                ", brandQuotient_id=" + brandQuotient_id +
-                ", storehouse=" + storehouse +
-                ", shopkeeper=" + shopkeeper +
-                ", brandQuotient=" + brandQuotient +
-                '}';
+        final StringBuilder sb = new StringBuilder("Order{");
+        sb.append("id=").append(id);
+        sb.append(", orderCode='").append(orderCode).append('\'');
+        sb.append(", totalPrice=").append(totalPrice);
+        sb.append(", message='").append(message).append('\'');
+        sb.append(", createDate=").append(createDate);
+        sb.append(", updateDate=").append(updateDate);
+        sb.append(", tableIndex=").append(tableIndex);
+        sb.append(", storehouse_id=").append(storehouse_id);
+        sb.append(", shopkeeper_id=").append(shopkeeper_id);
+        sb.append(", brandQuotient_id=").append(brandQuotient_id);
+        sb.append(", storehouse=").append(storehouse);
+        sb.append(", shopkeeper=").append(shopkeeper);
+        sb.append(", brandQuotient=").append(brandQuotient);
+        sb.append('}');
+        return sb.toString();
     }
 }

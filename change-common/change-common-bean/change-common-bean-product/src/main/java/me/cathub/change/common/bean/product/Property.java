@@ -22,6 +22,9 @@ public class Property implements Serializable {
 
     private long productCategory_id;
 
+    /**
+     * 哪个分类的属性?
+     */
     private ProductCategory productCategory;
 
     public Property() {
@@ -89,14 +92,15 @@ public class Property implements Serializable {
 
     @Override
     public String toString() {
-        return "Property{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", createDate=" + createDate +
-                ", updateDate=" + updateDate +
-                ", tableIndex=" + tableIndex +
-                ", productCategory_id=" + productCategory_id +
-                ", productCategory=" + productCategory +
-                '}';
+        final StringBuilder sb = new StringBuilder("Property{");
+        sb.append("id=").append(id);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", createDate=").append(createDate);
+        sb.append(", updateDate=").append(updateDate);
+        sb.append(", tableIndex=").append(tableIndex);
+        sb.append(", productCategory_id=").append(productCategory_id);
+        sb.append(", productCategory=").append(productCategory);
+        sb.append('}');
+        return sb.toString();
     }
 }

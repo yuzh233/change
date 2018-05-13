@@ -8,17 +8,17 @@
        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
     <!-- 提供方应用信息，用于计算依赖关系 -->
-    <dubbo:application name="change-order-server"  />
+    <dubbo:application name="change-order-rpc-server"  />
 
     <!-- 使用广播注册中心暴露服务地址 -->
-    <dubbo:registry address="zookeeper://120.77.159.152:2181" />
+    <dubbo:registry address="zookeeper://120.77.159.152:2181" file="change_order_rpc_server/dubbo-registry/dubbo-registry.properties" />
 
     <!-- 用dubbo协议在20880端口暴露服务 -->
-    <dubbo:protocol name="dubbo" port="20883" />
+    <dubbo:protocol name="dubbo" port="20884" />
 
     <!-- 暴露的服务接口 -->
-    <dubbo:service interface="me.cathub.change.api.rpc.server.order.OrderRpcServer" ref="orderRpcServer" />
-    <dubbo:service interface="me.cathub.change.api.rpc.server.order.OrderItemRpcServer" ref="orderItemRpcServer" />
+    <dubbo:service interface="me.cathub.change.api.rpc.server.order.OrderRpcServer" ref="orderRpcServer" timeout="15000" />
+    <dubbo:service interface="me.cathub.change.api.rpc.server.order.OrderItemRpcServer" ref="orderItemRpcServer" timeout="15000" />
 
     <bean id="orderRpcServer" class="me.cathub.change.order.rpc.server.OrderRpcServerImpl"/>
     <bean id="orderItemRpcServer" class="me.cathub.change.order.rpc.server.OrderItemRpcServerImpl"/>

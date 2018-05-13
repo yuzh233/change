@@ -8,6 +8,10 @@ import java.util.Date;
  */
 public class StorehouseCountry implements Serializable {
     private long id;
+
+    /**
+     * 国家名
+     */
     private String name;
     private Date createDate;
     private Date updateDate;
@@ -62,12 +66,13 @@ public class StorehouseCountry implements Serializable {
 
     @Override
     public String toString() {
-        return "StorehouseCountry{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", createDate=" + createDate +
-                ", updateDate=" + updateDate +
-                ", tableIndex=" + tableIndex +
-                '}';
+        final StringBuilder sb = new StringBuilder("StorehouseCountry{");
+        sb.append("id=").append(id);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", createDate=").append(createDate);
+        sb.append(", updateDate=").append(updateDate);
+        sb.append(", tableIndex=").append(tableIndex);
+        sb.append('}');
+        return sb.toString();
     }
 }
