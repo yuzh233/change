@@ -15,7 +15,6 @@ public class ProductImage implements Serializable {
     /**
      * 封面图片 (位于产品列表:入口)
      */
-    @JsonSerialize(using = LongJsonSerializer.class)
     public static final int TYPE_COVER = 0;
 
     /**
@@ -28,6 +27,7 @@ public class ProductImage implements Serializable {
      */
     public static final int TYPE_INFO = 2;
 
+    @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss",timezone = "GMT+8")
     private long id;
     private String url;
     private int type;
@@ -37,6 +37,7 @@ public class ProductImage implements Serializable {
     private Date updateDate;
     private int tableIndex;
 
+    @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss",timezone = "GMT+8")
     private long product_id;
 
     /**

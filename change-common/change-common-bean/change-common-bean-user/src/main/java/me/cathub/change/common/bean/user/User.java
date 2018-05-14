@@ -52,6 +52,7 @@ public class User implements Serializable {
     protected int status;
     protected int tableIndex;
 
+    @JsonSerialize(using = LongJsonSerializer.class)
     protected long role_id;
 
     /**

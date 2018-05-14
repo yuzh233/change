@@ -1,6 +1,8 @@
 package me.cathub.change.common.bean.order;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import me.cathub.change.common.bean.product.Product;
+import me.cathub.change.common.tool.LongJsonSerializer;
 
 import java.io.Serializable;
 
@@ -8,7 +10,7 @@ import java.io.Serializable;
  * 订单项
  */
 public class OrderItem implements Serializable {
-
+    @JsonSerialize(using = LongJsonSerializer.class)
     private long id;
 
     /**
@@ -32,7 +34,9 @@ public class OrderItem implements Serializable {
     private float itemId;
     private int tableIndex;
 
+    @JsonSerialize(using = LongJsonSerializer.class)
     private long product_id;
+    @JsonSerialize(using = LongJsonSerializer.class)
     private long order_id;
 
     private Product product;    // 买的哪个产品?

@@ -1,5 +1,9 @@
 package me.cathub.change.common.bean.storehouse;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import me.cathub.change.common.tool.LongJsonSerializer;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -7,7 +11,7 @@ import java.util.Date;
  * 仓库
  */
 public class Storehouse implements Serializable {
-
+    @JsonSerialize(using = LongJsonSerializer.class)
     private long id;
     private String name;
 
@@ -20,10 +24,12 @@ public class Storehouse implements Serializable {
      * 仓库描述
      */
     private String description;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createDate;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date updateDate;
     private int tableIndex;
-
+    @JsonSerialize(using = LongJsonSerializer.class)
     private long storehouseCountry_id;
 
     /**

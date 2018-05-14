@@ -1,8 +1,11 @@
 package me.cathub.change.common.bean.storehouse;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import me.cathub.change.common.bean.product.Product;
 import me.cathub.change.common.bean.product.ProductCategory;
 import me.cathub.change.common.bean.user.Company;
+import me.cathub.change.common.tool.LongJsonSerializer;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -11,7 +14,7 @@ import java.util.Date;
  * 仓库产品库存
  */
 public class StorehouseProductStock implements Serializable {
-
+    @JsonSerialize(using = LongJsonSerializer.class)
     private long id;
 
     /**
@@ -23,13 +26,18 @@ public class StorehouseProductStock implements Serializable {
      * 价格
      */
     private float price;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createDate;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date updateDate;
     private int tableIndex;
-
+    @JsonSerialize(using = LongJsonSerializer.class)
     private long product_id;
+    @JsonSerialize(using = LongJsonSerializer.class)
     private long storehouse_id;
+    @JsonSerialize(using = LongJsonSerializer.class)
     private long productCategory_id;
+    @JsonSerialize(using = LongJsonSerializer.class)
     private long company_id;
 
     /**

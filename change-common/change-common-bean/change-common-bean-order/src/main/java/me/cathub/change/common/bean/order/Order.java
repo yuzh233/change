@@ -1,8 +1,11 @@
 package me.cathub.change.common.bean.order;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import me.cathub.change.common.bean.storehouse.Storehouse;
 import me.cathub.change.common.bean.user.BrandQuotient;
 import me.cathub.change.common.bean.user.Shopkeeper;
+import me.cathub.change.common.tool.LongJsonSerializer;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -11,7 +14,7 @@ import java.util.Date;
  * 订单
  */
 public class Order implements Serializable {
-
+    @JsonSerialize(using = LongJsonSerializer.class)
     private long id;
 
     /**
@@ -28,12 +31,17 @@ public class Order implements Serializable {
      * 备注信息
      */
     private String message;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createDate;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date updateDate;
     private int tableIndex;
 
+    @JsonSerialize(using = LongJsonSerializer.class)
     private long storehouse_id;
+    @JsonSerialize(using = LongJsonSerializer.class)
     private long shopkeeper_id;
+    @JsonSerialize(using = LongJsonSerializer.class)
     private long brandQuotient_id;
 
     /**

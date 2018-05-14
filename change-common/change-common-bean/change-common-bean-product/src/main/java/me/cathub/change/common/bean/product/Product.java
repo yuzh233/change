@@ -45,8 +45,11 @@ public class Product implements Serializable {
     private Date updateDate;
     private int tableIndex;
 
+    @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss",timezone = "GMT+8")
     private long productCategory_id;
+    @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss",timezone = "GMT+8")
     private long company_id;
+    @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss",timezone = "GMT+8")
     private long brandQuotient_id;
 
     /**
