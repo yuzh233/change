@@ -1,8 +1,10 @@
 package me.cathub.change.common.bean.product;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import me.cathub.change.common.bean.user.BrandQuotient;
 import me.cathub.change.common.bean.user.Company;
+import me.cathub.change.common.tool.LongJsonSerializer;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -22,6 +24,7 @@ public class Product implements Serializable {
      */
     public static final int STATUS_IN_STOCK = 1;
 
+    @JsonSerialize(using = LongJsonSerializer.class)
     private long id;
     private String name;
 

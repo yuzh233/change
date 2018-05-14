@@ -1,5 +1,9 @@
 package me.cathub.change.common.bean.product;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import me.cathub.change.common.tool.LongJsonSerializer;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -7,7 +11,7 @@ import java.util.Date;
  * 产品分类
  */
 public class ProductCategory implements Serializable {
-
+    @JsonSerialize(using = LongJsonSerializer.class)
     private long id;
     private String name;
 
@@ -15,11 +19,14 @@ public class ProductCategory implements Serializable {
      * 所在层数
      */
     private int storey;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createDate;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date updateDate;
     private int tableIndex;
 
-    private long parent_id;
+    @JsonSerialize(using = LongJsonSerializer.class)
+    private long parent_id;     // 父级分类（即所属一级分类）
 
     /**
      * 父级分类

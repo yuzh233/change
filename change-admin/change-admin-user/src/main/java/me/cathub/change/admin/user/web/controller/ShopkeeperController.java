@@ -29,13 +29,7 @@ public class ShopkeeperController extends BaseControllerImpl<Shopkeeper, Shopkee
     @Override
     public int deletes(@RequestParam("ids[]") long[] ids, @RequestParam(value = "del_flag", required = false) boolean del_flag)
             throws Exception {
-        for (long id : ids) {
-            Shopkeeper shopkeeper = new Shopkeeper();
-            shopkeeper.setId(id);
-            shopkeeper = rpcService.select(shopkeeper, del_flag);
-            rpcService.deleteL(shopkeeper);//逻辑删除
-        }
-        return 0;
+        return rpcService.deletes(ids, new Shopkeeper(), !del_flag);
     }
 
     @Override

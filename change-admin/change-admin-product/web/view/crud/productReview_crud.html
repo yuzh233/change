@@ -19,25 +19,24 @@
 <div id="main">
 	<div id="toolbar">
 		<a class="waves-effect waves-button" href="javascript:;" onclick="createAction()"><i class="zmdi zmdi-plus"></i> 新增评论</a>
-		<a class="waves-effect waves-button" href="javascript:;" onclick="updateAction()"><i class="zmdi zmdi-edit"></i> 编辑评论</a>
 		<a class="waves-effect waves-button" href="javascript:;" onclick="deleteAction()"><i class="zmdi zmdi-close"></i> 删除评论</a>
 	</div>
 	<table id="table"></table>
 </div>
 <!-- 新增 -->
 <div id="createDialog" class="crudDialog" hidden>
-	<form>
+	<form class="createForm">
 		<div class="form-group">
-			<label for="create-username">账户</label>
-			<input id="create-username" type="text" class="form-control">
+			<label for="create-shopkeeper">评论者（B2C店主）</label>
+			<input id="create-shopkeeper" type="text" class="form-control" name="shopkeeper.id">
 		</div>
 		<div class="form-group">
-			<label for="create-password">密码</label>
-			<input id="create-password" type="text" class="form-control">
+			<label for="create-product">所属产品ID</label>
+			<input id="create-product" type="text" class="form-control" name="product.id">
 		</div>
 		<div class="form-group">
-			<label for="create-company">企业</label>
-			<input id="create-company" type="text" class="form-control">
+			<label for="create-content">评论内容</label>
+			<input id="create-content" type="text" class="form-control" name="content">
 		</div>
 	</form>
 </div>
@@ -45,26 +44,10 @@
 <!-- 修改 -->
 <div id="updateDialog" class="crudDialog" hidden>
     <form>
-        <div class="form-group">
-            <label for="update-username">账户</label>
-            <input id="update-username" type="text" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="update-password">密码</label>
-            <input id="update-password" type="text" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="update-company">企业</label>
-            <input id="update-company" type="text" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="update-address">地址</label>
-            <input id="update-address" type="text" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="update-phone">电话</label>
-            <input id="update-phone" type="text" class="form-control">
-        </div>
+		<div class="form-group">
+			<label for="update-content">评论内容</label>
+			<input id="update-content" type="text" class="form-control update-content">
+		</div>
     </form>
 </div>
 <script src="../../resources/plugins/jquery.1.12.4.min.js"></script>
@@ -89,10 +72,11 @@ $(function() {
 	// bootstrap table初始化
 	// http://bootstrap-table.wenzhixin.net.cn/zh-cn/documentation/
 	$table.bootstrapTable({
-		url: '../../resources/data/productReview_list.json',
+		url: '../../productReview/list',
+        method: 'get',
 		height: getHeight(),
 		striped: true,
-		search: true,
+		search: false,
 		searchOnEnterKey: true,
 		showRefresh: true,
 		showToggle: true,
@@ -105,7 +89,7 @@ $(function() {
 		pagination: true,
 		paginationLoop: false,
 		classes: 'table table-hover table-no-bordered',
-		//sidePagination: 'server',
+		sidePagination: 'server',
 		//silentSort: false,
 		smartDisplay: false,
 		idField: 'id',
@@ -116,12 +100,23 @@ $(function() {
 		idField: 'systemId',
 		maintainSelected: true,
 		toolbar: '#toolbar',
+        queryParamsType: "undefined",
+        pageNumber: 1, // 页码，点击上下页自动更改值
+        pageSize: 15,  // 页大小，点击大小自动更改值
+        queryParams: function queryParams(params) {
+            var temp = {  //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+                page: params.pageNumber,
+                count: params.pageSize,
+                tableIndex: 0
+            };
+            return temp;
+        },
 		columns: [
 			{field: 'state', checkbox: true},
 			{field: 'id', title: '编号', sortable: true, halign: 'left'},
 			{field: 'content', title: '内容', sortable: true, halign: 'left'},
-			{field: 'shopkeeper_name', title: '评论者', sortable: true, halign: 'left'},
-			{field: 'product_name', title: '产品名', sortable: true, halign: 'left'},
+			{field: 'shopkeeper.name', title: '评论者(B2C店主)', sortable: true, halign: 'left'},
+			{field: 'product.name', title: '产品名', sortable: true, halign: 'left'},
 			{field: 'createDate', title: '创建时间', sortable: true, halign: 'left'},
 			{field: 'updateDate', title: '更新时间', sortable: true, halign: 'left'},
 			{field: 'action', title: '操作', sortable: false, halign: 'left', formatter: 'actionFormatter', events: 'actionEvents', clickToSelect: false}
@@ -144,12 +139,10 @@ window.actionEvents = {
         console.log(value, row, index);
     },
     'click .edit': function (e, value, row, index) {
-        alert('You click edit icon, row: ' + JSON.stringify(row));
-        console.log(value, row, index);
+        updateAction(row.id);
     },
     'click .remove': function (e, value, row, index) {
-        alert('You click remove icon, row: ' + JSON.stringify(row));
-        console.log(value, row, index);
+        deleteAction(row.id);
     }
 };
 function detailFormatter(index, row) {
@@ -171,7 +164,16 @@ function createAction() {
 				text: '确认',
 				btnClass: 'waves-effect waves-button',
 				action: function () {
-					$.alert('确认');
+                    $.ajax({
+                        url: "../../productReview/insert",
+                        type: "POST",
+                        contentType: "application/x-www-form-urlencoded",
+                        dataType: "json",
+                        data: $(".createForm:last").serialize(), //传递表单值
+                        success: function () {
+                            $table.bootstrapTable('refresh'); //刷新表格
+                        }
+                    });
 				}
 			},
 			cancel: {
@@ -182,84 +184,97 @@ function createAction() {
 	});
 }
 // 编辑
-function updateAction() {
-	var rows = $table.bootstrapTable('getSelections');
-	if (rows.length == 0) {
-		$.confirm({
-			title: false,
-			content: '请至少选择一条记录！',
-			autoClose: 'cancel|3000',
-			backgroundDismiss: true,
-			buttons: {
-				cancel: {
-					text: '取消',
-					btnClass: 'waves-effect waves-button'
-				}
-			}
-		});
-	} else {
-		$.confirm({
-			type: 'blue',
-			animationSpeed: 300,
-			title: '编辑评论',
-			content: $('#updateDialog').html(),
-			buttons: {
-				confirm: {
-					text: '确认',
-					btnClass: 'waves-effect waves-button',
-					action: function () {
-						$.alert('确认');
-					}
-				},
-				cancel: {
-					text: '取消',
-					btnClass: 'waves-effect waves-button'
-				}
-			}
-		});
-	}
+function updateAction(id) {
+    $.confirm({
+        type: 'blue',
+        animationSpeed: 300,
+        title: '编辑评论',
+        content: $('#updateDialog').html(),
+        buttons: {
+            confirm: {
+                text: '确认',
+                btnClass: 'waves-effect waves-button',
+                action: function () {
+                    var content = $(".update-content:last").val();
+
+                    //创建json对象
+                    var productReview = {};
+                    productReview.id = id;
+                    if (content != '') {
+                        productReview.content = content;
+                    }
+                    $.ajax({
+                        url: "../../productReview/update",
+                        type: "POST",
+                        dataType: "json",
+                        data: productReview,
+                        success: function () {
+                            $table.bootstrapTable('refresh');
+                        }
+                    });
+                }
+            },
+            cancel: {
+                text: '取消',
+                btnClass: 'waves-effect waves-button'
+            }
+        }
+    });
 }
 // 删除
-function deleteAction() {
+function deleteAction(id) {
 	var rows = $table.bootstrapTable('getSelections');
-	if (rows.length == 0) {
-		$.confirm({
-			title: false,
-			content: '请至少选择一条记录！',
-			autoClose: 'cancel|3000',
-			backgroundDismiss: true,
-			buttons: {
-				cancel: {
-					text: '取消',
-					btnClass: 'waves-effect waves-button'
-				}
-			}
-		});
-	} else {
-		$.confirm({
-			type: 'red',
-			animationSpeed: 300,
-			title: false,
-			content: '确认删除吗？',
-			buttons: {
-				confirm: {
-					text: '确认',
-					btnClass: 'waves-effect waves-button',
-					action: function () {
-						var ids = new Array();
-						for (var i in rows) {
-							ids.push(rows[i].systemId);
-						}
-						$.alert('删除：id=' + ids.join("-"));
-					}
-				},
-				cancel: {
-					text: '取消',
-					btnClass: 'waves-effect waves-button'
-				}
-			}
-		});
-	}
+    if (rows.length == 0 && id == null) {
+        $.confirm({
+            title: false,
+            content: '请至少选择一条记录！',
+            autoClose: 'cancel|3000',
+            backgroundDismiss: true,
+            buttons: {
+                cancel: {
+                    text: '取消',
+                    btnClass: 'waves-effect waves-button'
+                }
+            }
+        });
+    } else {
+        $.confirm({
+            type: 'red',
+            animationSpeed: 300,
+            title: false,
+            content: '确认删除吗？',
+            buttons: {
+                confirm: {
+                    text: '确认',
+                    btnClass: 'waves-effect waves-button',
+                    action: function () {
+                        var ids = new Array();
+                        if (rows.length != 0 && id == null) {
+                            for (var i in rows) {
+                                ids.push(rows[i].id);
+                            }
+                        } else {
+                            ids.push(id);
+                        }
+                        //异步删除
+                        $.ajax({
+                            url: "../../productReview/delete",
+                            type: "post",
+                            dataType: "json",
+                            data: {ids: ids},
+                            success: function () {
+                                $('#table').bootstrapTable('refresh');
+                            }
+                        });
+                    }
+                },
+                cancel: {
+                    text: '取消',
+                    btnClass: 'waves-effect waves-button'
+                }
+            }
+        });
+    }
 }
 </script>
 </body>

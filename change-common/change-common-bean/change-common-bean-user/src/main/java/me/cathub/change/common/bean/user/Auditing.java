@@ -1,5 +1,9 @@
 package me.cathub.change.common.bean.user;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import me.cathub.change.common.tool.LongJsonSerializer;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -38,8 +42,11 @@ public class Auditing implements Serializable {
      */
     public static final int STATUS_NOT_ALLOW = 3;
 
+    @JsonSerialize(using = LongJsonSerializer.class)
     private long id;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date auditSubmitDate;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date auditAllowDate;
     private int type;
     private int status;
@@ -50,7 +57,9 @@ public class Auditing implements Serializable {
     private String notAllowMessage;
     private int tableIndex;
 
+    @JsonSerialize(using = LongJsonSerializer.class)
     private long user_id;
+    @JsonSerialize(using = LongJsonSerializer.class)
     private long admin_id;
 
     /**

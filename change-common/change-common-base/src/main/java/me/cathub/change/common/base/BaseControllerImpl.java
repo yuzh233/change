@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 public abstract class BaseControllerImpl<B extends Serializable, S extends BaseRpcServer<B>> implements BaseController<B> {
     private static final String SET_ID = "setId";
@@ -52,7 +53,7 @@ public abstract class BaseControllerImpl<B extends Serializable, S extends BaseR
     @ResponseBody
     @Override
     public B select(B bean) throws Exception {
-        return rpcService.select(bean, true);
+        return rpcService.select(bean, false);
     }
 
     @RequestMapping("/list")
@@ -61,7 +62,7 @@ public abstract class BaseControllerImpl<B extends Serializable, S extends BaseR
     public PageResult list(int page, int count, int tableIndex) throws Exception {
         PageResult result = new PageResult();
 
-        List datas = rpcService.list(page, count, tableIndex, true);
+        List datas = rpcService.list(page, count, tableIndex, false);
         int total = rpcService.count(tableIndex);
 
         result.setRows(datas);
@@ -105,4 +106,6 @@ public abstract class BaseControllerImpl<B extends Serializable, S extends BaseR
     public int clear(int tableIndex) throws Exception {
         return rpcService.clear(tableIndex);
     }
+
+    public void update_modelAttribute(Long id, Map<String, Object> map) throws Exception{}
 }

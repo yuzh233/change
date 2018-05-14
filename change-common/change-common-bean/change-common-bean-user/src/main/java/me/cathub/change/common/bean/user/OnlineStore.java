@@ -1,5 +1,9 @@
 package me.cathub.change.common.bean.user;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import me.cathub.change.common.tool.LongJsonSerializer;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -18,17 +22,21 @@ public class OnlineStore implements Serializable {
      */
     public static final int TYPE_AMAZON = 2;
 
+    @JsonSerialize(using = LongJsonSerializer.class)
     private long id;
 
     /**
      * 网店地址
      */
     private String url;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createDate;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date updateDate;
     private int type;
     private int tableIndex;
 
+    @JsonSerialize(using = LongJsonSerializer.class)
     private long shopkeeper_id;
 
     /**

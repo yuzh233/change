@@ -43,9 +43,9 @@ $(function() {
 		$.cookie('zheng-upms-systemtitle', systemtitle);
 	});
 	// 显示cookie菜单
-	var systemid = $.cookie('zheng-upms-systemid') || 1;
+	var systemid = $.cookie('zheng-upms-systemid') || 3;
 	var systemname = $.cookie('zheng-upms-systemname') || 'change-admin-product';
-	var systemtitle = $.cookie('zheng-upms-systemtitle') || '用户管理系统';
+	var systemtitle = $.cookie('zheng-upms-systemtitle') || '商品管理系统';
 	$('.system_menus').hide(0, function () {
 		$('.system_' + systemid).show();
 	});
