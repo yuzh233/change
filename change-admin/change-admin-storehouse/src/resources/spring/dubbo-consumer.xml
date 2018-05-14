@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://code.alibabatech.com/schema/dubbo
+       http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <dubbo:application name="change-admin-storehouse-consumer"  />
+
+    <dubbo:registry address="zookeeper://120.77.159.152:2181" />
+
+    <dubbo:reference id="storehouseRpcServer" interface="me.cathub.change.api.rpc.server.storehouse.StorehouseRpcServer" timeout="10000"/>
+    <dubbo:reference id="storehouseCountryRpcServer" interface="me.cathub.change.api.rpc.server.storehouse.StorehouseCountryRpcServer" timeout="10000"/>
+    <dubbo:reference id="storehouseProductStockRpcServer" interface="me.cathub.change.api.rpc.server.storehouse.StorehouseProductStockRpcServer" timeout="10000"/>
+
+    <dubbo:reference id="productRpcServer" interface="me.cathub.change.api.rpc.server.product.ProductRpcServer" timeout="10000"></dubbo:reference>
+    <dubbo:reference id="companyRpcServer" interface="me.cathub.change.api.rpc.server.user.CompanyRpcServer" timeout="10000"/>
+</beans>
