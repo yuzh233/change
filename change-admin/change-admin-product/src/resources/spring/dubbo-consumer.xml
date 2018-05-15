@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://code.alibabatech.com/schema/dubbo
+       http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <dubbo:application name="change-admin-product-consumer"  />
+
+    <dubbo:registry address="zookeeper://120.77.159.152:2181" />
+
+    <dubbo:reference id="productRpcServer" interface="me.cathub.change.api.rpc.server.product.ProductRpcServer" timeout="10000"></dubbo:reference>
+    <dubbo:reference id="productCategoryRpcServer" interface="me.cathub.change.api.rpc.server.product.ProductCategoryRpcServer" timeout="10000"></dubbo:reference>
+    <dubbo:reference id="productImageRpcServer" interface="me.cathub.change.api.rpc.server.product.ProductImageRpcServer" timeout="10000"></dubbo:reference>
+    <dubbo:reference id="productReviewRpcServer" interface="me.cathub.change.api.rpc.server.product.ProductReviewRpcServer" timeout="10000"></dubbo:reference>
+
+    <dubbo:reference id="propertyRpcServer" interface="me.cathub.change.api.rpc.server.product.PropertyRpcServer" timeout="10000"></dubbo:reference>
+    <dubbo:reference id="propertyValueRpcServer" interface="me.cathub.change.api.rpc.server.product.PropertyValueRpcServer" timeout="10000"></dubbo:reference>
+
+    <dubbo:reference id="brandQuotientRpcServer" interface="me.cathub.change.api.rpc.server.user.BrandQuotientRpcServer" timeout="10000"/>
+    <dubbo:reference id="companyRpcServer" interface="me.cathub.change.api.rpc.server.user.CompanyRpcServer" timeout="10000"/>
+</beans>

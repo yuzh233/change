@@ -1,0 +1,309 @@
+﻿<!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CRUD</title>
+
+    <link href="../../resources/plugins/bootstrap-3.3.0/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../../resources/plugins/material-design-iconic-font-2.2.0/css/material-design-iconic-font.min.css"
+          rel="stylesheet"/>
+    <link href="../../resources/plugins/bootstrap-table-1.11.0/bootstrap-table.min.css" rel="stylesheet"/>
+    <link href="../../resources/plugins/waves-0.7.5/waves.min.css" rel="stylesheet"/>
+    <link href="../../resources/plugins/jquery-confirm/jquery-confirm.min.css" rel="stylesheet"/>
+    <link href="../../resources/plugins/select2/css/select2.min.css" rel="stylesheet"/>
+
+    <link href="../../resources/css/common.css" rel="stylesheet"/>
+</head>
+<body>
+<div id="main">
+    <div id="toolbar">
+        <a class="waves-effect waves-button" href="javascript:;" onclick="createAction()"><i class="zmdi zmdi-plus"></i>
+            新增网店</a>
+        <!--<a class="waves-effect waves-button" href="javascript:;" onclick="updateAction()"><i class="zmdi zmdi-edit"></i> 编辑网店</a>-->
+        <a class="waves-effect waves-button" href="javascript:;" onclick="deleteAction()"><i
+                class="zmdi zmdi-close"></i> 批量删除网店</a>
+    </div>
+    <table id="table"></table>
+</div>
+<!-- 新增 -->
+<div id="createDialog" class="crudDialog" hidden>
+    <form class="createForm">
+        <div class="form-group">
+            <label for="create-url">网址</label>
+            <input id="create-url" type="text" class="form-control" name="url">
+        </div>
+        <div class="form-group">
+            <label for="create-type">类型</label>
+            <input id="create-type" type="text" class="form-control" name="type">
+        </div>
+        <div class="form-group">
+            <label for="create-shopkeeper">店主ID</label>
+            <input id="create-shopkeeper" type="text" class="form-control" name="shopkeeper.id">
+        </div>
+    </form>
+</div>
+
+<!-- 修改 -->
+<div id="updateDialog" class="crudDialog" hidden>
+    <form class="updateForm">
+        <p style="color: darkgray"> - 只更新填写的部分信息 - </p>
+        <div class="form-group">
+            <label for="update-url">网址</label>
+            <input id="update-url" type="text" class="form-control update-url" name="url">
+        </div>
+        <div class="form-group">
+            <label for="update-type">类型</label>
+            <input id="update-type" type="text" class="form-control update-type" name="type">
+        </div>
+    </form>
+</div>
+<script src="../../resources/plugins/jquery.1.12.4.min.js"></script>
+<script src="../../resources/plugins/bootstrap-3.3.0/js/bootstrap.min.js"></script>
+<script src="../../resources/plugins/bootstrap-table-1.11.0/bootstrap-table.min.js"></script>
+<script src="../../resources/plugins/bootstrap-table-1.11.0/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="../../resources/plugins/waves-0.7.5/waves.min.js"></script>
+<script src="../../resources/plugins/jquery-confirm/jquery-confirm.min.js"></script>
+<script src="../../resources/plugins/select2/js/select2.min.js"></script>
+
+<script src="../../resources/js/common.js"></script>
+<script>
+    var $table = $('#table');
+    $(function () {
+        $(document).on('focus', 'input[type="text"]', function () {
+            $(this).parent().find('label').addClass('active');
+        }).on('blur', 'input[type="text"]', function () {
+            if ($(this).val() == '') {
+                $(this).parent().find('label').removeClass('active');
+            }
+        });
+        // bootstrap table初始化
+        // http://bootstrap-table.wenzhixin.net.cn/zh-cn/documentation/
+        $table.bootstrapTable({
+            url: '../../onlineStore/list',
+            method: 'get',
+            height: getHeight(),
+            striped: true,
+            search: false,
+            searchOnEnterKey: true,
+            showRefresh: true,
+            showToggle: true,
+            showColumns: true,
+            minimumCountColumns: 2,
+            showPaginationSwitch: true,
+            clickToSelect: true,
+            detailView: true,
+            detailFormatter: 'detailFormatter',
+            pagination: true,
+            paginationLoop: false,
+            classes: 'table table-hover table-no-bordered',
+            sidePagination: 'server',
+            //silentSort: false,
+            smartDisplay: false,
+            idField: 'id',
+            sortName: 'id',
+            sortOrder: 'desc',
+            escape: true,
+            searchOnEnterKey: true,
+            idField: 'systemId',
+            maintainSelected: true,
+            toolbar: '#toolbar',
+            queryParamsType: "undefined",
+            pageNumber: 1,
+            pageSize: 15,
+            queryParams: function queryParams(params) {
+                var temp = {
+                    page: params.pageNumber,
+                    count: params.pageSize,
+                    tableIndex: 0
+                };
+                return temp;
+            },
+            columns: [
+                {field: 'state', checkbox: true},
+                {field: 'id', title: '编号', sortable: true, halign: 'left'},
+                {field: 'url', title: '网址', sortable: true, halign: 'left'},
+                {field: 'type', title: '类型', sortable: true, halign: 'left'},
+                {field: 'shopkeeper.username', title: '店主', sortable: true, halign: 'left'},
+                {field: 'createDate', title: '创建时间', sortable: true, halign: 'left'},
+                {field: 'updateDate', title: '更新时间', sortable: true, halign: 'left'},
+                {
+                    field: 'action',
+                    title: '操作',
+                    sortable: false,
+                    halign: 'left',
+                    formatter: 'actionFormatter',
+                    events: 'actionEvents',
+                    clickToSelect: false
+                }
+            ]
+        }).on('all.bs.table', function (e, name, args) {
+            $('[data-toggle="tooltip"]').tooltip();
+            $('[data-toggle="popover"]').popover();
+        });
+    });
+
+    function actionFormatter(value, row, index) {
+        return [
+            '<a class="like" href="javascript:void(0)" data-toggle="tooltip" title="Like"><i class="glyphicon glyphicon-heart"></i></a>　',
+            '<a class="edit ml10" href="javascript:void(0)" data-toggle="tooltip" title="Edit"><i class="glyphicon glyphicon-edit"></i></a>　',
+            '<a class="remove ml10" href="javascript:void(0)" data-toggle="tooltip" title="Remove"><i class="glyphicon glyphicon-remove"></i></a>'
+        ].join('');
+    }
+
+    window.actionEvents = {
+        'click .like': function (e, value, row, index) {
+            alert('You click like icon, row: ' + JSON.stringify(row));
+            console.log(value, row, index);
+        },
+        'click .edit': function (e, value, row, index) {
+            updateAction(row.id);
+        },
+        'click .remove': function (e, value, row, index) {
+            deleteAction(row.id);
+        }
+    };
+
+    function detailFormatter(index, row) {
+        var html = [];
+        $.each(row, function (key, value) {
+            html.push('<p><b>' + key + ':</b> ' + value + '</p>');
+        });
+        return html.join('');
+    }
+
+    // 新增
+    function createAction() {
+        $.confirm({
+            type: 'dark',
+            animationSpeed: 300,
+            title: '新增网店',
+            content: $('#createDialog').html(),
+            buttons: {
+                confirm: {
+                    text: '确认',
+                    btnClass: 'waves-effect waves-button',
+                    action: function () {
+                        $.ajax({
+                            url: "../../onlineStore/insert",
+                            type: "POST",
+                            contentType: "application/x-www-form-urlencoded",
+                            dataType: "json",
+                            data: $(".createForm:last").serialize(), //传递表单值
+                            success: function () {
+                                $table.bootstrapTable('refresh'); //刷新表格
+                            }
+                        });
+                    }
+                },
+                cancel: {
+                    text: '取消',
+                    btnClass: 'waves-effect waves-button'
+                }
+            }
+        });
+    }
+
+    // 编辑
+    function updateAction(id) {
+        $.confirm({
+            type: 'blue',
+            animationSpeed: 300,
+            title: '编辑网店信息',
+            content: $('#updateDialog').html(),
+            buttons: {
+                confirm: {
+                    text: '确认',
+                    btnClass: 'waves-effect waves-button',
+                    action: function () {
+                        var url = $(".update-url:last").val();
+                        var type = $(".update-type:last").val();
+
+                        //创建json对象
+                        var json = {};
+                        json.id = id;
+                        if (url != '') {
+                            json.url = url;
+                        }
+                        if (type != '') {
+                            json.type = type;
+                        }
+                        $.ajax({
+                            url: "../../onlineStore/update",
+                            type: "POST",
+                            dataType: "json",
+                            data: json,
+                            success: function () {
+                                $table.bootstrapTable('refresh');
+                            }
+                        });
+                    }
+                },
+                cancel: {
+                    text: '取消',
+                    btnClass: 'waves-effect waves-button'
+                }
+            }
+        });
+    }
+
+    // 删除
+    function deleteAction(id) {
+        var rows = $table.bootstrapTable('getSelections');
+        if (rows.length == 0 && id == null) {
+            $.confirm({
+                title: false,
+                content: '请至少选择一条记录！',
+                autoClose: 'cancel|3000',
+                backgroundDismiss: true,
+                buttons: {
+                    cancel: {
+                        text: '取消',
+                        btnClass: 'waves-effect waves-button'
+                    }
+                }
+            });
+        } else {
+            $.confirm({
+                type: 'red',
+                animationSpeed: 300,
+                title: false,
+                content: '确认删除吗？',
+                buttons: {
+                    confirm: {
+                        text: '确认',
+                        btnClass: 'waves-effect waves-button',
+                        action: function () {
+                            var ids = new Array();
+                            if (rows.length != 0 && id == null) {
+                                for (var i in rows) {
+                                    ids.push(rows[i].id);
+                                }
+                            } else {
+                                ids.push(id);
+                            }
+                            console.log('删除：id=' + ids);
+                            //异步删除
+                            $.ajax({
+                                url: "../../onlineStore/delete",
+                                type: "post",
+                                dataType: "json",
+                                data: {ids: ids},
+                                success: function () {
+                                    $('#table').bootstrapTable('refresh');
+                                }
+                            });
+                        }
+                    },
+                    cancel: {
+                        text: '取消',
+                        btnClass: 'waves-effect waves-button'
+                    }
+                }
+            });
+        }
+    }
+</script>
+</body>
+</html>
