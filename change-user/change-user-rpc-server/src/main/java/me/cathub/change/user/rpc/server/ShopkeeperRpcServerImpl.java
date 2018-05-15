@@ -25,11 +25,6 @@ public class ShopkeeperRpcServerImpl extends BaseRpcServerImpl<Shopkeeper, Shopk
     }
 
     @Override
-    public Shopkeeper login(Shopkeeper bean) throws Exception {
-        return dao.login(bean);
-    }
-
-    @Override
     public Shopkeeper fill(Shopkeeper bean) {
         try {
             Role role = roleRpcServer.select(new Role(bean.getRole_id()), true);

@@ -68,17 +68,6 @@ public class AdminDaoImpl extends BaseDaoMyBatisImpl<Admin> implements AdminDao 
     }
 
     @Override
-    public Admin login(Admin admin) throws Exception {
-        Admin result = null;
-        try {
-            result = sqlSessionTemplate.selectOne(NAME_SPACE + LOGIN, admin);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
-
-    @Override
     public Admin selectByName(String name, int tableIndex) throws Exception {
         Admin result = null;
         try {

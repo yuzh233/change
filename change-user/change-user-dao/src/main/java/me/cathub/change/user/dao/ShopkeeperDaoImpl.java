@@ -68,17 +68,6 @@ public class ShopkeeperDaoImpl extends BaseDaoMyBatisImpl<Shopkeeper> implements
     }
 
     @Override
-    public Shopkeeper login(Shopkeeper bean) throws Exception {
-        Shopkeeper result = null;
-        try {
-            result = sqlSessionTemplate.selectOne(NAME_SPACE + LOGIN, bean);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
-
-    @Override
     public Shopkeeper selectByName(String name, int tableIndex) throws Exception {
         Shopkeeper result = null;
         try {

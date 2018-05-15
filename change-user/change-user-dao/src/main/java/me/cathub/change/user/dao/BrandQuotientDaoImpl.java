@@ -68,17 +68,6 @@ public class BrandQuotientDaoImpl extends BaseDaoMyBatisImpl<BrandQuotient> impl
     }
 
     @Override
-    public BrandQuotient login(BrandQuotient bean) throws Exception {
-        BrandQuotient result = null;
-        try {
-            result = sqlSessionTemplate.selectOne(NAME_SPACE + LOGIN, bean);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
-
-    @Override
     public BrandQuotient selectByName(String name, int tableIndex) throws Exception {
         BrandQuotient result = null;
         try {
