@@ -108,10 +108,6 @@
         SELECT COUNT(*) FROM shopkeeper_${_parameter} WHERE yn=0
     </select>
 
-    <select id="login" parameterType="shopkeeper" resultMap="shopkeeper">
-        SELECT * FROM shopkeeper_${tableIndex} WHERE yn=1 AND username=#{username, jdbcType=VARCHAR} AND password=#{password, jdbcType=VARCHAR}
-    </select>
-
     <delete id="clear" parameterType="int">
         DELETE FROM shopkeeper_${_parameter} WHERE yn=0
     </delete>

@@ -11,5 +11,11 @@
 
     <artifactId>change-config-dao-user</artifactId>
 
-
+    <build>
+        <resources>
+            <resource>
+                <directory>resources</directory>
+            </resource>
+        </resources>
+    </build>
 </project>

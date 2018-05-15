@@ -112,10 +112,6 @@
         SELECT COUNT(*) FROM brandQuotient_${_parameter} WHERE yn=0
     </select>
 
-    <select id="login" parameterType="brandQuotient" resultMap="brandQuotient">
-        SELECT * FROM brandQuotient_${tableIndex} where yn=1 AND username=#{username, jdbcType=VARCHAR} AND password=#{password, jdbcType=VARCHAR}
-    </select>
-
     <delete id="clear" parameterType="int">
         DELETE FROM brandQuotient_${_parameter} WHERE yn=0
     </delete>

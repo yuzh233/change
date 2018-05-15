@@ -104,10 +104,6 @@
         SELECT COUNT(*) FROM admin_${_parameter} WHERE yn=0
     </select>
 
-    <select id="login" parameterType="admin" resultMap="admin">
-        SELECT * FROM admin_${tableIndex} where yn=1 AND username=#{username, jdbcType=VARCHAR} AND password=#{password, jdbcType=VARCHAR}
-    </select>
-
     <delete id="clear" parameterType="int">
         DELETE FROM admin_${_parameter} WHERE yn=0
     </delete>
