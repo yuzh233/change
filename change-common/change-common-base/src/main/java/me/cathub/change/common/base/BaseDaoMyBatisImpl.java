@@ -7,8 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * 通用的Mybatis dao抽象类
+ * @param <T> Java bean
+ */
 public abstract class BaseDaoMyBatisImpl<T extends Serializable> implements BaseDao<T> {
-    private static final String SET_ID = "setId";
 
     @Autowired
     protected SqlSessionTemplate sqlSessionTemplate;

@@ -5,9 +5,13 @@ import java.util.List;
 
 /**
  * 通用Dao接口
- * @param <T> 具体Bean
+ * @param <T> Java bean
  */
 public interface BaseDao<T extends Serializable> {
+
+    /**
+     * mybatis mappers
+     */
     String INSERT = ".insert";
     String DELETE_L = ".deleteL";
     String DELETE_P = ".deleteP";

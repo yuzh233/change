@@ -2,7 +2,12 @@ package me.cathub.change.common.base;
 
 import java.util.List;
 
+/**
+ * 通用的RpcServer接口
+ * @param <T>
+ */
 public interface BaseRpcServer<T> {
+
     /**
      * 插入数据
      * @param bean

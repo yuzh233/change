@@ -38,6 +38,11 @@ public class BrandQuotientRpcServerImpl extends BaseRpcServerImpl<BrandQuotient,
     }
 
     @Override
+    public BrandQuotient login(BrandQuotient bean) throws Exception {
+        return dao.login(bean);
+    }
+
+    @Override
     public BrandQuotient fill(BrandQuotient bean) {
         try {
             Company company = companyRpcServer.select(new Company(bean.getCompany_id()), true);

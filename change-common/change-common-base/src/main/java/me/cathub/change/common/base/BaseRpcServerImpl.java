@@ -9,6 +9,11 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
+/**
+ * 通用的RpcServer抽象类
+ * @param <B>
+ * @param <D>
+ */
 public abstract class BaseRpcServerImpl<B extends Serializable, D extends BaseDao<B>> implements BaseRpcServer<B>, FillAssociationDate<B> {
 
     private static final String SET_ID = "setId";

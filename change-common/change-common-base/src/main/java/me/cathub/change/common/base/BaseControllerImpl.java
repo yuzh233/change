@@ -8,8 +8,12 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 通用的控制器抽象类
+ * @param <B> Java bean type
+ * @param <S> Rpc server type
+ */
 public abstract class BaseControllerImpl<B extends Serializable, S extends BaseRpcServer<B>> implements BaseController<B> {
-    private static final String SET_ID = "setId";
 
     @Autowired
     protected S rpcService;

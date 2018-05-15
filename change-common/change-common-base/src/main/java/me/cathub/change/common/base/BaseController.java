@@ -2,8 +2,20 @@ package me.cathub.change.common.base;
 
 import java.util.Map;
 
+/**
+ * 通用的控制器接口
+ * @param <T>
+ */
 public interface BaseController<T> {
+
+    /**
+     * 逻辑删除标识
+     */
     boolean DEL_FLAG_L = true;
+
+    /**
+     * 物理删除标识
+     */
     boolean DEL_FLAG_P = false;
 
     /**

@@ -1,7 +1,7 @@
 package me.cathub.change.common.base;
 
 /**
- * 登陆接口
+ * 登陆校验接口
  * @param <T>
  */
 public interface LoginInterface<T> {

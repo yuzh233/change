@@ -25,6 +25,11 @@ public class AdminRpcServerImpl extends BaseRpcServerImpl<Admin, AdminDao> imple
     }
 
     @Override
+    public Admin login(Admin bean) throws Exception {
+        return dao.login(bean);
+    }
+
+    @Override
     public Admin fill(Admin bean) {
         try {
             Role role = roleRpcServer.select(new Role(bean.getRole_id()), true);
