@@ -1,9 +1,0 @@
-# Created by .ignore support plugin (hsz.mobi)
-.idea
-out
-*.iml
-.gitignore
-change-db
-change-apply
-change-sso
-#jdbc.properties
