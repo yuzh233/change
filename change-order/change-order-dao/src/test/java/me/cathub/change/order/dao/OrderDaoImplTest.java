@@ -142,11 +142,11 @@ public class OrderDaoImplTest {
 
     @Test
     public void testListByBrandQuotient() throws Exception {
-        orderDao.listByBrandQuotient(-1, 0,5, 0).forEach(System.out::println);
+        orderDao.listByCompanyId(-1, 0,5, 0).forEach(System.out::println);
     }
 
     @Test
     public void testCountBrandQuotientId() throws Exception {
-        System.out.println(orderDao.countByBrandQuotientId(-1, 0));
+        System.out.println(orderDao.countByCompanyId(-1, 0));
     }
 }

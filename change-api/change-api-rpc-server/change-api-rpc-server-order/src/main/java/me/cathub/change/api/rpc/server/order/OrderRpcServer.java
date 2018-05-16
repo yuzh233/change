@@ -2,67 +2,77 @@ package me.cathub.change.api.rpc.server.order;
 
 import me.cathub.change.common.base.BaseRpcServer;
 import me.cathub.change.common.base.FillAssociationDate;
-import me.cathub.change.common.bean.order.Order;
+import me.cathub.change.order.bean.Order;
 
 import java.util.List;
 
+/**
+ * 订单Rpc服务接口
+ *
+ * @author cheng
+ */
 public interface OrderRpcServer extends BaseRpcServer<Order>, FillAssociationDate<Order> {
+
     /**
      * 根据仓库id获取订单列表
-     * @param storehouse_id
+     * @param storehouseId
      * @param page
      * @param count
      * @param tableIndex
+     * @param flag
      * @return
      * @throws Exception
      */
-    List<Order> listByStorehouseId(long storehouse_id, int page, int count, int tableIndex, boolean flag) throws Exception;
+    List<Order> listByStorehouseId(long storehouseId, int page, int count, int tableIndex, boolean flag) throws Exception;
 
     /**
      * 根据仓库id获取订单数量
-     * @param storehouse_id
+     * @param storehouseId
      * @param tableIndex
      * @return
      * @throws Exception
      */
-    long countByStorehouseId(long storehouse_id, int tableIndex) throws Exception;
+    long countByStorehouseId(long storehouseId, int tableIndex) throws Exception;
 
     /**
      * 根据借卖方获取订单列表
-     * @param shopkeeper_id
+     * @param shopkeeperId
      * @param page
      * @param count
      * @param tableIndex
+     * @param flag
      * @return
      * @throws Exception
      */
-    List<Order> listByShopkeeperId(long shopkeeper_id, int page, int count, int tableIndex, boolean flag) throws Exception;
+    List<Order> listByShopkeeperId(long shopkeeperId, int page, int count, int tableIndex, boolean flag) throws Exception;
 
     /**
      * 根据借卖方获取订单数量
-     * @param shopkeeper_id
+     * @param shopkeeperId
      * @param tableIndex
      * @return
      * @throws Exception
      */
-    long countByShopkeeperId(long shopkeeper_id, int tableIndex) throws Exception;
+    long countByShopkeeperId(long shopkeeperId, int tableIndex) throws Exception;
 
     /**
      * 根据品牌商获取订单列表
-     * @param brandQuotient_id
+     * @param brandQuotientId
      * @param page
      * @param count
+     * @param tableIndex
+     * @param flag
+     * @return
+     * @throws Exception
+     */
+    List<Order> listByBrandQuotient(long brandQuotientId, int page, int count, int tableIndex, boolean flag) throws Exception;
+
+    /**
+     * 根据品牌商获取订单数量
+     * @param brandQuotientId
      * @param tableIndex
      * @return
      * @throws Exception
      */
-    List<Order> listByBrandQuotient(long brandQuotient_id, int page, int count, int tableIndex, boolean flag) throws Exception;
-
-    /**
-     * 根据品牌商获取订单数量
-     * @param brandQuotient_id
-     * @param tableIndex
-     * @return
-     */
-    long countBrandQuotientId(long brandQuotient_id, int tableIndex);
+    long countBrandQuotientId(long brandQuotientId, int tableIndex) throws Exception;
 }

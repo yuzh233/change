@@ -206,7 +206,7 @@ function updateAction(id) {
                 action: function () {
                     var url = $(".update-url:last").val();
                     var type = $(".update-type:last").val();
-                    var product_id = $(".update-product:last").val();
+                    var productId = $(".update-product:last").val();
 
                     //创建json对象
                     var productImage = {};
@@ -217,8 +217,8 @@ function updateAction(id) {
                     if (type != '') {
                         productImage.type = type;
                     }
-                    if (product_id != '') {
-                        productImage.product = {"id":product_id};
+                    if (productId != '') {
+                        productImage.product = {"id":productId};
                     }
                     productImage = JSON.stringify(productImage);
                     $.ajax({

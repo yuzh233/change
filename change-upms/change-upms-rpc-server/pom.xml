@@ -8,6 +8,8 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+    <artifactId>change-upms-rpc-server</artifactId>
+    <packaging>jar</packaging>
 
     <build>
         <plugins>
@@ -40,13 +42,18 @@
         </plugins>
         <finalName>change-upms-rpc-server</finalName>
     </build>
-    <packaging>jar</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    <artifactId>change-upms-rpc-server</artifactId>
     <dependencies>
+        <!-- local start -->
+        <dependency>
+            <groupId>me.cathub</groupId>
+            <artifactId>change-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
         <dependency>
             <groupId>me.cathub</groupId>
             <artifactId>change-api-rpc-server-upms</artifactId>
@@ -67,16 +74,11 @@
         </dependency>
         <dependency>
             <groupId>me.cathub</groupId>
-            <artifactId>change-common-tool</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>me.cathub</groupId>
             <artifactId>change-config-rpc-server-upms</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
+        <!-- local end -->
 
         <!-- dubbo -->
         <dependency>

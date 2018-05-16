@@ -2,10 +2,15 @@ package me.cathub.change.api.dao.upms;
 
 import me.cathub.change.common.base.BaseDao;
 import me.cathub.change.common.base.DaoSelectByName;
-import me.cathub.change.common.bean.upms.Permission;
+import me.cathub.change.upms.bean.Permission;
 
 import java.util.List;
 
+/**
+ * 授权Dao接口
+ *
+ * @author cheng
+ */
 public interface PermissionDao extends BaseDao<Permission>, DaoSelectByName<Permission> {
     String NAME_SPACE = "Permission";
 
@@ -14,16 +19,21 @@ public interface PermissionDao extends BaseDao<Permission>, DaoSelectByName<Perm
 
     /**
      * 根据角色获取权限列表
-     * @param role_id 角色id
-     * @return
-     */
-    List<Permission> listByRoleId(long role_id, int page, int count, int tableIndex) throws Exception;
-
-    /**
-     * 根据角色获取权限数量
-     * @param role_id
+     * @param roleId
+     * @param page
+     * @param count
+     * @param tableIndex
      * @return
      * @throws Exception
      */
-    int countByRoleId(long role_id, int tableIndex) throws Exception;
+    List<Permission> listByRoleId(long roleId, int page, int count, int tableIndex) throws Exception;
+
+    /**
+     * 根据角色获取权限数量
+     * @param roleId
+     * @param tableIndex
+     * @return
+     * @throws Exception
+     */
+    int countByRoleId(long roleId, int tableIndex) throws Exception;
 }

@@ -17,7 +17,7 @@
         <result property="createDate" column="createDate"/>
         <result property="updateDate" column="updateDate"/>
 
-        <result property="role_id" column="role_id"/>
+        <result property="roleId" column="role_id"/>
     </resultMap>
 
     <insert id="insert" parameterType="permission">
@@ -93,11 +93,11 @@
         DELETE FROM permission_${_parameter} WHERE yn=0
     </delete>
 
-    <select id="listByRoleId" parameterType="map" resultMap="permission">
+    <select id="listByRole_id" parameterType="map" resultMap="permission">
         SELECT * FROM permission_${tableIndex} WHERE yn=1 AND role_id=#{role_id, jdbcType=BIGINT}
     </select>
 
-    <select id="countByRoleId" parameterType="map" resultType="int">
+    <select id="countByRole_id" parameterType="map" resultType="int">
         SELECT COUNT(*) FROM permission_${tableIndex} WHERE yn=1 AND role_id=#{role_id, jdbcType=BIGINT}
     </select>
 

@@ -2,13 +2,18 @@ package me.cathub.change.storehouse.dao;
 
 import me.cathub.change.api.dao.storehouse.StorehouseCountryDao;
 import me.cathub.change.common.base.BaseDaoMyBatisImpl;
-import me.cathub.change.common.bean.storehouse.StorehouseCountry;
+import me.cathub.change.storehouse.bean.StorehouseCountry;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 仓库所属国家Dao实现类
+ *
+ * @author cheng
+ */
 @Repository
 public class StorehouseCountryDaoImpl extends BaseDaoMyBatisImpl<StorehouseCountry> implements StorehouseCountryDao {
 
@@ -69,15 +74,10 @@ public class StorehouseCountryDaoImpl extends BaseDaoMyBatisImpl<StorehouseCount
 
     @Override
     public StorehouseCountry selectByName(String name, int tableIndex) throws Exception {
-        StorehouseCountry result = null;
-        try {
-            Map<String, Object> map = new HashMap<>();
-            map.put("name", name);
-            map.put("tableIndex", tableIndex);
-            result = sqlSessionTemplate.selectOne(NAME_SPACE + SELECT_BY_NAME, map);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return result;
+        Map<String, Object> map = new HashMap<>(2);
+        map.put("name", name);
+        map.put("tableIndex", tableIndex);
+
+        return search(NAME_SPACE + SELECT_BY_NAME, map);
     }
 }

@@ -8,14 +8,14 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+    <artifactId>change-upms-dao</artifactId>
     <packaging>jar</packaging>
 
-    <artifactId>change-upms-dao</artifactId>
-
     <dependencies>
+        <!-- local start -->
         <dependency>
             <groupId>me.cathub</groupId>
-            <artifactId>change-common-base</artifactId>
+            <artifactId>change-common</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
@@ -25,12 +25,7 @@
         </dependency>
         <dependency>
             <groupId>me.cathub</groupId>
-            <artifactId>change-common-bean-upms</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>me.cathub</groupId>
-            <artifactId>change-common-tool</artifactId>
+            <artifactId>change-upms-bean</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
@@ -38,6 +33,7 @@
             <artifactId>change-config-dao-upms</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <!-- local end -->
 
         <dependency>
             <groupId>junit</groupId>

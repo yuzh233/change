@@ -8,12 +8,12 @@ import me.cathub.change.api.rpc.server.upms.PermissionRpcServer;
 import me.cathub.change.api.rpc.server.upms.RoleRpcServer;
 import me.cathub.change.api.rpc.server.user.*;
 import me.cathub.change.common.bean.product.ProductImage;
-import me.cathub.change.common.tool.HTTPTool;
-import me.cathub.change.common.tool.aliyun.OSSAPI;
+import me.cathub.change.common.bean.product.PropertyValue;
 import me.cathub.change.db.bean.Product;
 import me.cathub.change.common.bean.product.ProductCategory;
 import me.cathub.change.common.bean.user.BrandQuotient;
 import me.cathub.change.common.bean.user.Company;
+import me.cathub.change.db.bean.Property;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -95,8 +95,9 @@ public class FillDate {
                     String company_name = temp.getCompany_name();
                     String image_url = temp.getImage_url();
 
-                    if (! image_url.contains(".jpg"))
+                    if (! image_url.contains(".jpg")) {
                         continue;
+                    }
 
                     String name = temp.getName();
                     float price = temp.getPrice();
@@ -133,11 +134,11 @@ public class FillDate {
                     // 填充产品图片数据
                     ProductImage productImage = new ProductImage();
                     productImage.setType(ProductImage.TYPE_COVER);
-                    productImage.setUrl(OSSAPI.getProductImgUrl(company_name, OSSAPI.getSuffix(image_url)));
+//                    productImage.setUrl(OSSAPI.getProductImgUrl(company_name, OSSAPI.getSuffix(image_url)));
                     productImage.setProduct(new me.cathub.change.common.bean.product.Product(p_id));
 
                     // 保存图片到OSS
-                    OSSAPI.uploadResource(productImage.getUrl(), HTTPTool.getInputStream(image_url));
+//                    OSSAPI.uploadResource(productImage.getUrl(), HTTPTool.getInputStream(image_url));
 
                     // 插入产品图片
                     productImageRpcServer.insert(productImage);
@@ -158,7 +159,7 @@ public class FillDate {
 
         for (int p = 0; p < TOTAL_PAGE; p++) {
             productImageRpcServer.list(p, PAGE_COUNT, 0, false).stream()
-                    .filter(bean -> bean.getProduct().getProductCategory_id() == 0)
+                    .filter(bean -> bean.getProduct().getProductCategoryId() == 0)
                     .forEach(bean -> {
 
                         try {
@@ -166,7 +167,7 @@ public class FillDate {
                              * 1. OSS 删除图片
                              * 2. 数据库删除 产品 and 产品图片
                              */
-//                            OSSAPI.deleteObject(bean.getUrl());
+//                            OSSAPI.deleteObject(common.getUrl());
                             productRpcServer.deleteL(bean.getProduct());
                             productImageRpcServer.deleteL(bean);
                         } catch (Exception e) {
@@ -184,6 +185,72 @@ public class FillDate {
         ProductImage productImage = new ProductImage();
         productImage.setProduct(new me.cathub.change.common.bean.product.Product(insert));
         System.out.println(productImageRpcServer.insert(productImage));
+    }
+
+    @Test
+    public void fillProperty() throws Exception {
+        File rdir = new File("C:\\Users\\cheng\\Desktop\\DATA\\data");
+        File[] dirs = rdir.listFiles();
+        int i = 0;
+        int j = 0;
+
+        for (File dir:dirs) {
+            File[] jsonFiles = dir.listFiles();
+            for (File jsonFile:jsonFiles) {
+                JSONObject jsonObject = JSONUtil.readJSONObject(jsonFile, Charset.defaultCharset());
+                Product product = JSONUtil.toBean(JSONUtil.getByPath(jsonObject, "product").toString(), Product.class);
+
+                me.cathub.change.common.bean.product.Product temp = productRpcServer.selectByName(product.getName(), 0, false);
+
+                if (temp != null) {
+                    if (temp.getBrandQuotient() == null) {
+                        continue;
+                    }
+                    Company company = companyRpcServer.select(new Company(temp.getBrandQuotient().getCompany_id()), true);
+                    if (company == null) {
+                        continue;
+                    }
+
+//                    // 填充图片
+//                    for (me.cathub.change.db.common.ProductImage image:product.getImages()) {
+//                        ProductImage productImage = new ProductImage();
+//                        productImage.setProduct(temp);
+//                        productImage.setType(image.getType());
+//
+//                        productImage.setUrl(OSSAPI.getProductImgUrl(company.getName(), OSSAPI.getSuffix(image.getUrl())));
+//                        // 保存图片到OSS
+//                        OSSAPI.uploadResource(productImage.getUrl(), HTTPTool.getInputStream(image.getUrl()));
+//
+//                        // 插入产品图片
+//                        productImageRpcServer.insert(productImage);
+//                    }
+
+                    for (Property property:product.getPropertys()) {
+                        String name = property.getName();
+                        String value = property.getValue();
+
+                        me.cathub.change.common.bean.product.Property pro = propertyRpcServer.selectByNameAndProductCategory(name, temp.getProductCategory_id(), 0, true);
+                        // 产品所属分类不存在这个属性 插入
+                        if (pro == null) {
+                            pro = new me.cathub.change.common.bean.product.Property();
+                            pro.setProductCategory(temp.getProductCategory());
+                            pro.setName(name);
+                            long pid = propertyRpcServer.insert(pro);
+                            pro.setId(pid);
+                        }
+
+                        PropertyValue pv = new PropertyValue();
+                        pv.setProperty(pro);
+                        pv.setProduct(temp);
+                        pv.setValue(value);
+                        propertyValueRpcServer.insert(pv);
+                        System.out.println("INSERT SUCCESS:" + temp.getProductCategory().getName() + ":" + temp.getName() + "/" + pro.getName() + ":" + pv.getValue());
+                    }
+                    i++;
+                }
+            }
+        }
+        System.out.println(i);
     }
 
     @Test

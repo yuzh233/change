@@ -1,15 +1,19 @@
 package me.cathub.change.product.dao;
 
-import com.github.pagehelper.PageHelper;
 import me.cathub.change.api.dao.product.ProductCategoryDao;
 import me.cathub.change.common.base.BaseDaoMyBatisImpl;
-import me.cathub.change.common.bean.product.ProductCategory;
+import me.cathub.change.product.bean.ProductCategory;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 产品分类Dao实现类
+ *
+ * @author cheng
+ */
 @Repository
 public class ProductCategoryDaoImpl extends BaseDaoMyBatisImpl<ProductCategory> implements ProductCategoryDao {
 
@@ -70,50 +74,28 @@ public class ProductCategoryDaoImpl extends BaseDaoMyBatisImpl<ProductCategory> 
 
     @Override
     public ProductCategory selectByName(String name, int tableIndex) throws Exception {
-        ProductCategory result = null;
-        try {
-            Map<String, Object> map = new HashMap<>();
-            map.put("name", name);
-            map.put("tableIndex", tableIndex);
-            result = sqlSessionTemplate.selectOne(NAME_SPACE + SELECT_BY_NAME, map);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return result;
+        Map<String, Object> map = new HashMap<>(2);
+        map.put("name", name);
+        map.put("tableIndex", tableIndex);
+
+        return search(NAME_SPACE + SELECT_BY_NAME, map);
     }
 
     @Override
     public List<ProductCategory> childListById(long id, int page, int count, int tableIndex) throws Exception {
-        List<ProductCategory> results = null;
+        Map<String, Object> map = new HashMap<>(2);
+        map.put("id", id);
+        map.put("tableIndex", tableIndex);
 
-        try {
-            Map<String, ? super Number> map = new HashMap<>();
-            map.put("id", id);
-            map.put("tableIndex", tableIndex);
-
-            PageHelper.startPage(page, count);
-            results = sqlSessionTemplate.selectList(NAME_SPACE + CHILD_LIST_BY_ID, map);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return results;
+        return baseList(NAME_SPACE + CHILD_LIST_BY_ID, page, count, map);
     }
 
     @Override
     public int childCountById(long id, int tableIndex) throws Exception {
-        int count = 0;
+        Map<String, Object> map = new HashMap<>(2);
+        map.put("id", id);
+        map.put("tableIndex", tableIndex);
 
-        try {
-            Map<String, ? super Number> map = new HashMap<>();
-            map.put("id", id);
-            map.put("tableIndex", tableIndex);
-
-            count = sqlSessionTemplate.selectOne(NAME_SPACE + CHILD_COUNT_BY_ID, map);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return count;
+        return baseCount(NAME_SPACE + CHILD_COUNT_BY_ID, map);
     }
 }

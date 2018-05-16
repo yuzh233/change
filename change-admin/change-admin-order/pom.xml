@@ -8,9 +8,37 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
     <artifactId>change-admin-order</artifactId>
+
     <dependencies>
+        <!-- local start -->
+        <dependency>
+            <groupId>me.cathub</groupId>
+            <artifactId>change-api-rpc-server-upms</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>me.cathub</groupId>
+            <artifactId>change-api-rpc-server-user</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>me.cathub</groupId>
+            <artifactId>change-api-rpc-server-product</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>me.cathub</groupId>
+            <artifactId>change-api-rpc-server-storehouse</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>me.cathub</groupId>
+            <artifactId>change-api-rpc-server-order</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <!-- local end -->
+
         <!-- dubbo -->
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -35,38 +63,5 @@
             <artifactId>javassist</artifactId>
             <version>3.20.0-GA</version>
         </dependency>
-
-        <dependency>
-            <groupId>me.cathub</groupId>
-            <artifactId>change-api-rpc-server-upms</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>me.cathub</groupId>
-            <artifactId>change-api-rpc-server-user</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>me.cathub</groupId>
-            <artifactId>change-api-rpc-server-product</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>me.cathub</groupId>
-            <artifactId>change-api-rpc-server-storehouse</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>me.cathub</groupId>
-            <artifactId>change-common-bean-order</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>me.cathub</groupId>
-            <artifactId>change-api-rpc-server-order</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
     </dependencies>
-
-
 </project>

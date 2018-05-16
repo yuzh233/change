@@ -2,13 +2,18 @@ package me.cathub.change.user.dao;
 
 import me.cathub.change.api.dao.user.AdminDao;
 import me.cathub.change.common.base.BaseDaoMyBatisImpl;
-import me.cathub.change.common.bean.user.Admin;
+import me.cathub.change.user.bean.Admin;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 管理员Dao实现类
+ *
+ * @author cheng
+ */
 @Repository
 public class AdminDaoImpl extends BaseDaoMyBatisImpl<Admin> implements AdminDao {
 
@@ -69,15 +74,10 @@ public class AdminDaoImpl extends BaseDaoMyBatisImpl<Admin> implements AdminDao 
 
     @Override
     public Admin selectByName(String name, int tableIndex) throws Exception {
-        Admin result = null;
-        try {
-            Map<String, Object> map = new HashMap<>();
-            map.put("name", name);
-            map.put("tableIndex", tableIndex);
-            result = sqlSessionTemplate.selectOne(NAME_SPACE + SELECT_BY_NAME, map);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return result;
+        Map<String, Object> map = new HashMap<>(2);
+        map.put("name", name);
+        map.put("tableIndex", tableIndex);
+
+        return search(NAME_SPACE + SELECT_BY_NAME, map);
     }
 }

@@ -8,21 +8,14 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+    <artifactId>change-api-rpc-server-storehouse</artifactId>
     <packaging>jar</packaging>
 
-    <artifactId>change-api-rpc-server-storehouse</artifactId>
     <dependencies>
         <dependency>
             <groupId>me.cathub</groupId>
-            <artifactId>change-common-base</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>me.cathub</groupId>
-            <artifactId>change-common-bean-storehouse</artifactId>
+            <artifactId>change-storehouse-bean</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
-
-
 </project>

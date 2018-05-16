@@ -17,7 +17,7 @@
         <result property="createDate" column="createDate"/>
         <result property="updateDate" column="updateDate"/>
 
-        <result property="productCategory_id" column="productCategory_id"/>
+        <result property="productCategoryId" column="productCategory_id"/>
     </resultMap>
 
     <insert id="insert" parameterType="property">
@@ -93,11 +93,11 @@
         DELETE FROM property_${_parameter} WHERE yn=0
     </delete>
 
-    <select id="listByProductCategoryId" parameterType="map" resultMap="property">
+    <select id="listByProductCategory_id" parameterType="map" resultMap="property">
         SELECT * FROM property_${tableIndex} WHERE yn=1 AND productCategory_id=#{productCategory_id, jdbcType=BIGINT}
     </select>
 
-    <select id="countByProductCategoryId" parameterType="map" resultType="int">
+    <select id="countByProductCategory_id" parameterType="map" resultType="int">
         SELECT COUNT(*) FROM property_${tableIndex} WHERE yn=1 AND productCategory_id=#{productCategory_id, jdbcType=BIGINT}
     </select>
 

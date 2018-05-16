@@ -1,14 +1,18 @@
 package me.cathub.change.order.dao;
 
-import com.github.pagehelper.PageHelper;
 import me.cathub.change.api.dao.order.OrderItemDao;
 import me.cathub.change.common.base.BaseDaoMyBatisImpl;
-import me.cathub.change.common.bean.order.OrderItem;
+import me.cathub.change.order.bean.OrderItem;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * 订单项Dao实现
+ *
+ * @author cheng
+ */
 @Repository
 public class OrderItemDaoImpl extends BaseDaoMyBatisImpl<OrderItem> implements OrderItemDao {
 
@@ -68,32 +72,20 @@ public class OrderItemDaoImpl extends BaseDaoMyBatisImpl<OrderItem> implements O
     }
 
     @Override
-    public List<OrderItem> listByOrderId(long order_id, int page, int count, int tableIndex) throws Exception {
-        List<OrderItem> results = null;
-        try {
-            HashMap<String, ? super Number> map = new HashMap<>();
-            map.put("order_id", order_id);
-            map.put("tableIndex", tableIndex);
+    public List<OrderItem> listByOrderId(long orderId, int page, int count, int tableIndex) throws Exception {
+        HashMap<String, Object> map = new HashMap<>(2);
+        map.put("order_id", orderId);
+        map.put("tableIndex", tableIndex);
 
-            PageHelper.startPage(page, count);
-            results = sqlSessionTemplate.selectList(NAME_SPACE + LIST_BY_ORDER_ID, map);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return results;
+        return baseList(NAME_SPACE + LIST_BY_ORDER_ID, page, count, map);
     }
 
     @Override
-    public int countByOrderId(long order_id, int tableIndex) throws Exception {
-        int count = 0;
-        try {
-            HashMap<String, ? super Number> map = new HashMap<>();
-            map.put("order_id", order_id);
-            map.put("tableIndex", tableIndex);
-            count = sqlSessionTemplate.selectOne(NAME_SPACE + COUNT_BY_ORDER_ID, map);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return count;
+    public int countByOrderId(long orderId, int tableIndex) throws Exception {
+        HashMap<String, Object> map = new HashMap<>(2);
+        map.put("order_id", orderId);
+        map.put("tableIndex", tableIndex);
+
+        return baseCount(NAME_SPACE + COUNT_BY_ORDER_ID, map);
     }
 }

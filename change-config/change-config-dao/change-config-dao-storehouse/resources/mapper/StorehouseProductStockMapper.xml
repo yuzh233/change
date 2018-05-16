@@ -18,10 +18,10 @@
         <result property="createDate" column="createDate"/>
         <result property="updateDate" column="updateDate"/>
 
-        <result property="product_id" column="product_id"/>
-        <result property="storehouse_id" column="storehouse_id"/>
-        <result property="productCategory_id" column="productCategory_id"/>
-        <result property="company_id" column="company_id"/>
+        <result property="productId" column="product_id"/>
+        <result property="storehouseId" column="storehouse_id"/>
+        <result property="productCategoryId" column="productCategory_id"/>
+        <result property="companyId" column="company_id"/>
     </resultMap>
 
     <insert id="insert" parameterType="storehouseProductStock">
@@ -105,11 +105,11 @@
         DELETE FROM storehouseProductStock_${_parameter} WHERE yn=0
     </delete>
 
-    <select id="selectByStorehouseIdAndProductId" parameterType="map" resultMap="storehouseProductStock">
+    <select id="selectByStorehouse_idAndProduct_id" parameterType="map" resultMap="storehouseProductStock">
         SELECT * FROM storehouseProductStock_${tableIndex} WHERE yn=1 AND storehouse_id=#{storehouse_id, jdbcType=BIGINT} AND product_id=#{product_id, jdbcType=BIGINT}
     </select>
 
-    <select id="listByStorehouseId" parameterType="map" resultMap="storehouseProductStock">
+    <select id="listByStorehouse_id" parameterType="map" resultMap="storehouseProductStock">
         SELECT * FROM storehouseProductStock_${tableIndex} WHERE yn=1 AND storehouse_id=#{storehouse_id, jdbcType=BIGINT}
     </select>
 </mapper>

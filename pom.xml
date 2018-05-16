@@ -32,10 +32,9 @@
         <module>change-storehouse</module>
         <module>change-order</module>
         <module>change-wallet</module>
-        <module>change-db</module>
+        <!--<module>change-db</module>-->
         <module>change-admin</module>
-        <module>change-apply</module>
-        <module>change-sso</module>
+        <!--<module>change-sso</module>-->
         <module>change-publish</module>
     </modules>
 </project>

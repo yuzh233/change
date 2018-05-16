@@ -17,8 +17,8 @@
         <result property="createDate" column="createDate"/>
         <result property="updateDate" column="updateDate"/>
 
-        <result property="shopkeeper_id" column="shopkeeper_id"/>
-        <result property="product_id" column="product_id"/>
+        <result property="shopkeeperId" column="shopkeeper_id"/>
+        <result property="productId" column="product_id"/>
     </resultMap>
 
     <insert id="insert" parameterType="productReview">
@@ -95,11 +95,11 @@
         DELETE FROM productReview_${_parameter} WHERE yn=0
     </delete>
 
-    <select id="listByProductId" parameterType="map" resultMap="productReview">
+    <select id="listByProduct_id" parameterType="map" resultMap="productReview">
         SELECT * FROM productReview_${tableIndex} WHERE yn=1 AND product_id=#{product_id, jdbcType=BIGINT}
     </select>
 
-    <select id="countByProductId" parameterType="map" resultType="int">
+    <select id="countByProduct_id" parameterType="map" resultType="int">
         SELECT COUNT(*) FROM productReview_${tableIndex} WHERE yn=1 AND product_id=#{product_id, jdbcType=BIGINT}
     </select>
 </mapper>

@@ -22,7 +22,7 @@
         <result property="updateDate" column="updateDate"/>
         <result property="status" column="status"/>
 
-        <result property="role_id" column="role_id"/>
+        <result property="roleId" column="role_id"/>
     </resultMap>
 
     <insert id="insert" parameterType="shopkeeper">
@@ -116,7 +116,7 @@
         SELECT * FROM shopkeeper_${tableIndex} WHERE yn=1 AND username=#{name, jdbcType=VARCHAR}
     </select>
 
-    <select id="selectByCompanyId" parameterType="map" resultType="shopkeeper">
+    <select id="selectByCompany_id" parameterType="map" resultType="shopkeeper">
         SELECT * FROM shopkeeper_${tableIndex} WHERE yn=1 AND company_id=#{company_id, jdbcType=BIGINT}
     </select>
 </mapper>

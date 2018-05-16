@@ -15,9 +15,10 @@
         <id property="id" column="id"/>
         <result property="name" column="name"/>
         <result property="storey" column="storey"/>
-        <result property="parent_id" column="parent_id"/>
         <result property="createDate" column="createDate"/>
         <result property="updateDate" column="updateDate"/>
+
+        <result property="parentId" column="parent_id"/>
     </resultMap>
 
     <insert id="insert" parameterType="productCategory">
@@ -98,11 +99,11 @@
         SELECT * FROM productCategory_${tableIndex} WHERE yn=1 AND name=#{name, jdbcType=VARCHAR}
     </select>
 
-    <select id="childListById" parameterType="map" resultMap="productCategory">
+    <select id="childListBy_id" parameterType="map" resultMap="productCategory">
         SELECT * FROM productCategory_${tableIndex} WHERE yn=1 AND parent_id=${id, jdbcType=BIGINT}
     </select>
 
-    <select id="childCountById" parameterType="map" resultMap="productCategory">
+    <select id="childCountBy_id" parameterType="map" resultMap="productCategory">
         SELECT COUNT(*) productCategory_${tableIndex} WHERE yn=1 AND parent_id=${id, jdbcType=BIGINT}
     </select>
 </mapper>

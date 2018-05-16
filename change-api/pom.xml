@@ -8,13 +8,19 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+    <artifactId>change-api</artifactId>
     <packaging>pom</packaging>
 
-    <artifactId>change-api</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>me.cathub</groupId>
+            <artifactId>change-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
     <modules>
         <module>change-api-dao</module>
         <module>change-api-rpc-server</module>
     </modules>
-
-
 </project>

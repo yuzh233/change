@@ -19,7 +19,7 @@
         <result property="createDate" column="createDate"/>
         <result property="updateDate" column="updateDate"/>
 
-        <result property="storehouseCountry_id" column="storehouseCountry_id"/>
+        <result property="storehouseCountryId" column="storehouseCountry_id"/>
     </resultMap>
 
     <insert id="insert" parameterType="storehouse">
@@ -105,11 +105,11 @@
         DELETE FROM storehouse_${_parameter} WHERE yn=0
     </delete>
 
-    <select id="listByStorehouseCountryId" parameterType="map" resultMap="storehouse">
+    <select id="listByStorehouseCountry_id" parameterType="map" resultMap="storehouse">
         SELECT * FROM storehouse_${tableIndex} WHERE yn=1 AND storehouseCountry_id=#{storehouseCountry_id, jdbcType=BIGINT}
     </select>
 
-    <select id="countByStorehouseCountryId" parameterType="map" resultType="int">
+    <select id="countByStorehouseCountry_id" parameterType="map" resultType="int">
         SELECT COUNT(*) FROM storehouse_${tableIndex} WHERE yn=1 AND storehouseCountry_id=#{storehouseCountry_id, jdbcType=BIGINT}
     </select>
 </mapper>

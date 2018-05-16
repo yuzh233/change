@@ -1,15 +1,19 @@
 package me.cathub.change.user.dao;
 
-import com.github.pagehelper.PageHelper;
 import me.cathub.change.api.dao.user.AuditingDao;
 import me.cathub.change.common.base.BaseDaoMyBatisImpl;
-import me.cathub.change.common.bean.user.Auditing;
+import me.cathub.change.user.bean.Auditing;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 入驻审核Dao实现类
+ *
+ * @author cheng
+ */
 @Repository
 public class AuditingDaoImpl extends BaseDaoMyBatisImpl<Auditing> implements AuditingDao {
 
@@ -69,64 +73,40 @@ public class AuditingDaoImpl extends BaseDaoMyBatisImpl<Auditing> implements Aud
     }
 
     @Override
-    public List<Auditing> listByAdminIdAndUserType(long admin_id, int type, int page, int count, int tableIndex) throws Exception {
-        List<Auditing> results = null;
-        try {
-            Map<String, ? super Number> map = new HashMap<>();
-            map.put("admin_id", admin_id);
-            map.put("type", type);
-            map.put("tableIndex", tableIndex);
+    public List<Auditing> listByAdminIdAndUserType(long adminId, int type, int page, int count, int tableIndex) throws Exception {
+        Map<String, Object> map = new HashMap<>(3);
+        map.put("admin_id", adminId);
+        map.put("type", type);
+        map.put("tableIndex", tableIndex);
 
-            PageHelper.startPage(page, count);
-            results = sqlSessionTemplate.selectList(NAME_SPACE + LIST_BY_ADMIN_AND_TYPE, map);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return results;
+        return baseList(NAME_SPACE + LIST_BY_ADMIN_AND_TYPE, page, count, map);
+    }
+
+    @Override
+    public int countByAdminIdAndUserType(long adminId, int type, int tableIndex) throws Exception {
+        Map<String, Object> map = new HashMap<>(3);
+        map.put("admin_id", adminId);
+        map.put("type", type);
+        map.put("tableIndex", tableIndex);
+
+        return baseCount(NAME_SPACE + COUNT_BY_ADMIN_AND_TYPE, map);
     }
 
     @Override
     public List<Auditing> listByNotAuditing(int type, int page, int count, int tableIndex) throws Exception {
-        List<Auditing> results = null;
-        try {
-            Map<String, ? super Number> map = new HashMap<>();
-            map.put("type", type);
-            map.put("tableIndex", tableIndex);
+        Map<String, Object> map = new HashMap<>(2);
+        map.put("type", type);
+        map.put("tableIndex", tableIndex);
 
-            PageHelper.startPage(page, count);
-            results = sqlSessionTemplate.selectList(NAME_SPACE + LIST_BY_NOT_AUDITING, map);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return results;
-    }
-
-    @Override
-    public int countByAdminIdAndUserType(long admin_id, int type, int tableIndex) throws Exception {
-        int count = 0;
-        try {
-            Map<String, ? super Number> map = new HashMap<>();
-            map.put("admin_id", admin_id);
-            map.put("type", type);
-            map.put("tableIndex", tableIndex);
-            count = sqlSessionTemplate.selectOne(NAME_SPACE + COUNT_BY_ADMIN_AND_TYPE, map);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return count;
+        return baseList(NAME_SPACE + LIST_BY_NOT_AUDITING, page, count, map);
     }
 
     @Override
     public int countByNotAuditing(int type, int tableIndex) throws Exception {
-        int count = 0;
-        try {
-            Map<String, ? super Number> map = new HashMap<>();
-            map.put("type", type);
-            map.put("tableIndex", tableIndex);
-            count = sqlSessionTemplate.selectOne(NAME_SPACE + COUNT_BY_NOT_AUDITING, map);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return count;
+        Map<String, Object> map = new HashMap<>(2);
+        map.put("type", type);
+        map.put("tableIndex", tableIndex);
+
+        return baseCount(NAME_SPACE + COUNT_BY_NOT_AUDITING, map);
     }
 }

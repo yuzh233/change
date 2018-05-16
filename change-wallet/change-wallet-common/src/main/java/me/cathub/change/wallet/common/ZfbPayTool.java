@@ -4,6 +4,11 @@ import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.request.AlipayTradePagePayRequest;
 
+/**
+ * 支付宝支付api工具类
+ *
+ * @author cheng
+ */
 public class ZfbPayTool {
     AlipayClient client = new DefaultAlipayClient(
             ZfbPayConfig.GATEWAY_URL,

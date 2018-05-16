@@ -11,7 +11,7 @@
     <import resource="spring-product-dao.xml"/>
 
     <!-- id 生成器 -->
-    <bean id="sequence" class="me.cathub.change.common.tool.Sequence">
+    <bean id="sequence" class="me.cathub.change.common.util.key.Sequence">
         <constructor-arg index="0" value="2"/>
         <constructor-arg index="1" value="0"/>
     </bean>

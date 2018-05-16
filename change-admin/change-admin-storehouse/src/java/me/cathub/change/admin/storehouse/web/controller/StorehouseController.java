@@ -4,8 +4,8 @@ package me.cathub.change.admin.storehouse.web.controller;
 import me.cathub.change.api.rpc.server.storehouse.StorehouseCountryRpcServer;
 import me.cathub.change.api.rpc.server.storehouse.StorehouseRpcServer;
 import me.cathub.change.common.base.BaseControllerImpl;
-import me.cathub.change.common.bean.storehouse.Storehouse;
-import me.cathub.change.common.bean.storehouse.StorehouseCountry;
+import me.cathub.change.storehouse.bean.Storehouse;
+import me.cathub.change.storehouse.bean.StorehouseCountry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,19 +17,22 @@ import java.util.Map;
 
 /**
  * 仓库模块 - 仓库实体
+ *
+ * @author zhangYu
  */
-
 @Controller
 @RequestMapping("/storehouse")
 public class StorehouseController extends BaseControllerImpl<Storehouse, StorehouseRpcServer> {
+
     @Autowired
     private StorehouseCountryRpcServer storehouseCountryRpcServer;
 
+    @RequestMapping("/restores")
+    @ResponseBody
     @Override
     public int restores(long[] ids) throws Exception {
-        return 0;
+        return rpcService.restores(ids, new Storehouse());
     }
-
 
     @RequestMapping("/delete")
     @ResponseBody
@@ -51,7 +54,7 @@ public class StorehouseController extends BaseControllerImpl<Storehouse, Storeho
 
     @ModelAttribute
     @Override
-    public void update_modelAttribute(Long id, Map<String, Object> map) throws Exception{
+    public void updateModelAttribute(Long id, Map<String, Object> map) throws Exception{
         if(id!=null) {
             Storehouse storehouse = rpcService.select(new Storehouse(id), false);
             map.put("storehouse", storehouse);

@@ -9,7 +9,6 @@
 
     <dubbo:application name="change-db-consumer"  />
 
-    <!--<dubbo:registry address="zookeeper://120.77.159.152:2181" />-->
     <dubbo:registry address="zookeeper://120.77.159.152:2181" />
 
     <dubbo:reference id="permissionRpcServer" interface="me.cathub.change.api.rpc.server.upms.PermissionRpcServer" />

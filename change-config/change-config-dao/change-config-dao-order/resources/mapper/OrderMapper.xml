@@ -19,9 +19,9 @@
         <result property="createDate" column="createDate"/>
         <result property="updateDate" column="updateDate"/>
 
-        <result property="storehouse_id" column="storehouse_id"/>
-        <result property="shopkeeper_id" column="shopkeeper_id"/>
-        <result property="brandQuotient_id" column="brandQuotient_id"/>
+        <result property="storehouseId" column="storehouse_id"/>
+        <result property="shopkeeperId" column="shopkeeper_id"/>
+        <result property="brandQuotientId" column="brandQuotient_id"/>
     </resultMap>
 
     <insert id="insert" parameterType="order">
@@ -105,19 +105,19 @@
         DELETE FROM order_${_parameter} WHERE yn=0
     </delete>
 
-    <select id="listByStorehouseId" parameterType="map" resultMap="order">
+    <select id="listByStorehouse_id" parameterType="map" resultMap="order">
         SELECT * FROM order_${tableIndex} WHERE yn=1 AND storehouse_id=#{storehouse_id, jdbcType=BIGINT}
     </select>
 
-    <select id="countByStorehouseId" parameterType="map" resultType="int">
+    <select id="countByStorehouse_id" parameterType="map" resultType="int">
         SELECT COUNT(*) order_${tableIndex} WHERE yn=1 AND storehouse_id=#{storehouse_id, jdbcType=BIGINT}
     </select>
 
-    <select id="listByShopkeeperId" parameterType="map" resultMap="order">
+    <select id="listByShopkeeper_id" parameterType="map" resultMap="order">
         SELECT * FROM order_${tableIndex} WHERE yn=1 AND shopkeeper_id=#{shopkeeper_id, jdbcType=BIGINT}
     </select>
 
-    <select id="countByShopkeeperId" parameterType="map" resultType="int">
+    <select id="countByShopkeeper_id" parameterType="map" resultType="int">
         SELECT COUNT(*) order_${tableIndex} WHERE yn=1 AND shopkeeper_id=#{shopkeeper_id, jdbcType=BIGINT}
     </select>
 

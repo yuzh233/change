@@ -18,7 +18,7 @@
         <result property="createDate" column="createDate"/>
         <result property="updateDate" column="updateDate"/>
 
-        <result property="product_id" column="product_id"/>
+        <result property="productId" column="product_id"/>
     </resultMap>
 
     <insert id="insert" parameterType="productImage">
@@ -97,15 +97,15 @@
         DELETE FROM productImage_${_parameter} WHERE yn=0
     </delete>
 
-    <select id="listByProductIdAndImageType" parameterType="map" resultMap="productImage">
+    <select id="listByProduct_idAndImageType" parameterType="map" resultMap="productImage">
         SELECT * FROM productImage_${tableIndex} WHERE yn=1 AND product_id=#{product_id, jdbcType=BIGINT} AND type=#{type, jdbcType=INTEGER}
     </select>
 
-    <select id="countByProductIdAndImageType" parameterType="map" resultType="int">
+    <select id="countByProduct_idAndImageType" parameterType="map" resultType="int">
         SELECT COUNT(*) FROM productImage_${tableIndex} WHERE yn=1 AND product_id=#{product_id, jdbcType=BIGINT} AND type=#{type, jdbcType=INTEGER}
     </select>
 
-    <select id="selectByProductIdHead" parameterType="map" resultMap="productImage">
+    <select id="selectByProduct_idHead" parameterType="map" resultMap="productImage">
         SELECT * FROM productImage_${tableIndex} WHERE yn=1 AND product_id=#{product_id, jdbcType=BIGINT} AND type=0
     </select>
 </mapper>

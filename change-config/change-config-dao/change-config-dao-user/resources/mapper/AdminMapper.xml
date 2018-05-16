@@ -21,7 +21,7 @@
         <result property="createDate" column="createDate"/>
         <result property="updateDate" column="updateDate"/>
 
-        <result property="role_id" column="role_id"/>
+        <result property="roleId" column="role_id"/>
     </resultMap>
 
     <insert id="insert" parameterType="admin">

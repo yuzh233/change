@@ -2,7 +2,7 @@ package me.cathub.change.admin.storehouse.web.controller;
 
 import me.cathub.change.api.rpc.server.storehouse.StorehouseCountryRpcServer;
 import me.cathub.change.common.base.BaseControllerImpl;
-import me.cathub.change.common.bean.storehouse.StorehouseCountry;
+import me.cathub.change.storehouse.bean.StorehouseCountry;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,14 +13,18 @@ import java.util.Map;
 
 /**
  * 仓库模块 - 国家实体
+ *
+ * @author zhangYu
  */
-
 @Controller
 @RequestMapping("/storehouseCountry")
 public class StorehouseCountryController extends BaseControllerImpl<StorehouseCountry, StorehouseCountryRpcServer> {
+
+    @RequestMapping("/restores")
+    @ResponseBody
     @Override
     public int restores(long[] ids) throws Exception {
-        return 0;
+        return rpcService.restores(ids, new StorehouseCountry());
     }
 
     @RequestMapping("/delete")
@@ -32,7 +36,7 @@ public class StorehouseCountryController extends BaseControllerImpl<StorehouseCo
 
     @ModelAttribute
     @Override
-    public void update_modelAttribute(Long id, Map<String, Object> map) throws Exception{
+    public void updateModelAttribute(Long id, Map<String, Object> map) throws Exception{
         if(id!=null) {
             StorehouseCountry storehouseCountry = rpcService.select(new StorehouseCountry(id), false);
             map.put("storehouseCountry", storehouseCountry);

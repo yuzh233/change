@@ -16,10 +16,10 @@
         <result property="unitPrice" column="unitPrice"/>
         <result property="count" column="count"/>
         <result property="totalPrice" column="totalPrice"/>
-        <result property="itemId" column="itemId"/>
+        <result property="return_id" column="return_id"/>
 
-        <result property="product_id" column="product_id"/>
-        <result property="order_id" column="order_id"/>
+        <result property="productId" column="product_id"/>
+        <result property="orderId" column="order_id"/>
     </resultMap>
 
     <insert id="insert" parameterType="orderItem">
@@ -28,7 +28,7 @@
           unitPrice,
           count,
           totalPrice,
-          itemId,
+          return_id,
           product_id,
           order_id,
           createDate,
@@ -38,7 +38,7 @@
           #{unitPrice, jdbcType=FLOAT},
           #{count, jdbcType=INTEGER},
           #{totalPrice, jdbcType=FLOAT},
-          #{itemId, jdbcType=BIGINT},
+          #{return_id, jdbcType=BIGINT},
           #{product.id, jdbcType=BIGINT},
           #{order.id, jdbcType=BIGINT},
           NOW(),
@@ -71,7 +71,7 @@
     <update id="update" parameterType="orderItem">
         UPDATE orderItem_${tableIndex} SET
           totalPrice=#{totalPrice, jdbcType=FLOAT},
-          itemId=#{itemId, jdbcType=BIGINT},
+          return_id=#{return_id, jdbcType=BIGINT},
           updateDate=NOW()
         WHERE
           id=#{id, jdbcType=BIGINT}
@@ -103,11 +103,11 @@
         DELETE FROM orderItem_${_parameter} WHERE yn=0
     </delete>
 
-    <select id="listByOrderId" parameterType="map" resultMap="orderItem">
+    <select id="listByOrder_id" parameterType="map" resultMap="orderItem">
         SELECT * FROM orderItem_${tableIndex} WHERE yn=1 AND order_id=#{order_id, jdbcType=BIGINT}
     </select>
 
-    <select id="countByOrderId" parameterType="map" resultType="int">
+    <select id="countByOrder_id" parameterType="map" resultType="int">
         SELECT COUNT(*) FROM orderItem_${tableIndex} WHERE yn=1 AND order_id=#{order_id, jdbcType=BIGINT}
     </select>
 </mapper>

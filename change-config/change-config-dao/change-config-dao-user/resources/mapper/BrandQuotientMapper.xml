@@ -22,8 +22,8 @@
         <result property="updateDate" column="updateDate"/>
         <result property="status" column="status"/>
 
-        <result property="role_id" column="role_id"/>
-        <result property="company_id" column="company_id"/>
+        <result property="roleId" column="role_id"/>
+        <result property="companyId" column="company_id"/>
     </resultMap>
 
     <insert id="insert" parameterType="brandQuotient">

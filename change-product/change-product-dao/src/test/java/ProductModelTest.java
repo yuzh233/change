@@ -1,14 +1,11 @@
 import me.cathub.change.api.dao.product.*;
-import me.cathub.change.common.bean.product.Product;
 import me.cathub.change.common.bean.product.Property;
-import me.cathub.change.common.tool.Sequence;
+import me.cathub.change.common.util.key.Sequence;
 import me.cathub.change.common.bean.product.ProductCategory;
 import me.cathub.change.product.dao.*;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapters;
 
 public class ProductModelTest {
     ApplicationContext context = new ClassPathXmlApplicationContext("spring/spring-product-dao.xml");
@@ -39,7 +36,7 @@ public class ProductModelTest {
         propertyValueDao.listByProductId(21736753882734592l, 0, 100, 0).stream()
                 .forEach(bean -> {
                     try {
-                        String name = propertyDao.select(new Property(bean.getProperty_id())).getName();
+                        String name = propertyDao.select(new Property(bean.getPropertyId())).getName();
                         System.out.println(name + ":" + bean.getValue());
                     } catch (Exception e) {
                         e.printStackTrace();

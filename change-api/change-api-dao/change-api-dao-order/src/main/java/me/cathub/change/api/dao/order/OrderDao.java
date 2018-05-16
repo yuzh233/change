@@ -1,10 +1,14 @@
 package me.cathub.change.api.dao.order;
 
 import me.cathub.change.common.base.BaseDao;
-import me.cathub.change.common.bean.order.Order;
+import me.cathub.change.order.bean.Order;
 
 import java.util.List;
 
+/**
+ * 订单Dao接口
+ * @author cheng
+ */
 public interface OrderDao extends BaseDao<Order> {
     String NAME_SPACE = "Order";
 
@@ -12,65 +16,67 @@ public interface OrderDao extends BaseDao<Order> {
     String COUNT_BY_STOREHOUSE_ID = ".countByStorehouseId";
     String LIST_BY_SHOPKEEPER_ID = ".listByShopkeeperId";
     String COUNT_BY_SHOPKEEPER_ID = ".countByShopkeeperId";
-    String LIST_BY_BRAND_QUOTIENT_ID = ".listByBrandQuotient";
-    String COUNT_BY_BRAND_QUOTIENT_ID = ".countByBrandQuotient";
+    String LIST_BY_COMPANY_ID = ".listByCompanyId";
+    String COUNT_BY_COMPANY_ID = ".countByCompanyId";
 
     /**
      * 根据仓库id获取订单列表
-     * @param storehouse_id
-     * @param page
-     * @param count
-     * @param tableIndex
-     * @return
-     * @throws Exception
+     * @param storehouseId  仓库id
+     * @param page          当前页
+     * @param count         页数量
+     * @param tableIndex    表索引
+     * @return              订单列表
+     * @throws Exception    Sql throw exception
      */
-    List<Order> listByStorehouseId(long storehouse_id, int page, int count, int tableIndex) throws Exception;
+    List<Order> listByStorehouseId(long storehouseId, int page, int count, int tableIndex) throws Exception;
 
     /**
      * 根据仓库id获取订单数量
-     * @param storehouse_id
-     * @param tableIndex
-     * @return
-     * @throws Exception
+     * @param storehouseId  仓库id
+     * @param tableIndex    表索引
+     * @return              订单数量
+     * @throws Exception    Sql throw exception
      */
-    int countByStorehouseId(long storehouse_id, int tableIndex) throws Exception;
+    int countByStorehouseId(long storehouseId, int tableIndex) throws Exception;
 
     /**
      * 根据借卖方获取订单列表
-     * @param shopkeeper_id
-     * @param page
-     * @param count
-     * @param tableIndex
-     * @return
-     * @throws Exception
+     * @param shopkeeperId  借卖方id
+     * @param page          当前页
+     * @param count         页数量
+     * @param tableIndex    表索引
+     * @return              订单列表
+     * @throws Exception    Sql throw exception
      */
-    List<Order> listByShopkeeperId(long shopkeeper_id, int page, int count, int tableIndex) throws Exception;
+    List<Order> listByShopkeeperId(long shopkeeperId, int page, int count, int tableIndex) throws Exception;
 
     /**
      * 根据借卖方获取订单数量
-     * @param shopkeeper_id
-     * @param tableIndex
-     * @return
-     * @throws Exception
+     * @param shopkeeperId  借卖方id
+     * @param tableIndex    表索引
+     * @return              订单数量
+     * @throws Exception    Sql throw exception
      */
-    int countByShopkeeperId(long shopkeeper_id, int tableIndex) throws Exception;
+    int countByShopkeeperId(long shopkeeperId, int tableIndex) throws Exception;
 
     /**
-     * 根据品牌商获取订单列表
-     * @param brandQuotient_id
-     * @param page
-     * @param count
-     * @param tableIndex
-     * @return
-     * @throws Exception
+     * 根据企业获取订单列表
+     * @param companyId     企业id
+     * @param page          当前页
+     * @param count         页数量
+     * @param tableIndex    表索引
+     * @return              订单列表
+     * @throws Exception    Sql throw exception
      */
-    List<Order> listByBrandQuotient(long brandQuotient_id, int page, int count, int tableIndex) throws Exception;
+    List<Order> listByCompanyId(long companyId, int page, int count, int tableIndex) throws Exception;
 
     /**
-     * 根据品牌商获取订单数量
-     * @param brandQuotient_id
-     * @param tableIndex
-     * @return
+     * 根据企业获取订单数量
+     * @param companyId     企业id
+     * @param tableIndex    表索引
+     * @return              订单数量
+     * @throws Exception    Sql throw exception
+     *
      */
-    int countByBrandQuotientId(long brandQuotient_id, int tableIndex);
+    int countByCompanyId(long companyId, int tableIndex) throws Exception;
 }

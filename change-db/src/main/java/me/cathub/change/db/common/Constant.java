@@ -199,7 +199,7 @@ public interface Constant {
     };
 
     // 汽车用品
-    String[] $1 = {
+    String[] TYPE1 = {
             "https://lyclub.1688.com/?spm=a262gg.10354509.j7k7n6eo.3.37387d3eQ1UQVr",
             "https://carcuu.1688.com/?spm=a262gg.10354509.j7k7n6eo.6.37387d3eQ1UQVr",
             "https://gzklm683.1688.com/?spm=a262gg.10354509.j7k7n6eo.9.37387d3eQ1UQVr",
@@ -227,7 +227,7 @@ public interface Constant {
     };
 
     // 玩具
-    String[] $2 = {
+    String[] TYPE2 = {
             "https://shop1486227429889.1688.com/?spm=a262gg.10353673.j7k7n6eo.3.25576454B4hLH1",
             "https://shop1407886664855.1688.com/?spm=a262gg.10353673.j7k7n6eo.6.25576454B4hLH1",
             "https://shop1356630883510.1688.com/?spm=a262gg.10353673.j7k7n6eo.9.25576454B4hLH1",
@@ -247,7 +247,7 @@ public interface Constant {
     };
 
     // 童装
-    String[] $3 = {
+    String[] TYPE3 = {
             "https://hml15219900485.1688.com/?spm=a262gg.10347514.j7k7n6eo.3.1c7e1195cwZdoD",
             "https://yee088.1688.com/?spm=a262gg.10347514.j7k7n6eo.6.1c7e1195cwZdoD",
             "https://xi1078.1688.com/?spm=a262gg.10347514.j7k7n6eo.9.1c7e1195cwZdoD",
@@ -267,7 +267,7 @@ public interface Constant {
 
 
     // 美妆护肤
-    String[] $4 = {
+    String[] TYPE4 = {
             "https://zchmf.1688.com/?spm=a262gg.10619847.j7k7n6eo.3.5c1e7f2dMYS0F8",
             "https://shop1457628775909.1688.com/?spm=a262gg.10619847.j7k7n6eo.6.5c1e7f2dMYS0F8",
             "https://kommen.1688.com/?spm=a262gg.10619847.j7k7n6eo.9.5c1e7f2dMYS0F8",
@@ -287,7 +287,7 @@ public interface Constant {
 
 
     // 日用百货
-    String[] $5 = {
+    String[] TYPE5 = {
             "https://shop67558380i85l1.1688.com/?spm=a262gg.10396681.jb21cir1.3.63a05cf1tc7Uug",
             "https://shop1415033085430.1688.com/?spm=a262gg.10396681.jb21cir1.6.63a05cf1tc7Uug",
             "https://hjxinlongboli.1688.com/?spm=a262gg.10396681.jb21cir1.9.63a05cf1tc7Uug",
@@ -321,7 +321,7 @@ public interface Constant {
     };
 
     // 家纺家饰
-    String[] $6 = {
+    String[] TYPE6 = {
             "https://zemanfangzhipin.1688.com/?spm=a262gg.10396337.je6f752x.3.1efc5eaa7J02R7",
             "https://jianfangshaye.1688.com/?spm=a262gg.10396337.je6f752x.6.1efc5eaa7J02R7",
             "https://yunleifz.1688.com/?spm=a262gg.10396337.je6f752x.9.1efc5eaa7J02R7",
@@ -360,7 +360,7 @@ public interface Constant {
     };
 
     // 家居用品
-    String[] $7 = {
+    String[] TYPE7 = {
             "https://shop1430240002543.1688.com/?spm=a262gg.10396336.jb2z6lj8.3.426365033ANV0H",
             "https://geilidianzi.1688.com/?spm=a262gg.10396336.jb2z6lj8.6.426365033ANV0H",
             "https://duoban.1688.com/?spm=a262gg.10396336.jb2z6lj8.9.426365033ANV0H",
@@ -388,7 +388,7 @@ public interface Constant {
     };
 
     // 宠物
-    String[] $8 = {
+    String[] TYPE8 = {
             "https://shop1430240002543.1688.com/?spm=a262gg.10396336.jb2z6lj8.3.7a6e6503LnV6YM",
             "https://geilidianzi.1688.com/?spm=a262gg.10396336.jb2z6lj8.6.7a6e6503LnV6YM",
             "https://duoban.1688.com/?spm=a262gg.10396336.jb2z6lj8.9.7a6e6503LnV6YM",
@@ -422,7 +422,7 @@ public interface Constant {
     };
 
     // 办公文教
-    String[] $9 = {
+    String[] TYPE9 = {
             "https://shop1439311948963.1688.com/?spm=a262gg.10396931.jejb47mv.3.6c11f336lldhn9",
             "https://shop1479487738136.1688.com/?spm=a262gg.10396931.jejb47mv.6.6c11f336lldhn9",
             "https://yilanwenju.1688.com/?spm=a262gg.10396931.jejb47mv.9.6c11f336lldhn9",

@@ -8,9 +8,16 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
     <artifactId>change-order-dao</artifactId>
+    <packaging>jar</packaging>
+
     <dependencies>
+        <!-- local start -->
+        <dependency>
+            <groupId>me.cathub</groupId>
+            <artifactId>change-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
         <dependency>
             <groupId>me.cathub</groupId>
             <artifactId>change-api-dao-order</artifactId>
@@ -18,14 +25,10 @@
         </dependency>
         <dependency>
             <groupId>me.cathub</groupId>
-            <artifactId>change-common-tool</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>me.cathub</groupId>
             <artifactId>change-config-dao-order</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <!-- local end -->
 
         <dependency>
             <groupId>org.testng</groupId>

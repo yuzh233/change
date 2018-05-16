@@ -18,7 +18,7 @@
         <result property="updateDate" column="updateDate"/>
         <result property="type" column="type"/>
 
-        <result property="shopkeeper_id" column="shopkeeper_id"/>
+        <result property="shopkeeperId" column="shopkeeper_id"/>
     </resultMap>
 <!--    <resultMap id="onlineStore_Shopkeeper" type="onlineStore" extends="onlineStore">
         <association property="shopkeeper" resultMap="Shopkeeper.shopkeeper"></association>
@@ -99,11 +99,11 @@
         DELETE FROM onlineStore_${_parameter} WHERE yn=0
     </delete>
 
-    <select id="listByShopkeeperId" parameterType="map" resultMap="onlineStore">
+    <select id="listByShopkeeper_id" parameterType="map" resultMap="onlineStore">
         SELECT * FROM onlineStore_${tableIndex} WHERE yn=1 AND shopkeeper_id=#{shopkeeper_id, jdbcType=BIGINT}
     </select>
 
-    <select id="countByShopkeeperId" parameterType="map" resultType="int">
+    <select id="countByShopkeeper_id" parameterType="map" resultType="int">
         SELECT COUNT(*) FROM onlineStore_${tableIndex} WHERE yn=1 AND shopkeeper_id=#{shopkeeper_id, jdbcType=BIGINT}
     </select>
 </mapper>

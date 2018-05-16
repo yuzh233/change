@@ -1,15 +1,19 @@
 package me.cathub.change.product.dao;
 
-import com.github.pagehelper.PageHelper;
 import me.cathub.change.api.dao.product.ProductReviewDao;
 import me.cathub.change.common.base.BaseDaoMyBatisImpl;
-import me.cathub.change.common.bean.product.ProductReview;
+import me.cathub.change.product.bean.ProductReview;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 产品评论Dao实现类
+ *
+ * @author cheng
+ */
 @Repository
 public class ProductReviewDaoImpl extends BaseDaoMyBatisImpl<ProductReview> implements ProductReviewDao {
 
@@ -69,32 +73,20 @@ public class ProductReviewDaoImpl extends BaseDaoMyBatisImpl<ProductReview> impl
     }
 
     @Override
-    public List<ProductReview> listByProductId(long product_id, int page, int count, int tableIndex) throws Exception {
-        List<ProductReview> results = null;
-        try {
-            Map<String, ? super Number> map = new HashMap<>();
-            map.put("product_id", product_id);
-            map.put("tableIndex", tableIndex);
+    public List<ProductReview> listByProductId(long productId, int page, int count, int tableIndex) throws Exception {
+        Map<String, Object> map = new HashMap<>(2);
+        map.put("product_id", productId);
+        map.put("tableIndex", tableIndex);
 
-            PageHelper.startPage(page, count);
-            results = sqlSessionTemplate.selectList(NAME_SPACE + LIST_BY_PRODUCT_ID, map);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return results;
+        return baseList(NAME_SPACE + LIST_BY_PRODUCT_ID, page, count, map);
     }
 
     @Override
-    public int countByProductId(long product_id, int tableIndex) throws Exception {
-        int count = 0;
-        try {
-            Map<String, ? super Number> map = new HashMap<>();
-            map.put("product_id", product_id);
-            map.put("tableIndex", tableIndex);
-            count = sqlSessionTemplate.selectOne(NAME_SPACE + COUNT_BY_PRODUCT_ID, map);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return count;
+    public int countByProductId(long productId, int tableIndex) throws Exception {
+        Map<String, Object> map = new HashMap<>(2);
+        map.put("product_id", productId);
+        map.put("tableIndex", tableIndex);
+
+        return baseCount(NAME_SPACE + COUNT_BY_PRODUCT_ID, map);
     }
 }

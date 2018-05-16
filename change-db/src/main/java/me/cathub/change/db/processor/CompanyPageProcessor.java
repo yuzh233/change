@@ -30,8 +30,9 @@ public class CompanyPageProcessor extends BasePageProcessor {
         List<String> product_prices = page.getHtml().$("div.app-offerGeneral > div > div > ul > li > div").$("em", "text").all();
         List<String> product_image_urls = page.getHtml().$("div.app-offerGeneral > div > div > ul > li > div.image").$("img", "data-lazy-load-src").all();
 
-        if (product_image_urls.size() != product_names.size() || product_image_urls.size() != product_prices.size() || product_image_urls.size() != product_urls.size())
+        if (product_image_urls.size() != product_names.size() || product_image_urls.size() != product_prices.size() || product_image_urls.size() != product_urls.size()) {
             return;
+        }
 
         List<Product> products = new ArrayList<>();
         for (int i = 0; i < product_urls.size(); i++) {

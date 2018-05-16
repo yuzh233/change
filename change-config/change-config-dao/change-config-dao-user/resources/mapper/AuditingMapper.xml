@@ -19,8 +19,8 @@
         <result property="status" column="status"/>
         <result property="notAllowMessage" column="notAllowMessage"/>
 
-        <result property="admin_id" column="admin_id"/>
-        <result property="user_id" column="user_id"/>
+        <result property="adminId" column="admin_id"/>
+        <result property="userId" column="user_id"/>
     </resultMap>
 
     <insert id="insert" parameterType="auditing">
