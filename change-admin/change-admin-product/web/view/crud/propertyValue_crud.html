@@ -19,7 +19,7 @@
 <div id="main">
 	<div id="toolbar">
 		<a class="waves-effect waves-button" href="javascript:;" onclick="createAction()"><i class="zmdi zmdi-plus"></i> 新增属性</a>
-		<a class="waves-effect waves-button" href="javascript:;" onclick="deleteAction()"><i class="zmdi zmdi-close"></i> 删除属性</a>
+		<a class="waves-effect waves-button" href="javascript:;" onclick="deleteAction()"><i class="zmdi zmdi-close"></i> 批量删除属性</a>
 	</div>
 	<table id="table"></table>
 </div>
@@ -31,12 +31,12 @@
 			<input id="create-value" type="text" class="form-control" name="value">
 		</div>
 		<div class="form-group">
-			<label for="create-property_id">产品ID</label>
-			<input id="create-property_id" type="text" class="form-control" name="property.id">
+			<label for="create-propertyId">产品ID</label>
+			<input id="create-propertyId" type="text" class="form-control" name="product.id">
 		</div>
 		<div class="form-group">
-			<label for="create-product_id">属性ID</label>
-			<input id="create-product_id" type="text" class="form-control" name="product.id">
+			<label for="create-productId">属性ID</label>
+			<input id="create-productId" type="text" class="form-control" name="property.id">
 		</div>
 	</form>
 </div>
@@ -50,12 +50,12 @@
 			<input id="update-value" type="text" class="form-control update-value">
 		</div>
 		<div class="form-group">
-			<label for="update-property_id">产品ID</label>
-			<input id="update-property_id" type="text" class="form-control update-property_id">
+			<label for="update-propertyId">产品ID</label>
+			<input id="update-propertyId" type="text" class="form-control update-productId">
 		</div>
 		<div class="form-group">
-			<label for="update-product_id">属性ID</label>
-			<input id="update-product_id" type="text" class="form-control update-product_id">
+			<label for="update-productId">属性ID</label>
+			<input id="update-productId" type="text" class="form-control update-propertyId">
 		</div>
     </form>
 </div>
@@ -205,8 +205,8 @@ function updateAction(id) {
                 btnClass: 'waves-effect waves-button',
                 action: function () {
                     var value = $(".update-value:last").val();
-                    var property_id = $(".update-property_id:last").val();
-                    var product_id = $(".update-product_id:last").val();
+                    var propertyId = $(".update-propertyId:last").val();
+                    var productId = $(".update-productId:last").val();
 
                     //创建json对象
                     var propertyValue = {};
@@ -214,19 +214,25 @@ function updateAction(id) {
                     if (value != '') {
                         propertyValue.value = value;
                     }
-                    if (property_id != '') {
-                        propertyValue.property = {"id":property_id};
+                    if (propertyId != '') {
+                        propertyValue.property = {"id":propertyId};
                     }
-                    if (product_id != '') {
-                        propertyValue.product = {"id":product_id};
+                    if (productId != '') {
+                        propertyValue.product = {"id":productId};
                     }
+                    propertyValue = JSON.stringify(propertyValue);
                     $.ajax({
                         url: "../../propertyValue/update",
+						contentType:"application/json",
                         type: "POST",
                         dataType: "json",
                         data: propertyValue,
-                        success: function () {
-                            $table.bootstrapTable('refresh');
+                        success: function (flag) {
+                            if(flag){
+                            	$table.bootstrapTable('refresh');
+							}else {
+                                alert("修改失败，请检查产品id或属性id是否存在。");
+							}
                         }
                     });
                 }

@@ -18,26 +18,29 @@
 <body>
 <div id="main">
 	<div id="toolbar">
-		<a class="waves-effect waves-button" href="javascript:;" onclick="createAction()"><i class="zmdi zmdi-plus"></i> 新增角色</a>
-		<a class="waves-effect waves-button" href="javascript:;" onclick="updateAction()"><i class="zmdi zmdi-edit"></i> 编辑角色</a>
-		<a class="waves-effect waves-button" href="javascript:;" onclick="deleteAction()"><i class="zmdi zmdi-close"></i> 删除角色</a>
+		<a class="waves-effect waves-button" href="javascript:;" onclick="createAction()"><i class="zmdi zmdi-plus"></i> 新增库存信息</a>
+		<a class="waves-effect waves-button" href="javascript:;" onclick="deleteAction()"><i class="zmdi zmdi-close"></i> 批量删除库存信息</a>
 	</div>
 	<table id="table"></table>
 </div>
 <!-- 新增 -->
 <div id="createDialog" class="crudDialog" hidden>
-	<form>
+	<form class="insertForm">
 		<div class="form-group">
-			<label for="create-username">账户</label>
-			<input id="create-username" type="text" class="form-control">
+			<label for="create-product">产品ID*</label>
+			<input id="create-product" type="text" class="form-control" name="product.id">
 		</div>
 		<div class="form-group">
-			<label for="create-password">密码</label>
-			<input id="create-password" type="text" class="form-control">
+			<label for="create-stock">库存</label>
+			<input id="create-stock" type="text" class="form-control" name="stock">
 		</div>
 		<div class="form-group">
-			<label for="create-company">企业</label>
-			<input id="create-company" type="text" class="form-control">
+			<label for="create-price">价格</label>
+			<input id="create-price" type="text" class="form-control" name="price">
+		</div>
+		<div class="form-group">
+			<label for="create-storehouse">仓库ID*</label>
+			<input id="create-storehouse" type="text" class="form-control" name="storehouse.id">
 		</div>
 	</form>
 </div>
@@ -45,26 +48,15 @@
 <!-- 修改 -->
 <div id="updateDialog" class="crudDialog" hidden>
     <form>
-        <div class="form-group">
-            <label for="update-username">账户</label>
-            <input id="update-username" type="text" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="update-password">密码</label>
-            <input id="update-password" type="text" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="update-company">企业</label>
-            <input id="update-company" type="text" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="update-address">地址</label>
-            <input id="update-address" type="text" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="update-phone">电话</label>
-            <input id="update-phone" type="text" class="form-control">
-        </div>
+		<p style="color: darkred"> - 需填写完整信息 - </p>
+		<div class="form-group">
+			<label for="update-product">价格*</label>
+			<input id="update-product" type="text" class="form-control update-product">
+		</div>
+		<div class="form-group">
+			<label for="update-stock">库存*</label>
+			<input id="update-stock" type="text" class="form-control update-stock">
+		</div>
     </form>
 </div>
 <script src="../../resources/plugins/jquery.1.12.4.min.js"></script>
@@ -89,10 +81,11 @@ $(function() {
 	// bootstrap table初始化
 	// http://bootstrap-table.wenzhixin.net.cn/zh-cn/documentation/
 	$table.bootstrapTable({
-		url: '../../resources/data/storehouseProductStock_list.json',
+        url: '../../storehouseProductStock/list',
+        method: 'get',
 		height: getHeight(),
 		striped: true,
-		search: true,
+		search: false,
 		searchOnEnterKey: true,
 		showRefresh: true,
 		showToggle: true,
@@ -105,7 +98,7 @@ $(function() {
 		pagination: true,
 		paginationLoop: false,
 		classes: 'table table-hover table-no-bordered',
-		//sidePagination: 'server',
+		sidePagination: 'server',
 		//silentSort: false,
 		smartDisplay: false,
 		idField: 'id',
@@ -116,13 +109,26 @@ $(function() {
 		idField: 'systemId',
 		maintainSelected: true,
 		toolbar: '#toolbar',
+        pageNumber: 1,
+        pageSize: 15,
+        queryParamsType: "undefined",
+        queryParams: function queryParams(params) {
+            var temp = {
+                page: params.pageNumber,
+                count: params.pageSize,
+                tableIndex: 0
+            };
+            return temp;
+        },
 		columns: [
 			{field: 'state', checkbox: true},
 			{field: 'id', title: '编号', sortable: true, halign: 'left'},
-			{field: 'product_name', title: '产品', sortable: true, halign: 'left'},
-			{field: 'storehouse_name', title: '仓库', sortable: true, halign: 'left'},
+			{field: 'product.name', title: '产品', sortable: true, halign: 'left'},
+			{field: 'productCategory.name', title: '分类', sortable: true, halign: 'left'},
+			{field: 'storehouse.name', title: '仓库', sortable: true, halign: 'left'},
 			{field: 'price', title: '价格', sortable: true, halign: 'left'},
 			{field: 'stock', title: '库存', sortable: true, halign: 'left'},
+			{field: 'company.name', title: '所属企业', sortable: true, halign: 'left'},
 			{field: 'createDate', title: '创建时间', sortable: true, halign: 'left'},
 			{field: 'updateDate', title: '更新时间', sortable: true, halign: 'left'},
 			{field: 'action', title: '操作', sortable: false, halign: 'left', formatter: 'actionFormatter', events: 'actionEvents', clickToSelect: false}
@@ -145,12 +151,10 @@ window.actionEvents = {
         console.log(value, row, index);
     },
     'click .edit': function (e, value, row, index) {
-        alert('You click edit icon, row: ' + JSON.stringify(row));
-        console.log(value, row, index);
+        updateAction(row.id);
     },
     'click .remove': function (e, value, row, index) {
-        alert('You click remove icon, row: ' + JSON.stringify(row));
-        console.log(value, row, index);
+        deleteAction(row.id);
     }
 };
 function detailFormatter(index, row) {
@@ -165,14 +169,27 @@ function createAction() {
 	$.confirm({
 		type: 'dark',
 		animationSpeed: 300,
-		title: '新增角色',
+		title: '新增库存信息',
 		content: $('#createDialog').html(),
 		buttons: {
 			confirm: {
 				text: '确认',
 				btnClass: 'waves-effect waves-button',
 				action: function () {
-					$.alert('确认');
+                    $.ajax({
+                        url: "../../storehouseProductStock/insert",
+                        type: "POST",
+                        contentType: "application/x-www-form-urlencoded",
+                        dataType: "json",
+                        data: $(".insertForm:last").serialize(), //传递表单值
+                        success: function (flag) {
+                            if(flag){
+                                $table.bootstrapTable('refresh'); //刷新表格
+							}else{
+                                alert("增加失败，请确认产品或仓库是否存在。");
+							}
+                        }
+                    });
 				}
 			},
 			cancel: {
@@ -183,84 +200,108 @@ function createAction() {
 	});
 }
 // 编辑
-function updateAction() {
-	var rows = $table.bootstrapTable('getSelections');
-	if (rows.length == 0) {
-		$.confirm({
-			title: false,
-			content: '请至少选择一条记录！',
-			autoClose: 'cancel|3000',
-			backgroundDismiss: true,
-			buttons: {
-				cancel: {
-					text: '取消',
-					btnClass: 'waves-effect waves-button'
-				}
-			}
-		});
-	} else {
-		$.confirm({
-			type: 'blue',
-			animationSpeed: 300,
-			title: '编辑角色',
-			content: $('#updateDialog').html(),
-			buttons: {
-				confirm: {
-					text: '确认',
-					btnClass: 'waves-effect waves-button',
-					action: function () {
-						$.alert('确认');
+function updateAction(id) {
+    $.confirm({
+        type: 'blue',
+        animationSpeed: 300,
+        title: '编辑库存信息',
+        content: $('#updateDialog').html(),
+        buttons: {
+            confirm: {
+                text: '确认',
+                btnClass: 'waves-effect waves-button',
+                action: function () {
+                    var stock = $(".update-stock:last").val();
+                    var price = $(".update-product:last").val();
+
+                    var storehouseProductStock = {};
+                    storehouseProductStock.id = id;
+                    if (stock != '') {
+                        storehouseProductStock.stock = stock;
+                    }
+                    if (price != '') {
+                        storehouseProductStock.price = price;
+                    }
+                    if(storehouseProductStock.stock == null || storehouseProductStock.price == null){
+                        alert("请填写完整信息！");
+                        return false;
 					}
-				},
-				cancel: {
-					text: '取消',
-					btnClass: 'waves-effect waves-button'
-				}
-			}
-		});
-	}
+                    $.ajax({
+                        url: "../../storehouseProductStock/update",
+                        type: "POST",
+                        dataType: "json",
+                        data: storehouseProductStock,
+                        success: function () {
+                            $table.bootstrapTable('refresh');
+                        }
+                    });
+                }
+            },
+            cancel: {
+                text: '取消',
+                btnClass: 'waves-effect waves-button'
+            }
+        }
+    });
 }
 // 删除
-function deleteAction() {
+function deleteAction(id) {
 	var rows = $table.bootstrapTable('getSelections');
-	if (rows.length == 0) {
-		$.confirm({
-			title: false,
-			content: '请至少选择一条记录！',
-			autoClose: 'cancel|3000',
-			backgroundDismiss: true,
-			buttons: {
-				cancel: {
-					text: '取消',
-					btnClass: 'waves-effect waves-button'
-				}
-			}
-		});
-	} else {
-		$.confirm({
-			type: 'red',
-			animationSpeed: 300,
-			title: false,
-			content: '确认删除吗？',
-			buttons: {
-				confirm: {
-					text: '确认',
-					btnClass: 'waves-effect waves-button',
-					action: function () {
-						var ids = new Array();
-						for (var i in rows) {
-							ids.push(rows[i].systemId);
-						}
-						$.alert('删除：id=' + ids.join("-"));
-					}
-				},
-				cancel: {
-					text: '取消',
-					btnClass: 'waves-effect waves-button'
-				}
-			}
-		});
-	}
+    if (rows.length == 0 && id == null) {
+        $.confirm({
+            title: false,
+            content: '请至少选择一条记录！',
+            autoClose: 'cancel|3000',
+            backgroundDismiss: true,
+            buttons: {
+                cancel: {
+                    text: '取消',
+                    btnClass: 'waves-effect waves-button'
+                }
+            }
+        });
+    } else {
+        $.confirm({
+            type: 'red',
+            animationSpeed: 300,
+            title: false,
+            content: '确认删除吗？',
+            buttons: {
+                confirm: {
+                    text: '确认',
+                    btnClass: 'waves-effect waves-button',
+                    action: function () {
+                        var ids = new Array();
+                        if (rows.length != 0 && id == null) {
+                            for (var i in rows) {
+                                ids.push(rows[i].id);
+                            }
+                        } else {
+                            ids.push(id);
+                        }
+                        //异步删除
+                        $.ajax({
+                            url: "../../storehouseProductStock/delete",
+                            type: "post",
+                            dataType: "json",
+                            data: {ids: ids},
+                            success: function (falg) {
+                                if(falg){
+                                    $('#table').bootstrapTable('refresh');
+                                }else{
+                                    alert("该字段已与其他字段绑定，删除失败！");
+                                }
+                            }
+                        });
+                    }
+                },
+                cancel: {
+                    text: '取消',
+                    btnClass: 'waves-effect waves-button'
+                }
+            }
+        });
+    }
 }
 </script>
 </body>

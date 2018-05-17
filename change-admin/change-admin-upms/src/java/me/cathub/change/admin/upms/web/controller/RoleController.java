@@ -2,7 +2,7 @@ package me.cathub.change.admin.upms.web.controller;
 
 import me.cathub.change.api.rpc.server.upms.RoleRpcServer;
 import me.cathub.change.common.base.BaseControllerImpl;
-import me.cathub.change.common.bean.upms.Role;
+import me.cathub.change.upms.bean.Role;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,13 +13,18 @@ import java.util.Map;
 
 /**
  * 权限模块 - 角色操作
+ *
+ * @author zhangYu
  */
 @Controller
 @RequestMapping("/role")
 public class RoleController extends BaseControllerImpl<Role, RoleRpcServer> {
+
+    @RequestMapping("/restores")
+    @ResponseBody
     @Override
     public int restores(long[] ids) throws Exception {
-        return 0;
+        return rpcService.restores(ids, new Role());
     }
 
     @RequestMapping("/delete")
@@ -31,7 +36,7 @@ public class RoleController extends BaseControllerImpl<Role, RoleRpcServer> {
 
     @ModelAttribute
     @Override
-    public void update_modelAttribute(@RequestParam(value = "id",required = false)Long id, Map<String, Object> map) throws Exception {
+    public void updateModelAttribute(@RequestParam(value = "id",required = false)Long id, Map<String, Object> map) throws Exception {
         if(id!=null) {
             Role role = new Role();
             role.setId(id);
@@ -39,5 +44,4 @@ public class RoleController extends BaseControllerImpl<Role, RoleRpcServer> {
             map.put("role", role);
         }
     }
-
 }

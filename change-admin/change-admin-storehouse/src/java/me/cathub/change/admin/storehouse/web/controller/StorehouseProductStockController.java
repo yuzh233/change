@@ -5,10 +5,10 @@ import me.cathub.change.api.rpc.server.storehouse.StorehouseProductStockRpcServe
 import me.cathub.change.api.rpc.server.storehouse.StorehouseRpcServer;
 import me.cathub.change.api.rpc.server.user.CompanyRpcServer;
 import me.cathub.change.common.base.BaseControllerImpl;
-import me.cathub.change.common.bean.product.Product;
-import me.cathub.change.common.bean.storehouse.Storehouse;
-import me.cathub.change.common.bean.storehouse.StorehouseProductStock;
-import me.cathub.change.common.bean.user.Company;
+import me.cathub.change.product.bean.Product;
+import me.cathub.change.storehouse.bean.Storehouse;
+import me.cathub.change.storehouse.bean.StorehouseProductStock;
+import me.cathub.change.user.bean.Company;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -17,15 +17,19 @@ import java.util.Map;
 
 /**
  * 仓库模块 - 产品实体
+ *
+ * @author zhangYu
  */
-
 @Controller
 @RequestMapping("/storehouseProductStock")
 public class StorehouseProductStockController extends BaseControllerImpl<StorehouseProductStock, StorehouseProductStockRpcServer> {
+
     @Autowired
     private ProductRpcServer productRpcServer;
+
     @Autowired
     private StorehouseRpcServer storehouseRpcServer;
+
     @Autowired
     private CompanyRpcServer companyRpcServer;
 
@@ -43,6 +47,7 @@ public class StorehouseProductStockController extends BaseControllerImpl<Storeho
 
     @RequestMapping("/insert")
     @ResponseBody
+    @Override
     public boolean insert(StorehouseProductStock bean) throws Exception {
         //关联产品、仓库信息
         if (bean.getProduct() != null) {
@@ -51,8 +56,8 @@ public class StorehouseProductStockController extends BaseControllerImpl<Storeho
                 return false;
             }
             bean.setProduct(product);
-            if ((Long) product.getCompany_id() != null) {
-                bean.setCompany(companyRpcServer.select(new Company(product.getCompany_id()),true));
+            if ((Long) product.getCompanyId() != null) {
+                bean.setCompany(companyRpcServer.select(new Company(product.getCompanyId()),true));
             }
             bean.setProductCategory(product.getProductCategory());
         }
@@ -68,7 +73,7 @@ public class StorehouseProductStockController extends BaseControllerImpl<Storeho
 
     @ModelAttribute
     @Override
-    public void update_modelAttribute(Long id, Map<String, Object> map) throws Exception{
+    public void updateModelAttribute(Long id, Map<String, Object> map) throws Exception{
         if(id!=null) {
             StorehouseProductStock storehouseProductStock = rpcService.select(new StorehouseProductStock(id), false);
             map.put("storehouseCountry", storehouseProductStock);

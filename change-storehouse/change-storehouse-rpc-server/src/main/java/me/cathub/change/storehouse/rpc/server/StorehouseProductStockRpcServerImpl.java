@@ -7,11 +7,11 @@ import me.cathub.change.api.rpc.server.storehouse.StorehouseProductStockRpcServe
 import me.cathub.change.api.rpc.server.storehouse.StorehouseRpcServer;
 import me.cathub.change.api.rpc.server.user.CompanyRpcServer;
 import me.cathub.change.common.base.BaseRpcServerImpl;
-import me.cathub.change.common.bean.product.Product;
-import me.cathub.change.common.bean.product.ProductCategory;
-import me.cathub.change.common.bean.storehouse.Storehouse;
-import me.cathub.change.common.bean.storehouse.StorehouseProductStock;
-import me.cathub.change.common.bean.user.Company;
+import me.cathub.change.product.bean.Product;
+import me.cathub.change.product.bean.ProductCategory;
+import me.cathub.change.storehouse.bean.Storehouse;
+import me.cathub.change.storehouse.bean.StorehouseProductStock;
+import me.cathub.change.user.bean.Company;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +19,11 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
+/**
+ * 仓库产品库存Rpc服务实现类
+ *
+ * @author cheng
+ */
 @Service
 public class StorehouseProductStockRpcServerImpl extends BaseRpcServerImpl<StorehouseProductStock, StorehouseProductStockDao> implements StorehouseProductStockRpcServer {
 
@@ -35,35 +40,37 @@ public class StorehouseProductStockRpcServerImpl extends BaseRpcServerImpl<Store
     private CompanyRpcServer companyRpcServer;
 
     @Override
-    public StorehouseProductStock selectByStorehouseIdAndProductId(long storehouse_id, long product_id, int tableIndex, boolean flag) throws Exception {
-        if (flag)
-            return dao.selectByStorehouseIdAndProductId(storehouse_id, product_id, tableIndex);
-        else
-            return fill(dao.selectByStorehouseIdAndProductId(storehouse_id, product_id, tableIndex));
+    public StorehouseProductStock selectByStorehouseIdAndProductId(long storehouseId, long productId, int tableIndex, boolean flag) throws Exception {
+        if (flag) {
+            return dao.selectByStorehouseIdAndProductId(storehouseId, productId, tableIndex);
+        } else {
+            return fill(dao.selectByStorehouseIdAndProductId(storehouseId, productId, tableIndex));
+        }
     }
 
     @Override
-    public List<StorehouseProductStock> listByStorehouseId(long storehouse_id, int page, int count, int tableIndex, boolean flag) throws Exception {
-        if (flag)
-            return dao.listByStorehouseId(storehouse_id, page, count, tableIndex);
-        else
-            return dao.listByStorehouseId(storehouse_id, page, count, tableIndex).stream()
+    public List<StorehouseProductStock> listByStorehouseId(long storehouseId, int page, int count, int tableIndex, boolean flag) throws Exception {
+        if (flag) {
+            return dao.listByStorehouseId(storehouseId, page, count, tableIndex);
+        } else {
+            return dao.listByStorehouseId(storehouseId, page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
+        }
     }
 
     @Override
-    public int countByStorehouseId(long storehouse_id, int tableIndex) throws Exception {
-        return dao.countByStorehouseId(storehouse_id, tableIndex);
+    public int countByStorehouseId(long storehouseId, int tableIndex) throws Exception {
+        return dao.countByStorehouseId(storehouseId, tableIndex);
     }
 
     @Override
     public StorehouseProductStock fill(StorehouseProductStock bean) {
         try {
-            Product product = productRpcServer.select(new Product(bean.getProduct_id()), true);
-            Storehouse storehouse = storehouseRpcServer.select(new Storehouse(bean.getStorehouse_id()), true);
-            ProductCategory productCategory = productCategoryRpcServer.select(new ProductCategory(bean.getProductCategory_id()), true);
-            Company company = companyRpcServer.select(new Company(bean.getCompany_id()), true);
+            Product product = productRpcServer.select(new Product(bean.getProductId()), true);
+            Storehouse storehouse = storehouseRpcServer.select(new Storehouse(bean.getStorehouseId()), true);
+            ProductCategory productCategory = productCategoryRpcServer.select(new ProductCategory(bean.getProductCategoryId()), true);
+            Company company = companyRpcServer.select(new Company(bean.getCompanyId()), true);
 
             bean.setProduct(product);
             bean.setStorehouse(storehouse);

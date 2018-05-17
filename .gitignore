@@ -1,9 +1,0 @@
-# Created by .ignore support plugin (hsz.mobi)
-.idea
-.idea/
-out
-*.iml
-.gitignore
-change-admin
-
-#jdbc.properties

@@ -3,26 +3,29 @@ package me.cathub.change.admin.product.web.controller;
 import me.cathub.change.api.rpc.server.product.ProductCategoryRpcServer;
 import me.cathub.change.api.rpc.server.product.PropertyRpcServer;
 import me.cathub.change.common.base.BaseControllerImpl;
-import me.cathub.change.common.bean.product.ProductCategory;
-import me.cathub.change.common.bean.product.Property;
+import me.cathub.change.product.bean.ProductCategory;
+import me.cathub.change.product.bean.Property;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
-
 /**
  * 产品模块 - 属性
+ *
+ * @author zhang
  */
 @Controller
 @RequestMapping("/property")
 public class PropertyController extends BaseControllerImpl<Property, PropertyRpcServer> {
+
     @Autowired
     private ProductCategoryRpcServer productCategoryRpcServer;
 
+    @RequestMapping("/restores")
+    @ResponseBody
     @Override
     public int restores(long[] ids) throws Exception {
-        return 0;
+        return rpcService.restores(ids, new Property());
     }
 
     @RequestMapping("/delete")
@@ -32,24 +35,10 @@ public class PropertyController extends BaseControllerImpl<Property, PropertyRpc
         return rpcService.deletes(ids, new Property(), !del_flag);
     }
 
-    @RequestMapping("/update")
-    @ResponseBody
-    public boolean update(@RequestBody Property property) throws Exception {
-        Property bean = property;
-        property = rpcService.select(property, false);
-        if (bean.getName() != null) {
-            property.setName(bean.getName());
-        }
-        //关联产品分类对象
-        if (bean.getProductCategory() != null) {
-            ProductCategory productCategory = productCategoryRpcServer.selectByName(bean.getProductCategory().getName(), 0, true);
-            property.setProductCategory(productCategory);
-        }
-        return rpcService.update(property);
-    }
 
     @RequestMapping("/insert")
     @ResponseBody
+    @Override
     public boolean insert(Property property) throws Exception {
         if (property.getProductCategory() != null) {
             ProductCategory productCategory = productCategoryRpcServer.selectByName(property.getProductCategory().getName(), 0, true);

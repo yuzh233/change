@@ -3,8 +3,7 @@ package me.cathub.change.admin.product.web.controller;
 import me.cathub.change.api.rpc.server.product.ProductCategoryRpcServer;
 import me.cathub.change.api.rpc.server.product.ProductRpcServer;
 import me.cathub.change.common.base.BaseControllerImpl;
-import me.cathub.change.common.bean.product.Product;
-import me.cathub.change.common.bean.product.ProductCategory;
+import me.cathub.change.product.bean.ProductCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,25 +15,18 @@ import java.util.Map;
 
 /**
  * 产品模块 - 分类
+ *
+ * @author zhang
  */
 @Controller
 @RequestMapping("/productCategory")
 public class ProductCategoryController extends BaseControllerImpl<ProductCategory, ProductCategoryRpcServer> {
 
-    @ModelAttribute
-    @Override
-    public void update_modelAttribute(@RequestParam(value = "id", required = false) Long id, Map<String, Object> map) throws Exception {
-        if (id != null) {
-            ProductCategory bean = new ProductCategory();
-            bean.setId(id);
-            bean = select(bean);
-            map.put("productCategory", bean);
-        }
-    }
-
+    @RequestMapping("/deletes")
+    @ResponseBody
     @Override
     public int restores(long[] ids) throws Exception {
-        return 0;
+        return rpcService.restores(ids, new ProductCategory());
     }
 
     @RequestMapping("/delete")
@@ -46,8 +38,9 @@ public class ProductCategoryController extends BaseControllerImpl<ProductCategor
 
     @RequestMapping("/insert")
     @ResponseBody
+    @Override
     public boolean insert(ProductCategory productCategory) throws Exception {
-        //根据父级分类的名字获得父级分类
+        // 根据父级分类的名字获得父级分类
         if (productCategory.getParent() != null) {
             ProductCategory parent = rpcService.selectByName(productCategory.getParent().getName(), 0, true);
             productCategory.setParent(parent);
@@ -55,4 +48,14 @@ public class ProductCategoryController extends BaseControllerImpl<ProductCategor
         return rpcService.insert(productCategory) != -1;
     }
 
+    @ModelAttribute
+    @Override
+    public void updateModelAttribute(@RequestParam(value = "id", required = false) Long id, Map<String, Object> map) throws Exception {
+        if (id != null) {
+            ProductCategory bean = new ProductCategory();
+            bean.setId(id);
+            bean = select(bean);
+            map.put("productCategory", bean);
+        }
+    }
 }

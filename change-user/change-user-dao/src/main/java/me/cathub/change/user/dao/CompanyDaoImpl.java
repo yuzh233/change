@@ -2,13 +2,18 @@ package me.cathub.change.user.dao;
 
 import me.cathub.change.api.dao.user.CompanyDao;
 import me.cathub.change.common.base.BaseDaoMyBatisImpl;
-import me.cathub.change.common.bean.user.Company;
+import me.cathub.change.user.bean.Company;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 企业Dao实现类
+ *
+ * @author cheng
+ */
 @Repository
 public class CompanyDaoImpl extends BaseDaoMyBatisImpl<Company> implements CompanyDao {
 
@@ -54,7 +59,7 @@ public class CompanyDaoImpl extends BaseDaoMyBatisImpl<Company> implements Compa
 
     @Override
     public List<Company> listByDel(int page, int count, int tableIndex) throws Exception {
-        return listByDel(NAME_SPACE, page, count ,tableIndex);
+        return listByDel(NAME_SPACE, page, count, tableIndex);
     }
 
     @Override
@@ -69,15 +74,10 @@ public class CompanyDaoImpl extends BaseDaoMyBatisImpl<Company> implements Compa
 
     @Override
     public Company selectByName(String name, int tableIndex) throws Exception {
-        Company result = null;
-        try {
-            Map<String, Object> map = new HashMap<>();
-            map.put("name", name);
-            map.put("tableIndex", tableIndex);
-            result = sqlSessionTemplate.selectOne(NAME_SPACE + SELECT_BY_NAME, map);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return result;
+        Map<String, Object> map = new HashMap<>(2);
+        map.put("name", name);
+        map.put("tableIndex", tableIndex);
+
+        return search(NAME_SPACE + SELECT_BY_NAME, map);
     }
 }

@@ -1,15 +1,19 @@
 package me.cathub.change.product.dao;
 
 
-import com.github.pagehelper.PageHelper;
 import me.cathub.change.api.dao.product.ProductImageDao;
 import me.cathub.change.common.base.BaseDaoMyBatisImpl;
-import me.cathub.change.common.bean.product.ProductImage;
+import me.cathub.change.product.bean.ProductImage;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * 产品图片Dao实现类
+ *
+ * @author cheng
+ */
 @Repository
 public class ProductImageDaoImpl extends BaseDaoMyBatisImpl<ProductImage> implements ProductImageDao {
 
@@ -69,48 +73,31 @@ public class ProductImageDaoImpl extends BaseDaoMyBatisImpl<ProductImage> implem
     }
 
     @Override
-    public List<ProductImage> listByProductIdAndImageType(long product_id, int type, int page, int count, int tableIndex) throws Exception {
-        List<ProductImage> results = null;
-        try {
-            HashMap<String, ? super Number> map = new HashMap<>();
-            map.put("product_id", product_id);
-            map.put("type", type);
-            map.put("tableIndex", tableIndex);
+    public List<ProductImage> listByProductIdAndImageType(long productId, int type, int page, int count, int tableIndex) throws Exception {
+        HashMap<String, Object> map = new HashMap<>(3);
+        map.put("product_id", productId);
+        map.put("type", type);
+        map.put("tableIndex", tableIndex);
 
-            PageHelper.startPage(page, count);
-            results = sqlSessionTemplate.selectList(NAME_SPACE + LIST_BY_PRODUCT_IMAGE_ID_AND_IMAGE_TYPE, map);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return results;
+        return baseList(NAME_SPACE + LIST_BY_PRODUCT_IMAGE_ID_AND_IMAGE_TYPE, page, count, map);
     }
 
     @Override
-    public int countByProductIdAndImageType(long product_id, int type, int tableIndex) throws Exception {
-        int count = 0;
-        try {
-            HashMap<String, ? super Number> map = new HashMap<>();
-            map.put("product_id", product_id);
-            map.put("type", type);
-            map.put("tableIndex", tableIndex);
-            count = sqlSessionTemplate.selectOne(NAME_SPACE + COUNT_BY_PRODUCT_IMAGE_ID_AND_IMAGE_TYPE, map);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return count;
+    public int countByProductIdAndImageType(long productId, int type, int tableIndex) throws Exception {
+        HashMap<String, Object> map = new HashMap<>(3);
+        map.put("product_id", productId);
+        map.put("type", type);
+        map.put("tableIndex", tableIndex);
+
+        return baseCount(NAME_SPACE + COUNT_BY_PRODUCT_IMAGE_ID_AND_IMAGE_TYPE, map);
     }
 
     @Override
-    public ProductImage selectByProductIdCover(long product_id, int tableIndex) throws Exception {
-        ProductImage result = null;
-        try {
-            HashMap<String, ? super Number> map = new HashMap<>();
-            map.put("product_id", product_id);
-            map.put("tableIndex", tableIndex);
-            result = sqlSessionTemplate.selectOne(NAME_SPACE + SELECT_BY_PRODUCT_IMAGE_ID, map);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return result;
+    public ProductImage selectByProductIdCover(long productId, int tableIndex) throws Exception {
+        HashMap<String, Object> map = new HashMap<>(2);
+        map.put("product_id", productId);
+        map.put("tableIndex", tableIndex);
+
+        return search(NAME_SPACE + SELECT_BY_PRODUCT_IMAGE_ID, map);
     }
 }

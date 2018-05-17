@@ -2,10 +2,15 @@ package me.cathub.change.api.dao.user;
 
 
 import me.cathub.change.common.base.BaseDao;
-import me.cathub.change.common.bean.user.OnlineStore;
+import me.cathub.change.user.bean.OnlineStore;
 
 import java.util.List;
 
+/**
+ * 网店Dao接口
+ *
+ * @author cheng
+ */
 public interface OnlineStoreDao extends BaseDao<OnlineStore> {
     String NAME_SPACE = "OnlineStore";
 
@@ -14,19 +19,21 @@ public interface OnlineStoreDao extends BaseDao<OnlineStore> {
 
     /**
      * 根据店主获取网店列表
-     * @param shopkeeper_id
+     * @param shopkeeperId
      * @param page
      * @param count
+     * @param tableIndex
      * @return
      * @throws Exception
      */
-    List<OnlineStore> listByShopkeeperId(long shopkeeper_id, int page, int count, int tableIndex) throws Exception;
+    List<OnlineStore> listByShopkeeperId(long shopkeeperId, int page, int count, int tableIndex) throws Exception;
 
     /**
      * 根据店主获取网店数量
-     * @param shopkeeper_id
+     * @param shopkeeperId
+     * @param tableIndex
      * @return
      * @throws Exception
      */
-    int countByShopkeeperId(long shopkeeper_id, int tableIndex) throws Exception;
+    int countByShopkeeperId(long shopkeeperId, int tableIndex) throws Exception;
 }

@@ -5,60 +5,36 @@ import me.cathub.change.api.rpc.server.product.ProductRpcServer;
 import me.cathub.change.api.rpc.server.user.BrandQuotientRpcServer;
 import me.cathub.change.api.rpc.server.user.CompanyRpcServer;
 import me.cathub.change.common.base.BaseControllerImpl;
-import me.cathub.change.common.bean.product.Product;
-import me.cathub.change.common.bean.product.ProductCategory;
-import me.cathub.change.common.bean.user.BrandQuotient;
-import me.cathub.change.common.bean.user.Company;
+import me.cathub.change.product.bean.Product;
+import me.cathub.change.product.bean.ProductCategory;
+import me.cathub.change.user.bean.BrandQuotient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
-
 /**
  * 产品模块 - 产品操作
+ *
+ * @author zhang
  */
 @Controller
 @RequestMapping("/product")
 public class ProductController extends BaseControllerImpl<Product, ProductRpcServer> {
+
     @Autowired
     private ProductCategoryRpcServer productCategoryRpcServer;
+
     @Autowired
     private CompanyRpcServer companyRpcServer;
+
     @Autowired
     private BrandQuotientRpcServer brandQuotientRpcServer;
 
-
-    @RequestMapping("/update")
+    @RequestMapping("/restores")
     @ResponseBody
-    public boolean update(@RequestBody Product product) throws Exception {
-        Product p1 = product; //暂存表单数据
-        product = rpcService.select(product, false); //关联查询
-        if (p1.getName() != null) {
-            product.setName(p1.getName());
-        }
-        if (p1.getSubTitle() != null) {
-            product.setSubTitle(p1.getSubTitle());
-        }
-        if (p1.getPrice() != 0) {
-            product.setPrice(p1.getPrice());
-        }
-        if (p1.getDescription() != null) {
-            product.setDescription(p1.getDescription());
-        }
-        if (p1.getStatus() != 0) {
-            product.setStatus(p1.getStatus());
-        }
-        if (p1.getProductCategory() != null) {
-            ProductCategory pc = productCategoryRpcServer.selectByName(p1.getProductCategory().getName(), 0, true);
-            product.setProductCategory(pc);
-        }
-        return rpcService.update(product);
-    }
-
     @Override
     public int restores(long[] ids) throws Exception {
-        return 0;
+        return rpcService.restores(ids, new Product());
     }
 
     @RequestMapping("/delete")
@@ -70,6 +46,7 @@ public class ProductController extends BaseControllerImpl<Product, ProductRpcSer
 
     @RequestMapping("/insert")
     @ResponseBody
+    @Override
     public boolean insert(Product product) throws Exception {
         //根据分类、品牌商的name查找对象并赋值
         if (product.getProductCategory() != null) {

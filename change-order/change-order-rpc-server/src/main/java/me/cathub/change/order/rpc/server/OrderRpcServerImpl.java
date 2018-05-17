@@ -6,10 +6,10 @@ import me.cathub.change.api.rpc.server.storehouse.StorehouseRpcServer;
 import me.cathub.change.api.rpc.server.user.BrandQuotientRpcServer;
 import me.cathub.change.api.rpc.server.user.ShopkeeperRpcServer;
 import me.cathub.change.common.base.BaseRpcServerImpl;
-import me.cathub.change.common.bean.order.Order;
-import me.cathub.change.common.bean.storehouse.Storehouse;
-import me.cathub.change.common.bean.user.BrandQuotient;
-import me.cathub.change.common.bean.user.Shopkeeper;
+import me.cathub.change.order.bean.Order;
+import me.cathub.change.storehouse.bean.Storehouse;
+import me.cathub.change.user.bean.BrandQuotient;
+import me.cathub.change.user.bean.Shopkeeper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +17,11 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
+/**
+ * 订单Rpc服务实现类
+ *
+ * @author cheng
+ */
 @Service
 public class OrderRpcServerImpl extends BaseRpcServerImpl<Order, OrderDao> implements OrderRpcServer {
 
@@ -30,45 +35,45 @@ public class OrderRpcServerImpl extends BaseRpcServerImpl<Order, OrderDao> imple
     private BrandQuotientRpcServer brandQuotientRpcServer;
 
     @Override
-    public List<Order> listByStorehouseId(long storehouse_id, int page, int count, int tableIndex, boolean flag) throws Exception {
-        return dao.listByStorehouseId(storehouse_id, page, count, tableIndex).stream()
+    public List<Order> listByStorehouseId(long storehouseId, int page, int count, int tableIndex, boolean flag) throws Exception {
+        return dao.listByStorehouseId(storehouseId, page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
     }
 
     @Override
-    public long countByStorehouseId(long storehouse_id, int tableIndex) throws Exception {
-        return dao.countByStorehouseId(storehouse_id, tableIndex);
+    public long countByStorehouseId(long storehouseId, int tableIndex) throws Exception {
+        return dao.countByStorehouseId(storehouseId, tableIndex);
     }
 
     @Override
-    public List<Order> listByShopkeeperId(long shopkeeper_id, int page, int count, int tableIndex, boolean flag) throws Exception {
-        return dao.listByShopkeeperId(shopkeeper_id, page, count, tableIndex).stream()
+    public List<Order> listByShopkeeperId(long shopkeeperId, int page, int count, int tableIndex, boolean flag) throws Exception {
+        return dao.listByShopkeeperId(shopkeeperId, page, count, tableIndex).stream()
                 .map(bean -> fill(bean))
                 .collect(toList());
     }
 
     @Override
-    public long countByShopkeeperId(long shopkeeper_id, int tableIndex) throws Exception {
-        return dao.countByStorehouseId(shopkeeper_id, tableIndex);
+    public long countByShopkeeperId(long shopkeeperId, int tableIndex) throws Exception {
+        return dao.countByStorehouseId(shopkeeperId, tableIndex);
     }
 
     @Override
-    public List<Order> listByBrandQuotient(long brandQuotient_id, int page, int count, int tableIndex, boolean flag) throws Exception {
-        return dao.listByBrandQuotient(brandQuotient_id, page, count, tableIndex);
+    public List<Order> listByBrandQuotient(long brandQuotientId, int page, int count, int tableIndex, boolean flag) throws Exception {
+        return dao.listByCompanyId(brandQuotientId, page, count, tableIndex);
     }
 
     @Override
-    public long countBrandQuotientId(long brandQuotient_id, int tableIndex) {
-        return dao.countByBrandQuotientId(brandQuotient_id, tableIndex);
+    public long countBrandQuotientId(long brandQuotientId, int tableIndex) throws Exception {
+        return dao.countByCompanyId(brandQuotientId, tableIndex);
     }
 
     @Override
     public Order fill(Order bean) {
         try {
-            Storehouse storehouse = storehouseRpcServer.select(new Storehouse(bean.getStorehouse_id()), true);
-            Shopkeeper shopkeeper = shopkeeperRpcServer.select(new Shopkeeper(bean.getShopkeeper_id()), true);
-            BrandQuotient brandQuotient = brandQuotientRpcServer.select(new BrandQuotient(bean.getBrandQuotient_id()), true);
+            Storehouse storehouse = storehouseRpcServer.select(new Storehouse(bean.getStorehouseId()), true);
+            Shopkeeper shopkeeper = shopkeeperRpcServer.select(new Shopkeeper(bean.getShopkeeperId()), true);
+            BrandQuotient brandQuotient = brandQuotientRpcServer.select(new BrandQuotient(bean.getBrandQuotientId()), true);
 
             bean.setStorehouse(storehouse);
             bean.setShopkeeper(shopkeeper);

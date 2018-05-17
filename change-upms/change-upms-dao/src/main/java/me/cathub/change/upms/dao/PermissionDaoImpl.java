@@ -1,15 +1,19 @@
 package me.cathub.change.upms.dao;
 
-import com.github.pagehelper.PageHelper;
 import me.cathub.change.api.dao.upms.PermissionDao;
 import me.cathub.change.common.base.BaseDaoMyBatisImpl;
-import me.cathub.change.common.bean.upms.Permission;
+import me.cathub.change.upms.bean.Permission;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 授权Dao实现类
+ *
+ * @author cheng
+ */
 @Repository
 public class PermissionDaoImpl extends BaseDaoMyBatisImpl<Permission> implements PermissionDao {
 
@@ -69,46 +73,47 @@ public class PermissionDaoImpl extends BaseDaoMyBatisImpl<Permission> implements
     }
 
     @Override
-    public List<Permission> listByRoleId(long role_id, int page, int count, int tableIndex) throws Exception {
-        List<Permission> results = null;
-        try {
-            Map<String, ? super Number> map = new HashMap<>();
-            map.put("role_id", role_id);
-            map.put("tableIndex", tableIndex);
-
-            PageHelper.startPage(page, count);
-            results = sqlSessionTemplate.selectList(NAME_SPACE + LIST_BY_ROLE_ID, map);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return results;
-    }
-
-    @Override
-    public int countByRoleId(long role_id, int tableIndex) throws Exception {
-        int count = 0;
-        try {
-            Map<String, ? super Number> map = new HashMap<>();
-            map.put("role_id", role_id);
-            map.put("tableIndex", tableIndex);
-            count = sqlSessionTemplate.selectOne(NAME_SPACE + COUNT_BY_ROLE_ID, map);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return count;
-    }
-
-    @Override
     public Permission selectByName(String name, int tableIndex) throws Exception {
-        Permission result = null;
-        try {
-            Map<String, Object> map = new HashMap<>();
-            map.put("name", name);
-            map.put("tableIndex", tableIndex);
-            result = sqlSessionTemplate.selectOne(NAME_SPACE + SELECT_BY_NAME, map);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return result;
+        Map<String, Object> map = new HashMap<>(2);
+        map.put("name", name);
+        map.put("tableIndex", tableIndex);
+
+        return search(NAME_SPACE + SELECT_BY_NAME, map);
+    }
+
+    @Override
+    public List<Permission> listByApplyId(long applyId, int page, int count, int tableIndex) throws Exception {
+        Map<String, Object> map = new HashMap<>(2);
+        map.put("apply_id", applyId);
+        map.put("tableIndex", tableIndex);
+
+        return baseList(NAME_SPACE + LIST_BY_APPLY_ID, page, count, map);
+    }
+
+    @Override
+    public int countByApplyId(long applyId, int tableIndex) throws Exception {
+        Map<String, Object> map = new HashMap<>(2);
+        map.put("apply_id", applyId);
+        map.put("tableIndex", tableIndex);
+
+        return baseCount(NAME_SPACE + COUNT_BY_APPLY_ID, map);
+    }
+
+    @Override
+    public List<Permission> childListById(long id, int page, int count, int tableIndex) throws Exception {
+        Map<String, Object> map = new HashMap<>(2);
+        map.put("id", id);
+        map.put("tableIndex", tableIndex);
+
+        return baseList(NAME_SPACE + CHILD_LIST_BY_ID, page, count, map);
+    }
+
+    @Override
+    public int childCountById(long id, int tableIndex) throws Exception {
+        Map<String, Object> map = new HashMap<>(2);
+        map.put("id", id);
+        map.put("tableIndex", tableIndex);
+
+        return baseCount(NAME_SPACE + CHILD_COUNT_BY_ID, map);
     }
 }

@@ -9,38 +9,38 @@ change
 |       |—— change-api-dao
 |       |—— change-api-rpc-server
 |—— change-common — 公共模块
-|       |—— change-common-base
-|       |—— change-common-me.cathub.tool
 |—— change-config — 配置模块
 |       |—— change-config-dao
 |       |—— change-config-rpc-server — rpc远程服务配置
 |—— change-user — 用户模块
-|       |—— change-user-common
+|       |—— change-user-bean
 |       |—— change-user-dao
 |       |—— change-user-web
 |       |—— change-user-rpc-server
 |—— change-upms — 权限模块
-|       |—— change-upms-common
+|       |—— change-upms-bean
 |       |—— change-upms-dao
 |       |—— change-upms-client
 |       |—— change-upms-server
 |       |—— change-upms-rpc-server
 |—— change-product — 产品模块
-|       |—— change-product-common
+|       |—— change-product-bean
 |       |—— change-product-dao
 |       |—— change-product-service
 |       |—— change-product-rpc-server
 |—— change-storehouse — 仓库模块
-|       |—— change-storehouse-common
+|       |—— change-storehouse-bean
 |       |—— change-storehouse-dao
 |       |—— change-storehouse-service
 |       |—— change-storehouse-rpc-server
 |—— change-order — 订单模块
-|       |—— change-order-common
+|       |—— change-order-bean
 |       |—— change-order-dao
 |       |—— change-order-service
 |       |—— change-order-rpc-server
 |—— change-wallet — 钱包模块
+|       |—— change-wallet-common
+|       |—— change-wallet-bean
 ```
 
 ### 技术选型

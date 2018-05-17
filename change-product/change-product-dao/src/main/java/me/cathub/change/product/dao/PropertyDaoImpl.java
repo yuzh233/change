@@ -1,15 +1,19 @@
 package me.cathub.change.product.dao;
 
-import com.github.pagehelper.PageHelper;
 import me.cathub.change.api.dao.product.PropertyDao;
 import me.cathub.change.common.base.BaseDaoMyBatisImpl;
-import me.cathub.change.common.bean.product.Property;
+import me.cathub.change.product.bean.Property;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 属性Dao实现类
+ *
+ * @author cheng
+ */
 @Repository
 public class PropertyDaoImpl extends BaseDaoMyBatisImpl<Property> implements PropertyDao {
 
@@ -69,62 +73,39 @@ public class PropertyDaoImpl extends BaseDaoMyBatisImpl<Property> implements Pro
     }
 
     @Override
-    public List<Property> listByProductCategoryId(long productCategory_id, int page, int count, int tableIndex) throws Exception {
-        List<Property> results = null;
-        try {
-            Map<String, ? super Number> map = new HashMap<>();
-            map.put("productCategory_id", productCategory_id);
-            map.put("tableIndex", tableIndex);
+    public List<Property> listByProductCategoryId(long productCategoryId, int page, int count, int tableIndex) throws Exception {
+        Map<String, Object> map = new HashMap<>(2);
+        map.put("productCategory_id", productCategoryId);
+        map.put("tableIndex", tableIndex);
 
-            PageHelper.startPage(page, count);
-            results = sqlSessionTemplate.selectList(NAME_SPACE + LIST_BY_PRODUCT_CATEGORY_ID, map);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return results;
+        return baseList(NAME_SPACE + LIST_BY_PRODUCT_CATEGORY_ID, page, count, map);
     }
 
     @Override
-    public int countByProductCategoryId(long productCategory_id, int tableIndex) throws Exception {
-        int count = 0;
-        try {
-            Map<String, ? super Number> map = new HashMap<>();
-            map.put("productCategory_id", productCategory_id);
-            map.put("tableIndex", tableIndex);
-            count = sqlSessionTemplate.selectOne(NAME_SPACE + COUNT__BY_PRODUCT_CATEGORY_ID, map);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return count;
+    public int countByProductCategoryId(long productCategoryId, int tableIndex) throws Exception {
+        Map<String, Object> map = new HashMap<>(2);
+        map.put("productCategory_id", productCategoryId);
+        map.put("tableIndex", tableIndex);
+
+        return baseCount(NAME_SPACE + COUNT__BY_PRODUCT_CATEGORY_ID, map);
     }
 
     @Override
-    public Property selectByNameAndProductCategory(String name, long productCategory_id, int tableIndex) throws Exception {
-        Property result = null;
-        try {
-            Map<String, Object> map = new HashMap<>();
-            map.put("name", name);
-            map.put("productCategory_id", productCategory_id);
-            map.put("tableIndex", tableIndex);
+    public Property selectByNameAndProductCategory(String name, long productCategoryId, int tableIndex) throws Exception {
+        Map<String, Object> map = new HashMap<>(3);
+        map.put("name", name);
+        map.put("productCategory_id", productCategoryId);
+        map.put("tableIndex", tableIndex);
 
-            result  = sqlSessionTemplate.selectOne(NAME_SPACE + SELECT_BY_NAME_AND_PRODUCT_CATEGORY, map);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return result;
+        return search(NAME_SPACE + SELECT_BY_NAME_AND_PRODUCT_CATEGORY, map);
     }
 
     @Override
     public Property selectByName(String name, int tableIndex) throws Exception {
-        Property result = null;
-        try {
-            Map<String, Object> map = new HashMap<>();
-            map.put("name", name);
-            map.put("tableIndex", tableIndex);
-            result = sqlSessionTemplate.selectOne(NAME_SPACE + SELECT_BY_NAME, map);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return result;
+        Map<String, Object> map = new HashMap<>(2);
+        map.put("name", name);
+        map.put("tableIndex", tableIndex);
+
+        return search(NAME_SPACE + SELECT_BY_NAME, map);
     }
 }

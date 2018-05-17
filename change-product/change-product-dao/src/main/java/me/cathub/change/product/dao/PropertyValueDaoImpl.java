@@ -1,15 +1,19 @@
 package me.cathub.change.product.dao;
 
-import com.github.pagehelper.PageHelper;
 import me.cathub.change.api.dao.product.PropertyValueDao;
 import me.cathub.change.common.base.BaseDaoMyBatisImpl;
-import me.cathub.change.common.bean.product.PropertyValue;
+import me.cathub.change.product.bean.PropertyValue;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 属性值Dao实现类
+ *
+ * @author cheng
+ */
 @Repository
 public class PropertyValueDaoImpl extends BaseDaoMyBatisImpl<PropertyValue> implements PropertyValueDao {
 
@@ -69,37 +73,21 @@ public class PropertyValueDaoImpl extends BaseDaoMyBatisImpl<PropertyValue> impl
     }
 
     @Override
-    public List<PropertyValue> listByProductId(long product_id, int page, int count, int tableIndex) throws Exception {
-        List<PropertyValue> results = null;
+    public List<PropertyValue> listByProductId(long productId, int page, int count, int tableIndex) throws Exception {
+        Map<String, Object> map = new HashMap<>(2);
+        map.put("product_id", productId);
+        map.put("tableIndex", tableIndex);
 
-        try {
-            Map<String, ? super Number> map = new HashMap<>();
-            map.put("product_id", product_id);
-            map.put("tableIndex", tableIndex);
 
-            PageHelper.startPage(page, count);
-            results = sqlSessionTemplate.selectList(NAME_SPACE + LIST_BY_PRODUCT_ID, map);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return results;
+        return baseList(NAME_SPACE + LIST_BY_PRODUCT_ID, page, count, map);
     }
 
     @Override
-    public int countByProductId(long product_id, int tableIndex) throws Exception {
-        int count = 0;
+    public int countByProductId(long productId, int tableIndex) throws Exception {
+        HashMap<String, Object> map = new HashMap<>(2);
+        map.put("product_id", productId);
+        map.put("tableIndex", tableIndex);
 
-        try {
-            HashMap<String, ? super Number> map = new HashMap<>();
-            map.put("product_id", product_id);
-            map.put("tableIndex", tableIndex);
-
-            count = sqlSessionTemplate.selectOne(NAME_SPACE + COUNT_BY_PRODUCT_ID, map);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return count;
+        return baseCount(NAME_SPACE + COUNT_BY_PRODUCT_ID, map);
     }
 }

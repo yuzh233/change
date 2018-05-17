@@ -2,13 +2,18 @@ package me.cathub.change.upms.dao;
 
 import me.cathub.change.api.dao.upms.RoleDao;
 import me.cathub.change.common.base.BaseDaoMyBatisImpl;
-import me.cathub.change.common.bean.upms.Role;
+import me.cathub.change.upms.bean.Role;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 角色Dao实现类
+ *
+ * @author cheng
+ */
 @Repository
 public class RoleDaoImpl extends BaseDaoMyBatisImpl<Role> implements RoleDao {
 
@@ -69,15 +74,10 @@ public class RoleDaoImpl extends BaseDaoMyBatisImpl<Role> implements RoleDao {
 
     @Override
     public Role selectByName(String name, int tableIndex) throws Exception {
-        Role result = null;
-        try {
-            Map<String, Object> map = new HashMap<>();
-            map.put("name", name);
-            map.put("tableIndex", tableIndex);
-            result = sqlSessionTemplate.selectOne(NAME_SPACE + SELECT_BY_NAME, map);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return result;
+        Map<String, Object> map = new HashMap<>(2);
+        map.put("name", name);
+        map.put("tableIndex", tableIndex);
+
+        return search(NAME_SPACE + SELECT_BY_NAME, map);
     }
 }

@@ -2,25 +2,26 @@ package me.cathub.change.admin.product.web.controller;
 
 import me.cathub.change.api.rpc.server.product.ProductReviewRpcServer;
 import me.cathub.change.common.base.BaseControllerImpl;
-import me.cathub.change.common.bean.product.ProductReview;
+import me.cathub.change.product.bean.ProductReview;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.Map;
-
 /**
  * 产品模块 - 评论
+ *
+ * @author zhang
  */
 @Controller
 @RequestMapping("/productReview")
 public class ProductReviewController extends BaseControllerImpl<ProductReview, ProductReviewRpcServer> {
 
+    @RequestMapping("/restores")
+    @ResponseBody
     @Override
     public int restores(long[] ids) throws Exception {
-        return 0;
+        return rpcService.restores(ids, new ProductReview());
     }
 
     @RequestMapping("/delete")

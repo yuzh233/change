@@ -1,15 +1,19 @@
 package me.cathub.change.storehouse.dao;
 
-import com.github.pagehelper.PageHelper;
 import me.cathub.change.api.dao.storehouse.StorehouseProductStockDao;
 import me.cathub.change.common.base.BaseDaoMyBatisImpl;
-import me.cathub.change.common.bean.storehouse.StorehouseProductStock;
+import me.cathub.change.storehouse.bean.StorehouseProductStock;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 仓库产品库存Dao实现
+ *
+ * @author cheng
+ */
 @Repository
 public class StorehouseProductStockDaoImpl extends BaseDaoMyBatisImpl<StorehouseProductStock> implements StorehouseProductStockDao {
 
@@ -69,49 +73,30 @@ public class StorehouseProductStockDaoImpl extends BaseDaoMyBatisImpl<Storehouse
     }
 
     @Override
-    public StorehouseProductStock selectByStorehouseIdAndProductId(long storehouse_id, long product_id, int tableIndex) throws Exception {
-        StorehouseProductStock result = null;
-        try {
-            HashMap<String, ? super Number> map = new HashMap<>();
-            map.put("storehouse_id", storehouse_id);
-            map.put("product_id", product_id);
-            map.put("tableIndex", tableIndex);
-            result = sqlSessionTemplate.selectOne(NAME_SPACE + SELECT_BY_STOREHOUSE_ID_AND_PRODUCT_ID, map);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return result;
+    public StorehouseProductStock selectByStorehouseIdAndProductId(long storehouseId, long productId, int tableIndex) throws Exception {
+        HashMap<String, Object> map = new HashMap<>(3);
+        map.put("storehouse_id", storehouseId);
+        map.put("product_id", productId);
+        map.put("tableIndex", tableIndex);
+
+        return search(NAME_SPACE + SELECT_BY_STOREHOUSE_ID_AND_PRODUCT_ID, map);
     }
 
     @Override
-    public List<StorehouseProductStock> listByStorehouseId(long storehouse_id, int page, int count, int tableIndex) throws Exception {
-        List<StorehouseProductStock> results = null;
-        try {
-            HashMap<String, ? super Number> map = new HashMap<>();
-            map.put("storehouse_id", storehouse_id);
-            map.put("tableIndex", tableIndex);
+    public List<StorehouseProductStock> listByStorehouseId(long storehouseId, int page, int count, int tableIndex) throws Exception {
+        HashMap<String, Object> map = new HashMap<>(2);
+        map.put("storehouse_id", storehouseId);
+        map.put("tableIndex", tableIndex);
 
-            PageHelper.startPage(page, count);
-            results = sqlSessionTemplate.selectList(NAME_SPACE + LIST_BY_STOREHOUSE_ID, map);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return results;
+        return baseList(NAME_SPACE + LIST_BY_STOREHOUSE_ID, page, count, map);
     }
 
     @Override
-    public int countByStorehouseId(long storehouse_id, int tableIndex) throws Exception {
-        int count = 0;
+    public int countByStorehouseId(long storehouseId, int tableIndex) throws Exception {
+        Map<String, Object> map = new HashMap<>(2);
+        map.put("storehouse_id", storehouseId);
+        map.put("tableIndex", tableIndex);
 
-        try {
-            Map<String, ? super Number> map = new HashMap<>();
-            map.put("storehouse_id", storehouse_id);
-            map.put("tableIndex", tableIndex);
-
-            count = sqlSessionTemplate.selectOne(NAME_SPACE + COUNT_BY_STOREHOUSE_ID, map);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return count;
+        return baseCount(NAME_SPACE + COUNT_BY_STOREHOUSE_ID, map);
     }
 }

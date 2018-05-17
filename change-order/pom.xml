@@ -8,10 +8,11 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
     <artifactId>change-order</artifactId>
     <packaging>pom</packaging>
+    
     <modules>
+        <module>change-order-bean</module>
         <module>change-order-dao</module>
         <module>change-order-rpc-server</module>
     </modules>

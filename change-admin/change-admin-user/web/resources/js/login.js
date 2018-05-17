@@ -21,35 +21,39 @@ $(function() {
 		}
 	});
 });
+// 统一登陆中心
+var BASE_PATH = "http://localhost:9991";
+var BACK_URL = "";
+
 // 登录
 function login() {
-	$.ajax({
-		url: BASE_PATH + '/sso/login',
-		type: 'POST',
-		data: {
-			username: $('#username').val(),
-			password: $('#password').val(),
-			rememberMe: $('#rememberMe').is(':checked'),
-			backurl: BACK_URL
-		},
-		beforeSend: function() {
+    $.ajax({
+        url: BASE_PATH + '/login',
+        type: 'POST',
+        data: {
+            username: $('#username').val(),
+            password: $('#password').val(),
+            rememberMe: $('#rememberMe').is(':checked'),
+            back_url: BACK_URL
+        },
+        beforeSend: function() {
 
-		},
-		success: function(json){
-			if (json.code == 1) {
-				location.href = json.data;
-			} else {
-				alert(json.data);
-				if (10101 == json.code) {
-					$('#username').focus();
-				}
-				if (10102 == json.code) {
-					$('#password').focus();
-				}
-			}
-		},
-		error: function(error){
-			console.log(error);
-		}
-	});
+        },
+        success: function(json){
+            if (json.code === 1) {
+                alert(json);
+                window.location.href = json.data;
+            } else {
+                if (10101 == json.code) {
+                    $('#username').focus();
+                }
+                if (10102 == json.code) {
+                    $('#password').focus();
+                }
+            }
+        },
+        error: function(error){
+            console.log(error);
+        }
+    });
 }

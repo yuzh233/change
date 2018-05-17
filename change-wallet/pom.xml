@@ -8,12 +8,11 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
     <artifactId>change-wallet</artifactId>
     <packaging>pom</packaging>
+
     <modules>
+        <module>change-wallet-bean</module>
         <module>change-wallet-common</module>
     </modules>
-
-
 </project>

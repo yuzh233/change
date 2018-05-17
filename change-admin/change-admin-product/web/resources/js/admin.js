@@ -29,23 +29,23 @@ $(function() {
 		}
 	});
 	// 切换系统
-	$('.switch-systems').click(function () {
-		var systemid = $(this).attr('systemid');
-		var systemname = $(this).attr('systemname');
-		var systemtitle = $(this).attr('systemtitle');
-		$('.system_menus').hide(0, function () {
-			$('.system_' + systemid).show();
-		});
-		$('body').attr("id", systemname);
-		$('#system_title').text(systemtitle);
-		$.cookie('zheng-upms-systemid', systemid);
-		$.cookie('zheng-upms-systemname', systemname);
-		$.cookie('zheng-upms-systemtitle', systemtitle);
-	});
+	// $('.switch-systems').click(function () {
+	// 	var systemid = $(this).attr('systemid');
+	// 	var systemname = $(this).attr('systemname');
+	// 	var systemtitle = $(this).attr('systemtitle');
+	// 	$('.system_menus').hide(0, function () {
+	// 		$('.system_' + systemid).show();
+	// 	});
+	// 	$('body').attr("id", systemname);
+	// 	$('#system_title').text(systemtitle);
+	// 	$.cookie('change-admin-product-systemid', systemid);
+	// 	$.cookie('change-admin-product-systemname', systemname);
+	// 	$.cookie('change-admin-product-systemtitle', systemtitle);
+	// });
 	// 显示cookie菜单
-	var systemid = $.cookie('zheng-upms-systemid') || 3;
-	var systemname = $.cookie('zheng-upms-systemname') || 'change-admin-product';
-	var systemtitle = $.cookie('zheng-upms-systemtitle') || '商品管理系统';
+	var systemid = $.cookie('change-admin-product-systemid') || 3;
+	var systemname = $.cookie('change-admin-product-systemname') || 'change-admin-product';
+	var systemtitle = $.cookie('change-admin-product-systemtitle') || '商品管理系统';
 	$('.system_menus').hide(0, function () {
 		$('.system_' + systemid).show();
 	});

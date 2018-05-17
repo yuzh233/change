@@ -8,17 +8,18 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
     <artifactId>change-storehouse-dao</artifactId>
+    <packaging>jar</packaging>
+
     <dependencies>
         <dependency>
             <groupId>me.cathub</groupId>
-            <artifactId>change-api-dao-storehouse</artifactId>
+            <artifactId>change-common</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>me.cathub</groupId>
-            <artifactId>change-common-tool</artifactId>
+            <artifactId>change-api-dao-storehouse</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>

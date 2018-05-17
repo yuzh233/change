@@ -1,10 +1,15 @@
 package me.cathub.change.api.dao.storehouse;
 
 import me.cathub.change.common.base.BaseDao;
-import me.cathub.change.common.bean.storehouse.StorehouseProductStock;
+import me.cathub.change.storehouse.bean.StorehouseProductStock;
 
 import java.util.List;
 
+/**
+ * 仓库产品库存Dao接口
+ *
+ * @author cheng
+ */
 public interface StorehouseProductStockDao extends BaseDao<StorehouseProductStock> {
     String NAME_SPACE = "StorehouseProductStock";
 
@@ -14,25 +19,31 @@ public interface StorehouseProductStockDao extends BaseDao<StorehouseProductStoc
 
     /**
      * 根据仓库和产品查找库存
-     * @param storehouse_id
-     * @param product_id
+     * @param storehouseId
+     * @param productId
+     * @param tableIndex
      * @return
+     * @throws Exception
      */
-    StorehouseProductStock selectByStorehouseIdAndProductId(long storehouse_id, long product_id, int tableIndex) throws Exception;
+    StorehouseProductStock selectByStorehouseIdAndProductId(long storehouseId, long productId, int tableIndex) throws Exception;
 
     /**
      * 根据仓库得到产品库存列表
-     * @param storehouse_id
+     * @param storehouseId
+     * @param page
+     * @param count
+     * @param tableIndex
      * @return
      * @throws Exception
      */
-    List<StorehouseProductStock> listByStorehouseId(long storehouse_id, int page, int count, int tableIndex) throws Exception;
+    List<StorehouseProductStock> listByStorehouseId(long storehouseId, int page, int count, int tableIndex) throws Exception;
 
     /**
      * 根据仓库得到产品库存数量
-     * @param storehouse_id
+     * @param storehouseId
+     * @param tableIndex
      * @return
      * @throws Exception
      */
-    int countByStorehouseId(long storehouse_id, int tableIndex) throws Exception;
+    int countByStorehouseId(long storehouseId, int tableIndex) throws Exception;
 }

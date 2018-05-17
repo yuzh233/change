@@ -18,26 +18,29 @@
 <body>
 <div id="main">
 	<div id="toolbar">
-		<a class="waves-effect waves-button" href="javascript:;" onclick="createAction()"><i class="zmdi zmdi-plus"></i> 新增角色</a>
-		<a class="waves-effect waves-button" href="javascript:;" onclick="updateAction()"><i class="zmdi zmdi-edit"></i> 编辑角色</a>
-		<a class="waves-effect waves-button" href="javascript:;" onclick="deleteAction()"><i class="zmdi zmdi-close"></i> 删除角色</a>
+		<a class="waves-effect waves-button" href="javascript:;" onclick="createAction()"><i class="zmdi zmdi-plus"></i> 新增仓库</a>
+		<a class="waves-effect waves-button" href="javascript:;" onclick="deleteAction()"><i class="zmdi zmdi-close"></i> 批量删除仓库</a>
 	</div>
 	<table id="table"></table>
 </div>
 <!-- 新增 -->
 <div id="createDialog" class="crudDialog" hidden>
-	<form>
+	<form class="insertForm">
 		<div class="form-group">
-			<label for="create-username">账户</label>
-			<input id="create-username" type="text" class="form-control">
+			<label for="create-name">仓库名</label>
+			<input id="create-name" type="text" class="form-control" name="name">
 		</div>
 		<div class="form-group">
-			<label for="create-password">密码</label>
-			<input id="create-password" type="text" class="form-control">
+			<label for="create-address">地址</label>
+			<input id="create-address" type="text" class="form-control" name="address">
 		</div>
 		<div class="form-group">
-			<label for="create-company">企业</label>
-			<input id="create-company" type="text" class="form-control">
+			<label for="create-description">描述</label>
+			<input id="create-description" type="text" class="form-control" name="description">
+		</div>
+		<div class="form-group">
+			<label for="create-storehouseCountry">所属国家</label>
+			<input id="create-storehouseCountry" type="text" class="form-control" name="storehouseCountry.name">
 		</div>
 	</form>
 </div>
@@ -45,26 +48,19 @@
 <!-- 修改 -->
 <div id="updateDialog" class="crudDialog" hidden>
     <form>
-        <div class="form-group">
-            <label for="update-username">账户</label>
-            <input id="update-username" type="text" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="update-password">密码</label>
-            <input id="update-password" type="text" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="update-company">企业</label>
-            <input id="update-company" type="text" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="update-address">地址</label>
-            <input id="update-address" type="text" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="update-phone">电话</label>
-            <input id="update-phone" type="text" class="form-control">
-        </div>
+		<p style="color: darkgray"> - 只更新填写的部分信息 - </p>
+		<div class="form-group">
+			<label for="update-name">仓库名</label>
+			<input id="update-name" type="text" class="form-control update-name">
+		</div>
+		<div class="form-group">
+			<label for="update-address">地址</label>
+			<input id="update-address" type="text" class="form-control update-address">
+		</div>
+		<div class="form-group">
+			<label for="update-description">描述</label>
+			<input id="update-description" type="text" class="form-control update-description">
+		</div>
     </form>
 </div>
 <script src="../../resources/plugins/jquery.1.12.4.min.js"></script>
@@ -89,10 +85,11 @@ $(function() {
 	// bootstrap table初始化
 	// http://bootstrap-table.wenzhixin.net.cn/zh-cn/documentation/
 	$table.bootstrapTable({
-		url: '../../resources/data/storehouse_list.json',
+		url: '../../storehouse/list',
+        method: 'get',
 		height: getHeight(),
 		striped: true,
-		search: true,
+		search: false,
 		searchOnEnterKey: true,
 		showRefresh: true,
 		showToggle: true,
@@ -105,7 +102,7 @@ $(function() {
 		pagination: true,
 		paginationLoop: false,
 		classes: 'table table-hover table-no-bordered',
-		//sidePagination: 'server',
+		sidePagination: 'server',
 		//silentSort: false,
 		smartDisplay: false,
 		idField: 'id',
@@ -116,11 +113,23 @@ $(function() {
 		idField: 'systemId',
 		maintainSelected: true,
 		toolbar: '#toolbar',
+        pageNumber: 1,
+        pageSize: 15,
+        queryParamsType: "undefined",
+        queryParams: function queryParams(params) {
+            var temp = {
+                page: params.pageNumber,
+                count: params.pageSize,
+                tableIndex: 0
+            };
+            return temp;
+        },
 		columns: [
 			{field: 'state', checkbox: true},
 			{field: 'id', title: '编号', sortable: true, halign: 'left'},
-			{field: 'name', title: '国家', sortable: true, halign: 'left'},
+			{field: 'name', title: '仓库名', sortable: true, halign: 'left'},
 			{field: 'address', title: '地址', sortable: true, halign: 'left'},
+			{field: 'storehouseCountry.name', title: '所属国家', sortable: true, halign: 'left'},
 			{field: 'description', title: '描述', sortable: true, halign: 'left'},
 			{field: 'createDate', title: '创建时间', sortable: true, halign: 'left'},
 			{field: 'updateDate', title: '更新时间', sortable: true, halign: 'left'},
@@ -144,12 +153,10 @@ window.actionEvents = {
         console.log(value, row, index);
     },
     'click .edit': function (e, value, row, index) {
-        alert('You click edit icon, row: ' + JSON.stringify(row));
-        console.log(value, row, index);
+        updateAction(row.id);
     },
     'click .remove': function (e, value, row, index) {
-        alert('You click remove icon, row: ' + JSON.stringify(row));
-        console.log(value, row, index);
+        deleteAction(row.id);
     }
 };
 function detailFormatter(index, row) {
@@ -164,14 +171,23 @@ function createAction() {
 	$.confirm({
 		type: 'dark',
 		animationSpeed: 300,
-		title: '新增角色',
+		title: '新增仓库',
 		content: $('#createDialog').html(),
 		buttons: {
 			confirm: {
 				text: '确认',
 				btnClass: 'waves-effect waves-button',
 				action: function () {
-					$.alert('确认');
+                    $.ajax({
+                        url: "../../storehouse/insert",
+                        type: "POST",
+                        contentType: "application/x-www-form-urlencoded",
+                        dataType: "json",
+                        data: $(".insertForm:last").serialize(), //传递表单值
+                        success: function () {
+                            $table.bootstrapTable('refresh'); //刷新表格
+                        }
+                    });
 				}
 			},
 			cancel: {
@@ -182,84 +198,108 @@ function createAction() {
 	});
 }
 // 编辑
-function updateAction() {
-	var rows = $table.bootstrapTable('getSelections');
-	if (rows.length == 0) {
-		$.confirm({
-			title: false,
-			content: '请至少选择一条记录！',
-			autoClose: 'cancel|3000',
-			backgroundDismiss: true,
-			buttons: {
-				cancel: {
-					text: '取消',
-					btnClass: 'waves-effect waves-button'
-				}
-			}
-		});
-	} else {
-		$.confirm({
-			type: 'blue',
-			animationSpeed: 300,
-			title: '编辑角色',
-			content: $('#updateDialog').html(),
-			buttons: {
-				confirm: {
-					text: '确认',
-					btnClass: 'waves-effect waves-button',
-					action: function () {
-						$.alert('确认');
-					}
-				},
-				cancel: {
-					text: '取消',
-					btnClass: 'waves-effect waves-button'
-				}
-			}
-		});
-	}
+function updateAction(id) {
+    $.confirm({
+        type: 'blue',
+        animationSpeed: 300,
+        title: '编辑仓库',
+        content: $('#updateDialog').html(),
+        buttons: {
+            confirm: {
+                text: '确认',
+                btnClass: 'waves-effect waves-button',
+                action: function () {
+                    var name = $(".update-name:last").val();
+                    var address = $(".update-address:last").val();
+                    var description = $(".update-description:last").val();
+
+                    var Storehouse = {};
+                    Storehouse.id = id;
+                    if (name != '') {
+                        Storehouse.name = name;
+                    }
+                    if (address != '') {
+                        Storehouse.address = address;
+                    }
+                    if (description != '') {
+                        Storehouse.description = description;
+                    }
+                    $.ajax({
+                        url: "../../storehouse/update",
+                        type: "POST",
+                        dataType: "json",
+                        data: Storehouse,
+                        success: function () {
+                            $table.bootstrapTable('refresh');
+                        }
+                    });
+                }
+            },
+            cancel: {
+                text: '取消',
+                btnClass: 'waves-effect waves-button'
+            }
+        }
+    });
 }
 // 删除
-function deleteAction() {
+function deleteAction(id) {
 	var rows = $table.bootstrapTable('getSelections');
-	if (rows.length == 0) {
-		$.confirm({
-			title: false,
-			content: '请至少选择一条记录！',
-			autoClose: 'cancel|3000',
-			backgroundDismiss: true,
-			buttons: {
-				cancel: {
-					text: '取消',
-					btnClass: 'waves-effect waves-button'
-				}
-			}
-		});
-	} else {
-		$.confirm({
-			type: 'red',
-			animationSpeed: 300,
-			title: false,
-			content: '确认删除吗？',
-			buttons: {
-				confirm: {
-					text: '确认',
-					btnClass: 'waves-effect waves-button',
-					action: function () {
-						var ids = new Array();
-						for (var i in rows) {
-							ids.push(rows[i].systemId);
-						}
-						$.alert('删除：id=' + ids.join("-"));
-					}
-				},
-				cancel: {
-					text: '取消',
-					btnClass: 'waves-effect waves-button'
-				}
-			}
-		});
-	}
+    if (rows.length == 0 && id == null) {
+        $.confirm({
+            title: false,
+            content: '请至少选择一条记录！',
+            autoClose: 'cancel|3000',
+            backgroundDismiss: true,
+            buttons: {
+                cancel: {
+                    text: '取消',
+                    btnClass: 'waves-effect waves-button'
+                }
+            }
+        });
+    } else {
+        $.confirm({
+            type: 'red',
+            animationSpeed: 300,
+            title: false,
+            content: '请确认是否有其他信息关联该仓库字段，确认删除吗？',
+            buttons: {
+                confirm: {
+                    text: '确认',
+                    btnClass: 'waves-effect waves-button',
+                    action: function () {
+                        var ids = new Array();
+                        if (rows.length != 0 && id == null) {
+                            for (var i in rows) {
+                                ids.push(rows[i].id);
+                            }
+                        } else {
+                            ids.push(id);
+                        }
+                        //异步删除
+                        $.ajax({
+                            url: "../../storehouse/delete",
+                            type: "post",
+                            dataType: "json",
+                            data: {ids: ids},
+                            success: function (falg) {
+                                if(falg){
+                                    $('#table').bootstrapTable('refresh');
+                                }else{
+                                    alert("该字段已与其他字段绑定，删除失败！");
+                                }
+                            }
+                        });
+                    }
+                },
+                cancel: {
+                    text: '取消',
+                    btnClass: 'waves-effect waves-button'
+                }
+            }
+        });
+    }
 }
 </script>
 </body>

@@ -1,15 +1,19 @@
 package me.cathub.change.order.dao;
 
-import com.github.pagehelper.PageHelper;
 import me.cathub.change.api.dao.order.OrderDao;
 import me.cathub.change.common.base.BaseDaoMyBatisImpl;
-import me.cathub.change.common.bean.order.Order;
+import me.cathub.change.order.bean.Order;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 订单Dao实现
+ *
+ * @author cheng
+ */
 @Repository
 public class OrderDaoImpl extends BaseDaoMyBatisImpl<Order> implements OrderDao {
 
@@ -69,107 +73,56 @@ public class OrderDaoImpl extends BaseDaoMyBatisImpl<Order> implements OrderDao 
     }
 
     @Override
-    public List<Order> listByStorehouseId(long storehouse_id, int page, int count, int tableIndex) throws Exception {
-        List<Order> results = null;
+    public List<Order> listByStorehouseId(long storehouseId, int page, int count, int tableIndex) throws Exception {
+        Map<String, Object> map = new HashMap<>(2);
+        map.put("storehouse_id", storehouseId);
+        map.put("tableIndex", tableIndex);
 
-        try {
-            Map<String, ? super Number> map = new HashMap<>();
-            map.put("storehouse_id", storehouse_id);
-            map.put("tableIndex", tableIndex);
-
-            PageHelper.startPage(page, count);
-            results = sqlSessionTemplate.selectList(NAME_SPACE + LIST_BY_STOREHOUSE_ID, map);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return results;
+        return baseList(NAME_SPACE + LIST_BY_STOREHOUSE_ID, page, count, map);
     }
 
     @Override
-    public int countByStorehouseId(long storehouse_id, int tableIndex) throws Exception {
-        int count = 0;
+    public int countByStorehouseId(long storehouseId, int tableIndex) throws Exception {
+        Map<String, Object> map = new HashMap<>(2);
+        map.put("storehouse_id", storehouseId);
+        map.put("tableIndex", tableIndex);
 
-        try {
-            Map<String, ? super Number> map = new HashMap<>();
-            map.put("storehouse_id", storehouse_id);
-            map.put("tableIndex", tableIndex);
-
-            count = sqlSessionTemplate.selectOne(NAME_SPACE + COUNT_BY_STOREHOUSE_ID, map);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return count;
+        return baseCount(NAME_SPACE + COUNT_BY_STOREHOUSE_ID, map);
     }
 
     @Override
-    public List<Order> listByShopkeeperId(long shopkeeper_id, int page, int count, int tableIndex) throws Exception {
-        List<Order> results = null;
+    public List<Order> listByShopkeeperId(long shopkeeperId, int page, int count, int tableIndex) throws Exception {
+        Map<String, Object> map = new HashMap<>(2);
+        map.put("shopkeeper_id", shopkeeperId);
+        map.put("tableIndex", tableIndex);
 
-        try {
-            Map<String, ? super Number> map = new HashMap<>();
-            map.put("shopkeeper_id", shopkeeper_id);
-            map.put("tableIndex", tableIndex);
-
-            PageHelper.startPage(page, count);
-            results = sqlSessionTemplate.selectList(NAME_SPACE + LIST_BY_SHOPKEEPER_ID, map);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return results;
+        return baseList(NAME_SPACE + LIST_BY_SHOPKEEPER_ID, page, count, map);
     }
 
     @Override
-    public int countByShopkeeperId(long shopkeeper_id, int tableIndex) throws Exception {
-        int count = 0;
+    public int countByShopkeeperId(long shopkeeperId, int tableIndex) throws Exception {
+        Map<String, Object> map = new HashMap<>(2);
+        map.put("shopkeeper_id", shopkeeperId);
+        map.put("tableIndex", tableIndex);
 
-        try {
-            Map<String, ? super Number> map = new HashMap<>();
-            map.put("shopkeeper_id", shopkeeper_id);
-            map.put("tableIndex", tableIndex);
-
-            count = sqlSessionTemplate.selectOne(NAME_SPACE + COUNT_BY_SHOPKEEPER_ID, map);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return count;
+        return baseCount(NAME_SPACE + COUNT_BY_SHOPKEEPER_ID, map);
     }
 
     @Override
-    public List<Order> listByBrandQuotient(long brandQuotient_id, int page, int count, int tableIndex) throws Exception {
-        List<Order> results = null;
+    public List<Order> listByCompanyId(long companyId, int page, int count, int tableIndex) throws Exception {
+        Map<String, Object> map = new HashMap<>(2);
+        map.put("brandQuotient_id", companyId);
+        map.put("tableIndex", tableIndex);
 
-        try {
-            Map<String, ? super Number> map = new HashMap<>();
-            map.put("brandQuotient_id", brandQuotient_id);
-            map.put("tableIndex", tableIndex);
-
-            PageHelper.startPage(page, count);
-            results = sqlSessionTemplate.selectList(NAME_SPACE + LIST_BY_BRAND_QUOTIENT_ID, map);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return results;
+        return baseList(NAME_SPACE + LIST_BY_COMPANY_ID, page, count, map);
     }
 
     @Override
-    public int countByBrandQuotientId(long brandQuotient_id, int tableIndex) {
-        int count = 0;
+    public int countByCompanyId(long companyId, int tableIndex) throws Exception {
+        Map<String, Object> map = new HashMap<>(2);
+        map.put("brandQuotient_id", companyId);
+        map.put("tableIndex", tableIndex);
 
-        try {
-            Map<String, ? super Number> map = new HashMap<>();
-            map.put("brandQuotient_id", brandQuotient_id);
-            map.put("tableIndex", tableIndex);
-
-            count = sqlSessionTemplate.selectOne(NAME_SPACE + COUNT_BY_BRAND_QUOTIENT_ID, map);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return count;
+        return baseCount(NAME_SPACE + COUNT_BY_COMPANY_ID, map);
     }
 }

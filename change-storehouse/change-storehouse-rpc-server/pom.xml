@@ -8,6 +8,8 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+    <artifactId>change-storehouse-rpc-server</artifactId>
+    <packaging>jar</packaging>
 
     <build>
         <plugins>
@@ -40,13 +42,17 @@
         </plugins>
         <finalName>change-storehouse-rpc-server</finalName>
     </build>
-    <packaging>jar</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    <artifactId>change-storehouse-rpc-server</artifactId>
     <dependencies>
+        <!-- local start -->
+        <dependency>
+            <groupId>me.cathub</groupId>
+            <artifactId>change-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
         <dependency>
             <groupId>me.cathub</groupId>
             <artifactId>change-api-rpc-server-storehouse</artifactId>
@@ -87,12 +93,7 @@
             <artifactId>change-config-rpc-server-storehouse</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-        <dependency>
-            <groupId>me.cathub</groupId>
-            <artifactId>change-common-tool</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-
+        <!-- local end -->
 
         <!-- dubbo -->
         <dependency>

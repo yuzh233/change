@@ -1,15 +1,20 @@
 package me.cathub.change.user.dao;
 
-import com.github.pagehelper.PageHelper;
 import me.cathub.change.api.dao.user.OnlineStoreDao;
 import me.cathub.change.common.base.BaseDaoMyBatisImpl;
-import me.cathub.change.common.bean.user.OnlineStore;
+import me.cathub.change.user.bean.OnlineStore;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
+/**
+ * 网店Dao实现类
+ *
+ * @author cheng
+ */
 @Repository
 public class OnlineStoreDaoImpl extends BaseDaoMyBatisImpl<OnlineStore> implements OnlineStoreDao {
 
@@ -69,32 +74,20 @@ public class OnlineStoreDaoImpl extends BaseDaoMyBatisImpl<OnlineStore> implemen
     }
 
     @Override
-    public List<OnlineStore> listByShopkeeperId(long shopkeeper_id, int page, int count, int tableIndex) throws Exception {
-        List<OnlineStore> results = null;
-        try {
-            Map<String, ? super Number> map = new HashMap<>();
-            map.put("shopkeeper_id", shopkeeper_id);
-            map.put("tableIndex", tableIndex);
+    public List<OnlineStore> listByShopkeeperId(long shopkeeperId, int page, int count, int tableIndex) throws Exception {
+        Map<String, Object> map = new HashMap<>(2);
+        map.put("shopkeeper_id", shopkeeperId);
+        map.put("tableIndex", tableIndex);
 
-            PageHelper.startPage(page, count);
-            results = sqlSessionTemplate.selectList(NAME_SPACE + LIST_BY_SHOPKEEPER_ID, map);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return results;
+        return baseList(NAME_SPACE + LIST_BY_SHOPKEEPER_ID, page, count, map);
     }
 
     @Override
-    public int countByShopkeeperId(long shopkeeper_id, int tableIndex) throws Exception {
-        int count = 0;
-        try {
-            Map<String, ? super Number> map = new HashMap<>();
-            map.put("shopkeeper_id", shopkeeper_id);
-            map.put("tableIndex", tableIndex);
-            count = sqlSessionTemplate.selectOne(NAME_SPACE + COUNT_BY_SHOPKEEPER_ID, map);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return count;
+    public int countByShopkeeperId(long shopkeeperId, int tableIndex) throws Exception {
+        Map<String, Object> map = new HashMap<>(2);
+        map.put("shopkeeper_id", shopkeeperId);
+        map.put("tableIndex", tableIndex);
+
+        return baseCount(NAME_SPACE + COUNT_BY_SHOPKEEPER_ID, map);
     }
 }

@@ -19,7 +19,7 @@
 <div id="main">
 	<div id="toolbar">
 		<a class="waves-effect waves-button" href="javascript:;" onclick="createAction()"><i class="zmdi zmdi-plus"></i> 新增属性</a>
-		<a class="waves-effect waves-button" href="javascript:;" onclick="deleteAction()"><i class="zmdi zmdi-close"></i> 删除属性</a>
+		<a class="waves-effect waves-button" href="javascript:;" onclick="deleteAction()"><i class="zmdi zmdi-close"></i> 批量删除属性</a>
 	</div>
 	<table id="table"></table>
 </div>
@@ -170,8 +170,13 @@ function createAction() {
                         contentType: "application/x-www-form-urlencoded",
                         dataType: "json",
                         data: $(".createForm:last").serialize(), //传递表单值
-                        success: function () {
-                            $table.bootstrapTable('refresh'); //刷新表格
+                        success: function (flag) {
+                            if(flag){
+                            	$table.bootstrapTable('refresh'); //刷新表格
+							}else {
+                                alert("找不到分类，增加属性值失败！");
+                                return false;
+							}
                         }
                     });
 				}
@@ -201,15 +206,17 @@ function updateAction(id) {
                     //创建json对象
                     var property = {};
                     property.id = id;
-                    if (username != '') {
-                        property.username = username;
+                    if (name != '') {
+                        property.name = name;
                     }
                     if (productCategory != '') {
                         property.productCategory = {"name":productCategory};
                     }
+                    property = JSON.stringify(property);
                     $.ajax({
-                        url: "../../product/update",
+                        url: "../../property/update",
                         type: "POST",
+						contentType:"application/json",
                         dataType: "json",
                         data: property,
                         success: function () {
@@ -262,7 +269,7 @@ function deleteAction(id) {
                         }
                         //异步删除
                         $.ajax({
-                            url: "../../product/delete",
+                            url: "../../property/delete",
                             type: "post",
                             dataType: "json",
                             data: {ids: ids},
