@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author cheng
  */
-public interface ProductReviewRpcServer extends BaseRpcServer<ProductReview>, FillAssociationDate<ProductReview> {
+public interface ProductReviewRpcServer extends BaseRpcServer<ProductReview> {
 
     /**
      * 根据产品获取产品评论列表

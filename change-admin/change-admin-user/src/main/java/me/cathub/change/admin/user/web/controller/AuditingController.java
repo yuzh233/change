@@ -2,6 +2,7 @@ package me.cathub.change.admin.user.web.controller;
 
 import me.cathub.change.api.rpc.server.user.*;
 import me.cathub.change.common.base.BaseControllerImpl;
+import me.cathub.change.common.bean.User;
 import me.cathub.change.user.bean.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

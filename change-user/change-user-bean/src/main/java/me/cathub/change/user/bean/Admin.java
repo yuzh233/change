@@ -1,5 +1,7 @@
 package me.cathub.change.user.bean;
 
+import me.cathub.change.common.bean.User;
+
 /**
  * 管理员
  *
@@ -26,8 +28,6 @@ public class Admin extends User {
         sb.append(", updateDate=").append(updateDate);
         sb.append(", status=").append(status);
         sb.append(", tableIndex=").append(tableIndex);
-        sb.append(", roleId=").append(roleId);
-        sb.append(", role=").append(role);
         sb.append('}');
         return sb.toString();
     }

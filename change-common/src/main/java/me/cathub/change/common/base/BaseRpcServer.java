@@ -9,7 +9,7 @@ import java.util.List;
  * <p/>
  * @param <Bean>
  */
-public interface BaseRpcServer<Bean> {
+public interface BaseRpcServer<Bean> extends FillAssociationDate<Bean> {
 
     /**
      * 插入数据

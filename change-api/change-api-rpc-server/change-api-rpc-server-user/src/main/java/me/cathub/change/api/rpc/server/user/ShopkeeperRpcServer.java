@@ -10,5 +10,5 @@ import me.cathub.change.user.bean.Shopkeeper;
  *
  * @author cheng
  */
-public interface ShopkeeperRpcServer extends BaseRpcServer<Shopkeeper>, FillAssociationDate<Shopkeeper>, ServerSelectByName<Shopkeeper> {
+public interface ShopkeeperRpcServer extends BaseRpcServer<Shopkeeper>, ServerSelectByName<Shopkeeper> {
 }

@@ -5,11 +5,14 @@ import me.cathub.change.api.rpc.server.upms.RoleRpcServer;
 import me.cathub.change.api.rpc.server.user.BrandQuotientRpcServer;
 import me.cathub.change.api.rpc.server.user.CompanyRpcServer;
 import me.cathub.change.common.base.BaseRpcServerImpl;
-import me.cathub.change.upms.bean.Role;
 import me.cathub.change.user.bean.BrandQuotient;
 import me.cathub.change.user.bean.Company;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * 品牌商Rpc服务实现类
@@ -22,9 +25,6 @@ public class BrandQuotientRpcServerImpl extends BaseRpcServerImpl<BrandQuotient,
     @Autowired
     private CompanyRpcServer companyRpcServer;
 
-    @Autowired
-    private RoleRpcServer roleRpcServer;
-
     @Override
     public BrandQuotient selectByName(String name, int tableIndex, boolean flag) throws Exception {
         if (flag) {
@@ -35,22 +35,27 @@ public class BrandQuotientRpcServerImpl extends BaseRpcServerImpl<BrandQuotient,
     }
 
     @Override
-    public BrandQuotient selectByCompanyId(long companyId, int tableIndex, boolean flag) {
+    public List<BrandQuotient> listByCompanyId(long companyId, int page, int count, int tableIndex, boolean flag) throws Exception {
         if (flag) {
-            return dao.selectByCompanyId(companyId, tableIndex);
+            return dao.listByCompanyId(companyId, page, count, tableIndex);
         } else {
-            return fill(dao.selectByCompanyId(companyId, tableIndex));
+            return dao.listByCompanyId(companyId, page, count, tableIndex).stream()
+                    .map(bean -> fill(bean))
+                    .collect(toList());
         }
+    }
+
+    @Override
+    public int countByCompanyId(long companyId, int tableIndex) throws Exception {
+        return dao.countByCompanyId(companyId, tableIndex);
     }
 
     @Override
     public BrandQuotient fill(BrandQuotient bean) {
         try {
             Company company = companyRpcServer.select(new Company(bean.getCompanyId()), true);
-            Role role = roleRpcServer.select(new Role(bean.getRoleId()), true);
 
             bean.setCompany(company);
-            bean.setRole(role);
         } catch (Exception e) {
             e.printStackTrace();
         }

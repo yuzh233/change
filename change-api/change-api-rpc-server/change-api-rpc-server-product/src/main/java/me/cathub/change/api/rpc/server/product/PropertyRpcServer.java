@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author cheng
  */
-public interface PropertyRpcServer extends BaseRpcServer<Property>, FillAssociationDate<Property>, ServerSelectByName<Property> {
+public interface PropertyRpcServer extends BaseRpcServer<Property>, ServerSelectByName<Property> {
 
     /**
      * 根据产品分类获取属性列表

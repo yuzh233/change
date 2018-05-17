@@ -72,7 +72,7 @@ $(function() {
 	// bootstrap table初始化
 	// http://bootstrap-table.wenzhixin.net.cn/zh-cn/documentation/
 	$table.bootstrapTable({
-		url: '../../permission/list',
+		url: '../../parent/list',
         method: 'get',
 		height: getHeight(),
 		striped: true,
@@ -164,7 +164,7 @@ function createAction() {
 				btnClass: 'waves-effect waves-button',
 				action: function () {
                     $.ajax({
-                        url: "../../permission/insert",
+                        url: "../../parent/insert",
                         type: "POST",
                         contentType: "application/x-www-form-urlencoded",
                         dataType: "json",
@@ -201,22 +201,22 @@ function updateAction(id) {
                     var name = $(".update-name:last").val();
                     var role = $(".update-role:last").val();
 
-                    var permission = {};
-                    permission.id = id;
+                    var parent = {};
+                    parent.id = id;
                     if (name != '') {
-                        permission.name = name;
+                        parent.name = name;
                     }
                     if (role != '') {
-                        permission.role = {"name":role};
+                        parent.role = {"name":role};
                     }
                     //转成JSON对象，后台用对象接受
-                    permission = JSON.stringify(permission);
+                    parent = JSON.stringify(parent);
                     $.ajax({
-                        url: "../../permission/update",
+                        url: "../../parent/update",
                         contentType:"application/json",
                         type: "POST",
                         dataType: "json",
-                        data: permission,
+                        data: parent,
                         success: function (flag) {
                             if(flag){
                                 $table.bootstrapTable('refresh'); //刷新表格
@@ -272,7 +272,7 @@ function deleteAction(id) {
                         console.log('删除：id=' + ids);
                         //异步删除
                         $.ajax({
-                            url: "../../permission/delete",
+                            url: "../../parent/delete",
                             type: "post",
                             dataType: "json",
                             data: {ids: ids},

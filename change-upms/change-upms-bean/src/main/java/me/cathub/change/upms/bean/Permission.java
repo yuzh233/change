@@ -23,35 +23,24 @@ public class Permission implements Serializable {
     private Date updateDate;
     private int tableIndex;
 
-    @JsonSerialize(using = LongJsonSerializer.class)
-    private long roleId;
+    private long applyId;
+    private long parentId;
 
     /**
-     * 所属角色
+     * 所属应用
      */
-    private Role role;
+    private Apply apply;
 
-    public Permission() {
-    }
+    /**
+     * 父级
+     */
+    private Permission parent;
 
     public Permission(long id) {
         this.id = id;
     }
 
-    public long getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(long roleId) {
-        this.roleId = roleId;
-    }
-
-    public int getTableIndex() {
-        return tableIndex;
-    }
-
-    public void setTableIndex(int tableIndex) {
-        this.tableIndex = tableIndex;
+    public Permission() {
     }
 
     public long getId() {
@@ -86,12 +75,44 @@ public class Permission implements Serializable {
         this.updateDate = updateDate;
     }
 
-    public Role getRole() {
-        return role;
+    public int getTableIndex() {
+        return tableIndex;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setTableIndex(int tableIndex) {
+        this.tableIndex = tableIndex;
+    }
+
+    public long getApplyId() {
+        return applyId;
+    }
+
+    public void setApplyId(long applyId) {
+        this.applyId = applyId;
+    }
+
+    public long getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(long parentId) {
+        this.parentId = parentId;
+    }
+
+    public Apply getApply() {
+        return apply;
+    }
+
+    public void setApply(Apply apply) {
+        this.apply = apply;
+    }
+
+    public Permission getParent() {
+        return parent;
+    }
+
+    public void setParent(Permission parent) {
+        this.parent = parent;
     }
 
     @Override
@@ -102,8 +123,10 @@ public class Permission implements Serializable {
         sb.append(", createDate=").append(createDate);
         sb.append(", updateDate=").append(updateDate);
         sb.append(", tableIndex=").append(tableIndex);
-        sb.append(", roleId=").append(roleId);
-        sb.append(", role=").append(role);
+        sb.append(", applyId=").append(applyId);
+        sb.append(", parentId=").append(parentId);
+        sb.append(", apply=").append(apply);
+        sb.append(", parent=").append(parent);
         sb.append('}');
         return sb.toString();
     }

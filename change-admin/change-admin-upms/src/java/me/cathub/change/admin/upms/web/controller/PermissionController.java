@@ -39,13 +39,6 @@ public class PermissionController extends BaseControllerImpl<Permission, Permiss
     @ResponseBody
     @Override
     public boolean insert(Permission permission) throws Exception {
-        //查询对应的角色是否存在
-        String roleName = permission.getRole().getName();
-        Role role = roleRpcServer.selectByName(roleName, 0, true);
-        if (role != null) {
-            permission.setRole(role);
-            return rpcService.insert(permission) != -1;
-        }
         return false;
     }
 }

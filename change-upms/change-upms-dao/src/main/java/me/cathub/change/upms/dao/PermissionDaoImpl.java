@@ -73,29 +73,47 @@ public class PermissionDaoImpl extends BaseDaoMyBatisImpl<Permission> implements
     }
 
     @Override
-    public List<Permission> listByRoleId(long roleId, int page, int count, int tableIndex) throws Exception {
-        Map<String, Object> map = new HashMap<>(2);
-        map.put("role_id", roleId);
-        map.put("tableIndex", tableIndex);
-
-        return baseList(NAME_SPACE + LIST_BY_ROLE_ID, page, count, map);
-    }
-
-    @Override
-    public int countByRoleId(long roleId, int tableIndex) throws Exception {
-        Map<String, Object> map = new HashMap<>(2);
-        map.put("role_id", roleId);
-        map.put("tableIndex", tableIndex);
-
-        return baseCount(NAME_SPACE + COUNT_BY_ROLE_ID, map);
-    }
-
-    @Override
     public Permission selectByName(String name, int tableIndex) throws Exception {
         Map<String, Object> map = new HashMap<>(2);
         map.put("name", name);
         map.put("tableIndex", tableIndex);
 
         return search(NAME_SPACE + SELECT_BY_NAME, map);
+    }
+
+    @Override
+    public List<Permission> listByApplyId(long applyId, int page, int count, int tableIndex) throws Exception {
+        Map<String, Object> map = new HashMap<>(2);
+        map.put("apply_id", applyId);
+        map.put("tableIndex", tableIndex);
+
+        return baseList(NAME_SPACE + LIST_BY_APPLY_ID, page, count, map);
+    }
+
+    @Override
+    public int countByApplyId(long applyId, int tableIndex) throws Exception {
+        Map<String, Object> map = new HashMap<>(2);
+        map.put("apply_id", applyId);
+        map.put("tableIndex", tableIndex);
+
+        return baseCount(NAME_SPACE + COUNT_BY_APPLY_ID, map);
+    }
+
+    @Override
+    public List<Permission> childListById(long id, int page, int count, int tableIndex) throws Exception {
+        Map<String, Object> map = new HashMap<>(2);
+        map.put("id", id);
+        map.put("tableIndex", tableIndex);
+
+        return baseList(NAME_SPACE + CHILD_LIST_BY_ID, page, count, map);
+    }
+
+    @Override
+    public int childCountById(long id, int tableIndex) throws Exception {
+        Map<String, Object> map = new HashMap<>(2);
+        map.put("id", id);
+        map.put("tableIndex", tableIndex);
+
+        return baseCount(NAME_SPACE + CHILD_COUNT_BY_ID, map);
     }
 }

@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author cheng
  */
-public interface OrderItemRpcServer extends BaseRpcServer<OrderItem>,FillAssociationDate<OrderItem> {
+public interface OrderItemRpcServer extends BaseRpcServer<OrderItem> {
 
     /**
      * 根据订单获取订单项列表

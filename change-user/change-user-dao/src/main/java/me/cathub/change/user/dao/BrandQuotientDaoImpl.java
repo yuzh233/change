@@ -82,11 +82,20 @@ public class BrandQuotientDaoImpl extends BaseDaoMyBatisImpl<BrandQuotient> impl
     }
 
     @Override
-    public BrandQuotient selectByCompanyId(long companyId, int tableIndex) {
+    public List<BrandQuotient> listByCompanyId(long companyId, int page, int count, int tableIndex) throws Exception {
         Map<String, Object> map = new HashMap<>(2);
         map.put("company_id", companyId);
         map.put("tableIndex", tableIndex);
 
-        return search(NAME_SPACE + SELECT_BY_COMPANY_ID, map);
+        return baseList(NAME_SPACE + LIST_BY_COMPANY_ID, page, count, map);
+    }
+
+    @Override
+    public int countByCompanyId(long companyId, int tableIndex) throws Exception {
+        Map<String, Object> map = new HashMap<>(2);
+        map.put("company_id", companyId);
+        map.put("tableIndex", tableIndex);
+
+        return baseCount(NAME_SPACE + COUNT_BY_COMPANY_ID, map);
     }
 }

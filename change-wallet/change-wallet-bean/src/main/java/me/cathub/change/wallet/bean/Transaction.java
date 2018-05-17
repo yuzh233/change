@@ -1,6 +1,6 @@
 package me.cathub.change.wallet.bean;
 
-import me.cathub.change.user.bean.User;
+import me.cathub.change.common.bean.User;
 
 import java.io.Serializable;
 import java.util.Date;

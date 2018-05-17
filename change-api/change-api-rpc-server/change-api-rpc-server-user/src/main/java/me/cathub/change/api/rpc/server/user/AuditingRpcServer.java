@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author cheng
  */
-public interface AuditingRpcServer extends BaseRpcServer<Auditing>, FillAssociationDate<Auditing> {
+public interface AuditingRpcServer extends BaseRpcServer<Auditing> {
 
     /**
      * 根据管理员和类型获取审核列表

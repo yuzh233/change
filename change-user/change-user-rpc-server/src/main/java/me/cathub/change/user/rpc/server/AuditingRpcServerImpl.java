@@ -6,6 +6,7 @@ import me.cathub.change.api.rpc.server.user.AuditingRpcServer;
 import me.cathub.change.api.rpc.server.user.BrandQuotientRpcServer;
 import me.cathub.change.api.rpc.server.user.ShopkeeperRpcServer;
 import me.cathub.change.common.base.BaseRpcServerImpl;
+import me.cathub.change.common.bean.User;
 import me.cathub.change.user.bean.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

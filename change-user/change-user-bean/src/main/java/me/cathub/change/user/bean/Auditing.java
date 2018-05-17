@@ -2,6 +2,7 @@ package me.cathub.change.user.bean;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import me.cathub.change.common.bean.User;
 import me.cathub.change.common.util.json.LongJsonSerializer;
 
 import java.io.Serializable;

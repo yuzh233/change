@@ -66,8 +66,6 @@ public class BrandQuotientController extends BaseControllerImpl<BrandQuotient, B
             brandQuotient.setCompany(company);
         }
 
-        // 品牌商的角色都是“用户-品牌商”
-        brandQuotient.setRole(new Role(19874028009291776L));
         return rpcService.insert(brandQuotient) != -1;
     }
 }

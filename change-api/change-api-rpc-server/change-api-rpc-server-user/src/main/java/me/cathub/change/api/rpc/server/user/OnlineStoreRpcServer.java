@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author cheng
  */
-public interface OnlineStoreRpcServer extends BaseRpcServer<OnlineStore>, FillAssociationDate<OnlineStore> {
+public interface OnlineStoreRpcServer extends BaseRpcServer<OnlineStore> {
 
     /**
      * 根据店主获取网店列表

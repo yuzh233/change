@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author cheng
  */
-public interface ProductRpcServer extends BaseRpcServer<Product>, FillAssociationDate<Product>, ServerSelectByName<Product> {
+public interface ProductRpcServer extends BaseRpcServer<Product>, ServerSelectByName<Product> {
 
     /**
      * 根据品牌商获取产品列表

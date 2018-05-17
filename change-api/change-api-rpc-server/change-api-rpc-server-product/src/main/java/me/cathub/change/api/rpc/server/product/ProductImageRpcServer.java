@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author cheng
  */
-public interface ProductImageRpcServer extends BaseRpcServer<ProductImage>, FillAssociationDate<ProductImage> {
+public interface ProductImageRpcServer extends BaseRpcServer<ProductImage> {
 
     /**
      * 根据产品和图片类型获取产品图片列表

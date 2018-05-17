@@ -1,5 +1,7 @@
 package me.cathub.change.user.bean;
 
+import me.cathub.change.common.bean.User;
+
 /**
  * B2C店主
  *
@@ -27,8 +29,6 @@ public class Shopkeeper extends User {
         sb.append(", updateDate=").append(updateDate);
         sb.append(", status=").append(status);
         sb.append(", tableIndex=").append(tableIndex);
-        sb.append(", roleId=").append(roleId);
-        sb.append(", role=").append(role);
         sb.append('}');
         return sb.toString();
     }

@@ -1,8 +1,7 @@
-package me.cathub.change.user.bean;
+package me.cathub.change.common.bean;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import me.cathub.change.upms.bean.Role;
 import me.cathub.change.common.util.json.LongJsonSerializer;
 
 import java.io.Serializable;
@@ -12,6 +11,11 @@ import java.util.Date;
  * 用户账户
  *
  * @author cheng
+ *
+ * @see
+ * # updateAuthor cheng
+ * # updateInfo 用户与角色变更为多对多关系
+ * # lastUpdate 2018-5-17 12:11
  */
 public class User implements Serializable {
 
@@ -54,14 +58,6 @@ public class User implements Serializable {
     protected int status;
     protected int tableIndex;
 
-    @JsonSerialize(using = LongJsonSerializer.class)
-    protected long roleId;
-
-    /**
-     * 什么角色?
-     */
-    protected Role role;
-
     public User() {
     }
 
@@ -93,28 +89,12 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public long getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(long roleId) {
-        this.roleId = roleId;
-    }
-
     public int getTableIndex() {
         return tableIndex;
     }
 
     public void setTableIndex(int tableIndex) {
         this.tableIndex = tableIndex;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
     }
 
     public long getId() {
@@ -180,8 +160,6 @@ public class User implements Serializable {
         sb.append(", updateDate=").append(updateDate);
         sb.append(", status=").append(status);
         sb.append(", tableIndex=").append(tableIndex);
-        sb.append(", roleId=").append(roleId);
-        sb.append(", role=").append(role);
         sb.append('}');
         return sb.toString();
     }

@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author cheng
  */
-public interface StorehouseRpcServer extends BaseRpcServer<Storehouse>, FillAssociationDate<Storehouse>, ServerSelectByName<Storehouse> {
+public interface StorehouseRpcServer extends BaseRpcServer<Storehouse>, ServerSelectByName<Storehouse> {
 
     /**
      * 根据国家获取仓库列表

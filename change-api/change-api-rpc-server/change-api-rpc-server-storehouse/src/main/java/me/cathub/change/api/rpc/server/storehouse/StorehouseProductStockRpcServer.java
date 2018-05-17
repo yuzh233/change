@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author cheng
  */
-public interface StorehouseProductStockRpcServer extends BaseRpcServer<StorehouseProductStock>, FillAssociationDate<StorehouseProductStock> {
+public interface StorehouseProductStockRpcServer extends BaseRpcServer<StorehouseProductStock> {
 
     /**
      * 根据仓库和产品查找库存

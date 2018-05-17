@@ -23,9 +23,6 @@ import java.util.Map;
 @RequestMapping("/admin")
 public class AdminController extends BaseControllerImpl<Admin, AdminRpcServer> {
 
-    @Autowired
-    private RoleRpcServer roleRpcServer;
-
     @RequestMapping("/restores")
     @ResponseBody
     @Override
@@ -48,7 +45,6 @@ public class AdminController extends BaseControllerImpl<Admin, AdminRpcServer> {
             admin.setId(id);
             admin = select(admin);
             //关联角色对象
-            admin.setRole(roleRpcServer.select(new Role(admin.getRoleId()),true));
             map.put("admin", admin);
         }
     }

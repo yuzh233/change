@@ -1,6 +1,7 @@
 package me.cathub.change.user.bean;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import me.cathub.change.common.bean.User;
 import me.cathub.change.common.util.json.LongJsonSerializer;
 
 /**
@@ -56,8 +57,6 @@ public class BrandQuotient extends User {
         sb.append(", updateDate=").append(updateDate);
         sb.append(", status=").append(status);
         sb.append(", tableIndex=").append(tableIndex);
-        sb.append(", roleId=").append(roleId);
-        sb.append(", role=").append(role);
         sb.append('}');
         return sb.toString();
     }

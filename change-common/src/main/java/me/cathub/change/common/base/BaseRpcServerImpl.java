@@ -15,9 +15,9 @@ import static java.util.stream.Collectors.toList;
  * @author cheng
  * <p/>
  * @param <Bean> Java bean
- * @param <Dao> DaoImpl
+ * @param <Dao> Dao
  */
-public abstract class BaseRpcServerImpl<Bean extends Serializable, Dao extends BaseDao<Bean>> implements BaseRpcServer<Bean>, FillAssociationDate<Bean> {
+public abstract class BaseRpcServerImpl<Bean extends Serializable, Dao extends BaseDao<Bean>> implements BaseRpcServer<Bean> {
 
     private static final String SET_ID = "setId";
 

@@ -1,4 +1,4 @@
-package me.cathub.change.wallet.bean;
+package me.cathub.change.upms.bean;
 
 import me.cathub.change.common.bean.User;
 
@@ -6,49 +6,33 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 账户余额
+ * 用户角色
  *
  * @author cheng
  */
-public class Balance implements Serializable {
-
-    /**
-     * 账户类型为品牌商
-     */
-    public static final int TYPE_BRAND_QUOTIENT= 1;
-
-    /**
-     * 账户类型为借卖方
-     */
-    public static final int TYPE_SHOPKEEPER = 2;
+public class UserRole implements Serializable {
 
     private long id;
-    private float price;
-    private Date createDate;
-    private Date updateDate;
-    private int type;
-    private int tableIndex;
-
-    private long userId;
 
     /**
-     * 这钱是哪个账户的?
+     * 用户类型
      */
+    private int type;
+
+    private Date createDate;
+    private Date updateDate;
+
+    private long userId;
+    private long roleId;
+
     private User user;
+    private Role role;
 
-    public Balance() {
+    public UserRole() {
     }
 
-    public Balance(long id) {
+    public UserRole(long id) {
         this.id = id;
-    }
-
-    public int getTableIndex() {
-        return tableIndex;
-    }
-
-    public void setTableIndex(int tableIndex) {
-        this.tableIndex = tableIndex;
     }
 
     public long getId() {
@@ -57,14 +41,6 @@ public class Balance implements Serializable {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public float getPrice() {
-        return price;
-    }
-
-    public void setPrice(float price) {
-        this.price = price;
     }
 
     public Date getCreateDate() {
@@ -83,20 +59,20 @@ public class Balance implements Serializable {
         this.updateDate = updateDate;
     }
 
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
-    }
-
     public long getUserId() {
         return userId;
     }
 
     public void setUserId(long userId) {
         this.userId = userId;
+    }
+
+    public long getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(long roleId) {
+        this.roleId = roleId;
     }
 
     public User getUser() {
@@ -107,17 +83,33 @@ public class Balance implements Serializable {
         this.user = user;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Balance{");
+        final StringBuilder sb = new StringBuilder("UserRole{");
         sb.append("id=").append(id);
-        sb.append(", price=").append(price);
+        sb.append(", type=").append(type);
         sb.append(", createDate=").append(createDate);
         sb.append(", updateDate=").append(updateDate);
-        sb.append(", type=").append(type);
-        sb.append(", tableIndex=").append(tableIndex);
         sb.append(", userId=").append(userId);
+        sb.append(", roleId=").append(roleId);
         sb.append(", user=").append(user);
+        sb.append(", role=").append(role);
         sb.append('}');
         return sb.toString();
     }

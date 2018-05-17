@@ -10,5 +10,5 @@ import me.cathub.change.user.bean.Admin;
  *
  * @author cheng
  */
-public interface AdminRpcServer extends BaseRpcServer<Admin>, FillAssociationDate<Admin>, ServerSelectByName<Admin> {
+public interface AdminRpcServer extends BaseRpcServer<Admin>, ServerSelectByName<Admin> {
 }

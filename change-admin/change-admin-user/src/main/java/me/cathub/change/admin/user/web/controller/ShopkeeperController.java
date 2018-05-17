@@ -49,7 +49,6 @@ public class ShopkeeperController extends BaseControllerImpl<Shopkeeper, Shopkee
             shopkeeper.setId(id);
             shopkeeper = select(shopkeeper);
             //关联角色对象
-            shopkeeper.setRole(roleRpcServer.select(new Role(shopkeeper.getRoleId()),true));
             map.put("shopkeeper", shopkeeper);
         }
     }
@@ -59,7 +58,6 @@ public class ShopkeeperController extends BaseControllerImpl<Shopkeeper, Shopkee
     @Override
     public boolean insert(Shopkeeper bean) throws Exception {
         // 店主的角色都是“借卖方”
-        bean.setRole(new Role(19874064625565696L));
         return rpcService.insert(bean) != -1;
     }
 
