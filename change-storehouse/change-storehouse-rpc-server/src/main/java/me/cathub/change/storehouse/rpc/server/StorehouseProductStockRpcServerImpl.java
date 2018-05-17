@@ -65,6 +65,54 @@ public class StorehouseProductStockRpcServerImpl extends BaseRpcServerImpl<Store
     }
 
     @Override
+    public List<StorehouseProductStock> listByProductId(long productId, int page, int count, int tableIndex, boolean flag) throws Exception {
+        if (flag) {
+            return dao.listByProductId(productId, page, count, tableIndex);
+        } else {
+            return dao.listByProductId(productId, page, count, tableIndex).stream()
+                    .map(bean -> fill(bean))
+                    .collect(toList());
+        }
+    }
+
+    @Override
+    public int countByProductId(long productId, int tableIndex) throws Exception {
+        return dao.countByProductId(productId, tableIndex);
+    }
+
+    @Override
+    public List<StorehouseProductStock> listByStorehouseIdAndProductCategoryId(long storehouseId, long productCategoryId, int page, int count, int tableIndex, boolean flag) throws Exception {
+        if (flag) {
+            return dao.listByStorehouseIdAndProductCategoryId(storehouseId, productCategoryId, page, count, tableIndex);
+        } else {
+            return dao.listByStorehouseIdAndProductCategoryId(storehouseId, productCategoryId, page, count, tableIndex).stream()
+                    .map(bean -> fill(bean))
+                    .collect(toList());
+        }
+    }
+
+    @Override
+    public int countByStorehouseIdAndProductCategoryId(long storehouseId, long productCategoryId, int tableIndex) throws Exception {
+        return dao.countByStorehouseIdAndProductCategoryId(storehouseId, productCategoryId, tableIndex);
+    }
+
+    @Override
+    public List<StorehouseProductStock> listByStorehouseIdAndCompanyId(long storehouseId, long companyId, int page, int count, int tableIndex, boolean flag) throws Exception {
+        if (flag) {
+            return dao.listByStorehouseIdAndCompanyId(storehouseId, companyId, page, count, tableIndex);
+        } else {
+            return dao.listByStorehouseIdAndCompanyId(storehouseId, companyId, page, count, tableIndex).stream()
+                    .map(bean -> fill(bean))
+                    .collect(toList());
+        }
+    }
+
+    @Override
+    public int countByStorehouseIdAndCompanyId(long storehouseId, long companyId, int tableIndex) throws Exception {
+        return dao.countByStorehouseIdAndCompanyId(storehouseId, companyId, tableIndex);
+    }
+
+    @Override
     public StorehouseProductStock fill(StorehouseProductStock bean) {
         try {
             Product product = productRpcServer.select(new Product(bean.getProductId()), true);
