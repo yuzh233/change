@@ -99,4 +99,60 @@ public class StorehouseProductStockDaoImpl extends BaseDaoMyBatisImpl<Storehouse
 
         return baseCount(NAME_SPACE + COUNT_BY_STOREHOUSE_ID, map);
     }
+
+    @Override
+    public List<StorehouseProductStock> listByProductId(long productId, int page, int count, int tableIndex) throws Exception {
+        HashMap<String, Object> map = new HashMap<>(2);
+        map.put("product_id", productId);
+        map.put("tableIndex", tableIndex);
+
+        return baseList(NAME_SPACE + LIST_BY_PRODUCT_ID, page, count, map);
+    }
+
+    @Override
+    public int countByProductId(long productId, int tableIndex) throws Exception {
+        Map<String, Object> map = new HashMap<>(2);
+        map.put("product_id", productId);
+        map.put("tableIndex", tableIndex);
+
+        return baseCount(NAME_SPACE + COUNT_BY_PRODUCT_ID, map);
+    }
+
+    @Override
+    public List<StorehouseProductStock> listByStorehouseIdAndProductCategoryId(long storehouseId, long productCategoryId, int page, int count, int tableIndex) throws Exception {
+        HashMap<String, Object> map = new HashMap<>(2);
+        map.put("storehouse_id", storehouseId);
+        map.put("tableIndex", tableIndex);
+
+        return baseList(NAME_SPACE + LIST_BY_STOREHOUSE_ID_AND_PRODUCT_CATEGORY_ID, page, count, map);
+    }
+
+    @Override
+    public int countByStorehouseIdAndProductCategoryId(long storehouseId, long productCategoryId, int tableIndex) throws Exception {
+        Map<String, Object> map = new HashMap<>(3);
+        map.put("storehouse_id", storehouseId);
+        map.put("tableIndex", tableIndex);
+
+        return baseCount(NAME_SPACE + COUNT_BY_STOREHOUSE_ID_AND_PRODUCT_CATEGORY_ID, map);
+    }
+
+    @Override
+    public List<StorehouseProductStock> listByStorehouseIdAndCompanyId(long storehouseId, long companyId, int page, int count, int tableIndex) throws Exception {
+        HashMap<String, Object> map = new HashMap<>(3);
+        map.put("storehouse_id", storehouseId);
+        map.put("company_id", companyId);
+        map.put("tableIndex", tableIndex);
+
+        return baseList(NAME_SPACE + LIST_BY_STOREHOUSE_ID_AND_COMPANY_ID, page, count, map);
+    }
+
+    @Override
+    public int countByStorehouseIdAndCompanyId(long storehouseId, long companyId, int tableIndex) throws Exception {
+        Map<String, Object> map = new HashMap<>(3);
+        map.put("storehouse_id", storehouseId);
+        map.put("company_id", companyId);
+        map.put("tableIndex", tableIndex);
+
+        return baseCount(NAME_SPACE + COUNT_BY_STOREHOUSE_ID_AND_COMPANY_ID, map);
+    }
 }

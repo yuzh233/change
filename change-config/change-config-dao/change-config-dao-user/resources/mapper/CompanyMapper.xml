@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Company">
+
+    <!--&lt;!&ndash;缓存&ndash;&gt;
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache">
+        <property name="timeToIdleSeconds" value="3600"/>
+        <property name="timeToLiveSeconds" value="3600"/>
+        <property name="maxEntriesLocalHeap" value="1000"/>
+        <property name="maxEntriesLocalDisk" value="10000000"/>
+        <property name="memoryStoreEvictionPolicy" value="LRU"/>
+    </cache>-->
+
+    <resultMap id="company" type="company">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="address" column="address"/>
+        <result property="service" column="service"/>
+        <result property="phone" column="phone"/>
+        <result property="email" column="email"/>
+        <result property="createDate" column="createDate"/>
+        <result property="updateDate" column="updateDate"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="company">
+        INSERT INTO company_${tableIndex} (
+          id,
+          name,
+          address,
+          service,
+          phone,
+          email,
+          createDate,
+          yn
+        )VALUES(
+          #{id, jdbcType=BIGINT},
+          #{name, jdbcType=VARCHAR},
+          #{address, jdbcType=VARCHAR},
+          #{service, jdbcType=VARCHAR},
+          #{phone, jdbcType=VARCHAR},
+          #{email, jdbcType=VARCHAR},
+          NOW(),
+          1
+        )
+    </insert>
+
+    <update id="deleteL" parameterType="company">
+        UPDATE company_${tableIndex} SET
+          yn=0
+        WHERE
+          id=#{id, jdbcType=BIGINT}
+        and
+          yn=1
+    </update>
+
+    <update id="restore" parameterType="company">
+        UPDATE company_${tableIndex} SET
+        yn=1
+        WHERE
+        id=#{id, jdbcType=BIGINT}
+        AND
+        yn=0
+    </update>
+
+    <delete id="deleteP" parameterType="company">
+        DELETE FROM company_${tableIndex} WHERE id=#{id, jdbcType=BIGINT} and yn=0
+    </delete>
+
+    <update id="update" parameterType="company">
+        UPDATE company_${tableIndex} SET
+          address=#{address, jdbcType=VARCHAR},
+          service=#{service, jdbcType=VARCHAR},
+          phone=#{phone, jdbcType=VARCHAR},
+          email=#{email, jdbcType=VARCHAR},
+          updateDate=NOW()
+        WHERE
+          id=#{id, jdbcType=BIGINT}
+        and
+          yn=1
+    </update>
+
+    <select id="select" parameterType="company" resultMap="company">
+        SELECT * FROM company_${tableIndex} WHERE id=#{id, jdbcType=BIGINT} AND yn=1
+    </select>
+
+    <select id="list" parameterType="int" resultMap="company">
+        SELECT * FROM company_${_parameter} WHERE yn=1
+    </select>
+
+    <select id="count" parameterType="int" resultType="int">
+        SELECT COUNT(*) FROM company_${_parameter} WHERE yn=1
+    </select>
+
+    <select id="listByPage" parameterType="int" resultMap="company">
+        SELECT * FROM company_${_parameter} WHERE yn=0
+    </select>
+
+    <select id="countByPage" parameterType="int" resultType="int">
+        SELECT COUNT(*) FROM company_${_parameter} WHERE yn=0
+    </select>
+
+    <delete id="clear" parameterType="int">
+        DELETE FROM company_${_parameter} WHERE yn=0
+    </delete>
+
+    <select id="selectByName" parameterType="map" resultMap="company">
+        SELECT * FROM company_${tableIndex} WHERE yn=1 AND name=#{name, jdbcType=VARCHAR}
+    </select>
+</mapper>
