@@ -17,6 +17,14 @@ public class ResponseData {
      */
     private String data;
 
+    public ResponseData() {
+    }
+
+    public ResponseData(int code, String data) {
+        this.code = code;
+        this.data = data;
+    }
+
     public int getCode() {
         return code;
     }
