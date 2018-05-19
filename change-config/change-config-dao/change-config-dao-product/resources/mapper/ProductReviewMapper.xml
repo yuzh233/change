@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ProductReview">
+
+    <!--&lt;!&ndash;缓存&ndash;&gt;
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache">
+        <property name="timeToIdleSeconds" value="3600"/>
+        <property name="timeToLiveSeconds" value="3600"/>
+        <property name="maxEntriesLocalHeap" value="1000"/>
+        <property name="maxEntriesLocalDisk" value="10000000"/>
+        <property name="memoryStoreEvictionPolicy" value="LRU"/>
+    </cache>-->
+
+    <resultMap id="productReview" type="productReview">
+        <id property="id" column="id"/>
+        <result property="content" column="content"/>
+        <result property="createDate" column="createDate"/>
+        <result property="updateDate" column="updateDate"/>
+
+        <result property="shopkeeperId" column="shopkeeper_id"/>
+        <result property="productId" column="product_id"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="productReview">
+        INSERT INTO productReview_${tableIndex} (
+          id,
+          content,
+          product_id,
+          shopkeeper_id,
+          createDate,
+          yn
+        )VALUES(
+          #{id, jdbcType=BIGINT},
+          #{content, jdbcType=VARCHAR},
+          #{product.id, jdbcType=BIGINT},
+          #{shopkeeper.id, jdbcType=BIGINT},
+          NOW(),
+          1
+        )
+    </insert>
+
+    <update id="deleteL" parameterType="productReview">
+        UPDATE productReview_${tableIndex} SET
+          yn=0
+        WHERE
+          id=#{id, jdbcType=BIGINT}
+        and
+          yn=1
+    </update>
+
+    <update id="restore" parameterType="productReview">
+        UPDATE productReview_${tableIndex} SET
+        yn=1
+        WHERE
+        id=#{id, jdbcType=BIGINT}
+        AND
+        yn=0
+    </update>
+
+    <delete id="deleteP" parameterType="productReview">
+        DELETE FROM productReview_${tableIndex} WHERE id=#{id, jdbcType=BIGINT} and yn=0
+    </delete>
+
+    <update id="update" parameterType="productReview">
+        UPDATE productReview_${tableIndex} SET
+          content=#{content, jdbcType=VARCHAR},
+          updateDate=NOW()
+        WHERE
+          id=#{id, jdbcType=BIGINT}
+        and
+          yn=1
+    </update>
+
+    <select id="select" parameterType="productReview" resultMap="productReview">
+        SELECT * FROM productReview_${tableIndex} WHERE id=#{id, jdbcType=BIGINT} AND yn=1
+    </select>
+
+    <select id="list" parameterType="int" resultMap="productReview">
+        SELECT * FROM productReview_${_parameter} WHERE yn=1
+    </select>
+
+    <select id="count" parameterType="int" resultType="int">
+        SELECT COUNT(*) FROM productReview_${_parameter} WHERE yn=1
+    </select>
+
+    <select id="listByDel" parameterType="int" resultMap="productReview">
+        SELECT * FROM productReview_${_parameter} WHERE yn=0
+    </select>
+
+    <select id="countByDel" parameterType="int" resultType="int">
+        SELECT COUNT(*) productReview_${_parameter} WHERE yn=0
+    </select>
+
+    <delete id="clear" parameterType="int">
+        DELETE FROM productReview_${_parameter} WHERE yn=0
+    </delete>
+
+    <select id="listByProductId" parameterType="map" resultMap="productReview">
+        SELECT * FROM productReview_${tableIndex} WHERE yn=1 AND product_id=#{product_id, jdbcType=BIGINT}
+    </select>
+
+    <select id="countByProductId" parameterType="map" resultType="int">
+        SELECT COUNT(*) FROM productReview_${tableIndex} WHERE yn=1 AND product_id=#{product_id, jdbcType=BIGINT}
+    </select>
+</mapper>

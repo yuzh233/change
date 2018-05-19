@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="RolePermission">
+
+    <!--&lt;!&ndash;缓存&ndash;&gt;
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache">
+        <property name="timeToIdleSeconds" value="3600"/>
+        <property name="timeToLiveSeconds" value="3600"/>
+        <property name="maxEntriesLocalHeap" value="1000"/>
+        <property name="maxEntriesLocalDisk" value="10000000"/>
+        <property name="memoryStoreEvictionPolicy" value="LRU"/>
+    </cache>-->
+
+    <resultMap id="rolePermission" type="rolePermission">
+        <id property="id" column="id"/>
+        <result property="createDate" column="createDate"/>
+        <result property="updateDate" column="updateDate"/>
+
+        <result property="roleId" column="role_id"/>
+        <result property="applyId" column="apply_id"/>
+        <result property="permissionId" column="permission_id"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="rolePermission">
+        INSERT INTO rolePermission_${tableIndex} (
+          id,
+          role_id,
+          apply_id,
+          permission_id,
+          createDate,
+          yn
+        )VALUES(
+          #{id, jdbcType=BIGINT},
+          #{role.id, jdbcType=BIGINT},
+          #{apply.id, jdbcType=BIGINT},
+          #{permission.id, jdbcType=BIGINT},
+          NOW(),
+          1
+        )
+    </insert>
+
+    <update id="deleteL" parameterType="rolePermission">
+        UPDATE rolePermission_${tableIndex} SET
+          yn=0
+        WHERE
+          id=#{id, jdbcType=BIGINT}
+        and
+          yn=1
+    </update>
+
+    <update id="restore" parameterType="rolePermission">
+        UPDATE rolePermission_${tableIndex} SET
+        yn=1
+        WHERE
+        id=#{id, jdbcType=BIGINT}
+        AND
+        yn=0
+    </update>
+
+    <delete id="deleteP" parameterType="rolePermission">
+        DELETE FROM rolePermission_${tableIndex} WHERE id=#{id, jdbcType=BIGINT} and yn=0
+    </delete>
+
+    <update id="update" parameterType="rolePermission">
+        UPDATE rolePermission_${tableIndex} SET
+          role_id=#{role.id, jdbcType=BIGINT},
+          apply_id=#{apply.id, jdbcType=BIGINT},
+          permission_id=#{permission.id, jdbcType=BIGINT}
+          updateDate=NOW()
+        WHERE
+          id=#{id, jdbcType=BIGINT}
+        and
+          yn=1
+    </update>
+
+    <select id="select" parameterType="rolePermission" resultMap="rolePermission">
+        SELECT * FROM rolePermission_${tableIndex} WHERE id=#{id, jdbcType=BIGINT} AND yn=1
+    </select>
+
+    <select id="list" parameterType="int" resultMap="rolePermission">
+        SELECT * FROM rolePermission_${_parameter} WHERE yn=1
+    </select>
+
+    <select id="count" parameterType="int" resultType="int">
+        SELECT COUNT(*) FROM rolePermission_${_parameter} WHERE yn=1
+    </select>
+
+    <select id="listByDel" parameterType="int" resultMap="rolePermission">
+        SELECT * FROM rolePermission_${_parameter} WHERE yn=0
+    </select>
+
+    <select id="countByDel" parameterType="int" resultType="int">
+        SELECT COUNT(*) FROM rolePermission_${_parameter} WHERE yn=0
+    </select>
+
+    <delete id="clear" parameterType="int">
+        DELETE FROM rolePermission_${_parameter} WHERE yn=0
+    </delete>
+
+    <select id="listByRoleIdAndApplyId" parameterType="map" resultMap="rolePermission">
+        SELECT * FROM rolePermission_${_parameter} WHERE yn=1 AND role_id=#{role.id, jdbcType=BIGINT} AND apply_id=#{apply.id, jdbcType=BIGINT}
+    </select>
+
+    <select id="countByRoleIdAndApplyId" parameterType="map" resultType="int">
+        SELECT COUNT(*) FROM rolePermission_${_parameter} WHERE yn=1 AND role_id=#{role.id, jdbcType=BIGINT} AND apply_id=#{apply.id, jdbcType=BIGINT}
+    </select>
+
+    <select id="listByRoleId" parameterType="map" resultMap="rolePermission">
+        SELECT * FROM rolePermission_${_parameter} WHERE yn=1 AND role_id=#{role.id, jdbcType=BIGINT}
+    </select>
+
+    <select id="countByRoleId" parameterType="map" resultType="int">
+        SELECT COUNT(*) FROM rolePermission_${_parameter} WHERE yn=1 AND role_id=#{role.id, jdbcType=BIGINT}
+    </select>
+</mapper>

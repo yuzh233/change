@@ -24,7 +24,7 @@ $(function() {
 // 登录
 function login() {
 	$.ajax({
-		url: BASE_PATH + '/sso/login',
+		url: BASE_PATH + '/token/login',
 		type: 'POST',
 		data: {
 			username: $('#username').val(),
