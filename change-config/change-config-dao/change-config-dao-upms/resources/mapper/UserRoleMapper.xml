@@ -13,7 +13,7 @@
 
     <resultMap id="userRole" type="userRole">
         <id property="id" column="id"/>
-        <id property="type" column="type"/>
+        <result property="type" column="type"/>
         <result property="createDate" column="createDate"/>
         <result property="updateDate" column="updateDate"/>
 
@@ -24,12 +24,14 @@
     <insert id="insert" parameterType="userRole">
         INSERT INTO userRole_${tableIndex} (
           id,
+          type,
           user_id,
           role_id,
           createDate,
           yn
         )VALUES(
           #{id, jdbcType=BIGINT},
+          #{type, jdbcType=INTEGER},
           #{user.id, jdbcType=BIGINT},
           #{role.id, jdbcType=BIGINT},
           NOW(),

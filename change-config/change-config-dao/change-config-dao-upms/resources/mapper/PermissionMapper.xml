@@ -67,7 +67,9 @@
     <update id="update" parameterType="permission">
         UPDATE permission_${tableIndex} SET
           name=#{name, jdbcType=VARCHAR},
-          role_id=#{role.id, jdbcType=BIGINT},
+          url=#{url, jdbcType=VARCHAR},
+          apply_id=#{apply.id, jdbcType=BIGINT},
+          parent_id=#{parent.id, jdbcType=BIGINT},
           updateDate=NOW()
         WHERE
           id=#{id, jdbcType=BIGINT}

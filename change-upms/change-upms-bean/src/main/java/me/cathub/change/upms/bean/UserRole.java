@@ -21,6 +21,7 @@ public class UserRole implements Serializable {
 
     private Date createDate;
     private Date updateDate;
+    private int tableIndex;
 
     private long userId;
     private long roleId;
@@ -33,6 +34,14 @@ public class UserRole implements Serializable {
 
     public UserRole(long id) {
         this.id = id;
+    }
+
+    public int getTableIndex() {
+        return tableIndex;
+    }
+
+    public void setTableIndex(int tableIndex) {
+        this.tableIndex = tableIndex;
     }
 
     public long getId() {
@@ -79,6 +88,22 @@ public class UserRole implements Serializable {
         return user;
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("UserRole{");
+        sb.append("id=").append(id);
+        sb.append(", type=").append(type);
+        sb.append(", createDate=").append(createDate);
+        sb.append(", updateDate=").append(updateDate);
+        sb.append(", tableIndex=").append(tableIndex);
+        sb.append(", userId=").append(userId);
+        sb.append(", roleId=").append(roleId);
+        sb.append(", user=").append(user);
+        sb.append(", role=").append(role);
+        sb.append('}');
+        return sb.toString();
+    }
+
     public void setUser(User user) {
         this.user = user;
     }
@@ -99,18 +124,4 @@ public class UserRole implements Serializable {
         this.type = type;
     }
 
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("UserRole{");
-        sb.append("id=").append(id);
-        sb.append(", type=").append(type);
-        sb.append(", createDate=").append(createDate);
-        sb.append(", updateDate=").append(updateDate);
-        sb.append(", userId=").append(userId);
-        sb.append(", roleId=").append(roleId);
-        sb.append(", user=").append(user);
-        sb.append(", role=").append(role);
-        sb.append('}');
-        return sb.toString();
-    }
 }

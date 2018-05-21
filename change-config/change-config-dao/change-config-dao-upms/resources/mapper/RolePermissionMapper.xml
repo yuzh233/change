@@ -65,7 +65,7 @@
         UPDATE rolePermission_${tableIndex} SET
           role_id=#{role.id, jdbcType=BIGINT},
           apply_id=#{apply.id, jdbcType=BIGINT},
-          permission_id=#{permission.id, jdbcType=BIGINT}
+          permission_id=#{permission.id, jdbcType=BIGINT},
           updateDate=NOW()
         WHERE
           id=#{id, jdbcType=BIGINT}

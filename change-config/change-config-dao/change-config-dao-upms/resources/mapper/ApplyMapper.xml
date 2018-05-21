@@ -63,7 +63,7 @@
     <update id="update" parameterType="apply">
         UPDATE apply_${tableIndex} SET
           name=#{name, jdbcType=VARCHAR},
-          url=#{encoding, jdbcType=VARCHAR},
+          url=#{url, jdbcType=VARCHAR},
           encoding=#{encoding, jdbcType=VARCHAR},
           updateDate=NOW()
         WHERE
