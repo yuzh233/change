@@ -32,13 +32,13 @@ public class UserSelectRpcServerImpl implements UserSelectRpcServer {
     public User select(long id, boolean flag, int type) throws Exception {
         User result = null;
         switch (type) {
-            case TYPE_ADMIN:
+            case User.TYPE_ADMIN:
                 result = adminRpcServer.select(new Admin(id), flag);
                 break;
-            case TYPE_BRAND_QUOTIENT:
+            case User.TYPE_BRAND_QUOTIENT:
                 result = brandQuotientRpcServer.select(new BrandQuotient(id), flag);
                 break;
-            case TYPE_SHOPKEEPER:
+            case User.TYPE_SHOPKEEPER:
                 result = shopkeeperRpcServer.select(new Shopkeeper(id), flag);
                 break;
             default:
@@ -50,13 +50,13 @@ public class UserSelectRpcServerImpl implements UserSelectRpcServer {
     public User selectByName(String name, int tableIndex, boolean flag, int type) throws Exception {
         User result = null;
         switch (type) {
-            case TYPE_ADMIN:
+            case User.TYPE_ADMIN:
                 result = adminRpcServer.selectByName(name, tableIndex, flag);
                 break;
-            case TYPE_BRAND_QUOTIENT:
+            case User.TYPE_BRAND_QUOTIENT:
                 result = brandQuotientRpcServer.selectByName(name, tableIndex, flag);
                 break;
-            case TYPE_SHOPKEEPER:
+            case User.TYPE_SHOPKEEPER:
                 result = shopkeeperRpcServer.selectByName(name, tableIndex, flag);
                 break;
             default:
