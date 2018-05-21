@@ -155,6 +155,24 @@ public class ProductDaoImpl extends BaseDaoMyBatisImpl<Product> implements Produ
         map.put("name", name);
         map.put("tableIndex", tableIndex);
 
-        return search(NAME_SPACE + SELECT_BY_NAME, map);
+        return searchOne(NAME_SPACE + SELECT_BY_NAME, map);
+    }
+
+    @Override
+    public List<Product> listByName(String name, int page, int count, int tableIndex) throws Exception {
+        Map<String, Object> map = new HashMap<>(2);
+        map.put("name", name);
+        map.put("tableIndex", tableIndex);
+
+        return searchList(NAME_SPACE + LIST_BY_NAME, page, count, map);
+    }
+
+    @Override
+    public int countByName(String name, int tableIndex) throws Exception {
+        Map<String, Object> map = new HashMap<>(2);
+        map.put("name", name);
+        map.put("tableIndex", tableIndex);
+
+        return baseCount(NAME_SPACE + COUNT_BY_NAME, map);
     }
 }

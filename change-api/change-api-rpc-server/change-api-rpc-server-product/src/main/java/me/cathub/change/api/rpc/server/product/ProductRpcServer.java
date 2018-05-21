@@ -2,6 +2,7 @@ package me.cathub.change.api.rpc.server.product;
 
 import me.cathub.change.common.base.BaseRpcServer;
 import me.cathub.change.common.base.FillAssociationDate;
+import me.cathub.change.common.base.ServerSearchList;
 import me.cathub.change.common.base.ServerSelectByName;
 import me.cathub.change.product.bean.Product;
 
@@ -12,7 +13,7 @@ import java.util.List;
  *
  * @author cheng
  */
-public interface ProductRpcServer extends BaseRpcServer<Product>, ServerSelectByName<Product> {
+public interface ProductRpcServer extends BaseRpcServer<Product>, ServerSelectByName<Product>, ServerSearchList<Product> {
 
     /**
      * 根据品牌商获取产品列表

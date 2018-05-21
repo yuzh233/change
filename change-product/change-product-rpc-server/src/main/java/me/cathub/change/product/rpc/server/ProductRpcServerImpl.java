@@ -103,6 +103,22 @@ public class ProductRpcServerImpl extends BaseRpcServerImpl<Product, ProductDao>
     }
 
     @Override
+    public List<Product> listByName(String name, int page, int count, int tableIndex, boolean flag) throws Exception {
+        if (flag) {
+            return dao.listByName(name, page, count, tableIndex);
+        } else {
+            return dao.listByName(name, page, count, tableIndex).stream()
+                    .map(bean -> fill(bean))
+                    .collect(toList());
+        }
+    }
+
+    @Override
+    public int countByName(String name, int tableIndex) throws Exception {
+        return dao.countByName(name ,tableIndex);
+    }
+
+    @Override
     public Product fill(Product bean) {
         try {
             ProductCategory productCategory = productCategoryRpcServer.select(new ProductCategory(bean.getProductCategoryId()), true);

@@ -165,7 +165,18 @@ public abstract class BaseDaoMyBatisImpl<Bean extends Serializable> implements B
      * @param params        参数Map
      * @return              Java bean
      */
-    protected final Bean search(String nameSpace, Map<String, Object> params) {
+    protected final Bean searchOne(String nameSpace, Map<String, Object> params) {
         return sqlSessionTemplate.selectOne(nameSpace, params);
+    }
+
+    /**
+     * 搜索
+     * @param nameSpace     Mapper
+     * @param params        参数Map
+     * @return              Java bean
+     */
+    protected final List<Bean> searchList(String nameSpace, int page, int count, Map<String, Object> params) {
+        PageHelper.startPage(page, count);
+        return sqlSessionTemplate.selectList(nameSpace, params);
     }
 }

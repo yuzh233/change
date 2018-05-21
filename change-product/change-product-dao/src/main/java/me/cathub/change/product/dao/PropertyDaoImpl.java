@@ -97,7 +97,7 @@ public class PropertyDaoImpl extends BaseDaoMyBatisImpl<Property> implements Pro
         map.put("productCategory_id", productCategoryId);
         map.put("tableIndex", tableIndex);
 
-        return search(NAME_SPACE + SELECT_BY_NAME_AND_PRODUCT_CATEGORY, map);
+        return searchOne(NAME_SPACE + SELECT_BY_NAME_AND_PRODUCT_CATEGORY, map);
     }
 
     @Override
@@ -106,6 +106,6 @@ public class PropertyDaoImpl extends BaseDaoMyBatisImpl<Property> implements Pro
         map.put("name", name);
         map.put("tableIndex", tableIndex);
 
-        return search(NAME_SPACE + SELECT_BY_NAME, map);
+        return searchOne(NAME_SPACE + SELECT_BY_NAME, map);
     }
 }
