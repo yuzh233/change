@@ -13,6 +13,7 @@ public class RolePermission implements Serializable {
     private long id;
     private Date createDate;
     private Date updateDate;
+    private int tableIndex;
 
     private long roleId;
     private long applyId;
@@ -110,6 +111,14 @@ public class RolePermission implements Serializable {
 
     public void setPermission(Permission permission) {
         this.permission = permission;
+    }
+
+    public int getTableIndex() {
+        return tableIndex;
+    }
+
+    public void setTableIndex(int tableIndex) {
+        this.tableIndex = tableIndex;
     }
 
     @Override

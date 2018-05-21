@@ -66,7 +66,7 @@ public class UserRoleRpcServerImpl extends BaseRpcServerImpl<UserRole, UserRoleD
 
         try {
             Role role = roleRpcServer.select(new Role(bean.getRoleId()), true);
-            User user = userSelectRpcServer.select(bean.getId(), true, bean.getType());
+            User user = userSelectRpcServer.select(bean.getUserId(), true, bean.getType());
 
             bean.setRole(role);
             bean.setUser(user);

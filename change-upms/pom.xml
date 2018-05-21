@@ -15,5 +15,7 @@
         <module>change-upms-bean</module>
         <module>change-upms-dao</module>
         <module>change-upms-rpc-server</module>
+        <module>change-upms-server</module>
+        <module>change-upms-client</module>
     </modules>
 </project>

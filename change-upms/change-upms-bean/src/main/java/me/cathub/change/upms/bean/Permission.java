@@ -17,6 +17,7 @@ public class Permission implements Serializable {
     @JsonSerialize(using = LongJsonSerializer.class)
     private long id;
     private String name;
+    private String url;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createDate;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
@@ -41,6 +42,14 @@ public class Permission implements Serializable {
     }
 
     public Permission() {
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public long getId() {
@@ -120,6 +129,7 @@ public class Permission implements Serializable {
         final StringBuilder sb = new StringBuilder("Permission{");
         sb.append("id=").append(id);
         sb.append(", name='").append(name).append('\'');
+        sb.append(", url='").append(url).append('\'');
         sb.append(", createDate=").append(createDate);
         sb.append(", updateDate=").append(updateDate);
         sb.append(", tableIndex=").append(tableIndex);

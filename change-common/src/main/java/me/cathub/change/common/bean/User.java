@@ -19,6 +19,10 @@ import java.util.Date;
  */
 public class User implements Serializable {
 
+    public static final int TYPE_ADMIN = 1;
+    public static final int TYPE_BRAND_QUOTIENT = 2;
+    public static final int TYPE_SHOPKEEPER = 3;
+
     /**
      * 作用在属性或getter上，用于在序列化json时嵌入自己的代码。比如long转成String
      */
