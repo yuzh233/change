@@ -24,7 +24,9 @@ public class Permission implements Serializable {
     private Date updateDate;
     private int tableIndex;
 
+    @JsonSerialize(using = LongJsonSerializer.class)
     private long applyId;
+    @JsonSerialize(using = LongJsonSerializer.class)
     private long parentId;
 
     /**

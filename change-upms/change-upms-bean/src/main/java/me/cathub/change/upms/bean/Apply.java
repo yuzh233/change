@@ -1,5 +1,9 @@
 package me.cathub.change.upms.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import me.cathub.change.common.util.json.LongJsonSerializer;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -9,7 +13,7 @@ import java.util.Date;
  * @author cheng
  */
 public class Apply implements Serializable {
-
+    @JsonSerialize(using = LongJsonSerializer.class)
     private long id;
 
     /**
@@ -26,7 +30,9 @@ public class Apply implements Serializable {
      * url编码格式
      */
     private String encoding;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createDate;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date updateDate;
     private int tableIndex;
 

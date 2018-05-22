@@ -1,5 +1,9 @@
 package me.cathub.change.upms.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import me.cathub.change.common.util.json.LongJsonSerializer;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -9,14 +13,19 @@ import java.util.Date;
  * @author cheng
  */
 public class RolePermission implements Serializable {
-
+    @JsonSerialize(using = LongJsonSerializer.class)
     private long id;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createDate;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateDate;
     private int tableIndex;
 
+    @JsonSerialize(using = LongJsonSerializer.class)
     private long roleId;
+    @JsonSerialize(using = LongJsonSerializer.class)
     private long applyId;
+    @JsonSerialize(using = LongJsonSerializer.class)
     private long permissionId;
 
     /**

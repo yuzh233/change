@@ -14,10 +14,9 @@
     <dubbo:reference id="permissionRpcServer" interface="me.cathub.change.api.rpc.server.upms.PermissionRpcServer" timeout="15000"/>
     <dubbo:reference id="roleRpcServer" interface="me.cathub.change.api.rpc.server.upms.RoleRpcServer" timeout="15000"/>
 
-    <!--<dubbo:reference id="adminRpcServer" interface="me.cathub.change.api.rpc.server.user.AdminRpcServer" timeout="15000"/>-->
-    <!--<dubbo:reference id="shopkeeperRpcServer" interface="me.cathub.change.api.rpc.server.user.ShopkeeperRpcServer" timeout="15000"/>-->
-    <!--<dubbo:reference id="auditingRpcServer" interface="me.cathub.change.api.rpc.server.user.AuditingRpcServer" timeout="15000"/>-->
-    <!--<dubbo:reference id="brandQuotientRpcServer" interface="me.cathub.change.api.rpc.server.user.BrandQuotientRpcServer" timeout="15000"/>-->
-    <!--<dubbo:reference id="companyRpcServer" interface="me.cathub.change.api.rpc.server.user.CompanyRpcServer" timeout="15000"/>-->
-    <!--<dubbo:reference id="onlineStoreRpcServer" interface="me.cathub.change.api.rpc.server.user.OnlineStoreRpcServer" timeout="15000"/>-->
+    <dubbo:reference id="applyRpcServer" interface="me.cathub.change.api.rpc.server.upms.ApplyRpcServer" timeout="15000"/>
+    <dubbo:reference id="rolePermissionRpcServer" interface="me.cathub.change.api.rpc.server.upms.RolePermissionRpcServer" timeout="15000"/>
+    <dubbo:reference id="userRoleRpcServer" interface="me.cathub.change.api.rpc.server.upms.UserRoleRpcServer" timeout="15000"/>
+    <dubbo:reference id="userSelectRpcServer" interface="me.cathub.change.api.rpc.server.user.UserSelectRpcServer" timeout="15000"/>
+
 </beans>

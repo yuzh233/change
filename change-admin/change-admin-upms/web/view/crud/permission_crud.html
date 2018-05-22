@@ -31,8 +31,16 @@
 			<input id="create-name" type="text" class="form-control" name="name">
 		</div>
 		<div class="form-group">
-			<label for="create-role">所属角色</label>
-			<input id="create-role" type="text" class="form-control" name="role.name">
+			<label for="create-url">URL</label>
+			<input id="create-url" type="text" class="form-control" name="url">
+		</div>
+		<div class="form-group">
+			<label for="create-apply">所属应用ID</label>
+			<input id="create-apply" type="text" class="form-control" name="apply.id">
+		</div>
+		<div class="form-group">
+			<label for="create-parent">父级权限ID</label>
+			<input id="create-parent" type="text" class="form-control" name="parent.id">
 		</div>
 	</form>
 </div>
@@ -43,10 +51,6 @@
 		<div class="form-group">
 			<label for="update-name">权限名</label>
 			<input id="update-name" type="text" class="form-control update-name">
-		</div>
-		<div class="form-group">
-			<label for="update-role">所属角色</label>
-			<input id="update-role" type="text" class="form-control update-role" name="role.name">
 		</div>
     </form>
 </div>
@@ -72,7 +76,7 @@ $(function() {
 	// bootstrap table初始化
 	// http://bootstrap-table.wenzhixin.net.cn/zh-cn/documentation/
 	$table.bootstrapTable({
-		url: '../../parent/list',
+		url: '../../permission/list',
         method: 'get',
 		height: getHeight(),
 		striped: true,
@@ -115,7 +119,8 @@ $(function() {
 			{field: 'state', checkbox: true},
 			{field: 'id', title: '编号', sortable: false, halign: 'left'},
 			{field: 'name', title: '权限名', sortable: false, halign: 'left'},
-			{field: 'role.name', title: '所属角色', sortable: false, halign: 'left'},
+			{field: 'url', title: 'URL', sortable: false, halign: 'left'},
+			{field: 'apply.name', title: '应用', sortable: false, halign: 'left'},
 			{field: 'createDate', title: '创建时间', sortable: false, halign: 'left'},
 			{field: 'updateDate', title: '更新时间', sortable: false, halign: 'left'},
 			{field: 'action', title: '操作', sortable: false, halign: 'left', formatter: 'actionFormatter', events: 'actionEvents', clickToSelect: false}
@@ -164,7 +169,7 @@ function createAction() {
 				btnClass: 'waves-effect waves-button',
 				action: function () {
                     $.ajax({
-                        url: "../../parent/insert",
+                        url: "../../permission/insert",
                         type: "POST",
                         contentType: "application/x-www-form-urlencoded",
                         dataType: "json",
@@ -173,7 +178,7 @@ function createAction() {
                             if(flag){
                             	$table.bootstrapTable('refresh'); //刷新表格
 							}else{
-                                alert("没有该角色，增加失败。");
+                                alert("增加失败");
 							}
                         }
                     });
@@ -199,24 +204,20 @@ function updateAction(id) {
                 btnClass: 'waves-effect waves-button',
                 action: function () {
                     var name = $(".update-name:last").val();
-                    var role = $(".update-role:last").val();
 
-                    var parent = {};
-                    parent.id = id;
+                    var permission = {};
+                    permission.id = id;
                     if (name != '') {
-                        parent.name = name;
-                    }
-                    if (role != '') {
-                        parent.role = {"name":role};
+                        permission.name = name;
                     }
                     //转成JSON对象，后台用对象接受
-                    parent = JSON.stringify(parent);
+                    // parent = JSON.stringify(parent);
                     $.ajax({
-                        url: "../../parent/update",
-                        contentType:"application/json",
+                        url: "../../permission/update",
+                        // contentType:"application/json",
                         type: "POST",
                         dataType: "json",
-                        data: parent,
+                        data: permission,
                         success: function (flag) {
                             if(flag){
                                 $table.bootstrapTable('refresh'); //刷新表格
@@ -255,7 +256,7 @@ function deleteAction(id) {
             type: 'red',
             animationSpeed: 300,
             title: false,
-            content: '确认删除吗？',
+            content: '可能有其他字段引用该权限，确认删除吗？',
             buttons: {
                 confirm: {
                     text: '确认',
@@ -272,7 +273,7 @@ function deleteAction(id) {
                         console.log('删除：id=' + ids);
                         //异步删除
                         $.ajax({
-                            url: "../../parent/delete",
+                            url: "../../permission/delete",
                             type: "post",
                             dataType: "json",
                             data: {ids: ids},
