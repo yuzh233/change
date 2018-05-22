@@ -1,5 +1,7 @@
 package me.cathub.change.common.base;
 
+import java.util.List;
+
 /**
  * Dao 层, 根据名称查找的接口
  *

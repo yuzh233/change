@@ -102,7 +102,7 @@
     </delete>
 
     <select id="selectByName" parameterType="map" resultType="permission">
-        SELECT * FROM permission_${tableIndex} WHERE yn=1 AND name=#{name, jdbcType=VARCHAR}
+        SELECT * FROM permission_${tableIndex} WHERE name=#{name, jdbcType=VARCHAR} AND yn=1
     </select>
 
     <select id="listByApplyId" parameterType="map" resultType="permission">
@@ -110,7 +110,7 @@
     </select>
 
     <select id="countByApplyId" parameterType="map" resultType="int">
-        SELECT COUNT(*) FROM permission_${_parameter} WHERE yn=1 AND apply_id=#{apply_id, jdbcType=BIGINT}
+        SELECT COUNT(*) FROM permission_${tableIndex} WHERE yn=1 AND apply_id=#{apply_id, jdbcType=BIGINT}
     </select>
 
     <select id="childListById" parameterType="map" resultType="permission">
@@ -118,6 +118,6 @@
     </select>
 
     <select id="childCountById" parameterType="map" resultType="int">
-        SELECT COUNT(*) FROM permission_${_parameter} WHERE yn=1 AND parent_id=#{id, jdbcType=BIGINT}
+        SELECT COUNT(*) FROM permission_${tableIndex} WHERE yn=1 AND parent_id=#{id, jdbcType=BIGINT}
     </select>
 </mapper>

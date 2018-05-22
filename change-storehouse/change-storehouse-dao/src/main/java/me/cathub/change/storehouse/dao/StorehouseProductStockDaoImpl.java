@@ -79,7 +79,7 @@ public class StorehouseProductStockDaoImpl extends BaseDaoMyBatisImpl<Storehouse
         map.put("product_id", productId);
         map.put("tableIndex", tableIndex);
 
-        return search(NAME_SPACE + SELECT_BY_STOREHOUSE_ID_AND_PRODUCT_ID, map);
+        return searchOne(NAME_SPACE + SELECT_BY_STOREHOUSE_ID_AND_PRODUCT_ID, map);
     }
 
     @Override

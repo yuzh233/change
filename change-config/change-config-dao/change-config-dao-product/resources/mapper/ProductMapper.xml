@@ -150,4 +150,8 @@
     <select id="selectByName" parameterType="map" resultMap="product">
         SELECT * FROM product_${tableIndex} WHERE yn=1 AND name=#{name, jdbcType=VARCHAR}
     </select>
+
+    <select id="searchByName" parameterType="map" resultMap="product">
+        SELECT * FROM product_${tableIndex} WHERE yn=1 AND name=#{name, jdbcType=VARCHAR}
+    </select>
 </mapper>

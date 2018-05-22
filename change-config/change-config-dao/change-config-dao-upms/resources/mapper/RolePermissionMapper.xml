@@ -97,19 +97,19 @@
         DELETE FROM rolePermission_${_parameter} WHERE yn=0
     </delete>
 
-    <select id="listByRoleIdAndApplyId" parameterType="map" resultMap="rolePermission">
-        SELECT * FROM rolePermission_${_parameter} WHERE yn=1 AND role_id=#{role.id, jdbcType=BIGINT} AND apply_id=#{apply.id, jdbcType=BIGINT}
+    <select id="listByRoleIdAndApplyId" parameterType="Map" resultMap="rolePermission">
+        SELECT * FROM rolePermission_${tableIndex} WHERE yn=1 AND role_id=#{role_id, jdbcType=BIGINT} AND apply_id=#{apply_id, jdbcType=BIGINT}
     </select>
 
-    <select id="countByRoleIdAndApplyId" parameterType="map" resultType="int">
-        SELECT COUNT(*) FROM rolePermission_${_parameter} WHERE yn=1 AND role_id=#{role.id, jdbcType=BIGINT} AND apply_id=#{apply.id, jdbcType=BIGINT}
+    <select id="countByRoleIdAndApplyId" parameterType="Map" resultType="int">
+        SELECT COUNT(*) FROM rolePermission_${tableIndex} WHERE yn=1 AND role_id=#{role_id, jdbcType=BIGINT} AND apply_id=#{apply_id, jdbcType=BIGINT}
     </select>
 
-    <select id="listByRoleId" parameterType="map" resultMap="rolePermission">
-        SELECT * FROM rolePermission_${_parameter} WHERE yn=1 AND role_id=#{role.id, jdbcType=BIGINT}
+    <select id="listByRoleId" parameterType="Map" resultMap="rolePermission">
+        SELECT * FROM rolePermission_${tableIndex} WHERE yn=1 AND role_id=#{role_id, jdbcType=BIGINT}
     </select>
 
-    <select id="countByRoleId" parameterType="map" resultType="int">
-        SELECT COUNT(*) FROM rolePermission_${_parameter} WHERE yn=1 AND role_id=#{role.id, jdbcType=BIGINT}
+    <select id="countByRoleId" parameterType="Map" resultType="int">
+        SELECT COUNT(*) FROM rolePermission_${tableIndex} WHERE yn=1 AND role_id=#{role_id, jdbcType=BIGINT}
     </select>
 </mapper>

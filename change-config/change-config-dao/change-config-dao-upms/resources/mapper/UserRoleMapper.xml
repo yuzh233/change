@@ -98,18 +98,18 @@
     </delete>
 
     <select id="listByUserId" parameterType="map" resultMap="userRole">
-        SELECT * FROM userRole_${_parameter} WHERE yn=1 AND user_id=#{user.id, jdbcType=BIGINT}
+        SELECT * FROM userRole_${tableIndex} WHERE yn=1 AND user_id=#{user_id, jdbcType=BIGINT}
     </select>
 
     <select id="countByUserId" parameterType="map" resultType="int">
-        SELECT COUNT(*) FROM userRole_${_parameter} WHERE yn=1 AND user_id=#{user.id, jdbcType=BIGINT}
+        SELECT COUNT(*) FROM userRole_${tableIndex} WHERE yn=1 AND user_id=#{user_id, jdbcType=BIGINT}
     </select>
 
     <select id="listByRoleId" parameterType="map" resultMap="userRole">
-        SELECT * FROM userRole_${_parameter} WHERE yn=1 AND role_id=#{role.id, jdbcType=BIGINT}
+        SELECT * FROM userRole_${tableIndex} WHERE yn=1 AND role_id=#{role_id, jdbcType=BIGINT}
     </select>
 
     <select id="countByRoleId" parameterType="map" resultType="int">
-        SELECT COUNT(*) FROM userRole_${_parameter} WHERE yn=1 AND role_id=#{role.id, jdbcType=BIGINT}
+        SELECT COUNT(*) FROM userRole_${tableIndex} WHERE yn=1 AND role_id=#{role_id, jdbcType=BIGINT}
     </select>
 </mapper>

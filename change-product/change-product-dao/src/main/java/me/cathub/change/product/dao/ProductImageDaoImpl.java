@@ -98,6 +98,6 @@ public class ProductImageDaoImpl extends BaseDaoMyBatisImpl<ProductImage> implem
         map.put("product_id", productId);
         map.put("tableIndex", tableIndex);
 
-        return search(NAME_SPACE + SELECT_BY_PRODUCT_IMAGE_ID, map);
+        return searchOne(NAME_SPACE + SELECT_BY_PRODUCT_IMAGE_ID, map);
     }
 }

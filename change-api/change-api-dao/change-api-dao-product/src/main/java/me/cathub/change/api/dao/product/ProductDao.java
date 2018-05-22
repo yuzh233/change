@@ -1,6 +1,7 @@
 package me.cathub.change.api.dao.product;
 
 import me.cathub.change.common.base.BaseDao;
+import me.cathub.change.common.base.DaoSearchList;
 import me.cathub.change.common.base.DaoSelectByName;
 import me.cathub.change.product.bean.Product;
 
@@ -11,7 +12,7 @@ import java.util.List;
  *
  * @author cheng
  */
-public interface ProductDao extends BaseDao<Product>, DaoSelectByName<Product> {
+public interface ProductDao extends BaseDao<Product>, DaoSelectByName<Product>, DaoSearchList<Product> {
     String NAME_SPACE = "Product";
 
     String LIST_BY_COMPANY_ID = ".listByCompanyId";

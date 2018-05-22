@@ -13,6 +13,8 @@ import java.util.Map;
  * 角色权限Dao实现类
  *
  * @author cheng
+ *
+ * test time 5.21 23：44 OK
  */
 @Repository
 public class RolePermissionDaoImpl extends BaseDaoMyBatisImpl<RolePermission> implements RolePermissionDao {
@@ -84,7 +86,7 @@ public class RolePermissionDaoImpl extends BaseDaoMyBatisImpl<RolePermission> im
 
     @Override
     public int countByRoleIdAndApplyId(long roleId, long applyId, int tableIndex) throws Exception {
-        Map<String, Object> map = new HashMap<>(2);
+        Map<String, Object> map = new HashMap<>(3);
         map.put("role_id", roleId);
         map.put("apply_id", applyId);
         map.put("tableIndex", tableIndex);

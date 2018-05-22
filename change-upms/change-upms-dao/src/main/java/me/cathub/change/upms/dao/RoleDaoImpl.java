@@ -78,6 +78,6 @@ public class RoleDaoImpl extends BaseDaoMyBatisImpl<Role> implements RoleDao {
         map.put("name", name);
         map.put("tableIndex", tableIndex);
 
-        return search(NAME_SPACE + SELECT_BY_NAME, map);
+        return searchOne(NAME_SPACE + SELECT_BY_NAME, map);
     }
 }
