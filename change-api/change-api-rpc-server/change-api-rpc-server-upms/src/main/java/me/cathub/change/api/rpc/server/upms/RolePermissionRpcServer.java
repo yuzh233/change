@@ -56,4 +56,25 @@ public interface RolePermissionRpcServer extends BaseRpcServer<RolePermission> {
      * @throws Exception
      */
     int countByRoleId(long roleId, int tableIndex) throws Exception;
+
+    /**
+     * 根据应用查询权限列表
+     * @param applyId
+     * @param page
+     * @param count
+     * @param tableIndex
+     * @param flag
+     * @return
+     * @throws Exception
+     */
+    List<RolePermission> listByApplyId(long applyId, int page, int count, int tableIndex, boolean flag) throws Exception;
+
+    /**
+     * 根据应用查询权限数量
+     * @param applyId
+     * @param tableIndex
+     * @return
+     * @throws Exception
+     */
+    int countByApplyId(long applyId, int tableIndex) throws Exception;
 }

@@ -111,4 +111,22 @@ public class RolePermissionDaoImpl extends BaseDaoMyBatisImpl<RolePermission> im
 
         return baseCount(NAME_SPACE + COUNT_BY_ROLE_ID, map);
     }
+
+    @Override
+    public List<RolePermission> listByApplyId(long applyId, int page, int count, int tableIndex) throws Exception {
+        Map<String, Object> map = new HashMap<>(2);
+        map.put("apply_id", applyId);
+        map.put("tableIndex", tableIndex);
+
+        return baseList(NAME_SPACE + LIST_BY_APPLY_ID, page, count, map);
+    }
+
+    @Override
+    public int countByApplyId(long applyId, int tableIndex) throws Exception {
+        Map<String, Object> map = new HashMap<>(2);
+        map.put("apply_id", applyId);
+        map.put("tableIndex", tableIndex);
+
+        return baseCount(NAME_SPACE + COUNT_BY_APPLY_ID, map);
+    }
 }

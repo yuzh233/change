@@ -112,4 +112,12 @@
     <select id="countByRoleId" parameterType="Map" resultType="int">
         SELECT COUNT(*) FROM rolePermission_${tableIndex} WHERE yn=1 AND role_id=#{role_id, jdbcType=BIGINT}
     </select>
+
+    <select id="listByApplyId" parameterType="Map" resultMap="rolePermission">
+        SELECT * FROM rolePermission_${tableIndex} WHERE yn=1 AND apply_id=#{apply_id, jdbcType=BIGINT}
+    </select>
+
+    <select id="countByApplyId" parameterType="Map" resultType="int">
+        SELECT COUNT(*) FROM rolePermission_${tableIndex} WHERE yn=1 AND apply_id=#{apply_id, jdbcType=BIGINT}
+    </select>
 </mapper>

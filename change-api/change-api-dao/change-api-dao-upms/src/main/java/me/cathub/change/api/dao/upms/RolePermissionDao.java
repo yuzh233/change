@@ -17,6 +17,8 @@ public interface RolePermissionDao extends BaseDao<RolePermission> {
     String COUNT_BY_ROLE_ID_AND_APPLY_ID = ".countByRoleIdAndApplyId";
     String LIST_BY_ROLE_ID = ".listByRoleId";
     String COUNT_BY_ROLE_ID = ".countByRoleId";
+    String LIST_BY_APPLY_ID = ".listByApplyId";
+    String COUNT_BY_APPLY_ID = ".countByApplyId";
 
     /**
      * 根据角色和应用查询权限列表
@@ -59,4 +61,24 @@ public interface RolePermissionDao extends BaseDao<RolePermission> {
      * @throws Exception
      */
     int countByRoleId(long roleId, int tableIndex) throws Exception;
+
+    /**
+     * 根据应用查询权限列表
+     * @param applyId
+     * @param page
+     * @param count
+     * @param tableIndex
+     * @return
+     * @throws Exception
+     */
+    List<RolePermission> listByApplyId(long applyId, int page, int count, int tableIndex) throws Exception;
+
+    /**
+     * 根据应用查询权限数量
+     * @param applyId
+     * @param tableIndex
+     * @return
+     * @throws Exception
+     */
+    int countByApplyId(long applyId, int tableIndex) throws Exception;
 }

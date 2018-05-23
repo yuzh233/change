@@ -1,6 +1,5 @@
 package me.cathub.change.upms.dao;
 
-import javafx.application.Application;
 import me.cathub.change.api.dao.upms.PermissionDao;
 import me.cathub.change.common.util.key.Sequence;
 import me.cathub.change.upms.bean.Apply;
@@ -8,6 +7,10 @@ import me.cathub.change.upms.bean.Permission;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -17,6 +20,41 @@ public class PermissionDaoImplTest {
     PermissionDao dao = context.getBean(PermissionDaoImpl.class);
 
     Sequence sequence = new Sequence(0, 1);
+
+    @Test
+    public void test() throws Exception {
+//        List<String> names = Arrays.asList("商品分类", "商品", "商品图片", "属性", "属性值", "商品评论");
+//        List<String> nameUrls = Arrays.asList("/productCategory", "/product", "/productImage", "/property", "/propertyValue", "/productReview");
+
+        List<String> names = Arrays.asList("仓库国家", "仓库", "仓库产品库存");
+        List<String> nameUrls = Arrays.asList("/storehouseCountry", "/storehouse", "/storehouseProductStock");
+
+        List<String> actionNames = Arrays.asList("添加$", "修改$", "删除$(逻辑删除)", "恢复$(逻辑恢复)", "查询$", "查询$列表", "查询$列表(逻辑删除)");
+        List<String> urls = Arrays.asList("/insert", "/update", "/delete", "/restore", "/select", "/list", "/listDel");
+
+        Apply apply = new Apply(30316287322230784L);
+
+        Permission permission = new Permission();
+        permission.setApply(apply);
+
+        for (int i = 0; i < names.size(); i++) {
+            String name = names.get(i);
+            String nameUrl = nameUrls.get(i);
+
+            for (int j = 0; j < actionNames.size(); j++) {
+                String temp = actionNames.get(j);
+                String pName = temp.replace("$", name);
+                String pUrl = nameUrl + urls.get(j);
+
+                permission.setId(sequence.nextId());
+                permission.setName(pName);
+                permission.setUrl(pUrl);
+                System.out.println(permission);
+
+                dao.insert(permission);
+            }
+        }
+    }
 
     @Test
     public void insert() throws Exception {

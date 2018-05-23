@@ -1,13 +1,17 @@
 package me.cathub.change.upms.dao;
 
+import me.cathub.change.api.dao.upms.PermissionDao;
 import me.cathub.change.api.dao.upms.RolePermissionDao;
 import me.cathub.change.common.util.key.Sequence;
 import me.cathub.change.upms.bean.Apply;
+import me.cathub.change.upms.bean.Permission;
 import me.cathub.change.upms.bean.Role;
 import me.cathub.change.upms.bean.RolePermission;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -16,13 +20,29 @@ public class RolePermissionDaoImplTest {
     ApplicationContext context = new ClassPathXmlApplicationContext("classpath:spring/spring-upms-dao.xml");
 
     RolePermissionDao dao = context.getBean(RolePermissionDaoImpl.class);
+    PermissionDao pDao = context.getBean(PermissionDaoImpl.class);
     Sequence sequence = new Sequence(0 ,1);
+
+    @Test
+    public void test() throws Exception {
+        List<Permission> permissions = pDao.listByApplyId(30316287322230784L, 0, 100, 0);
+
+        RolePermission rolePermission = new RolePermission(sequence.nextId());
+        rolePermission.setRole(new Role(30593908295602176L));
+        rolePermission.setApply(new Apply(30316287322230784L));
+
+        for (Permission permission : permissions) {
+            rolePermission.setPermission(permission);
+            dao.insert(rolePermission);
+            rolePermission.setId(sequence.nextId());
+        }
+    }
 
     @Test
     public void insert() throws Exception {
         RolePermission rolePermission = new RolePermission(sequence.nextId());
-        rolePermission.setRole(new Role(-1));
-        rolePermission.setApply(new Apply(-2));
+        rolePermission.setRole(new Role(30317630518726656L));
+        rolePermission.setApply(new Apply(30315967665934336L));
 
         // 增加测试
         assertTrue(dao.insert(rolePermission));

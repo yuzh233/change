@@ -67,6 +67,22 @@ public class RolePermissionRpcServerImpl extends BaseRpcServerImpl<RolePermissio
     }
 
     @Override
+    public List<RolePermission> listByApplyId(long applyId, int page, int count, int tableIndex, boolean flag) throws Exception {
+        if (flag) {
+            return dao.listByApplyId(applyId, page, count, tableIndex);
+        } else {
+            return dao.listByApplyId(applyId, page, count, tableIndex).stream()
+                    .map(bean -> fill(bean))
+                    .collect(toList());
+        }
+    }
+
+    @Override
+    public int countByApplyId(long applyId, int tableIndex) throws Exception {
+        return dao.countByApplyId(applyId, tableIndex);
+    }
+
+    @Override
     public RolePermission fill(RolePermission bean) {
         try {
             Role role = roleRpcServer.select(new Role(bean.getRoleId()), true);
