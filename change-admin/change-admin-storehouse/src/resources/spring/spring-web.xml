@@ -7,6 +7,8 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <import resource="dubbo-consumer.xml"/>
+    <import resource="spring-session.xml"/>
+    <import resource="spring-sso.xml"/>
 
     <!-- 组件扫描(注解) -->
     <context:component-scan base-package="me.cathub.change.admin.storehouse.web.controller"/>

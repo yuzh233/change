@@ -2,7 +2,9 @@ package me.cathub.change.admin.user.web.controller;
 
 import me.cathub.change.api.rpc.server.user.AdminRpcServer;
 import me.cathub.change.common.base.BaseAdminControllerImpl;
+import me.cathub.change.common.bean.PageResult;
 import me.cathub.change.user.bean.Admin;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;

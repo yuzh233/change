@@ -11,8 +11,12 @@
 
     <dubbo:registry address="zookeeper://120.77.159.152:2181" />
 
-    <dubbo:reference id="permissionRpcServer" interface="me.cathub.change.api.rpc.server.upms.PermissionRpcServer" timeout="10000"/>
     <dubbo:reference id="roleRpcServer" interface="me.cathub.change.api.rpc.server.upms.RoleRpcServer" timeout="10000"/>
+    <dubbo:reference id="rolePermissionRpcServer" interface="me.cathub.change.api.rpc.server.upms.RolePermissionRpcServer" timeout="10000"/>
+    <dubbo:reference id="applyRpcServer" interface="me.cathub.change.api.rpc.server.upms.ApplyRpcServer" timeout="10000"/>
+    <dubbo:reference id="userRoleRpcServer" interface="me.cathub.change.api.rpc.server.upms.UserRoleRpcServer" timeout="10000"/>
+
+    <dubbo:reference id="userSelectRpcServer" interface="me.cathub.change.api.rpc.server.user.UserSelectRpcServer" timeout="10000"/>
 
     <dubbo:reference id="adminRpcServer" interface="me.cathub.change.api.rpc.server.user.AdminRpcServer" timeout="10000"/>
     <dubbo:reference id="brandQuotientRpcServer" interface="me.cathub.change.api.rpc.server.user.BrandQuotientRpcServer" timeout="10000"/>

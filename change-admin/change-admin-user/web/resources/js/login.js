@@ -21,27 +21,23 @@ $(function() {
 		}
 	});
 });
-// 统一登陆中心
-var BASE_PATH = "http://localhost:9991";
-var BACK_URL = "";
 
 // 登录
 function login() {
     $.ajax({
-        url: BASE_PATH + '/login',
+        url: '/login',
         type: 'POST',
         data: {
             username: $('#username').val(),
             password: $('#password').val(),
             rememberMe: $('#rememberMe').is(':checked'),
-            back_url: BACK_URL
         },
         beforeSend: function() {
 
         },
-        success: function(json){
-            if (json.code === 1) {
-                alert(json);
+        success: function(result){
+            var json = JSON.parse(result);
+            if (json.code == 1) {
                 window.location.href = json.data;
             } else {
                 if (10101 == json.code) {

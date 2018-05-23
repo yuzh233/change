@@ -7,8 +7,7 @@
     <title>CRUD</title>
 
     <link href="../../resources/plugins/bootstrap-3.3.0/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../../resources/plugins/material-design-iconic-font-2.2.0/css/material-design-iconic-font.min.css"
-          rel="stylesheet"/>
+    <link href="../../resources/plugins/material-design-iconic-font-2.2.0/css/material-design-iconic-font.min.css" rel="stylesheet"/>
     <link href="../../resources/plugins/bootstrap-table-1.11.0/bootstrap-table.min.css" rel="stylesheet"/>
     <link href="../../resources/plugins/waves-0.7.5/waves.min.css" rel="stylesheet"/>
     <link href="../../resources/plugins/jquery-confirm/jquery-confirm.min.css" rel="stylesheet"/>
@@ -19,10 +18,8 @@
 <body>
 <div id="main">
     <div id="toolbar">
-        <a class="waves-effect waves-button" href="javascript:;" onclick="createAction()"><i class="zmdi zmdi-plus"></i>
-            新增角色</a>
-        <a class="waves-effect waves-button" href="javascript:;" onclick="deleteAction()"><i
-                class="zmdi zmdi-close"></i> 批量删除角色</a>
+        <a class="waves-effect waves-button" href="javascript:;" onclick="createAction()"><i class="zmdi zmdi-plus"></i> 新增角色</a>
+        <a class="waves-effect waves-button" href="javascript:;" onclick="deleteAction()"><i class="zmdi zmdi-close"></i> 批量删除</a>
     </div>
     <table id="table"></table>
 </div>
@@ -110,6 +107,7 @@
                 {field: 'state', checkbox: true},
                 {field: 'id', title: '编号', sortable: false, halign: 'left'},
                 {field: 'name', title: '角色名', sortable: false, halign: 'left'},
+                {field: 'description', title: '描述', sortable: false, halign: 'left'},
                 {field: 'createDate', title: '创建时间', sortable: false, halign: 'left'},
                 {field: 'updateDate', title: '更新时间', sortable: false, halign: 'left'},
                 {
@@ -130,7 +128,6 @@
 
     function actionFormatter(value, row, index) {
         return [
-            '<a class="like" href="javascript:void(0)" data-toggle="tooltip" title="Like"><i class="glyphicon glyphicon-heart"></i></a>　',
             '<a class="edit ml10" href="javascript:void(0)" data-toggle="tooltip" title="Edit"><i class="glyphicon glyphicon-edit"></i></a>　',
             '<a class="remove ml10" href="javascript:void(0)" data-toggle="tooltip" title="Remove"><i class="glyphicon glyphicon-remove"></i></a>'
         ].join('');

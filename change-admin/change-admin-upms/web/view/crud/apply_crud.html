@@ -7,8 +7,7 @@
     <title>CRUD</title>
 
     <link href="../../resources/plugins/bootstrap-3.3.0/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../../resources/plugins/material-design-iconic-font-2.2.0/css/material-design-iconic-font.min.css"
-          rel="stylesheet"/>
+    <link href="../../resources/plugins/material-design-iconic-font-2.2.0/css/material-design-iconic-font.min.css" rel="stylesheet"/>
     <link href="../../resources/plugins/bootstrap-table-1.11.0/bootstrap-table.min.css" rel="stylesheet"/>
     <link href="../../resources/plugins/waves-0.7.5/waves.min.css" rel="stylesheet"/>
     <link href="../../resources/plugins/jquery-confirm/jquery-confirm.min.css" rel="stylesheet"/>
@@ -19,10 +18,8 @@
 <body>
 <div id="main">
     <div id="toolbar">
-        <a class="waves-effect waves-button" href="javascript:;" onclick="createAction()"><i class="zmdi zmdi-plus"></i>
-            新增应用</a>
-        <a class="waves-effect waves-button" href="javascript:;" onclick="deleteAction()"><i
-                class="zmdi zmdi-close"></i> 批量删除应用</a>
+        <a class="waves-effect waves-button" href="javascript:;" onclick="createAction()"><i class="zmdi zmdi-plus"></i> 新增应用</a>
+        <a class="waves-effect waves-button" href="javascript:;" onclick="deleteAction()"><i class="zmdi zmdi-close"></i> 批量删除</a>
     </div>
     <table id="table"></table>
 </div>
@@ -34,7 +31,7 @@
             <input id="create-name" type="text" class="form-control" name="name">
         </div>
         <div class="form-group">
-            <label for="create-url">应用url</label>
+            <label for="create-url">应用URL</label>
             <input id="create-url" type="text" class="form-control" name="url">
         </div>
         <div class="form-group">
@@ -52,7 +49,7 @@
             <input id="update-name" type="text" class="form-control update-name" name="name">
         </div>
         <div class="form-group">
-            <label for="update-url">应用url</label>
+            <label for="update-url">应用URL</label>
             <input id="update-url" type="text" class="form-control update-url" name="url">
         </div>
         <div class="form-group">
@@ -107,8 +104,6 @@
             sortName: 'id',
             sortOrder: 'desc',
             escape: true,
-            searchOnEnterKey: true,
-            idField: 'systemId',
             maintainSelected: true,
             toolbar: '#toolbar',
             queryParamsType: "undefined",
@@ -148,7 +143,6 @@
 
     function actionFormatter(value, row, index) {
         return [
-            '<a class="like" href="javascript:void(0)" data-toggle="tooltip" title="Like"><i class="glyphicon glyphicon-heart"></i></a>　',
             '<a class="edit ml10" href="javascript:void(0)" data-toggle="tooltip" title="Edit"><i class="glyphicon glyphicon-edit"></i></a>　',
             '<a class="remove ml10" href="javascript:void(0)" data-toggle="tooltip" title="Remove"><i class="glyphicon glyphicon-remove"></i></a>'
         ].join('');

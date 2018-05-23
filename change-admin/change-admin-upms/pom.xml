@@ -9,6 +9,18 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>change-admin-upms</artifactId>
+    <packaging>war</packaging>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <webXml>web\WEB-INF\web.xml</webXml>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
     <dependencies>
         <!-- local start -->
@@ -35,6 +47,11 @@
         <dependency>
             <groupId>me.cathub</groupId>
             <artifactId>change-api-rpc-server-storehouse</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>me.cathub</groupId>
+            <artifactId>change-upms-sso</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <!-- local ent -->

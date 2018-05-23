@@ -53,7 +53,7 @@
 			</div>
 		</li>
 		<li id="logo" class="hidden-xs">
-			<a href="index.html">
+			<a href="javascript:;">
 				<img src="../resources/images/logo.png"/>
 			</a>
 			<span id="system_title">后台管理系统</span>
@@ -86,22 +86,22 @@
 						</li>
 						<li class="divider"></li>
 						<li>
-							<a class="waves-effect switch-systems" href="http://localhost:9991" systemid="1" systemname="change-admin-user" systemtitle="用户管理系统"><i class="zmdi zmdi-account"></i> 用户管理系统</a>
+							<a class="waves-effect switch-systems" href="http://talei.me:9990" systemid="1" systemname="change-admin-user" systemtitle="用户管理系统"><i class="zmdi zmdi-account"></i> 用户管理系统</a>
 						</li>
 						<li>
-							<a class="waves-effect switch-systems" href="http://localhost:9990" systemid="2" systemname="change-admin-upms" systemtitle="权限管理系统"><i class="zmdi zmdi-shield-security"></i> 权限管理系统</a>
+							<a class="waves-effect switch-systems" href="http://talei.me:9991" systemid="2" systemname="change-admin-upms" systemtitle="权限管理系统"><i class="zmdi zmdi-shield-security"></i> 权限管理系统</a>
 						</li>
 						<li>
-							<a class="waves-effect switch-systems" href="http://localhost:9992" systemid="3" systemname="change-admin-product" systemtitle="商品管理系统"><i class="zmdi zmdi-wikipedia"></i> 商品管理系统</a>
+							<a class="waves-effect switch-systems" href="http://talei.me:9992" systemid="3" systemname="change-admin-product" systemtitle="商品管理系统"><i class="zmdi zmdi-wikipedia"></i> 商品管理系统</a>
 						</li>
 						<li>
-							<a class="waves-effect switch-systems" href="http://localhost:9993" systemid="4" systemname="change-admin-storehouse" systemtitle="仓库管理系统"><i class="zmdi zmdi-cloud"></i> 仓库管理系统</a>
+							<a class="waves-effect switch-systems" href="http://talei.me:9993" systemid="4" systemname="change-admin-storehouse" systemtitle="仓库管理系统"><i class="zmdi zmdi-cloud"></i> 仓库管理系统</a>
 						</li>
 						<li>
-							<a class="waves-effect switch-systems" href="http://localhost:9994" systemid="5" systemname="change-admin-order" systemtitle="订单管理系统"><i class="zmdi zmdi-windows"></i> 订单管理系统</a>
+							<a class="waves-effect switch-systems" href="http://talei.me:9994" systemid="5" systemname="change-admin-order" systemtitle="订单管理系统"><i class="zmdi zmdi-windows"></i> 订单管理系统</a>
 						</li>
 						<li>
-							<a class="waves-effect switch-systems" href="javascript:;" systemid="6" systemname="change-admin-wallet" systemtitle="钱包管理系统"><i class="zmdi zmdi-paypal-alt"></i> 钱包管理系统</a>
+							<a class="waves-effect switch-systems" href="http://talei.me:9995" systemid="6" systemname="change-admin-wallet" systemtitle="钱包管理系统"><i class="zmdi zmdi-paypal-alt"></i> 钱包管理系统</a>
 						</li>
 					</ul>
 				</li>
@@ -114,16 +114,7 @@
 							<a class="waves-effect" data-ma-action="fullscreen" href="javascript:fullPage();"><i class="zmdi zmdi-fullscreen"></i> 全屏模式</a>
 						</li>
 						<li>
-							<a class="waves-effect" data-ma-action="clear-localstorage" href="javascript:;"><i class="zmdi zmdi-delete"></i> 清除缓存</a>
-						</li>
-						<li>
-							<a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-face"></i> 隐私管理</a>
-						</li>
-						<li>
-							<a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-settings"></i> 系统设置</a>
-						</li>
-						<li>
-							<a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-run"></i> 退出登录</a>
+							<a class="waves-effect" href="/logout"><i class="zmdi zmdi-run"></i> 退出登录</a>
 						</li>
 					</ul>
 				</li>
@@ -156,7 +147,7 @@
 					<a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-settings"></i> 系统设置</a>
 				</li>
 				<li>
-					<a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-run"></i> 退出登录</a>
+					<a class="waves-effect" href="/logout"><i class="zmdi zmdi-run"></i> 退出登录</a>
 				</li>
 			</ul>
 		</div>
@@ -166,50 +157,21 @@
 			<li>
 				<a class="waves-effect" href="javascript:Tab.addTab('首页', 'home');"><i class="zmdi zmdi-home"></i> 首页</a>
 			</li>
-			<li class="sub-menu system_menus system_1 0">
-				<a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-accounts"></i> 用户模块</a>
+			<li class="sub-menu system_menus system_3 0">
+				<a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-satellite"></i> 产品管理</a>
 				<ul>
-					<li><a class="waves-effect" href="javascript:Tab.addTab('管理列表', '/view/crud/admin_crud.html');">管理列表</a></li>
-					<li><a class="waves-effect" href="javascript:Tab.addTab('企业列表', '/view/crud/company_crud.html');">企业列表</a></li>
-					<li><a class="waves-effect" href="javascript:Tab.addTab('品牌列表', '/view/crud/brandQuotient_crud.html');">品牌列表</a></li>
-					<li><a class="waves-effect" href="javascript:Tab.addTab('店主列表', '/view/crud/shopkeeper_crud.html');">店主列表</a></li>
-					<li><a class="waves-effect" href="javascript:Tab.addTab('网店列表', '/view/crud/onlineStore_crud.html');">网店列表</a></li>
-					<li><a class="waves-effect" href="javascript:Tab.addTab('审核列表', '/view/crud/auditing_crud.html');">审核列表</a></li>
+					<li><a class="waves-effect" href="javascript:Tab.addTab('分类管理', '/view/crud/productCategory_crud.html');">分类管理</a></li>
+					<li><a class="waves-effect" href="javascript:Tab.addTab('产品管理', '/view/crud/product_crud.html');">产品管理</a></li>
 				</ul>
 			</li>
-			<li class="sub-menu system_menus system_2 1">
-				<a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-lock-outline"></i> 权限模块</a>
+			<li class="sub-menu system_menus system_3 1">
+				<a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-satellite"></i> 产品信息</a>
 				<ul>
-					<li><a class="waves-effect" href="javascript:Tab.addTab('角色列表', '/view/crud/role_crud.html');">角色列表</a></li>
-					<li><a class="waves-effect" href="javascript:Tab.addTab('权限列表', '/view/crud/permission_crud.html');">权限列表</a></li>
+					<li><a class="waves-effect" href="javascript:Tab.addTab('图片管理', '/view/crud/productImage_crud.html');">图片管理</a></li>
+					<li><a class="waves-effect" href="javascript:Tab.addTab('评论管理', '/view/crud/productReview_crud.html');">评论管理</a></li>
+					<li><a class="waves-effect" href="javascript:Tab.addTab('属性管理', '/view/crud/property_crud.html');">属性管理</a></li>
+					<li><a class="waves-effect" href="javascript:Tab.addTab('属值管理', '/view/crud/propertyValue_crud.html');">属值管理</a></li>
 				</ul>
-			</li>
-			<li class="sub-menu system_menus system_3 2">
-				<a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-satellite"></i> 产品模块</a>
-				<ul>
-					<li><a class="waves-effect" href="javascript:Tab.addTab('分类列表', '/view/crud/productCategory_crud.html');">分类列表</a></li>
-					<li><a class="waves-effect" href="javascript:Tab.addTab('产品列表', '/view/crud/product_crud.html');">产品列表</a></li>
-					<li><a class="waves-effect" href="javascript:Tab.addTab('图片列表', '/view/crud/productImage_crud.html');">图片列表</a></li>
-					<li><a class="waves-effect" href="javascript:Tab.addTab('评论列表', '/view/crud/productReview_crud.html');">评论列表</a></li>
-					<li><a class="waves-effect" href="javascript:Tab.addTab('属性列表', '/view/crud/property_crud.html');">属性列表</a></li>
-					<li><a class="waves-effect" href="javascript:Tab.addTab('属值列表', '/view/crud/propertyValue_crud.html');">属值列表</a></li>
-				</ul>
-			</li>
-			<li class="sub-menu system_menus system_4 3">
-				<a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-comments"></i> 仓库模块</a>
-				<ul>
-					<li><a class="waves-effect" href="javascript:Tab.addTab('国家列表', '/view/crud/storehouseCountry_crud.html');">国家列表</a></li>
-					<li><a class="waves-effect" href="javascript:Tab.addTab('分类列表', '/view/crud/storehouse_crud.html');">仓库列表</a></li>
-					<li><a class="waves-effect" href="javascript:Tab.addTab('产品列表', '/view/crud/storehouseProductStock_crud.html');">产品列表</a></li>
-				</ul>
-			</li>
-			<li class="sub-menu system_menus system_5 4">
-				<a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-flip-to-front"></i> 订单模块</a>
-				<ul>
-					<li><a class="waves-effect" href="javascript:Tab.addTab('订单列表', '/view/crud/order_crud.html');">订单列表</a></li>
-					<li><a class="waves-effect" href="javascript:Tab.addTab('单项列表', '/view/crud/orderItem_crud.html');">单项列表</a></li>
-				</ul>
-			</li>
 			</li>
 		</ul>
 		<!-- /菜单区 -->
@@ -231,6 +193,11 @@
 		</div>
 		<div class="content_main">
 			<div id="iframe_home" class="iframe cur">
+				<p><h4>商品管理系统 </h4></p>
+				<p><b>系统简介</b>：本系统用于监控商品信息等。</p><br/>
+				<p><h4>系统功能概述：</h4></p>
+				<p><b>商品管理</b>：商品分类和商品的增加、删除、修改、查询功能。</p>
+				<p><b>商品信息</b>：商品属性、图片、评论的增加、删除、修改、查询功能。</p>
 			</div>
 		</div>
 	</section>

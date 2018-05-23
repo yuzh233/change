@@ -7,8 +7,7 @@
     <title>CRUD</title>
 
     <link href="../../resources/plugins/bootstrap-3.3.0/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../../resources/plugins/material-design-iconic-font-2.2.0/css/material-design-iconic-font.min.css"
-          rel="stylesheet"/>
+    <link href="../../resources/plugins/material-design-iconic-font-2.2.0/css/material-design-iconic-font.min.css" rel="stylesheet"/>
     <link href="../../resources/plugins/bootstrap-table-1.11.0/bootstrap-table.min.css" rel="stylesheet"/>
     <link href="../../resources/plugins/waves-0.7.5/waves.min.css" rel="stylesheet"/>
     <link href="../../resources/plugins/jquery-confirm/jquery-confirm.min.css" rel="stylesheet"/>
@@ -19,12 +18,8 @@
 <body>
 <div id="main">
     <div id="toolbar">
-        <a class="waves-effect waves-button" href="javascript:;" onclick="createAction()"><i class="zmdi zmdi-plus"></i>
-            新增管理员</a>
-        <!-- <a class="waves-effect waves-button" href="javascript:;" onclick="updateAction()"><i class="zmdi zmdi-edit"></i>
-             编辑管理员</a>-->
-        <a class="waves-effect waves-button" href="javascript:;" onclick="deleteAction()"><i
-                class="zmdi zmdi-close"></i> 批量删除管理员</a>
+        <a class="waves-effect waves-button" href="javascript:;" onclick="createAction()"><i class="zmdi zmdi-plus"></i> 添加管理员</a>
+        <a class="waves-effect waves-button" href="javascript:;" onclick="deleteAction()"><i class="zmdi zmdi-close"></i> 批量删除</a>
     </div>
     <table id="table"></table>
 </div>
@@ -127,7 +122,7 @@
             classes: 'table table-hover table-no-bordered',
             sidePagination: 'server', //服务器端分页
             //设置为undefined可以获取pageNumber，pageSize，searchText，sortName，sortOrder
-            //设置为limit可以获取limit, offset, search, sort, order
+            //设置为limit可以获取limit, offset, searchOne, sort, order
             queryParamsType: "undefined",
             pageNumber: 1, // 页码，点击上下页自动更改值
             pageSize: 15,  // 页大小，点击大小自动更改值
@@ -179,8 +174,6 @@
 
     function actionFormatter(value, row, index) {
         return [
-            //点赞
-            '<a class="like" href="javascript:void(0)" data-toggle="tooltip" title="Like"><i class="glyphicon glyphicon-heart"></i></a>　',
             //编辑
             '<a class="edit ml10" href="javascript:void(0)" data-toggle="tooltip" title="Edit"><i class="glyphicon glyphicon-edit"></i></a>　',
             //删除
