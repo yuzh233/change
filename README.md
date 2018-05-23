@@ -6,41 +6,50 @@
 ```$xslt
 change
 |—— change-api
-|       |—— change-api-dao
-|       |—— change-api-rpc-server
-|—— change-common — 公共模块
-|—— change-config — 配置模块
+|       |—— change-api-dao — dao接口
+|       |—— change-api-rpc-server — rpc远程服务接口
+|—— change-admin
+|       |—— change-admin-user[9990] — 用户管理子系统
+|       |—— change-admin-upms[9991] — 权限管理子系统
+|       |—— change-admin-product[9992] — 商品管理子系统
+|       |—— change-admin-storehouse[9993] — 仓库管理子系统
+|       |—— change-admin-order[9994] — 订单管理子系统
+
+|—— change-common '公共模块'
+|—— change-config '配置模块'
 |       |—— change-config-dao
-|       |—— change-config-rpc-server — rpc远程服务配置
-|—— change-user — 用户模块
+|       |—— change-config-rpc-server 'rpc远程服务配置'
+|
+|—— change-user '用户模块'
 |       |—— change-user-bean
 |       |—— change-user-dao
-|       |—— change-user-web
 |       |—— change-user-rpc-server
-|—— change-upms — 权限模块
+|
+|—— change-upms '权限模块'
+|       |—— change-upms-sso 'Spring Session + Spring MVC 拦截器实现的单点登录、权限控制'
 |       |—— change-upms-bean
 |       |—— change-upms-dao
-|       |—— change-upms-client
-|       |—— change-upms-server
 |       |—— change-upms-rpc-server
-|—— change-product — 产品模块
+|
+|—— change-product '产品模块'
 |       |—— change-product-bean
 |       |—— change-product-dao
-|       |—— change-product-service
 |       |—— change-product-rpc-server
-|—— change-storehouse — 仓库模块
+|
+|—— change-storehouse '仓库模块'
 |       |—— change-storehouse-bean
 |       |—— change-storehouse-dao
-|       |—— change-storehouse-service
 |       |—— change-storehouse-rpc-server
-|—— change-order — 订单模块
+|
+|—— change-order '订单模块'
 |       |—— change-order-bean
 |       |—— change-order-dao
-|       |—— change-order-service
 |       |—— change-order-rpc-server
-|—— change-wallet — 钱包模块
+|
+|—— change-wallet '钱包模块'
 |       |—— change-wallet-common
 |       |—— change-wallet-bean
+|
 ```
 
 ### 技术选型
