@@ -5,16 +5,17 @@
 #### 组织结构
 ```$xslt
 change
-|—— change-api
-|       |—— change-api-dao — dao接口
-|       |—— change-api-rpc-server — rpc远程服务接口
 |—— change-admin
 |       |—— change-admin-user[9990] — 用户管理子系统
 |       |—— change-admin-upms[9991] — 权限管理子系统
 |       |—— change-admin-product[9992] — 商品管理子系统
 |       |—— change-admin-storehouse[9993] — 仓库管理子系统
 |       |—— change-admin-order[9994] — 订单管理子系统
-
+|
+|—— change-api
+|       |—— change-api-dao — dao接口
+|       |—— change-api-rpc-server — rpc远程服务接口
+|
 |—— change-common '公共模块'
 |—— change-config '配置模块'
 |       |—— change-config-dao
@@ -49,7 +50,6 @@ change
 |—— change-wallet '钱包模块'
 |       |—— change-wallet-common
 |       |—— change-wallet-bean
-|
 ```
 
 ### 技术选型
