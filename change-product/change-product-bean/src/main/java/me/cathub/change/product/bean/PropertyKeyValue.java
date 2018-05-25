@@ -1,11 +1,13 @@
 package me.cathub.change.product.bean;
 
+import java.io.Serializable;
+
 /**
  * 属性键值对
  *
  * @author cheng
  */
-public class PropertyKeyValue {
+public class PropertyKeyValue implements Serializable {
 
     private String key;
     private String val;
