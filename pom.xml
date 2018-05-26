@@ -33,6 +33,7 @@
         <module>change-order</module>
         <module>change-wallet</module>
         <module>change-admin</module>
+        <module>change-apply</module>
         <module>change-publish</module>
     </modules>
 </project>
