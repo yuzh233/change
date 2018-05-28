@@ -2,13 +2,11 @@ package me.cathub.change.admin.upms.web.controller;
 
 import me.cathub.change.api.rpc.server.upms.RoleRpcServer;
 import me.cathub.change.api.rpc.server.upms.UserRoleRpcServer;
-import me.cathub.change.api.rpc.server.user.AdminRpcServer;
 import me.cathub.change.api.rpc.server.user.UserSelectRpcServer;
 import me.cathub.change.common.base.BaseAdminControllerImpl;
 import me.cathub.change.common.bean.User;
 import me.cathub.change.upms.bean.Role;
 import me.cathub.change.upms.bean.UserRole;
-import me.cathub.change.user.bean.Admin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,7 +35,7 @@ public class UserRoleAdminController extends BaseAdminControllerImpl<UserRole, U
     public boolean insert(UserRole userRole) throws Exception {
         //根据用户ID、角色ID关联对象
         if (userRole.getUser() != null) {
-            User user = userSelectRpcServer.select(userRole.getUser().getId(),true,userRole.getType());
+            User user = userSelectRpcServer.select(userRole.getUser().getId(),true, 0, userRole.getType());
             if (user == null) {
                 return false;
             }
@@ -59,7 +57,7 @@ public class UserRoleAdminController extends BaseAdminControllerImpl<UserRole, U
     public boolean update(@RequestBody UserRole userRole) throws Exception {
         UserRole bean = rpcService.select(userRole, false);
         if (userRole.getUser() != null) {
-            User user = userSelectRpcServer.select(userRole.getUser().getId(), true, userRole.getType());
+            User user = userSelectRpcServer.select(userRole.getUser().getId(), true, 0, userRole.getType());
             if(user == null){
                 return false;
             }
