@@ -17,5 +17,6 @@
         <module>change-api-rpc-server-storehouse</module>
         <module>change-api-rpc-server-upms</module>
         <module>change-api-rpc-server-user</module>
+        <module>change-api-rpc-server-wallet</module>
     </modules>
 </project>

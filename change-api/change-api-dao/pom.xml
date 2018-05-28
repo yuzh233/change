@@ -17,5 +17,6 @@
         <module>change-api-dao-order</module>
         <module>change-api-dao-product</module>
         <module>change-api-dao-storehouse</module>
+        <module>change-api-dao-wallet</module>
     </modules>
 </project>
