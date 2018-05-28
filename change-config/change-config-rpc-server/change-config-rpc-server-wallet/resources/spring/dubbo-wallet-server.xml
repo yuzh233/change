@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://code.alibabatech.com/schema/dubbo
+       http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!-- 提供方应用信息，用于计算依赖关系 -->
+    <dubbo:application name="change-wallet-rpc-server"  />
+
+    <!-- 使用广播注册中心暴露服务地址 -->
+    <dubbo:registry address="zookeeper://120.77.159.152:2181" file="change_wallet_rpc_server/dubbo-registry/dubbo-registry.properties" />
+
+    <!-- 用dubbo协议在20880端口暴露服务 -->
+    <dubbo:protocol name="dubbo" port="20885" />
+
+    <!-- 暴露的服务接口 -->
+    <dubbo:service interface="me.cathub.change.api.rpc.server.wallet.AliPayRpcServer" ref="aliPayRpcServer" timeout="15000" />
+    <dubbo:service interface="me.cathub.change.api.rpc.server.wallet.BalanceRpcServer" ref="balanceRpcServer" timeout="15000" />
+    <dubbo:service interface="me.cathub.change.api.rpc.server.wallet.OutputAuditingRpcServer" ref="outputAuditingRpcServer" timeout="15000" />
+    <dubbo:service interface="me.cathub.change.api.rpc.server.wallet.TransactionRpcServer" ref="transactionRpcServer" timeout="15000" />
+
+    <bean id="aliPayRpcServer" class="me.cathub.change.wallet.rpc.server.AliPayRpcServerImpl"/>
+    <bean id="balanceRpcServer" class="me.cathub.change.wallet.rpc.server.BalanceRpcServerImpl"/>
+    <bean id="outputAuditingRpcServer" class="me.cathub.change.wallet.rpc.server.OutputAuditingRpcServerImpl"/>
+    <bean id="transactionRpcServer" class="me.cathub.change.wallet.rpc.server.TransactionRpcServerImpl"/>
+
+    <dubbo:reference id="userSelectRpcServer" interface="me.cathub.change.api.rpc.server.user.UserSelectRpcServer" timeout="15000"/>
+</beans>

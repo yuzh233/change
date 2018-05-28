@@ -100,4 +100,20 @@
     <delete id="clear" parameterType="int">
         DELETE FROM auditing_${_parameter} WHERE yn=0
     </delete>
+
+    <select id="listByAdminIdAndUserType" parameterType="map" resultMap="auditing">
+        SELECT * FROM auditing_${tableIndex} WHERE yn=1 AND admin_id=#{admin_id, jdbcType=BIGINT} AND type=#{type, jdbcType=INTEGER}
+    </select>
+
+    <select id="countByAdminIdAndUserType" parameterType="map" resultType="int">
+        SELECT COUNT(*) FROM auditing_${tableIndex} WHERE yn=1 AND admin_id=#{admin_id, jdbcType=BIGINT} AND type=#{type, jdbcType=INTEGER}
+    </select>
+
+    <select id="listByNotAuditing" parameterType="map" resultMap="auditing">
+        SELECT * FROM auditing_${tableIndex} WHERE yn=1 AND admin_id=0 AND status=0
+    </select>
+
+    <select id="countByNotAuditing" parameterType="map" resultType="int">
+        SELECT COUNT(*) FROM auditing_${tableIndex} WHERE yn=1 AND admin_id=0 AND status=0
+    </select>
 </mapper>

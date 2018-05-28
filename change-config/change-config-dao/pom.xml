@@ -17,5 +17,6 @@
         <module>change-config-dao-storehouse</module>
         <module>change-config-dao-upms</module>
         <module>change-config-dao-user</module>
+        <module>change-config-dao-wallet</module>
     </modules>
 </project>

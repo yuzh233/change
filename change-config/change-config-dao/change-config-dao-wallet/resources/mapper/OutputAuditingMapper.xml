@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="OutputAuditing">
+
+    <!--缓存-->
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache">
+        <property name="timeToIdleSeconds" value="3600"/>
+        <property name="timeToLiveSeconds" value="3600"/>
+        <property name="maxEntriesLocalHeap" value="1000"/>
+        <property name="maxEntriesLocalDisk" value="10000000"/>
+        <property name="memoryStoreEvictionPolicy" value="LRU"/>
+    </cache>
+
+    <resultMap id="outputAuditing" type="outputAuditing">
+        <id property="id" column="id"/>
+        <result property="type" column="type"/>
+        <result property="amount" column="amount"/>
+        <result property="status" column="status"/>
+        <result property="outputType" column="outputType"/>
+        <result property="notAllowMessage" column="notAllowMessage"/>
+        <result property="auditSubmitDate" column="auditSubmitDate"/>
+        <result property="auditAllowDate" column="auditAllowDate"/>
+
+        <result property="userId" column="user_id"/>
+        <result property="adminId" column="admin_id"/>
+        <result property="transactionId" column="transaction_id"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="outputAuditing">
+        INSERT INTO outputAuditing_${tableIndex} (
+          id,
+          type,
+          status,
+          amount,
+          outputType,
+          notAllowMessage,
+          user_id,
+          admin_id,
+          transaction_id,
+          auditSubmitDate,
+          yn
+        )VALUES(
+          #{id, jdbcType=BIGINT},
+          #{type, jdbcType=INTEGER},
+          #{status, jdbcType=INTEGER},
+          #{amount, jdbcType=FLOAT},
+          #{outputType, jdbcType=INTEGER},
+          #{notAllowMessage, jdbcType=VARCHAR},
+          #{user.id, jdbcType=BIGINT},
+          #{admin.id, jdbcType=BIGINT},
+          #{transaction.id, jdbcType=BIGINT},
+          NOW(),
+          1
+        )
+    </insert>
+
+    <update id="deleteL" parameterType="outputAuditing">
+        UPDATE outputAuditing_${tableIndex} SET
+          yn=0
+        WHERE
+          id=#{id, jdbcType=BIGINT}
+        and
+          yn=1
+    </update>
+
+    <delete id="deleteP" parameterType="outputAuditing">
+        DELETE FROM outputAuditing_${tableIndex} WHERE id=#{id, jdbcType=BIGINT} and yn=0
+    </delete>
+
+    <update id="update" parameterType="outputAuditing">
+        UPDATE outputAuditing_${tableIndex} SET
+          notAllowMessage=#{notAllowMessage, jdbcType=VARCHAR},
+          admin_id=#{admin.id, jdbcType=BIGINT},
+          transaction_id=#{transaction.id, jdbcType=BIGINT},
+          auditAllowDate=NOW()
+        WHERE
+          id=#{id, jdbcType=BIGINT}
+        and
+          yn=1
+    </update>
+
+    <select id="select" parameterType="outputAuditing" resultMap="outputAuditing">
+        SELECT * FROM outputAuditing_${tableIndex} WHERE id=#{id, jdbcType=BIGINT} AND yn=1
+    </select>
+
+    <update id="restore" parameterType="outputAuditing">
+        UPDATE outputAuditing_${tableIndex} SET
+        yn=1
+        WHERE
+        id=#{id, jdbcType=BIGINT}
+        AND
+        yn=0
+    </update>
+
+    <select id="list" parameterType="int" resultMap="outputAuditing">
+        SELECT * FROM outputAuditing_${_parameter} WHERE yn=1
+    </select>
+
+    <select id="count" parameterType="int" resultType="int">
+        SELECT COUNT(*) FROM outputAuditing_${_parameter} WHERE yn=1
+    </select>
+
+    <select id="listByDel" parameterType="int" resultMap="outputAuditing">
+        SELECT * FROM outputAuditing_${_parameter} WHERE yn=0
+    </select>
+
+    <select id="countByDel" parameterType="int" resultType="int">
+        SELECT COUNT(*) FROM outputAuditing_${_parameter} WHERE yn=0
+    </select>
+
+    <delete id="clear" parameterType="int">
+        DELETE FROM outputAuditing_${_parameter} WHERE yn=0
+    </delete>
+
+    <select id="listByAdminIdAndUserType" parameterType="map" resultMap="outputAuditing">
+        SELECT * FROM outputAuditing_${tableIndex} WHERE yn=1 AND admin_id=#{admin_id, jdbcType=BIGINT} AND type=#{type, jdbcType=INTEGER}
+    </select>
+
+    <select id="countByAdminIdAndUserType" parameterType="map" resultType="int">
+        SELECT COUNT(*) FROM outputAuditing_${tableIndex} WHERE yn=1 AND admin_id=#{admin_id, jdbcType=BIGINT} AND type=#{type, jdbcType=INTEGER}
+    </select>
+
+    <select id="listByNotAuditing" parameterType="map" resultMap="outputAuditing">
+        SELECT * FROM outputAuditing_${tableIndex} WHERE yn=1 AND admin_id=0 AND status=0
+    </select>
+
+    <select id="countByNotAuditing" parameterType="map" resultType="int">
+        SELECT COUNT(*) FROM outputAuditing_${tableIndex} WHERE yn=1 AND admin_id=0 AND status=0
+    </select>
+
+    <select id="listByUserIdAndUserType" parameterType="map" resultMap="outputAuditing">
+        SELECT * FROM outputAuditing_${tableIndex} WHERE yn=1 AND type=#{type, jdbcType=INTEGER} AND user_id=#{user_id, jdbcType=BIGINT}
+    </select>
+
+    <select id="countByUserIdAndUserType" parameterType="map" resultType="int">
+        SELECT COUNT(*) FROM outputAuditing_${tableIndex} WHERE yn=1 AND type=#{type, jdbcType=INTEGER} AND user_id=#{user_id, jdbcType=BIGINT}
+    </select>
+</mapper>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="AliPay">
+
+    <!--缓存-->
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache">
+        <property name="timeToIdleSeconds" value="3600"/>
+        <property name="timeToLiveSeconds" value="3600"/>
+        <property name="maxEntriesLocalHeap" value="1000"/>
+        <property name="maxEntriesLocalDisk" value="10000000"/>
+        <property name="memoryStoreEvictionPolicy" value="LRU"/>
+    </cache>
+
+    <resultMap id="aliPay" type="aliPay">
+        <id property="id" column="id"/>
+        <result property="account" column="account"/>
+        <result property="realName" column="realName"/>
+        <result property="createDate" column="createDate"/>
+        <result property="updateDate" column="updateDate"/>
+
+        <result property="userId" column="user_id"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="aliPay">
+        INSERT INTO aliPay_${tableIndex} (
+          id,
+          account,
+          realName,
+          user_id,
+          createDate,
+          yn
+        )VALUES(
+          #{id, jdbcType=BIGINT},
+          #{account, jdbcType=VARCHAR},
+          #{realName, jdbcType=VARCHAR},
+          #{user.id, jdbcType=BIGINT},
+          NOW(),
+          1
+        )
+    </insert>
+
+    <update id="deleteL" parameterType="aliPay">
+        UPDATE aliPay_${tableIndex} SET
+          yn=0
+        WHERE
+          id=#{id, jdbcType=BIGINT}
+        and
+          yn=1
+    </update>
+
+    <delete id="deleteP" parameterType="aliPay">
+        DELETE FROM aliPay_${tableIndex} WHERE id=#{id, jdbcType=BIGINT} and yn=0
+    </delete>
+
+    <update id="update" parameterType="aliPay">
+        UPDATE aliPay_${tableIndex} SET
+          account=#{account, jdbcType=VARCHAR},
+          updateDate=NOW()
+        WHERE
+          id=#{id, jdbcType=BIGINT}
+        and
+          yn=1
+    </update>
+
+    <select id="select" parameterType="aliPay" resultMap="aliPay">
+        SELECT * FROM aliPay_${tableIndex} WHERE id=#{id, jdbcType=BIGINT} AND yn=1
+    </select>
+
+    <update id="restore" parameterType="aliPay">
+        UPDATE aliPay_${tableIndex} SET
+        yn=1
+        WHERE
+        id=#{id, jdbcType=BIGINT}
+        AND
+        yn=0
+    </update>
+
+    <select id="list" parameterType="int" resultMap="aliPay">
+        SELECT * FROM aliPay_#{_parameter} WHERE yn=1
+    </select>
+
+    <select id="count" parameterType="int" resultType="int">
+        SELECT COUNT(*) FROM aliPay_${_parameter} WHERE yn=1
+    </select>
+
+    <select id="listByDel" parameterType="int" resultMap="aliPay">
+        SELECT * FROM aliPay_${_parameter} WHERE yn=0
+    </select>
+
+    <select id="countByDel" parameterType="int" resultType="int">
+        SELECT COUNT(*) FROM aliPay_${_parameter} WHERE yn=0
+    </select>
+
+    <delete id="clear" parameterType="int">
+        DELETE FROM aliPay_${_parameter} WHERE yn=0
+    </delete>
+
+    <select id="selectByUserId" parameterType="map" resultMap="aliPay">
+        SELECT * FROM aliPay_${tableIndex} WHERE user_id=#{user_id, jdbcType=BIGINT} AND yn=1
+    </select>
+</mapper>

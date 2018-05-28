@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Transaction">
+
+    <!--缓存-->
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache">
+        <property name="timeToIdleSeconds" value="3600"/>
+        <property name="timeToLiveSeconds" value="3600"/>
+        <property name="maxEntriesLocalHeap" value="1000"/>
+        <property name="maxEntriesLocalDisk" value="10000000"/>
+        <property name="memoryStoreEvictionPolicy" value="LRU"/>
+    </cache>
+
+    <resultMap id="transaction" type="transaction">
+        <id property="id" column="id"/>
+        <result property="amount" column="amount"/>
+        <result property="message" column="message"/>
+        <result property="type" column="type"/>
+        <result property="payType" column="payType"/>
+        <result property="status" column="status"/>
+        <result property="createDate" column="createDate"/>
+        <result property="updateDate" column="updateDate"/>
+
+        <result property="returnId" column="return_id"/>
+        <result property="sendUserType" column="sendUserType"/>
+        <result property="receiveUserType" column="receiveUserType"/>
+        <result property="sendUserId" column="sendUser_id"/>
+        <result property="receiveUserId" column="receiveUser_id"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="transaction">
+        INSERT INTO transaction_${tableIndex} (
+          id,
+          amount,
+          message,
+          type,
+          payType,
+          status,
+          return_id,
+          sendUserType,
+          receiveUserType,
+          sendUser_id,
+          receiveUser_id,
+          createDate,
+          yn
+        )VALUES(
+          #{id, jdbcType=BIGINT},
+          #{amount, jdbcType=FLOAT},
+          #{message, jdbcType=VARCHAR},
+          #{type, jdbcType=INTEGER},
+          #{payType, jdbcType=INTEGER},
+          #{status, jdbcType=INTEGER},
+          #{returnId, jdbcType=VARCHAR},
+          #{sendUserType, jdbcType=INTEGER},
+          #{receiveUserType, jdbcType=INTEGER},
+          #{sendUser.id, jdbcType=BIGINT},
+          #{receiveUser.id, jdbcType=BIGINT},
+          NOW(),
+          1
+        )
+    </insert>
+
+    <update id="deleteL" parameterType="transaction">
+        UPDATE transaction_${tableIndex} SET
+          yn=0
+        WHERE
+          id=#{id, jdbcType=BIGINT}
+        and
+          yn=1
+    </update>
+
+    <delete id="deleteP" parameterType="transaction">
+        DELETE FROM transaction_${tableIndex} WHERE id=#{id, jdbcType=BIGINT} and yn=0
+    </delete>
+
+    <update id="update" parameterType="transaction">
+        UPDATE transaction_${tableIndex} SET
+          message=#{message, jdbcType=VARCHAR},
+          status=#{status, jdbcType=INTEGER},
+          return_id=#{returnId, jdbcType=INTEGER},
+          updateDate=NOW()
+        WHERE
+          id=#{id, jdbcType=BIGINT}
+        and
+          yn=1
+    </update>
+
+    <select id="select" parameterType="transaction" resultMap="transaction">
+        SELECT * FROM transaction_${tableIndex} WHERE id=#{id, jdbcType=BIGINT} AND yn=1
+    </select>
+
+    <update id="restore" parameterType="transaction">
+        UPDATE transaction_${tableIndex} SET
+        yn=1
+        WHERE
+        id=#{id, jdbcType=BIGINT}
+        AND
+        yn=0
+    </update>
+
+    <select id="list" parameterType="int" resultMap="transaction">
+        SELECT * FROM transaction_${_parameter} WHERE yn=1
+    </select>
+
+    <select id="count" parameterType="int" resultType="int">
+        SELECT COUNT(*) FROM transaction_${_parameter} WHERE yn=1
+    </select>
+
+    <select id="listByDel" parameterType="int" resultMap="transaction">
+        SELECT * FROM transaction_${_parameter} WHERE yn=0
+    </select>
+
+    <select id="countByDel" parameterType="int" resultType="int">
+        SELECT COUNT(*) FROM transaction_${_parameter} WHERE yn=0
+    </select>
+
+    <delete id="clear" parameterType="int">
+        DELETE FROM transaction_${_parameter} WHERE yn=0
+    </delete>
+
+    <select id="listBySendUserId" parameterType="map" resultMap="transaction">
+        SELECT * FROM transaction_${tableIndex} WHERE yn=1 AND sendUser_id=#{sendUser_id, jdbcType=BIGINT}
+    </select>
+
+    <select id="countBySendUserId" parameterType="map" resultType="int">
+        SELECT COUNT(*) FROM transaction_${tableIndex} WHERE yn=1 AND sendUser_id=#{sendUser_id, jdbcType=BIGINT}
+    </select>
+
+    <select id="listByReceiveUserId" parameterType="map" resultMap="transaction">
+        SELECT * FROM transaction_${tableIndex} WHERE yn=1 AND receiveUser_id=#{receiveUser_id, jdbcType=BIGINT}
+    </select>
+
+    <select id="countByReceiveUserId" parameterType="map" resultType="int">
+        SELECT COUNT(*) FROM transaction_${tableIndex} WHERE yn=1 AND receiveUser_id=#{receiveUser_id, jdbcType=BIGINT}
+    </select>
+</mapper>
