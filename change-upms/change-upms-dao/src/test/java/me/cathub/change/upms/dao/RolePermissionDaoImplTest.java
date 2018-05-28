@@ -13,6 +13,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
 import static org.junit.Assert.*;
 
 public class RolePermissionDaoImplTest {
@@ -25,11 +26,15 @@ public class RolePermissionDaoImplTest {
 
     @Test
     public void test() throws Exception {
-        List<Permission> permissions = pDao.listByApplyId(30316287322230784L, 0, 100, 0);
+        List<Permission> permissions = pDao.listByApplyId(30316379387203584L, 0, 100, 0);
 
         RolePermission rolePermission = new RolePermission(sequence.nextId());
-        rolePermission.setRole(new Role(30593908295602176L));
-        rolePermission.setApply(new Apply(30316287322230784L));
+        rolePermission.setRole(new Role(31196339547148288L));
+        rolePermission.setApply(new Apply(30316379387203584L));
+
+        permissions = permissions.stream()
+                .filter(bean -> bean.getUrl().contains("/list") || bean.getUrl().contains("select"))
+                .collect(toList());
 
         for (Permission permission : permissions) {
             rolePermission.setPermission(permission);

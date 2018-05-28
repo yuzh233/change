@@ -53,6 +53,7 @@ public class User implements Serializable {
      * 邮箱地址
      */
     protected String email;
+    protected int type;
     protected Date createDate;
     protected Date updateDate;
 
@@ -62,8 +63,7 @@ public class User implements Serializable {
     protected int status;
     protected int tableIndex;
 
-    public User() {
-    }
+    public User() {}
 
     public User(long id) {
         this.id = id;
@@ -151,6 +151,14 @@ public class User implements Serializable {
         this.status = status;
     }
 
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("User{");
@@ -160,6 +168,7 @@ public class User implements Serializable {
         sb.append(", name='").append(name).append('\'');
         sb.append(", phone='").append(phone).append('\'');
         sb.append(", email='").append(email).append('\'');
+        sb.append(", type=").append(type);
         sb.append(", createDate=").append(createDate);
         sb.append(", updateDate=").append(updateDate);
         sb.append(", status=").append(status);

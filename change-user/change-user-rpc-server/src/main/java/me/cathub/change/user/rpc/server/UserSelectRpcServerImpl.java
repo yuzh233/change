@@ -29,17 +29,23 @@ public class UserSelectRpcServerImpl implements UserSelectRpcServer {
     private ShopkeeperRpcServer shopkeeperRpcServer;
 
     @Override
-    public User select(long id, boolean flag, int type) throws Exception {
+    public User select(long id, boolean flag, int tableIndex, int type) throws Exception {
         User result = null;
         switch (type) {
             case User.TYPE_ADMIN:
-                result = adminRpcServer.select(new Admin(id), flag);
+                Admin admin = new Admin(id);
+                admin.setTableIndex(tableIndex);
+                result = adminRpcServer.select(admin, flag);
                 break;
             case User.TYPE_BRAND_QUOTIENT:
-                result = brandQuotientRpcServer.select(new BrandQuotient(id), flag);
+                BrandQuotient brandQuotient = new BrandQuotient(id);
+                brandQuotient.setTableIndex(tableIndex);
+                result = brandQuotientRpcServer.select(brandQuotient, flag);
                 break;
             case User.TYPE_SHOPKEEPER:
-                result = shopkeeperRpcServer.select(new Shopkeeper(id), flag);
+                Shopkeeper shopkeeper = new Shopkeeper(id);
+                shopkeeper.setTableIndex(tableIndex);
+                result = shopkeeperRpcServer.select(shopkeeper, flag);
                 break;
             default:
         }
@@ -62,5 +68,29 @@ public class UserSelectRpcServerImpl implements UserSelectRpcServer {
             default:
         }
         return result;
+    }
+
+    @Override
+    public BrandQuotient selectBrandQuotient(long id, int tableIndex, boolean flag) throws Exception {
+        BrandQuotient brandQuotient = new BrandQuotient(id);
+        brandQuotient.setTableIndex(tableIndex);
+
+        return brandQuotientRpcServer.select(brandQuotient, flag);
+    }
+
+    @Override
+    public Admin selectAdmin(long id, int tableIndex, boolean flag) throws Exception {
+        Admin admin = new Admin(id);
+        admin.setTableIndex(tableIndex);
+
+        return adminRpcServer.select(admin, flag);
+    }
+
+    @Override
+    public Shopkeeper selectShopkeeper(long id, int tableIndex, boolean flag) throws Exception {
+        Shopkeeper shopkeeper = new Shopkeeper(id);
+        shopkeeper.setTableIndex(tableIndex);
+
+        return shopkeeperRpcServer.select(shopkeeper, flag);
     }
 }

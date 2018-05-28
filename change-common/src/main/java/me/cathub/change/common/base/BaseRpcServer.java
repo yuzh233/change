@@ -1,5 +1,6 @@
 package me.cathub.change.common.base;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -9,7 +10,7 @@ import java.util.List;
  * <p/>
  * @param <Bean>
  */
-public interface BaseRpcServer<Bean> extends FillAssociationDate<Bean> {
+public interface BaseRpcServer<Bean extends Serializable> extends FillAssociationDate<Bean> {
 
     /**
      * 插入数据
