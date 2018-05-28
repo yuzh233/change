@@ -8,9 +8,17 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>change-wallet-common</artifactId>
+
+    <artifactId>change-wallet-pay</artifactId>
 
     <dependencies>
+        <dependency>
+            <groupId>me.cathub</groupId>
+            <artifactId>change-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <!-- ali pay -->
         <dependency>
             <groupId>com.alipay.sdk</groupId>
             <artifactId>alipay-sdk-java</artifactId>

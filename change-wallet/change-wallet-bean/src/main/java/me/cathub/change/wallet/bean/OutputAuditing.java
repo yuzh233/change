@@ -83,7 +83,7 @@ public class OutputAuditing implements Serializable {
     /**
      * 本次提现的金额
      */
-    private float price;
+    private float amount;
 
     /**
      * 审核状态
@@ -98,6 +98,7 @@ public class OutputAuditing implements Serializable {
 
     private long userId;
     private long adminId;
+    private long transactionId;
 
     /**
      * 谁发起提现申请的?
@@ -108,6 +109,11 @@ public class OutputAuditing implements Serializable {
      * 谁处理的申请?
      */
     private Admin admin;
+
+    /**
+     * 交易信息
+     */
+    private Transaction transaction;
 
     public OutputAuditing() {
     }
@@ -156,12 +162,12 @@ public class OutputAuditing implements Serializable {
         this.outputType = outputType;
     }
 
-    public float getPrice() {
-        return price;
+    public float getAmount() {
+        return amount;
     }
 
-    public void setPrice(float price) {
-        this.price = price;
+    public void setAmount(float amount) {
+        this.amount = amount;
     }
 
     public int getStatus() {
@@ -220,6 +226,22 @@ public class OutputAuditing implements Serializable {
         this.admin = admin;
     }
 
+    public long getTransactionId() {
+        return transactionId;
+    }
+
+    public void setTransactionId(long transactionId) {
+        this.transactionId = transactionId;
+    }
+
+    public Transaction getTransaction() {
+        return transaction;
+    }
+
+    public void setTransaction(Transaction transaction) {
+        this.transaction = transaction;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("OutputAuditing{");
@@ -228,14 +250,16 @@ public class OutputAuditing implements Serializable {
         sb.append(", auditAllowDate=").append(auditAllowDate);
         sb.append(", type=").append(type);
         sb.append(", outputType=").append(outputType);
-        sb.append(", price=").append(price);
+        sb.append(", amount=").append(amount);
         sb.append(", status=").append(status);
         sb.append(", notAllowMessage='").append(notAllowMessage).append('\'');
         sb.append(", tableIndex=").append(tableIndex);
         sb.append(", userId=").append(userId);
         sb.append(", adminId=").append(adminId);
+        sb.append(", transactionId=").append(transactionId);
         sb.append(", user=").append(user);
         sb.append(", admin=").append(admin);
+        sb.append(", transaction=").append(transaction);
         sb.append('}');
         return sb.toString();
     }

@@ -13,6 +13,8 @@
 
     <modules>
         <module>change-wallet-bean</module>
-        <module>change-wallet-common</module>
+        <module>change-wallet-pay</module>
+        <module>change-wallet-dao</module>
+        <module>change-wallet-rpc-server</module>
     </modules>
 </project>
