@@ -1,6 +1,9 @@
 package me.cathub.change.wallet.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import me.cathub.change.common.bean.User;
+import me.cathub.change.common.util.json.LongJsonSerializer;
 import me.cathub.change.user.bean.Admin;
 
 import java.io.Serializable;
@@ -58,16 +61,19 @@ public class OutputAuditing implements Serializable {
      */
     public static final int OUTPUT_TYPE_WX = 3;
 
+    @JsonSerialize(using = LongJsonSerializer.class)
     private long id;
 
     /**
      * 审核提交日期
      */
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date auditSubmitDate;
 
     /**
      * 审核通过日期
      */
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date auditAllowDate;
 
     /**
@@ -96,8 +102,11 @@ public class OutputAuditing implements Serializable {
     private String notAllowMessage;
     private int tableIndex;
 
+    @JsonSerialize(using = LongJsonSerializer.class)
     private long userId;
+    @JsonSerialize(using = LongJsonSerializer.class)
     private long adminId;
+    @JsonSerialize(using = LongJsonSerializer.class)
     private long transactionId;
 
     /**

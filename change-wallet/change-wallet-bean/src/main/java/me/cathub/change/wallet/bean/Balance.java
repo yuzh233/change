@@ -1,6 +1,9 @@
 package me.cathub.change.wallet.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import me.cathub.change.common.bean.User;
+import me.cathub.change.common.util.json.LongJsonSerializer;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -22,13 +25,17 @@ public class Balance implements Serializable {
      */
     public static final int TYPE_SHOPKEEPER = 2;
 
+    @JsonSerialize(using = LongJsonSerializer.class)
     private long id;
     private float balance;
     private int type;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createDate;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date updateDate;
     private int tableIndex;
 
+    @JsonSerialize(using = LongJsonSerializer.class)
     private long userId;
 
     /**
