@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://code.alibabatech.com/schema/dubbo
+       http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <dubbo:application name="change-admin-wallet-consumer" />
+
+    <dubbo:registry address="zookeeper://120.77.159.152:2181"/>
+
+    <dubbo:reference id="balanceRpcServer" interface="me.cathub.change.api.rpc.server.wallet.BalanceRpcServer" timeout="10000"/>
+    <dubbo:reference id="aliPayRpcServer" interface="me.cathub.change.api.rpc.server.wallet.AliPayRpcServer" timeout="10000"/>
+    <dubbo:reference id="outputAuditingRpcServer" interface="me.cathub.change.api.rpc.server.wallet.OutputAuditingRpcServer" timeout="10000"/>
+    <dubbo:reference id="transactionRpcServer" interface="me.cathub.change.api.rpc.server.wallet.TransactionRpcServer" timeout="10000"/>
+</beans>

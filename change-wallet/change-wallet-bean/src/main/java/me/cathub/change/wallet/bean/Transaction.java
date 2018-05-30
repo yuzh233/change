@@ -1,6 +1,9 @@
 package me.cathub.change.wallet.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import me.cathub.change.common.bean.User;
+import me.cathub.change.common.util.json.LongJsonSerializer;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -26,6 +29,7 @@ public class Transaction implements Serializable {
     public static final int STATUS_FAILED = -1;
     public static final int STATUS_SUCCESS = 1;
 
+    @JsonSerialize(using = LongJsonSerializer.class)
     private long id;
     private float amount;
     private String message;
@@ -46,14 +50,18 @@ public class Transaction implements Serializable {
      */
     private String returnId;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createDate;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date updateDate;
     private int tableIndex;
 
     private int sendUserType;
+    @JsonSerialize(using = LongJsonSerializer.class)
     private long sendUserId;
 
     private int receiveUserType;
+    @JsonSerialize(using = LongJsonSerializer.class)
     private long receiveUserId;
 
     private User sendUser;
