@@ -100,10 +100,10 @@
     </select>
 
     <select id="childListById" parameterType="map" resultMap="productCategory">
-        SELECT * FROM productCategory_${tableIndex} WHERE yn=1 AND parent_id=${id, jdbcType=BIGINT}
+        SELECT * FROM productCategory_${tableIndex} WHERE yn=1 AND parent_id=#{id, jdbcType=BIGINT}
     </select>
 
     <select id="childCountById" parameterType="map" resultMap="productCategory">
-        SELECT COUNT(*) productCategory_${tableIndex} WHERE yn=1 AND parent_id=${id, jdbcType=BIGINT}
+        SELECT COUNT(*) productCategory_${tableIndex} WHERE yn=1 AND parent_id=#{id, jdbcType=BIGINT}
     </select>
 </mapper>
