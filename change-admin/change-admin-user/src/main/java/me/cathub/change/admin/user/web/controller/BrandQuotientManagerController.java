@@ -21,7 +21,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/brandQuotient")
-public class BrandQuotientAdminController extends BaseAdminControllerImpl<BrandQuotient, BrandQuotientRpcServer> {
+public class BrandQuotientManagerController extends BaseAdminControllerImpl<BrandQuotient, BrandQuotientRpcServer> {
 
     @Autowired
     private CompanyRpcServer companyRpcServer;

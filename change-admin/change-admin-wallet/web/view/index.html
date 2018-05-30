@@ -157,13 +157,23 @@
             <li>
                 <a class="waves-effect" href="javascript:Tab.addTab('首页', 'home');"><i class="zmdi zmdi-home"></i> 首页</a>
             </li>
-            <li class="sub-menu system_menus system_2 1">
-                <a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-lock-outline"></i> 钱包系统管理</a>
+            <li class="sub-menu system_menus system_6 0">
+                <a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-lock-outline"></i> 绑定管理</a>
                 <ul>
-                    <li><a class="waves-effect" href="javascript:Tab.addTab('绑定支付宝', 'crud/alipay_crud.html');">绑定支付宝</a></li>
-                    <li><a class="waves-effect" href="javascript:Tab.addTab('账户余额', 'crud/balance_crud.html');">账户余额</a></li>
-                    <li><a class="waves-effect" href="javascript:Tab.addTab('提现审核', 'crud/outputauditing_crud.html');">提现审核</a></li>
-                    <li><a class="waves-effect" href="javascript:Tab.addTab('交易记录列表', 'crud/transaction_crud.html');">交易记录列表</a></li>
+                    <li><a class="waves-effect" href="javascript:Tab.addTab('支付宝管理', '/view/crud/aliPay_crud.html');">支付宝管理</a></li>
+                </ul>
+            </li>
+            <li class="sub-menu system_menus system_6 1">
+                <a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-lock-outline"></i> 交易记录</a>
+                <ul>
+                    <li><a class="waves-effect" href="javascript:Tab.addTab('账户余额管理', '/view/crud/balance_crud.html');">账户余额管理</a></li>
+                    <li><a class="waves-effect" href="javascript:Tab.addTab('交易记录管理', '/view/crud/transaction_crud.html');">交易记录管理</a></li>
+                </ul>
+            </li>
+            <li class="sub-menu system_menus system_6 2">
+                <a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-lock-outline"></i> 提现审核</a>
+                <ul>
+                    <li><a class="waves-effect" href="javascript:Tab.addTab('提现审核管理', '/view/crud/outputAuditing_crud.html');">提现审核管理</a></li>
                 </ul>
             </li>
         </ul>
@@ -187,6 +197,12 @@
         <div class="content_main">
             <div id="iframe_home" class="iframe cur">
                 <p><h4>钱包管理系统 </h4></p>
+                <p><b>系统简介</b>：本系统用于管理用户的第三方支付绑定、系统余额、提现审核、交易记录信息等。</p><br/>
+                <p><h4>系统功能概述：</h4></p>
+                <p><b>绑定管理</b>：品牌商和企业的增加、删除、修改、查询功能。</p>
+                <p><b>余额提现</b>：借卖方和网店增加、删除、修改、查询功能。</p>
+                <p><b>管理员管理</b>：管理员的增加、删除、修改、查询功能。</p>
+                <p><b>审核管理</b>：审核用户提交的入驻申请。</p>
             </div>
         </div>
     </section>

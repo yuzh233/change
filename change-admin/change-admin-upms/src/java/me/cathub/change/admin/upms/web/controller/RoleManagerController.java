@@ -18,7 +18,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/role")
-public class RoleAdminController extends BaseAdminControllerImpl<Role, RoleRpcServer> {
+public class RoleManagerController extends BaseAdminControllerImpl<Role, RoleRpcServer> {
 
     @RequestMapping("/restores")
     @ResponseBody

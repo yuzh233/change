@@ -20,7 +20,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/shopkeeper")
-public class ShopkeeperAdminController extends BaseAdminControllerImpl<Shopkeeper, ShopkeeperRpcServer> {
+public class ShopkeeperManagerController extends BaseAdminControllerImpl<Shopkeeper, ShopkeeperRpcServer> {
 
     @Autowired
     private RoleRpcServer roleRpcServer;

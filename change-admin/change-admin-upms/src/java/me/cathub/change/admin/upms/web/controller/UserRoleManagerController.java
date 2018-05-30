@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 @RequestMapping("/userRole")
-public class UserRoleAdminController extends BaseAdminControllerImpl<UserRole, UserRoleRpcServer> {
+public class UserRoleManagerController extends BaseAdminControllerImpl<UserRole, UserRoleRpcServer> {
 
     @Autowired
     private UserSelectRpcServer userSelectRpcServer;

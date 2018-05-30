@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 @RequestMapping("/productReview")
-public class ProductReviewAdminController extends BaseAdminControllerImpl<ProductReview, ProductReviewRpcServer> {
+public class ProductReviewManagerController extends BaseAdminControllerImpl<ProductReview, ProductReviewRpcServer> {
 
     @RequestMapping("/restores")
     @ResponseBody

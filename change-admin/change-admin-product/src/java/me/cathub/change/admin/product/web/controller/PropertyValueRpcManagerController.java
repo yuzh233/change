@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Controller
 @RequestMapping("/propertyValue")
-public class PropertyValueRpcAdminController extends BaseAdminControllerImpl<PropertyValue, PropertyValueRpcServer> {
+public class PropertyValueRpcManagerController extends BaseAdminControllerImpl<PropertyValue, PropertyValueRpcServer> {
 
     @Autowired
     private ProductRpcServer productRpcServer;

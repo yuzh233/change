@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Controller
 @RequestMapping("/productImage")
-public class ProductImageAdminController extends BaseAdminControllerImpl<ProductImage, ProductImageRpcServer> {
+public class ProductImageManagerController extends BaseAdminControllerImpl<ProductImage, ProductImageRpcServer> {
 
     @Autowired
     private ProductRpcServer productRpcServer;

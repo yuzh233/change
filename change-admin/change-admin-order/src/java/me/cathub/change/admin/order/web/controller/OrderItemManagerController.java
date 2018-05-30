@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 @RequestMapping("/orderItem")
-public class OrderItemAdminController extends BaseAdminControllerImpl<OrderItem, OrderItemRpcServer> {
+public class OrderItemManagerController extends BaseAdminControllerImpl<OrderItem, OrderItemRpcServer> {
 
     @Autowired
     private ProductRpcServer productRpcServer;

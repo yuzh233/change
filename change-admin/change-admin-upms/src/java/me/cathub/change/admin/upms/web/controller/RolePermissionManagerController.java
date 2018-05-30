@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 @RequestMapping("/rolePermission")
-public class RolePermissionAdminController extends BaseAdminControllerImpl<RolePermission, RolePermissionRpcServer> {
+public class RolePermissionManagerController extends BaseAdminControllerImpl<RolePermission, RolePermissionRpcServer> {
 
     @Autowired
     private RoleRpcServer roleRpcServer;

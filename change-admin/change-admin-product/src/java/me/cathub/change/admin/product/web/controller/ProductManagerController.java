@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Controller
 @RequestMapping("/product")
-public class ProductAdminController extends BaseAdminControllerImpl<Product, ProductRpcServer> {
+public class ProductManagerController extends BaseAdminControllerImpl<Product, ProductRpcServer> {
 
     @Autowired
     private ProductCategoryRpcServer productCategoryRpcServer;

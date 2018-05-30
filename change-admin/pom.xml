@@ -18,5 +18,6 @@
         <module>change-admin-product</module>
         <module>change-admin-storehouse</module>
         <module>change-admin-order</module>
+        <module>change-admin-wallet</module>
     </modules>
 </project>

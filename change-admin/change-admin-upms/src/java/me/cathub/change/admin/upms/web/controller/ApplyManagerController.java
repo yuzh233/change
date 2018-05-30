@@ -18,7 +18,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/apply")
-public class ApplyAdminController extends BaseAdminControllerImpl<Apply, ApplyRpcServer> {
+public class ApplyManagerController extends BaseAdminControllerImpl<Apply, ApplyRpcServer> {
 
     @RequestMapping("/delete")
     @ResponseBody

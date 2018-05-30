@@ -18,7 +18,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/productCategory")
-public class ProductCategoryAdminController extends BaseAdminControllerImpl<ProductCategory, ProductCategoryRpcServer> {
+public class ProductCategoryManagerController extends BaseAdminControllerImpl<ProductCategory, ProductCategoryRpcServer> {
 
     @RequestMapping("/deletes")
     @ResponseBody

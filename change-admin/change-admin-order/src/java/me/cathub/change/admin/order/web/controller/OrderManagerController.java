@@ -19,7 +19,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/order")
-public class OrderAdminController extends BaseAdminControllerImpl<Order, OrderRpcServer> {
+public class OrderManagerController extends BaseAdminControllerImpl<Order, OrderRpcServer> {
 
     @Autowired
     private StorehouseRpcServer storehouseRpcServer;

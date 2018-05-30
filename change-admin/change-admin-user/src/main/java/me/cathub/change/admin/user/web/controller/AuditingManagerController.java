@@ -20,7 +20,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/auditing")
-public class AuditingAdminController extends BaseAdminControllerImpl<Auditing, AuditingRpcServer> {
+public class AuditingManagerController extends BaseAdminControllerImpl<Auditing, AuditingRpcServer> {
 
     @Autowired
     private AuditingRpcServer auditingRpcServer;

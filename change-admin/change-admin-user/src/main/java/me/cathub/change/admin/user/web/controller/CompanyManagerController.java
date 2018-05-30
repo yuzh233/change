@@ -19,7 +19,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/company")
-public class CompanyAdminController extends BaseAdminControllerImpl<Company, CompanyRpcServer> {
+public class CompanyManagerController extends BaseAdminControllerImpl<Company, CompanyRpcServer> {
 
     @Autowired
     private CompanyRpcServer companyRpcServer;

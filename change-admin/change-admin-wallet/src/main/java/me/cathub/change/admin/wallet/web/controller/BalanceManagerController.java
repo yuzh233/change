@@ -1,19 +1,19 @@
 package me.cathub.change.admin.wallet.web.controller;
 
-import me.cathub.change.api.rpc.server.wallet.TransactionRpcServer;
+import me.cathub.change.api.rpc.server.wallet.BalanceRpcServer;
 import me.cathub.change.common.base.BaseAdminControllerImpl;
-import me.cathub.change.wallet.bean.Transaction;
+import me.cathub.change.wallet.bean.Balance;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * @Author: z.yu
- * @Date: 2018/05/28 22:18
- * @Description: 交易记录
+ * @Date: 2018/05/28 22:17
+ * @Description: 账户余额控制器
  */
 @Controller
-@RequestMapping("/transaction")
-public class TransactionController extends BaseAdminControllerImpl<Transaction,TransactionRpcServer>{
+@RequestMapping("/balance")
+public class BalanceManagerController extends BaseAdminControllerImpl<Balance,BalanceRpcServer> {
 
     @Override
     public int restores(long[] ids) throws Exception {

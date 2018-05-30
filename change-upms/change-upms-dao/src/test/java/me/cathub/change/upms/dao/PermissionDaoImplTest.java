@@ -26,13 +26,13 @@ public class PermissionDaoImplTest {
 //        List<String> names = Arrays.asList("商品分类", "商品", "商品图片", "属性", "属性值", "商品评论");
 //        List<String> nameUrls = Arrays.asList("/productCategory", "/product", "/productImage", "/property", "/propertyValue", "/productReview");
 
-        List<String> names = Arrays.asList("仓库国家", "仓库", "仓库产品库存");
-        List<String> nameUrls = Arrays.asList("/storehouseCountry", "/storehouse", "/storehouseProductStock");
+        List<String> names = Arrays.asList("用户绑定的支付宝", "用户余额", "提现申请", "交易记录");
+        List<String> nameUrls = Arrays.asList("/aliPay", "/balance", "/outputAuditing", "/transaction");
 
         List<String> actionNames = Arrays.asList("添加$", "修改$", "删除$(逻辑删除)", "恢复$(逻辑恢复)", "查询$", "查询$列表", "查询$列表(逻辑删除)");
         List<String> urls = Arrays.asList("/insert", "/update", "/delete", "/restore", "/select", "/list", "/listDel");
 
-        Apply apply = new Apply(30316287322230784L);
+        Apply apply = new Apply(	30316478049816576L);
 
         Permission permission = new Permission();
         permission.setApply(apply);

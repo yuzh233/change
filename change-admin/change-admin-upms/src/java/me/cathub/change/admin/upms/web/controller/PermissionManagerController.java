@@ -23,9 +23,9 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/permission")
-public class PermissionAdminController extends BaseAdminControllerImpl<Permission, PermissionRpcServer> {
+public class PermissionManagerController extends BaseAdminControllerImpl<Permission, PermissionRpcServer> {
 
-    Logger logger = LoggerFactory.getLogger(PermissionAdminController.class);
+    Logger logger = LoggerFactory.getLogger(PermissionManagerController.class);
 
     @Autowired
     private ApplyRpcServer applyRpcServer;

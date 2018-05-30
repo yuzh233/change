@@ -18,7 +18,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/storehouseCountry")
-public class StorehouseCountryAdminController extends BaseAdminControllerImpl<StorehouseCountry, StorehouseCountryRpcServer> {
+public class StorehouseCountryManagerController extends BaseAdminControllerImpl<StorehouseCountry, StorehouseCountryRpcServer> {
 
     @RequestMapping("/restores")
     @ResponseBody

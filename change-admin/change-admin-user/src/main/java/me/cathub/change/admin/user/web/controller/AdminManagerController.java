@@ -20,7 +20,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/admin")
-public class AdminAdminController extends BaseAdminControllerImpl<Admin, AdminRpcServer> {
+public class AdminManagerController extends BaseAdminControllerImpl<Admin, AdminRpcServer> {
 
     @RequestMapping("/restores")
     @ResponseBody

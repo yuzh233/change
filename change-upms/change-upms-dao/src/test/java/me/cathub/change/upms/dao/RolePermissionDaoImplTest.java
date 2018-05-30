@@ -26,11 +26,11 @@ public class RolePermissionDaoImplTest {
 
     @Test
     public void test() throws Exception {
-        List<Permission> permissions = pDao.listByApplyId(30316379387203584L, 0, 100, 0);
+        List<Permission> permissions = pDao.listByApplyId(30316478049816576L, 0, 100, 0);
 
         RolePermission rolePermission = new RolePermission(sequence.nextId());
-        rolePermission.setRole(new Role(31196339547148288L));
-        rolePermission.setApply(new Apply(30316379387203584L));
+        rolePermission.setRole(new Role(33251004266844160L));
+        rolePermission.setApply(new Apply(30316478049816576L));
 
         permissions = permissions.stream()
                 .filter(bean -> bean.getUrl().contains("/list") || bean.getUrl().contains("select"))

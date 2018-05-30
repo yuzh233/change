@@ -22,7 +22,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/storehouse")
-public class StorehouseAdminController extends BaseAdminControllerImpl<Storehouse, StorehouseRpcServer> {
+public class StorehouseManagerController extends BaseAdminControllerImpl<Storehouse, StorehouseRpcServer> {
 
     @Autowired
     private StorehouseCountryRpcServer storehouseCountryRpcServer;

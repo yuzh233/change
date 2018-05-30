@@ -23,7 +23,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     private String loginPage;
 
     /**
-     * 果然未登陆 跳转到统一登陆中心
+     * 未登陆 跳转到统一登陆中心
      * @param httpServletRequest
      * @param httpServletResponse
      * @param o

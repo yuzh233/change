@@ -43,9 +43,9 @@ $(function() {
 	// 	$.cookie('change-admin-upms-systemtitle', systemtitle);
 	// });
 	// 显示cookie菜单
-	var systemid = $.cookie('change-admin-upms--systemid') || 2;							// 系统id
-	var systemname = $.cookie('change-admin-upms--systemname') || 'change-admin-upms';		// style样式
-	var systemtitle = $.cookie('change-admin-upms-systemtitle') || '权限管理系统';			// 标题
+	var systemid = $.cookie('change-admin-wallet--systemid') || 6;							// 系统id
+	var systemname = $.cookie('change-admin-wallet--systemname') || 'change-admin-wallet';		// style样式
+	var systemtitle = $.cookie('change-admin-wallet-systemtitle') || '钱包管理系统';			// 标题
 	$('.system_menus').hide(0, function () {
 		$('.system_' + systemid).show();
 	});
