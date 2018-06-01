@@ -26,5 +26,5 @@
     <dubbo:reference id="productRpcServer" interface="me.cathub.change.api.rpc.server.product.ProductRpcServer" />
     <dubbo:reference id="storehouseRpcServer" interface="me.cathub.change.api.rpc.server.storehouse.StorehouseRpcServer" />
     <dubbo:reference id="shopkeeperRpcServer" interface="me.cathub.change.api.rpc.server.user.ShopkeeperRpcServer" />
-    <dubbo:reference id="brandQuotientRpcServer" interface="me.cathub.change.api.rpc.server.user.BrandQuotientRpcServer" />
+    <dubbo:reference id="companyRpcServer" interface="me.cathub.change.api.rpc.server.user.CompanyRpcServer" />
 </beans>
