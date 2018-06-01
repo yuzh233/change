@@ -3,12 +3,12 @@ package me.cathub.change.order.rpc.server;
 import me.cathub.change.api.dao.order.OrderDao;
 import me.cathub.change.api.rpc.server.order.OrderRpcServer;
 import me.cathub.change.api.rpc.server.storehouse.StorehouseRpcServer;
-import me.cathub.change.api.rpc.server.user.BrandQuotientRpcServer;
+import me.cathub.change.api.rpc.server.user.CompanyRpcServer;
 import me.cathub.change.api.rpc.server.user.ShopkeeperRpcServer;
 import me.cathub.change.common.base.BaseRpcServerImpl;
 import me.cathub.change.order.bean.Order;
 import me.cathub.change.storehouse.bean.Storehouse;
-import me.cathub.change.user.bean.BrandQuotient;
+import me.cathub.change.user.bean.Company;
 import me.cathub.change.user.bean.Shopkeeper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,7 +32,7 @@ public class OrderRpcServerImpl extends BaseRpcServerImpl<Order, OrderDao> imple
     private ShopkeeperRpcServer shopkeeperRpcServer;
 
     @Autowired
-    private BrandQuotientRpcServer brandQuotientRpcServer;
+    private CompanyRpcServer companyRpcServer;
 
     @Override
     public List<Order> listByStorehouseId(long storehouseId, int page, int count, int tableIndex, boolean flag) throws Exception {
@@ -73,11 +73,11 @@ public class OrderRpcServerImpl extends BaseRpcServerImpl<Order, OrderDao> imple
         try {
             Storehouse storehouse = storehouseRpcServer.select(new Storehouse(bean.getStorehouseId()), true);
             Shopkeeper shopkeeper = shopkeeperRpcServer.select(new Shopkeeper(bean.getShopkeeperId()), true);
-            BrandQuotient brandQuotient = brandQuotientRpcServer.select(new BrandQuotient(bean.getCompanyId()), true);
+            Company company = companyRpcServer.select(new Company(bean.getCompanyId()), true);
 
             bean.setStorehouse(storehouse);
             bean.setShopkeeper(shopkeeper);
-            bean.setBrandQuotient(brandQuotient);
+            bean.setCompany(company);
         } catch (Exception e) {
             e.printStackTrace();
         }
