@@ -19,7 +19,7 @@
         <result property="returnId" column="return_id"/>
 
         <result property="productId" column="product_id"/>
-        <result property="returnId" column="order_id"/>
+        <result property="orderId" column="order_id"/>
     </resultMap>
 
     <insert id="insert" parameterType="orderItem">

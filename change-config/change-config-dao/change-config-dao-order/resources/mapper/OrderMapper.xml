@@ -32,7 +32,7 @@
           message,
           storehouse_id,
           shopkeeper_id,
-          brandQuotient_id,
+          company_id,
           createDate,
           yn
         )VALUES(
@@ -42,7 +42,7 @@
           #{message, jdbcType=VARCHAR},
           #{storehouse.id, jdbcType=BIGINT},
           #{shopkeeper.id, jdbcType=BIGINT},
-          #{brandQuotient.id, jdbcType=BIGINT},
+          #{company.id, jdbcType=BIGINT},
           NOW(),
           1
         )
