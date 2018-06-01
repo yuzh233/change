@@ -73,7 +73,7 @@ public class OrderRpcServerImpl extends BaseRpcServerImpl<Order, OrderDao> imple
         try {
             Storehouse storehouse = storehouseRpcServer.select(new Storehouse(bean.getStorehouseId()), true);
             Shopkeeper shopkeeper = shopkeeperRpcServer.select(new Shopkeeper(bean.getShopkeeperId()), true);
-            BrandQuotient brandQuotient = brandQuotientRpcServer.select(new BrandQuotient(bean.getBrandQuotientId()), true);
+            BrandQuotient brandQuotient = brandQuotientRpcServer.select(new BrandQuotient(bean.getCompanyId()), true);
 
             bean.setStorehouse(storehouse);
             bean.setShopkeeper(shopkeeper);

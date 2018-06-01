@@ -22,7 +22,7 @@
 
         <result property="productCategoryId" column="productCategory_id"/>
         <result property="companyId" column="company_id"/>
-        <result property="brandQuotientId" column="brandQuotient_id"/>
+        <result property="companyId" column="brandQuotient_id"/>
     </resultMap>
 
     <insert id="insert" parameterType="product">
@@ -144,7 +144,7 @@
     </select>
 
     <select id="countByProductCategoryId" parameterType="long" resultType="int">
-        SELECT COUNT(*) FROM product WHERE yn=1 AND productCategory_id=#{productCategory_id, jdbcType=BIGINT}
+        SELECT COUNT(*) FROM product_${tableIndex} WHERE yn=1 AND productCategory_id=#{productCategory_id, jdbcType=BIGINT}
     </select>
 
     <select id="selectByName" parameterType="map" resultMap="product">

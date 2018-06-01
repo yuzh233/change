@@ -113,27 +113,31 @@
         SELECT * FROM storehouseProductStock_${tableIndex} WHERE yn=1 AND storehouse_id=#{storehouse_id, jdbcType=BIGINT}
     </select>
 
-    <select id="listByProductId" parameterType="int" resultMap="storehouseProductStock">
-        SELECT * FROM storehouseProductStock_${_parameter} WHERE yn=1 AND product_id=#{product.id, jdbcType=BIGITN}
+    <select id="countByStorehouseId" parameterType="map" resultType="int">
+        SELECT COUNT(*) FROM storehouseProductStock_${tableIndex} WHERE yn=1 AND storehouse_id=#{storehouse_id, jdbcType=BIGINT}
     </select>
 
-    <select id="countByProductId" parameterType="int" resultType="int">
-        SELECT COUNT(*) FROM storehouseProductStock_${_parameter} WHERE yn=1 AND product_id=#{product.id, jdbcType=BIGITN}
+    <select id="listByProductId" parameterType="map" resultMap="storehouseProductStock">
+        SELECT * FROM storehouseProductStock_${tableIndex} WHERE yn=1 AND product_id=#{product_id, jdbcType=BIGINT}
     </select>
 
-    <select id="listByStorehouseIdAndProductCategoryId" parameterType="int" resultMap="storehouseProductStock">
-        SELECT * FROM storehouseProductStock_${_parameter} WHERE yn=1 AND storehouse_id=#{storehouse.id, jdbcType=BIGITN} AND productCategory_id=#{productCategory.id, jdbcType=BIGINT}
+    <select id="countByProductId" parameterType="map" resultType="int">
+        SELECT COUNT(*) FROM storehouseProductStock_${tableIndex} WHERE yn=1 AND product_id=#{product_id, jdbcType=BIGINT}
     </select>
 
-    <select id="countByStorehouseIdAndProductCategoryId" parameterType="int" resultType="int">
-        SELECT COUNT(*) FROM storehouseProductStock_${_parameter} WHERE yn=1 AND storehouse_id=#{storehouse.id, jdbcType=BIGITN} AND productCategory_id=#{productCategory.id, jdbcType=BIGINT}
+    <select id="listByStorehouseIdAndProductCategoryId" parameterType="map" resultMap="storehouseProductStock">
+        SELECT * FROM storehouseProductStock_${tableIndex} WHERE yn=1 AND storehouse_id=#{storehouse_id, jdbcType=BIGINT} AND productCategory_id=#{productCategory_id, jdbcType=BIGINT}
     </select>
 
-    <select id="listByStorehouseIdAndCompanyId" parameterType="int" resultMap="storehouseProductStock">
-        SELECT * FROM storehouseProductStock_${_parameter} WHERE yn=1 AND storehouse_id=#{storehouse.id, jdbcType=BIGITN} AND company_id=#{company.id, jdbcType=BIGINT}
+    <select id="countByStorehouseIdAndProductCategoryId" parameterType="map" resultType="int">
+        SELECT COUNT(*) FROM storehouseProductStock_${tableIndex} WHERE yn=1 AND storehouse_id=#{storehouse_id, jdbcType=BIGINT} AND productCategory_id=#{productCategory_id, jdbcType=BIGINT}
+    </select>
+
+    <select id="listByStorehouseIdAndCompanyId" parameterType="map" resultMap="storehouseProductStock">
+        SELECT * FROM storehouseProductStock_${tableIndex} WHERE yn=1 AND storehouse_id=#{storehouse_id, jdbcType=BIGINT} AND company_id=#{company_d, jdbcType=BIGINT}
     </select>
 
     <select id="countByStorehouseIdAndCompanyId" parameterType="int" resultType="int">
-        SELECT COUNT(*) FROM storehouseProductStock_${_parameter} WHERE yn=1 AND storehouse_id=#{storehouse.id, jdbcType=BIGITN} AND company_id=#{company.id, jdbcType=BIGINT}
+        SELECT COUNT(*) FROM storehouseProductStock_${tableIndex} WHERE yn=1 AND storehouse_id=#{storehouse_id, jdbcType=BIGINT} AND company_id=#{company_id, jdbcType=BIGINT}
     </select>
 </mapper>

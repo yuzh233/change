@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import me.cathub.change.common.util.json.LongJsonSerializer;
 import me.cathub.change.storehouse.bean.Storehouse;
-import me.cathub.change.user.bean.BrandQuotient;
+import me.cathub.change.user.bean.Company;
 import me.cathub.change.user.bean.Shopkeeper;
 
 import java.io.Serializable;
@@ -45,7 +45,7 @@ public class Order implements Serializable {
     @JsonSerialize(using = LongJsonSerializer.class)
     private long shopkeeperId;
     @JsonSerialize(using = LongJsonSerializer.class)
-    private long brandQuotientId;
+    private long companyId;
 
     /**
      * 在哪个仓库买的?
@@ -58,9 +58,9 @@ public class Order implements Serializable {
     private Shopkeeper shopkeeper;
 
     /**
-     * 卖家是谁?
+     * 卖方企业是谁?
      */
-    private BrandQuotient brandQuotient;
+    private Company company;
 
     public Order() {
     }
@@ -93,12 +93,12 @@ public class Order implements Serializable {
         this.shopkeeperId = shopkeeperId;
     }
 
-    public long getBrandQuotientId() {
-        return brandQuotientId;
+    public long getCompanyId() {
+        return companyId;
     }
 
-    public void setBrandQuotientId(long brandQuotientId) {
-        this.brandQuotientId = brandQuotientId;
+    public void setCompanyId(long companyId) {
+        this.companyId = companyId;
     }
 
     public int getTableIndex() {
@@ -157,20 +157,20 @@ public class Order implements Serializable {
         this.shopkeeper = shopkeeper;
     }
 
-    public BrandQuotient getBrandQuotient() {
-        return brandQuotient;
-    }
-
-    public void setBrandQuotient(BrandQuotient brandQuotient) {
-        this.brandQuotient = brandQuotient;
-    }
-
     public Storehouse getStorehouse() {
         return storehouse;
     }
 
     public void setStorehouse(Storehouse storehouse) {
         this.storehouse = storehouse;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
     @Override
@@ -185,10 +185,10 @@ public class Order implements Serializable {
         sb.append(", tableIndex=").append(tableIndex);
         sb.append(", storehouseId=").append(storehouseId);
         sb.append(", shopkeeperId=").append(shopkeeperId);
-        sb.append(", brandQuotientId=").append(brandQuotientId);
+        sb.append(", companyId=").append(companyId);
         sb.append(", storehouse=").append(storehouse);
         sb.append(", shopkeeper=").append(shopkeeper);
-        sb.append(", brandQuotient=").append(brandQuotient);
+        sb.append(", company=").append(company);
         sb.append('}');
         return sb.toString();
     }

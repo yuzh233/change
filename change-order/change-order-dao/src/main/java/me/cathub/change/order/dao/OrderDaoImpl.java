@@ -3,6 +3,8 @@ package me.cathub.change.order.dao;
 import me.cathub.change.api.dao.order.OrderDao;
 import me.cathub.change.common.base.BaseDaoMyBatisImpl;
 import me.cathub.change.order.bean.Order;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;

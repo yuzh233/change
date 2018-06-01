@@ -2,9 +2,12 @@ package me.cathub.change.product.dao;
 
 import me.cathub.change.api.dao.product.ProductDao;
 import me.cathub.change.common.util.key.Sequence;
+import me.cathub.change.product.bean.Product;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -59,7 +62,9 @@ public class ProductDaoImplTest {
     }
 
     @Test
-    public void listByBrandQuotientId() {
+    public void listByBrandQuotientId() throws Exception {
+        List<Product> products = dao.listByBrandQuotientId(1, 0, 100, 0);
+        assertTrue(products.size() == dao.countByBrandQuotientId(1, 0));
     }
 
     @Test
@@ -67,7 +72,9 @@ public class ProductDaoImplTest {
     }
 
     @Test
-    public void listByCompanyId() {
+    public void listByCompanyId() throws Exception {
+        List<Product> products = dao.listByCompanyId(1, 0, 100, 0);
+        assertTrue(products.size() == dao.countByCompanyId(1, 0));
     }
 
     @Test
@@ -75,7 +82,9 @@ public class ProductDaoImplTest {
     }
 
     @Test
-    public void listByProductCategoryIdAndCompanyId() {
+    public void listByProductCategoryIdAndCompanyId() throws Exception {
+        List<Product> products = dao.listByProductCategoryIdAndCompanyId(1, 2, 0, 100, 0);
+        assertTrue(products.size() == dao.countByProductCategoryIdAndCompanyId(1, 2, 0));
     }
 
     @Test
@@ -83,7 +92,9 @@ public class ProductDaoImplTest {
     }
 
     @Test
-    public void listByProductCategoryId() {
+    public void listByProductCategoryId() throws Exception {
+        List<Product> products = dao.listByProductCategoryId(1, 0, 100, 0);
+        assertTrue(products.size() == dao.countByProductCategoryId(1, 0));
     }
 
     @Test

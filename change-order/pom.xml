@@ -15,5 +15,6 @@
         <module>change-order-bean</module>
         <module>change-order-dao</module>
         <module>change-order-rpc-server</module>
+        <module>change-order-need</module>
     </modules>
 </project>

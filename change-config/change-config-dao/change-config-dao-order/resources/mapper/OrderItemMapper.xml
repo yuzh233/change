@@ -96,7 +96,7 @@
     </select>
 
     <select id="countByDel" parameterType="int" resultType="int">
-        SELECT COUNT(*) orderItem_${_parameter} WHERE yn=0
+        SELECT COUNT(*) FROM orderItem_${_parameter} WHERE yn=0
     </select>
 
     <delete id="clear" parameterType="int">

@@ -88,7 +88,7 @@
     </select>
 
     <select id="countByDel" parameterType="int" resultType="int">
-        SELECT COUNT(*) productReview_${_parameter} WHERE yn=0
+        SELECT COUNT(*) FROM productReview_${_parameter} WHERE yn=0
     </select>
 
     <delete id="clear" parameterType="int">
