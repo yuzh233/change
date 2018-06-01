@@ -143,7 +143,7 @@
         SELECT * FROM product_${tableIndex} WHERE yn=1 AND productCategory_id=#{productCategory_id, jdbcType=BIGINT}
     </select>
 
-    <select id="countByProductCategoryId" parameterType="long" resultType="int">
+    <select id="countByProductCategoryId" parameterType="map" resultType="int">
         SELECT COUNT(*) FROM product_${tableIndex} WHERE yn=1 AND productCategory_id=#{productCategory_id, jdbcType=BIGINT}
     </select>
 
