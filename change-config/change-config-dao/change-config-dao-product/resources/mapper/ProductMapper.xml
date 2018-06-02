@@ -21,8 +21,8 @@
         <result property="updateDate" column="updateDate"/>
 
         <result property="productCategoryId" column="productCategory_id"/>
+        <result property="storehouseId" column="storehouse_id"/>
         <result property="companyId" column="company_id"/>
-        <result property="companyId" column="brandQuotient_id"/>
     </resultMap>
 
     <insert id="insert" parameterType="product">
