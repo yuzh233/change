@@ -56,8 +56,8 @@
 
     <!-- 订单信息 -->
     <div class="row bg2 no-gutters mt-3">
-        <div class="col-12 py-3 px-3">
-            <a href="#" v-if="order!=null">卖家: {{order.brandQuotient.name}}</a>
+        <div class="col-12 p-3">
+            <a href="#" v-if="order!=null">卖家： {{order.company.name}}</a>
         </div>
     </div>
     <form action="<%=webapp%>/order/addOrder" method="post">

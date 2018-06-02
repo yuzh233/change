@@ -31,7 +31,7 @@ ${request.context}
             <div class="supplier mx-4">
                 <img src="<%=webapp%>/resources/img/lb4.jpg" alt=""/>
                 <div class="name ml-2" >
-                    <%--<span v-if="product.brandQuotient!=null">{{product.brandQuotient.name}}</span>--%>
+                    <span v-if="product.brandQuotient!=null">{{product.company.name}}</span>
                     <br/>
                     <img src="https://cbu01.alicdn.com/cms/upload/2016/790/696/2696097_1254399316.png" alt="诚信"/>
                     <span class="text-danger">
@@ -239,7 +239,7 @@ ${request.context}
                 <a href="#">
                     <div class="row text-center justify-content-center no-gutters mt-3">
                         <img src="<%=webapp%>/resources/img/detail/logo.png" class="img-fluid" alt="">
-                        <p>EnllerviiD/英雷威官方旗舰店</p>
+                        <p>{{product.company.name}}</p>
                     </div>
                     <div class="row no-gutters justify-content-center">
                         <i class="icon "></i> 5年
@@ -251,13 +251,15 @@ ${request.context}
 
                 <div class="row no-gutters mt-2 info">
                     <div class="col-4">联系卖家：</div>
-                    <%--<div class="col-8">{{product.brandQuotient.name}}</div>--%>
-                    <div class="col-4">卖家电话：</div>
-                    <%--<div class="col-8">{{product.brandQuotient.phone}}</div>--%>
+                    <div class="col-8">{{product.brandQuotient.name}}</div>
+                    <div class="col-4">企业电话：</div>
+                    <div class="col-8">{{product.company.phone}}</div>
                     <div class="col-4">经营模式：</div>
                     <div class="col-8">生产厂家</div>
-                    <div class="col-4">所在地区：</div>
-                    <div class="col-8">福建 泉州</div>
+                    <div class="col-4">生产地址：</div>
+                    <div class="col-8">{{product.company.address}}</div>
+                    <div class="col-4">服务范围：</div>
+                    <div class="col-8">{{product.company.service}}</div>
                 </div>
                 <div class="row no-gutters mt-2 text-center">
                     <div class="col text-secondary">

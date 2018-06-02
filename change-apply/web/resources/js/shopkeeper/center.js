@@ -43,7 +43,7 @@ let vue = new Vue({
         var display = "bottom";
         var lang="zh";
 		let date = this.$refs.date
-        console.log('date:::::::::::::'+date)
+        console.log('date'+date)
 		$(date).mobiscroll().date({
             theme: theme,
             mode: mode,
