@@ -1,0 +1,23 @@
+.reg-type{
+    border-bottom: 1px solid #ff7300;
+
+}
+.reg-type a{
+    display: block;
+    color: #000;
+    padding: 15px;
+}
+.reg-type .active{
+    color:#ff7300 ;
+}
+
+/*注册表单*/
+.regfrom h6{
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.whitebag{
+	background: #fff;
+}

@@ -1,0 +1,109 @@
+body,html{
+	position: relative;
+	/*min-height: 100vh;*/
+	/*background: #e5e5e5;*/
+	    background: #f7f7f7;
+	    font-size: 14px;
+}
+
+footer{
+	position: relative;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	text-align: center;
+	color: #968E8E;
+	font-size: .8em;
+	
+}
+footer .links{
+	padding: 30px;
+	margin: 30px 30px;
+	border-bottom:1px solid #CDC7C7;
+}
+
+.login {
+	background: #fff;
+	height: 100%;
+	box-shadow: 20px 26px 29px -13px #c3c3c3;
+	border: 1px solid #eee;
+}
+.title{
+	margin:10px 20px;
+}
+.title h3{
+	font-size: 25px;
+	padding-top: 15px;
+	font-weight: bold;
+}
+/* 头部 */ 
+.head:hover{
+	color:  #ff7300;
+	cursor: pointer;
+}
+.head .logo {
+	/*padding-top:9px;*/
+	font-size:40px;
+	color: #ff7300;
+	font-weight: bold;
+	text-align: right;
+}
+ .head .name{
+	/*margin-top: 10px;*/
+	font-size:20px;
+	font-weight: bold;
+}
+.head .title .addrurl{
+	margin-top: -6px;
+	color: #6C757D;
+	font-size: 15px;
+}
+
+.bg1{
+	background: #fff;
+}
+.bg2 {
+	background: #E2EDF8;
+}
+/*////////////////////////////////////////////////////////////////////////////////////////////*/
+/*收货地址列表*/
+.order-info{
+	padding: 20px;
+}
+.border1{
+	border:1px solid #E2EDF8;
+    border-top: none;
+}
+.border2{
+    border:1px solid #E2EDF8;
+}
+
+
+/*共计*/
+.gj{
+    background: #fef8e1;
+    border: 1px solid #fbe1a3;
+}
+
+.tjdd button{
+    height:50px;
+}
+.tjdd .info{
+    padding: 0 20px 0 0;
+    line-height: 50px;
+    text-align: right;
+}
+
+.product,.product:hover{
+	color: #000;
+}
+
+.order-info>.col-md-2{
+	color: rgba(16, 25, 20, 0.53);
+}
+
+/*手机显示的商品信息*/
+.d-md-none.d-inline{
+	color: #6f6f6f;;
+	font-size: 12px;
+}

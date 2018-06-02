@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://code.alibabatech.com/schema/dubbo
+       http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <dubbo:application name="change-apply-consumer"  />
+
+    <dubbo:registry address="zookeeper://120.77.159.152:2181" />
+
+    <!--用户&权限-->
+    <dubbo:reference id="adminRpcServer" interface="me.cathub.change.api.rpc.server.user.AdminRpcServer"/>
+    <dubbo:reference id="brandQuotientRpcServer" interface="me.cathub.change.api.rpc.server.user.BrandQuotientRpcServer" />
+    <dubbo:reference id="shopkeeperRpcServer" interface="me.cathub.change.api.rpc.server.user.ShopkeeperRpcServer" />
+    <dubbo:reference id="auditingRpcServer" interface="me.cathub.change.api.rpc.server.user.AuditingRpcServer" />
+    <dubbo:reference id="companyRpcServer" interface="me.cathub.change.api.rpc.server.user.CompanyRpcServer" />
+    <dubbo:reference id="onlineStoreRpcServer" interface="me.cathub.change.api.rpc.server.user.OnlineStoreRpcServer" />
+
+    <dubbo:reference id="userSelectRpcServer" interface="me.cathub.change.api.rpc.server.user.UserSelectRpcServer" />
+
+
+    <dubbo:reference id="ApplyRpcServer" interface="me.cathub.change.api.rpc.server.upms.ApplyRpcServer" />
+    <dubbo:reference id="PermissionRpcServer" interface="me.cathub.change.api.rpc.server.upms.PermissionRpcServer" />
+    <dubbo:reference id="RolePermissionRpcServer" interface="me.cathub.change.api.rpc.server.upms.RolePermissionRpcServer" />
+    <dubbo:reference id="RoleRpcServer" interface="me.cathub.change.api.rpc.server.upms.RoleRpcServer" />
+    <dubbo:reference id="UserRoleRpcServer" interface="me.cathub.change.api.rpc.server.upms.UserRoleRpcServer" />
+
+    <!--产品-->
+    <dubbo:reference id="productRpcServer" interface="me.cathub.change.api.rpc.server.product.ProductRpcServer" />
+    <dubbo:reference id="productCategoryRpcServer" interface="me.cathub.change.api.rpc.server.product.ProductCategoryRpcServer" />
+    <dubbo:reference id="productImageRpcServer" interface="me.cathub.change.api.rpc.server.product.ProductImageRpcServer" />
+    <dubbo:reference id="PropertyRpcServer" interface="me.cathub.change.api.rpc.server.product.PropertyRpcServer" />
+    <dubbo:reference id="productReviewRpcServer" interface="me.cathub.change.api.rpc.server.product.ProductReviewRpcServer" />
+    <dubbo:reference id="propertyValueRpcServer" interface="me.cathub.change.api.rpc.server.product.PropertyValueRpcServer" />
+
+    <!--仓库-->
+    <dubbo:reference id="storehouseProductStockRpcServer" interface="me.cathub.change.api.rpc.server.storehouse.StorehouseProductStockRpcServer" />
+    <dubbo:reference id="storehouseCountryRpcServer" interface="me.cathub.change.api.rpc.server.storehouse.StorehouseCountryRpcServer" />
+    <dubbo:reference id="storehouseRpcServer" interface="me.cathub.change.api.rpc.server.storehouse.StorehouseRpcServer" />
+
+    <!-- 订单 -->
+    <dubbo:reference id="orderRpcServer" interface="me.cathub.change.api.rpc.server.order.OrderRpcServer" />
+    <dubbo:reference id="orderItemRpcServer" interface="me.cathub.change.api.rpc.server.order.OrderItemRpcServer" />
+
+    <!--钱包-->
+    <!--<dubbo:reference id="balanceRpcServer" interface="me.cathub.change.api.rpc.server.wallet.BalanceRpcServer" />-->
+
+
+
+</beans>

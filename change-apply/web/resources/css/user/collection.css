@@ -1,0 +1,77 @@
+.nav {
+	/*padding: 30px;*/
+	display: flex;
+	background-color: #F40;
+}
+
+.nav a{
+	display: block;
+	height: 60px;
+	line-height: 60px;
+	text-decoration: none;
+	padding: 0 25px;
+	text-align: center;
+	color: #fff;
+	font-size: 16px;
+}
+
+.nav a.current{
+	background-color: #de3b00;
+}
+.nav a:hover{
+	background: #e43d00;
+}
+.search{
+	height: 100%;
+}
+.search input,.search button{
+	display: block;
+	height: 30px;
+	outline: none;
+	border: none;
+	
+}
+.search input {
+	padding-left: 8px;
+}
+.search button{
+	cursor: pointer;
+	padding: 0 15px;
+	text-indent: 0;
+    font-size: 12px;
+    color: #666;
+    background: #f5f5f5;
+    
+    width: 72px;
+}
+
+@media (max-width: 575.98px) { 
+	.col-md-4{
+		background: #f7f7f7;
+	}
+}
+
+.products a{
+	display: block;
+	text-decoration: none;
+	text-align: center;
+	color: #333;
+	font-size: 12px;
+	margin-top: 20px;
+	border: 1px solid transparent;
+}
+
+.products a:hover{
+	border: 1px solid #f40;
+}
+
+.products a p{
+	margin: 8px 0;
+	height: 35.2px;
+	overflow: hidden;
+}
+.products a div{
+	color: #f40;
+    font-weight: 700;
+    font-family: verdana,arial;
+}
