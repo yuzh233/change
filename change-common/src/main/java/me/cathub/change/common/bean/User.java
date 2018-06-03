@@ -54,7 +54,9 @@ public class User implements Serializable {
      */
     protected String email;
     protected int type;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     protected Date createDate;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     protected Date updateDate;
 
     /**

@@ -29,13 +29,19 @@ public class AliPayController {
 
     private static final String APPLY_CODE = "1998";
 
+    //商户系统订单号
     private static final String PARAM_OUT_TRADE_NO = "OUT_TRADE_NO";
+    //订单名称 ，必填
     private static final String PARAM_SUBJECT = "SUBJECT";
+    //商品描述，可空
     private static final String PARAM_BODY = "BODY";
+    //交易总额
     private static final String PARAM_TOTAL_AMOUNT = "TOTAL_AMOUNT";
-
+    //异步通知页面
     private static final String NOTIFY_URL = "";
-    private static final String RETURN_URL = "http://223.156.141.192:8080/view/success.html";
+    //同步通知页面
+//    private static final String RETURN_URL = "http://localhost:8080/view/payment/success.jsp";
+    private static final String RETURN_URL = "http://localhost:8080/order/orderRollback";
 
     /**
      * 手机网站支付模板
@@ -111,20 +117,21 @@ public class AliPayController {
      */
     @RequestMapping("/pcPayment")
     public void pcPayment(PaymentParam paymentParam, HttpServletResponse httpResponse) throws Exception {
-
         /**
          * 电脑支付 API
          */
         AlipayTradePagePayRequest alipayRequest = new AlipayTradePagePayRequest();
 
+        //公共参数
         alipayRequest.setReturnUrl(RETURN_URL);
         alipayRequest.setNotifyUrl(NOTIFY_URL);
 
+        //业务请求参数，除公共参数外所有请求参数都必须放在这个参数中传递
         alipayRequest.setBizContent(getPcJson(paymentParam));
 
         String form = "";
-
         try {
+            //发出请求，返回请求页面（支付宝收银台），把页面展示给用户。
             form = AliPayClient.getAlipayClient().pageExecute(alipayRequest).getBody();
         } catch (AlipayApiException e) {
             e.printStackTrace();
