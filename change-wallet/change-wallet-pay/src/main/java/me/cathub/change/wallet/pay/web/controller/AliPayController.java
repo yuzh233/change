@@ -185,7 +185,6 @@ public class AliPayController {
                 transParam.getPayeeAccount(),
                 transParam.getAmount(),
                 transParam.getPayerShowName(),
-                transParam.getPayeeRealName(),
                 transParam.getRemark()
         ));
 
