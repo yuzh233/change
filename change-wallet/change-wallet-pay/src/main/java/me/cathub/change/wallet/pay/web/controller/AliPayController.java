@@ -61,7 +61,7 @@ public class AliPayController {
     /**
      * 转账模板
      */
-    private static final String TEMPLET_TRANS = "{\"out_biz_no\":\"%s\",\"payee_type\":\"ALIPAY_LOGONID\",\"payee_account\":\"%s\",\"amount\":\"%s\",\"payer_show_name\":\"%s\",\"payee_real_name\":\"%s\",\"remark\":\"%s\"}";
+    private static final String TEMPLET_TRANS = "{\"out_biz_no\":\"%s\",\"payee_type\":\"ALIPAY_LOGONID\",\"payee_account\":\"%s\",\"amount\":\"%s\",\"payer_show_name\":\"%s\",\"remark\":\"%s\"}";
 
     /**
      * 转账历史查询模板
