@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://code.alibabatech.com/schema/dubbo
+       http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <dubbo:application name="change-apply-consumer"  />
+
+    <dubbo:registry address="zookeeper://120.77.159.152:2181" />
+
+    <dubbo:reference id="aliPayRpcServer" interface="me.cathub.change.api.rpc.server.wallet.AliPayRpcServer" timeout="10000"></dubbo:reference>
+
+    <!--用户&权限-->
+    <dubbo:reference id="adminRpcServer" interface="me.cathub.change.api.rpc.server.user.AdminRpcServer" timeout="10000"/>
+    <dubbo:reference id="brandQuotientRpcServer" interface="me.cathub.change.api.rpc.server.user.BrandQuotientRpcServer" timeout="10000"/>
+    <dubbo:reference id="shopkeeperRpcServer" interface="me.cathub.change.api.rpc.server.user.ShopkeeperRpcServer" timeout="10000"/>
+    <dubbo:reference id="auditingRpcServer" interface="me.cathub.change.api.rpc.server.user.AuditingRpcServer" timeout="10000"/>
+    <dubbo:reference id="companyRpcServer" interface="me.cathub.change.api.rpc.server.user.CompanyRpcServer" timeout="10000"/>
+    <dubbo:reference id="onlineStoreRpcServer" interface="me.cathub.change.api.rpc.server.user.OnlineStoreRpcServer" timeout="10000"/>
+
+    <dubbo:reference id="userSelectRpcServer" interface="me.cathub.change.api.rpc.server.user.UserSelectRpcServer" timeout="10000"/>
+
+
+    <dubbo:reference id="ApplyRpcServer" interface="me.cathub.change.api.rpc.server.upms.ApplyRpcServer" timeout="10000"/>
+    <dubbo:reference id="PermissionRpcServer" interface="me.cathub.change.api.rpc.server.upms.PermissionRpcServer" timeout="10000"/>
+    <dubbo:reference id="RolePermissionRpcServer" interface="me.cathub.change.api.rpc.server.upms.RolePermissionRpcServer" timeout="10000"/>
+    <dubbo:reference id="RoleRpcServer" interface="me.cathub.change.api.rpc.server.upms.RoleRpcServer" timeout="10000"/>
+    <dubbo:reference id="UserRoleRpcServer" interface="me.cathub.change.api.rpc.server.upms.UserRoleRpcServer" timeout="10000"/>
+
+    <!--产品-->
+    <dubbo:reference id="productRpcServer" interface="me.cathub.change.api.rpc.server.product.ProductRpcServer" timeout="10000"/>
+    <dubbo:reference id="productCategoryRpcServer" interface="me.cathub.change.api.rpc.server.product.ProductCategoryRpcServer" timeout="10000"/>
+    <dubbo:reference id="productImageRpcServer" interface="me.cathub.change.api.rpc.server.product.ProductImageRpcServer" timeout="10000"/>
+    <dubbo:reference id="PropertyRpcServer" interface="me.cathub.change.api.rpc.server.product.PropertyRpcServer" timeout="10000"/>
+    <dubbo:reference id="productReviewRpcServer" interface="me.cathub.change.api.rpc.server.product.ProductReviewRpcServer" timeout="10000"/>
+    <dubbo:reference id="propertyValueRpcServer" interface="me.cathub.change.api.rpc.server.product.PropertyValueRpcServer" timeout="10000"/>
+
+    <!--仓库-->
+    <dubbo:reference id="storehouseProductStockRpcServer" interface="me.cathub.change.api.rpc.server.storehouse.StorehouseProductStockRpcServer" timeout="10000"/>
+    <dubbo:reference id="storehouseCountryRpcServer" interface="me.cathub.change.api.rpc.server.storehouse.StorehouseCountryRpcServer" timeout="10000"/>
+    <dubbo:reference id="storehouseRpcServer" interface="me.cathub.change.api.rpc.server.storehouse.StorehouseRpcServer" timeout="10000"/>
+
+    <!-- 订单 -->
+    <dubbo:reference id="orderRpcServer" interface="me.cathub.change.api.rpc.server.order.OrderRpcServer" timeout="10000"/>
+    <dubbo:reference id="orderItemRpcServer" interface="me.cathub.change.api.rpc.server.order.OrderItemRpcServer" timeout="10000"/>
+
+    <!--钱包-->
+    <!--<dubbo:reference id="aliPayRpcServer" interface="me.cathub.change.api.rpc.server.wallet.AliPayRpcServer" timeout="10000"/>-->
+    <!--<dubbo:reference id="balanceRpcServer" interface="me.cathub.change.api.rpc.server.wallet.BalanceRpcServer" timeout="10000"/>-->
+    <!--<dubbo:reference id="outputAuditingRpcServer" interface="me.cathub.change.api.rpc.server.wallet.OutputAuditingRpcServer" timeout="10000"/>-->
+    <!--<dubbo:reference id="transactionRpcServer" interface="me.cathub.change.api.rpc.server.wallet.TransactionRpcServer" timeout="10000"/>-->
+</beans>

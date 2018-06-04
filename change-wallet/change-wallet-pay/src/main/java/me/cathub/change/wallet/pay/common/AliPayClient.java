@@ -32,4 +32,36 @@ public class AliPayClient {
     public static AlipayClient getAlipayClient() {
         return alipayClient;
     }
+
+    /**
+     *  添加了get方法 用于支付宝回调时验签
+     *  z.yu
+     */
+    public static String getURL() {
+        return URL;
+    }
+
+    public static String getAppId() {
+        return APP_ID;
+    }
+
+    public static String getAppPrivateKey() {
+        return APP_PRIVATE_KEY;
+    }
+
+    public static String getFORMAT() {
+        return FORMAT;
+    }
+
+    public static String getCHARSET() {
+        return CHARSET;
+    }
+
+    public static String getAlipayPublicKey() {
+        return ALIPAY_PUBLIC_KEY;
+    }
+
+    public static String getSlgnType() {
+        return SLGN_TYPE;
+    }
 }
