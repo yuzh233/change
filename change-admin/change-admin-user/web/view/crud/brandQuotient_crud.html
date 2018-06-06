@@ -219,13 +219,16 @@
                             contentType: "application/x-www-form-urlencoded",
                             dataType: "json",
                             data: $(".insertForm:last").serialize(), //传递表单值
-                            success: function (data) {
-                                if (data == false) {
-                                    alert("该企业已有品牌商，请重新填写。");
-                                    return false;
-                                } else {
+                            success: function (flag) {
+                                if (flag) {
+                                    showMsg('添加成功!', 'top');
                                     $table.bootstrapTable('refresh'); //刷新表格
+                                } else {
+                                    showMsg('添加失败!', 'top');
                                 }
+                            }, error: function (error) {
+                                showMsg(error, 'center');
+                                console.log(error);
                             }
                         });
                     }
@@ -270,8 +273,16 @@
                             type: "POST",
                             dataType: "json",
                             data: json,
-                            success: function () {
-                                $table.bootstrapTable('refresh');
+                            success: function (flag) {
+                                if(flag){
+                                    showMsg('修改成功!', 'top');
+                                    $table.bootstrapTable('refresh'); //刷新表格
+                                }else{
+                                    showMsg('修改失败!', 'top');
+                                }
+                            }, error: function (error) {
+                                showMsg(error, 'center');
+                                console.log(error);
                             }
                         });
                     }
@@ -326,8 +337,16 @@
                                 type: "post",
                                 dataType: "json",
                                 data: {ids: ids},
-                                success: function () {
-                                    $('#table').bootstrapTable('refresh');
+                                success: function (length) {
+                                    if(length > 0){
+                                        showMsg('删除成功!', 'top');
+                                        $table.bootstrapTable('refresh'); //刷新表格
+                                    } else {
+                                        showMsg('删除失败!', 'top');
+                                    }
+                                }, error: function (error) {
+                                    showMsg(error, 'center');
+                                    console.log(error);
                                 }
                             });
                         }

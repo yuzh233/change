@@ -192,11 +192,15 @@
                             dataType: "json",
                             data: $(".createForm:last").serialize(), //传递表单值
                             success: function (flag) {
-                                if(flag){
-                                    $table.bootstrapTable('refresh'); //刷新表格
-                                }else {
-                                    alert("新增失败，请确保用户与用户类型保持一致！");
+                                if (flag) {
+                                    showMsg('添加成功!', 'center');
+                                    $('#table').bootstrapTable('refresh'); //刷新表格
+                                } else {
+                                    showMsg('添加失败!', 'center');
                                 }
+                            }, error: function (error) {
+                                showMsg(error, 'center');
+                                console.log(error);
                             }
                         });
                     }
@@ -249,10 +253,14 @@
                             data: userRole,
                             success: function (flag) {
                                 if(flag){
-                                    $table.bootstrapTable('refresh');
+                                    showMsg('修改成功!', 'center');
+                                    $('#table').bootstrapTable('refresh'); //刷新表格
                                 }else{
-                                    alert("更新失败，请确保用户与用户类型保持一致！");
+                                    showMsg('修改失败!', 'center');
                                 }
+                            }, error: function (error) {
+                                showMsg(error, 'center');
+                                console.log(error);
                             }
                         });
                     }
@@ -307,8 +315,16 @@
                                 type: "post",
                                 dataType: "json",
                                 data: {ids: ids},
-                                success: function () {
-                                    $('#table').bootstrapTable('refresh');
+                                success: function (length) {
+                                    if(length > 0){
+                                        showMsg('删除成功!', 'center');
+                                        $('#table').bootstrapTable('refresh'); //刷新表格
+                                    } else {
+                                        showMsg('删除失败!', 'center');
+                                    }
+                                }, error: function (error) {
+                                    showMsg(error, 'center');
+                                    console.log(error);
                                 }
                             });
                         }

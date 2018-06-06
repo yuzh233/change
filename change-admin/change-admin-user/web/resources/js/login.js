@@ -46,9 +46,11 @@ function login() {
                 if (10102 == json.code) {
                     $('#password').focus();
                 }
+                showMsg('用户名或密码错误, 请重新输入!', 'top');
             }
         },
         error: function(error){
+            showMsg('貌似没有网络呢', 'top');
             console.log(error);
         }
     });
