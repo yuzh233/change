@@ -8,6 +8,8 @@ import me.cathub.change.api.rpc.server.user.BrandQuotientRpcServer;
 import me.cathub.change.api.rpc.server.user.OnlineStoreRpcServer;
 import me.cathub.change.api.rpc.server.user.ShopkeeperRpcServer;
 import me.cathub.change.api.rpc.server.user.UserSelectRpcServer;
+import me.cathub.change.api.rpc.server.wallet.AliPayRpcServer;
+import me.cathub.change.api.rpc.server.wallet.BalanceRpcServer;
 import me.cathub.change.apply.common.Messg;
 import me.cathub.change.apply.common.OrderAndItems;
 import me.cathub.change.apply.common.OrderItemP;
@@ -50,25 +52,20 @@ public class ShopkeeperContorller {
     ShopkeeperRpcServer shopkeeperRpcServer;
     @Autowired
     UserSelectRpcServer userSelectRpcServer;
-
     @Autowired
     OnlineStoreRpcServer onlineStoreRpcServer;
-
     @Autowired
     OrderRpcServer orderRpcServer;
     @Autowired
     OrderItemRpcServer orderItemRpcServer;
-
     @Autowired
     ProductImageRpcServer productImageRpcServer;
     @Autowired
     ProductRpcServer productRpcServer;
-
-
-//    @Autowired
-//    BalanceRpcServer balanceRpcServer;
-//    @Autowired
-//    AliPayRpcServer aliPayRpcServer;
+    @Autowired
+    BalanceRpcServer balanceRpcServer;
+    @Autowired
+    AliPayRpcServer aliPayRpcServer;
 
     /**
      * 用户中心
@@ -165,16 +162,16 @@ public class ShopkeeperContorller {
         // 网店数
         int onCount = onlineStoreRpcServer.countByShopkeeperId(loginUser.getId(), 0);
         userInfo.put("onCount", onCount);
-//        // 余额
-//        Balance balance = balanceRpcServer.selectByUserId(loginUser.getId(), 0, true);
-        Balance balance = new Balance();
-        balance.setBalance(9999F);
+        // 余额
+        Balance balance = balanceRpcServer.selectByUserId(loginUser.getId(), 0, true);
+//        Balance balance = new Balance();
+//        balance.setBalance(9999F);
         userInfo.put("balance", balance);
         // 绑定支付宝帐号
-//        AliPay aliPay = aliPayRpcServer.selectByUserId(loginUser.getId(), 0, true);
-        AliPay aliPay = new AliPay();
-        aliPay.setAccount("youjie2015@126.com");
-        aliPay.setRealName("youjie");
+        AliPay aliPay = aliPayRpcServer.selectByUserId(loginUser.getId(), 0, true);
+//        AliPay aliPay = new AliPay();
+//        aliPay.setAccount("youjie2015@126.com");
+//        aliPay.setRealName("youjie");
         userInfo.put("aliPay", aliPay);
         return userInfo;
     }

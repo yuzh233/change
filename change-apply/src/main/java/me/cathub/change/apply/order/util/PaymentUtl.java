@@ -14,6 +14,12 @@ import java.util.Map;
  */
 public class PaymentUtl {
 
+    /**
+     * 支付宝验签
+     * @param request
+     * @return
+     * @throws Exception
+     */
     public static boolean check(HttpServletRequest request) throws Exception {
         //获取支付宝GET过来反馈信息
         Map<String, String> params = new HashMap<String, String>();
