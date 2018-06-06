@@ -40,8 +40,7 @@ public class AliPayController {
     //异步通知页面
     private static final String NOTIFY_URL = "";
     //同步通知页面
-//    private static final String RETURN_URL = "http://localhost:8080/view/payment/success.jsp";
-    private static final String RETURN_URL = "http://localhost:8080/order/orderRollback";
+    private static final String RETURN_URL = "http://localhost:8080/order/orderCallback";
 
     /**
      * 手机网站支付模板
@@ -123,7 +122,8 @@ public class AliPayController {
         AlipayTradePagePayRequest alipayRequest = new AlipayTradePagePayRequest();
 
         //公共参数
-        alipayRequest.setReturnUrl(RETURN_URL);
+//        alipayRequest.setReturnUrl(RETURN_URL);
+        alipayRequest.setReturnUrl(paymentParam.getCallbackUrl());
         alipayRequest.setNotifyUrl(NOTIFY_URL);
 
         //业务请求参数，除公共参数外所有请求参数都必须放在这个参数中传递
@@ -268,11 +268,14 @@ public class AliPayController {
 
     public static void main(String[] args) throws Exception {
         TransParam transParam = new TransParam();
-        transParam.setOutBizNo("10000002");
+        transParam.setOutBizNo("10000012");
         transParam.setAmount("999");
         transParam.setPayeeAccount("pbduln3011@sandbox.com");
         transParam.setPayeeRealName("沙箱环境");
         transParam.setPayerShowName("退款");
         transParam.setRemark("备注信息");
+
+        String trans = new AliPayController().transQuery("10000012", "20180604110070001502520000101246");
+        System.out.println(trans);
     }
 }

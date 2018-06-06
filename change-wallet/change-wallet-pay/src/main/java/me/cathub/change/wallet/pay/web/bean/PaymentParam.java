@@ -33,6 +33,19 @@ public class PaymentParam {
      */
     private float totalAmount;
 
+    /**
+     * 回调地址
+     */
+    private String callbackUrl;
+
+    public String getCallbackUrl() {
+        return callbackUrl;
+    }
+
+    public void setCallbackUrl(String callbackUrl) {
+        this.callbackUrl = callbackUrl;
+    }
+
     public String getOutTradeNo() {
         return outTradeNo;
     }

@@ -11,8 +11,6 @@
 
     <dubbo:registry address="zookeeper://120.77.159.152:2181" />
 
-    <dubbo:reference id="aliPayRpcServer" interface="me.cathub.change.api.rpc.server.wallet.AliPayRpcServer" timeout="10000"></dubbo:reference>
-
     <!--用户&权限-->
     <dubbo:reference id="adminRpcServer" interface="me.cathub.change.api.rpc.server.user.AdminRpcServer" timeout="10000"/>
     <dubbo:reference id="brandQuotientRpcServer" interface="me.cathub.change.api.rpc.server.user.BrandQuotientRpcServer" timeout="10000"/>
@@ -48,8 +46,8 @@
     <dubbo:reference id="orderItemRpcServer" interface="me.cathub.change.api.rpc.server.order.OrderItemRpcServer" timeout="10000"/>
 
     <!--钱包-->
-    <!--<dubbo:reference id="aliPayRpcServer" interface="me.cathub.change.api.rpc.server.wallet.AliPayRpcServer" timeout="10000"/>-->
-    <!--<dubbo:reference id="balanceRpcServer" interface="me.cathub.change.api.rpc.server.wallet.BalanceRpcServer" timeout="10000"/>-->
-    <!--<dubbo:reference id="outputAuditingRpcServer" interface="me.cathub.change.api.rpc.server.wallet.OutputAuditingRpcServer" timeout="10000"/>-->
-    <!--<dubbo:reference id="transactionRpcServer" interface="me.cathub.change.api.rpc.server.wallet.TransactionRpcServer" timeout="10000"/>-->
+    <dubbo:reference id="aliPayRpcServer" interface="me.cathub.change.api.rpc.server.wallet.AliPayRpcServer" timeout="10000"/>
+    <dubbo:reference id="balanceRpcServer" interface="me.cathub.change.api.rpc.server.wallet.BalanceRpcServer" timeout="10000"/>
+    <dubbo:reference id="outputAuditingRpcServer" interface="me.cathub.change.api.rpc.server.wallet.OutputAuditingRpcServer" timeout="10000"/>
+    <dubbo:reference id="transactionRpcServer" interface="me.cathub.change.api.rpc.server.wallet.TransactionRpcServer" timeout="10000"/>
 </beans>

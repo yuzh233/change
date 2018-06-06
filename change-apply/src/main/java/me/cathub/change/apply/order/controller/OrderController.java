@@ -1,6 +1,5 @@
 package me.cathub.change.apply.order.controller;
 
-import com.alipay.api.internal.util.AlipaySignature;
 import me.cathub.change.api.rpc.server.order.OrderItemRpcServer;
 import me.cathub.change.api.rpc.server.order.OrderRpcServer;
 import me.cathub.change.api.rpc.server.product.ProductImageRpcServer;
@@ -24,7 +23,6 @@ import me.cathub.change.storehouse.bean.StorehouseProductStock;
 import me.cathub.change.user.bean.BrandQuotient;
 import me.cathub.change.user.bean.Company;
 import me.cathub.change.user.bean.Shopkeeper;
-import me.cathub.change.wallet.pay.common.AliPayClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,7 +32,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * 用户订单Controller
@@ -73,8 +73,8 @@ public class OrderController {
      * @author z.yu
      * @datetime 2018-6-3 18:44
      */
-    @RequestMapping("/orderRollback")
-    public ModelAndView orderRollback(HttpServletRequest request) throws Exception {
+    @RequestMapping("/orderCallback")
+    public ModelAndView orderCallback(HttpServletRequest request) throws Exception {
         String page = "";
         Order order = null;
         List<OrderItem> orderItemList = new ArrayList<>();
