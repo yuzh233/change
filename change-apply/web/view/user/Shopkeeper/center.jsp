@@ -2,6 +2,7 @@
 <%
     String webapp = request.getContextPath();
 %>
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -10,84 +11,14 @@
     <title></title>
     <link rel="stylesheet" href="<%=webapp%>/resources/css/bootstrap4.min.css">
     <link href="<%=webapp%>/resources/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="<%=webapp%>/resources/css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="<%=webapp%>/resources/css/base.css" />
 
-    <link rel="stylesheet" href="<%=webapp%>/resources/css/user/shopkeeper/center.css"/>
-    <link rel="stylesheet" type="text/css" href="<%=webapp%>/resources/css/user/shoppingcart.css"/>
+    <link rel="stylesheet" href="<%=webapp%>/resources/css/user/shopkeeper/center.css" />
+    <link rel="stylesheet" type="text/css" href="<%=webapp%>/resources/css/user/shopkeeper/shoppingcart.css" />
 
-    <link href="http://www.jq22.com/demo/jqueryMobiscroll201803142314/css/mobiscroll.custom.min.css" rel="stylesheet"
-          type="text/css"
+    <link href="http://www.jq22.com/demo/jqueryMobiscroll201803142314/css/mobiscroll.custom.min.css" rel="stylesheet" type="text/css"
     />
 </head>
-
-<script type="text/javascript">
-    //充值到本系统
-    function Recharge() {
-        //获取用户输入总金额
-        var totalAmount = "";
-        var number = Number(totalAmount);
-        if (number == NaN) {
-            alert("请输入正确金额数！");
-            return false;
-        }
-        //备注
-        var remark = "充值" + totalAmount + "元";
-        //标题
-        var title = "充值";
-
-        var paymentParam = {
-            totalAmount: number,
-            remark: remark,
-            title: title
-        };
-        $.ajax({
-            url: "${pageContext.request.contextPath}/trans/recharge",
-            method: "post",
-            data: paymentParam,
-            dataType: "json",
-            success: function () {
-                window.location.reload();
-            }
-        });
-    }
-
-    //提现到用户支付宝
-    function withdraw() {
-        //获取用户输入总金额
-        var totalAmount = "";
-        var number = Number(totalAmount);
-        if (number == NaN) {
-            alert("请输入正确金额数！");
-            return false;
-        }
-        //获取用户支付宝账户
-        var payeeAccount = "";
-        //获取用户名
-        var payeeRealName = "";
-
-        var transParam = {
-            payeeRealName: payeeRealName,
-            amount: number,
-            remark: "提现" + totalAmount + "元",
-            payeeAccount: payeeAccount
-        };
-        //异步转账
-        $.ajax({
-            url: "${pageContext.request.contextPath}/trans/withdraw",
-            method: "post",
-            dataType: "json",
-            data: transParam,
-            success: function (result) {
-                if (result) {
-                    alert("提现成功！请留意支付宝到账通知。");
-                    window.location.reload();
-                } else {
-                    alert("提现失败！");
-                }
-            }
-        });
-    }
-</script>
 
 <body>
 
@@ -97,8 +28,7 @@
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light ">
                 <a class="navbar-brand" href="#">Change 工作平台</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse"
-                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -117,8 +47,7 @@
                             <a class="nav-link" href="#">设置</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                               data-toggle="dropdown" aria-haspopup="true"
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
                                aria-expanded="false">
                                 服务
                             </a>
@@ -156,10 +85,10 @@
                             <a href="#2" :class="{'active':leftIndex==2}" @click="tapleftIndex(2)">已买到的货品</a>
                         </li>
                         <li>
-                            <a href="shoppingcart.jsp">进货单</a>
+                            <a href="./shoppingcart.html">进货单</a>
                         </li>
                         <li>
-                            <a href="collection.jsp">收藏夹</a>
+                            <a href="./collection.html">收藏夹</a>
                         </li>
                         <li>
                             <a href="#4" data-index='5'>发布询价单</a>
@@ -189,50 +118,43 @@
                                 <div class="form-group row">
                                     <label for="username" class="col-sm-2 col-form-label">用户名</label>
                                     <div class="col-sm-10">
-                                        <input type="text" readonly class="form-control-plaintext" id="username"
-                                               :value="userInfo!=null?userInfo.user.username:''">
+                                        <input type="text" readonly class="form-control-plaintext" id="username" :value="userInfo!=null?userInfo.user.username:''">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="name" class="col-sm-2 col-form-label">姓名</label>
                                     <div class="col-sm-10">
-                                        <input type="text" readonly class="form-control-plaintext" id="name"
-                                               :value="userInfo!=null?userInfo.user.name:''">
+                                        <input type="text" readonly class="form-control-plaintext" id="name" :value="userInfo!=null?userInfo.user.name:''">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="phone" class="col-sm-2 col-form-label">电话</label>
                                     <div class="col-sm-10">
-                                        <input type="text" readonly class="form-control-plaintext" id="phone"
-                                               :value="userInfo!=null?userInfo.user.phone:''">
+                                        <input type="text" readonly class="form-control-plaintext" id="phone" :value="userInfo!=null?userInfo.user.phone:''">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="email" class="col-sm-2 col-form-label">邮箱</label>
                                     <div class="col-sm-10">
-                                        <input type="text" readonly class="form-control-plaintext" id="email"
-                                               :value="userInfo!=null?userInfo.user.email:''">
+                                        <input type="text" readonly class="form-control-plaintext" id="email" :value="userInfo!=null?userInfo.user.email:''">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="createDate" class="col-sm-2 col-form-label">注册时间</label>
                                     <div class="col-sm-10">
-                                        <input type="text" readonly class="form-control-plaintext" id="createDate"
-                                               :value="userInfo!=null?userInfo.user.createDate:''">
+                                        <input type="text" readonly class="form-control-plaintext" id="createDate" :value="userInfo!=null?userInfo.user.createDate:''">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="oldpassword" class="col-sm-2 col-form-label">旧密码</label>
                                     <div class="col-sm-10">
-                                        <input type="password" class="form-control" id="oldpassword"
-                                               placeholder="请输入旧密码" v-model="userOldPwd">
+                                        <input type="password" class="form-control" id="oldpassword" placeholder="请输入旧密码" v-model="userOldPwd">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="inputPassword" class="col-sm-2 col-form-label">新密码</label>
                                     <div class="col-sm-10">
-                                        <input type="password" class="form-control" id="inputPassword"
-                                               placeholder="请输入你的新密码" v-model="userNewPwd">
+                                        <input type="password" class="form-control" id="inputPassword" placeholder="请输入你的新密码" v-model="userNewPwd">
                                     </div>
                                 </div>
                                 <span class="text-success mx-3">{{msg}}</span>
@@ -245,41 +167,32 @@
                             </div>
                             <div class="info">
                                 <a href="#1" class="item" @click="tapleftIndex(2)">
-                                    <img src="<%=webapp%>/resources/img/icon/order.png"/>
-                                    <p>我的订单<b><span
-                                            class="badge badge-pill badge-primary">{{userInfo.orderCount}}</span></b>
-                                    </p>
+                                    <img src="<%=webapp%>/resources/img/icon/order.png" />
+                                    <p>我的订单<b><span class="badge badge-pill badge-primary">{{userInfo.orderCount}}</span></b></p>
                                 </a>
                                 <a href="#2" class="item" @click="tapleftIndex(1)">
-                                    <img src="<%=webapp%>/resources/img/icon/onlin.png"/>
-                                    <p>我的网店<b><span
-                                            class="badge badge-pill badge-warning">{{userInfo.onCount}}</span></b></p>
+                                    <img src="<%=webapp%>/resources/img/icon/onlin.png" />
+                                    <p>我的网店<b><span class="badge badge-pill badge-warning">{{userInfo.onCount}}</span></b></p>
                                 </a>
-                                <a href="shoppingcart.jsp" class="item">
-                                    <img src="<%=webapp%>/resources/img/icon/cart.png"/>
+                                <a href="./shoppingcart.html" class="item">
+                                    <img src="<%=webapp%>/resources/img/icon/cart.png" />
                                     <p>我的购物车</p>
                                 </a>
                                 <a href="#" class="item">
-                                    <img src="<%=webapp%>/resources/img/icon/money.png"/>
+                                    <img src="<%=webapp%>/resources/img/icon/money.png" />
                                     <p>{{userInfo.balance.balance}} 元</p>
                                 </a>
                             </div>
                             <p>
                                 支付宝：
-                                <a href="#" v-if="userInfo.aliPay==null" data-toggle="modal" data-target="#aliWindow"
-                                   @click.prevent="aliPayChange(1)">绑定支付宝账号</a>
-                                <a href="#" v-if="userInfo.aliPay!=null" data-toggle="modal" data-target="#aliWindow"
-                                   @click.prevent="aliPayChange(1)">
+                                <a href="#" v-if="userInfo.aliPay==null" data-toggle="modal" data-target="#aliWindow" @click.prevent="aliPayChange(1)">绑定支付宝账号</a>
+                                <a href="#" v-if="userInfo.aliPay!=null" data-toggle="modal" data-target="#aliWindow" @click.prevent="aliPayChange(1)">
                                     {{userInfo.aliPay.account}}
                                 </a>
                             </p>
                             <p>
-                                <button class="btn btn-primary " data-toggle="modal" data-target="#aliWindow"
-                                        :disabled="userInfo.aliPay==null" @click="aliPayChange(3)">提现
-                                </button>
-                                <button class="btn btn-success " data-toggle="modal" data-target="#aliWindow"
-                                        :disabled="userInfo.aliPay==null" @click="aliPayChange(2)">充值
-                                </button>
+                                <button class="btn btn-primary " data-toggle="modal" data-target="#aliWindow" :disabled="userInfo.aliPay==null" @click="aliPayChange(2)">提现</button>
+                                <button class="btn btn-success " data-toggle="modal" data-target="#aliWindow" :disabled="userInfo.aliPay==null" @click="aliPayChange(3)">充值</button>
                             </p>
                         </div>
                     </div>
@@ -289,14 +202,12 @@
                 <div class="tab-pane fade" :class="{'show active':leftIndex==1}">
                     <div class="p-4">
                         <h6 class="">M2B2C2模式 B2C店主可以将买到的商品推送至网店</h6>
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#onlineStore"
-                                @click.prevent="onlineStorePre(0,1)">网店驻入
-                        </button>
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#onlineStore" @click.prevent="onlineStorePre(0,1)">网店驻入</button>
                     </div>
 
                     <div class="onlineStoreList row">
                         <div class="col-md-4 col-6" v-for="(item,index) in onlineStore.list" :key="index">
-                            <a href="productPush.jsp" class="item">
+                            <a href="./productPush.html" class="item">
                                 <div class="type">
                                     <span v-if="item.type==1">eb</span>
                                     <span v-if="item.type==2">亚马逊</span>
@@ -310,12 +221,10 @@
                                         <span class="float-right">审核中</span>
                                     </div>
                                     <div class="op clearfix">
-                                        <button class="btn btn-danger float-left"
-                                                @click.prevent="onlineStoreDel(item.id)">
+                                        <button class="btn btn-danger float-left" @click.prevent="onlineStoreDel(item.id)">
                                             <i class="fa fa-trash"></i>
                                         </button>
-                                        <button class="btn btn-info float-left" data-toggle="modal"
-                                                data-target="#onlineStore" @click.prevent="onlineStorePre(index)">
+                                        <button class="btn btn-info float-left" data-toggle="modal" data-target="#onlineStore" @click.prevent="onlineStorePre(index)">
                                             <i class="fa fa-edit"></i>
                                         </button>
                                         <button class="btn float-right">
@@ -340,11 +249,11 @@
                     <div class="query">
                         <div class="row p-2">
                             <div class="col-md-3">
-                                <input type="text" class="" placeholder="根据商品名称或订单号"/>
+                                <input type="text" class="" placeholder="根据商品名称或订单号" />
 
                             </div>
                             <div class="col-md-3">
-                                <input type="text" class="" placeholder="卖家昵称"/>
+                                <input type="text" class="" placeholder="卖家昵称" />
                             </div>
                             <div class="col-md-3">
                                 <select>
@@ -355,7 +264,7 @@
                                 </select>
                             </div>
                             <div class="col-md-3">
-                                <input type="text" id="demo_datetime" ref="date"/>
+                                <input type="text" id="demo_datetime" ref="date" />
                             </div>
                         </div>
                     </div>
@@ -375,28 +284,26 @@
                         <a href="#">首页购买商品</a>
                     </template>
                     <template v-else>
-                        <div class="cart mb-3" v-for="(oitem,index) in userOrder">
+                        <div class="cart mb-3" v-for="(oitem,index) in userOrder.rows">
                             <div class="clearfix brand">
                                 <div class=" float-right">
                                     <img src="<%=webapp%>/resources/img/shangjia.png">店铺：
                                     <a :href="'http://localthos/brand/'+oitem.company.id">{{oitem.company.name}}</a>
-                                    <img src="<%=webapp%>/resources/img/liaotian.png" class="liaotian"/>
+                                    <img src="<%=webapp%>/resources/img/liaotian.png" class="liaotian" />
                                 </div>
                                 <div class="orderInfo float-left font-weight-bold">
                                     <label>
-                                        <input type="checkbox"/>
+                                        <input type="checkbox" />
                                         <span>{{oitem.createDate}}</span>
                                         <span>订单号：{{oitem.id}}</span>
                                     </label>
                                 </div>
                             </div>
-                            <div class="row text-center justify-content-center align-items-center"
-                                 v-for="(pitem,pindex) in oitem.orderItemsP">
+                            <div class="row text-center justify-content-center align-items-center" v-for="(pitem,pindex) in oitem.orderItemsP">
                                 <div class="col-md-4">
-                                    <a class="d-flex align-items-center product"
-                                       :href="'<%=webapp%>/product/'+oitem.storehouseId+'/'+pitem.productId">
+                                    <a class="d-flex align-items-center product" :href="'<%=webapp%>/product/'+oitem.storehouseId+'/'+pitem.productId">
                                         <img :src="'https://change-data.oss-cn-shenzhen.aliyuncs.com/'+pitem.productPacking.img.url">
-                                        <div>{{pitem.productPacking.name}}</div>
+                                        <div style="color:#333;">{{pitem.productPacking.name}}</div>
                                     </a>
                                 </div>
                                 <div class="col-md-2 col-6">
@@ -426,9 +333,12 @@
                                 </div>
                                 <div class="col-md-2 op col-6 mt-mo-0 mt-2">
                                     <template v-if="pindex==0">
-                                        <button class="btn btn-danger btn-block">付款</button>
+                                        <a href="#" class="btn btn-block btn-danger text-white" v-if="oitem.orderCode==1">付款</a>
+                                        <a href="#" class="btn btn-block btn-info text-white" v-if="oitem.orderCode==2" disabled>已评价</a>
+                                        <a href="#" class="btn btn-block btn-info text-white" v-if="oitem.orderCode==3">评价</a>
+                                        <a href="#" class="btn btn-block btn-secondary text-white" v-if="oitem.orderCode==4" disabled>已取消</a>
                                         <div></div>
-                                        <a href="#">关闭订单</a>
+                                        <a href="#" v-if="oitem.orderCode==1">关闭订单</a>
                                     </template>
                                 </div>
                             </div>
@@ -454,8 +364,7 @@
                     <form>
                         <div class="form-group">
                             <label for="onlineStoreUrl">网店地址</label>
-                            <textarea class="form-control" id="onlineStoreUrl" placeholder="请输入网店的地址"
-                                      v-model="onlineStore.os.url"></textarea>
+                            <textarea class="form-control" id="onlineStoreUrl"placeholder="请输入网店的地址" v-model="onlineStore.os.url"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="onlineStoreType">网店类型</label>
@@ -470,12 +379,8 @@
                 </div>
                 <div class="modal-footer">
                     <span class="mx-3">{{msg}}</span>
-                    <button type="button" class="btn btn-primary" @click="onlineStorereg()"
-                            v-show="onlineStore.type==0">申请
-                    </button>
-                    <button type="button" class="btn btn-danger" @click="chageOnlineStore()"
-                            v-show="onlineStore.type==1">修改
-                    </button>
+                    <button type="button" class="btn btn-primary" @click="onlineStorereg()" v-show="onlineStore.type==0">申请</button>
+                    <button type="button" class="btn btn-danger" @click="chageOnlineStore()" v-show="onlineStore.type==1">修改</button>
                 </div>
             </div>
         </div>
@@ -494,41 +399,42 @@
                     <form>
                         <div class="form-group">
                             <label for="onlineStoreUrl">支付宝帐号</label>
-                            <input type="text" class="form-control" placeholder="请输入支付宝帐号" v-model="aliPay.account"
-                                   :readonly="isaliPay!=1">
+                            <input type="text" class="form-control" placeholder="请输入支付宝帐号" v-model="aliPay.account" :readonly="isaliPay!=1">
                         </div>
                         <div class="form-group">
                             <label for="onlineStoreUrl">真实姓名</label>
-                            <input type="text" class="form-control" placeholder="请输入你的真实姓名" v-model="aliPay.realName"
-                                   :readonly="isaliPay!=1">
-                        </div>
-                        <div class="form-group" v-show="isaliPay==2">
-                            <label for="onlineStoreUrl">充值金额</label>
-                            <input type="text" class="form-control" placeholder="" v-model="aliPay.czMoney"
-                                   id="recharge_amount">
+                            <input type="text" class="form-control" placeholder="请输入你的真实姓名" v-model="aliPay.realName" :readonly="isaliPay!=1">
                         </div>
                         <div class="form-group" v-show="isaliPay==3">
-                            <label for="onlineStoreUrl">提现金额</label>
-                            <input type="text" class="form-control" placeholder="" v-model="aliPay.txMoney"
-                                   id="withdraw_amount">
+                            <label for="onlineStoreUrl">充值金额</label>
+                            <input type="text" class="form-control" placeholder="" v-model="aliPay.czMoney">
+                            <p id="tishi1" style="color: red"></p>
+                        </div>
+                        <div class="form-group" v-show="isaliPay==2">
+                            <label for="onlineStoreUrl">提现金额 (最大<span id="span">{{userInfo.balance.balance}}</span>)</label>
+                            <input type="text" class="form-control" placeholder="" v-model="aliPay.txMoney">
+                            <p id="tishi2" style="color: red"></p>
                         </div>
 
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary float-right"
-                            v-if="userInfo.aliPay==null && isaliPay==1">绑定
-                    </button>
-                    <button type="button" class="btn btn-danger float-right"
-                            v-if="userInfo.aliPay!=null && isaliPay==1">修改
-                    </button>
-                    <button type="button" class="btn btn-primary float-right" v-if="isaliPay==2" onclick="Recharge()">
+                    <button type="button" class="btn btn-primary float-right" v-if="userInfo.aliPay==null && isaliPay==1">绑定</button>
+                    <button type="button" class="btn btn-danger float-right" v-if="userInfo.aliPay!=null && isaliPay==1">修改</button>
+                    <button type="button" class="btn btn-success float-right" v-if="isaliPay==3" @click="Recharge()">
                         充值
                     </button>
-                    <button type="button" class="btn btn-success float-right" v-if="isaliPay==3" onclick="withdraw()">
+                    <button type="button" class="btn btn-primary float-right" v-if="isaliPay==2" @click="withdraw()">
                         提现
                     </button>
                 </div>
+                <%-- 充值的表单 --%>
+                <form id="formid" method="post" action="http://localhost:8888/ali/pcPayment">
+                    <input type="hidden" name="callbackUrl" id="form-callbackUrl">
+                    <input type="hidden" name="totalAmount" id="form-totalAmount">
+                    <input type="hidden" name="title" id="form-title">
+                    <input type="hidden" name="content" id="form-content">
+                </form>
             </div>
         </div>
     </div>
@@ -545,6 +451,7 @@
 <script src="<%=webapp%>/resources/js/vue.js"></script>
 <script src="<%=webapp%>/resources/js/axios.min.js"></script>
 <script type="text/javascript" src="<%=webapp%>/resources/js/shopkeeper/center.js"></script>
+
 </body>
 
 </html>

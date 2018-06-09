@@ -7,12 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS  -->
-    <link rel="stylesheet" href="../resources/css/bootstrap4.min.css">
-    <link rel="stylesheet" type="text/css" href="../resources/resources/css/base.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/resources/css/base.css"/>
     <title>Hello, world!</title>
 
-    <link rel="stylesheet" href="../resources/css/index.css"/>
-    <script type="text/javascript" src="../resources/js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/index.css"/>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript">
         $(function () {
             newProduct();
@@ -72,7 +72,7 @@
                 dataType: "json",
                 success: function (data) {
                     $.each(data, function (key, value) {
-                        var html = "<a href='http://www.baidu.com' class='item' target='_blank'><img src='../resources/img/user.png'><h6>" + value.name + "</h6></a>";
+                        var html = "<a href='http://www.baidu.com' class='item' target='_blank'><img src='${pageContext.request.contextPath}/resources/img/user.png'><h6>" + value.name + "</h6></a>";
                         $("#rec_company").append(html);
                     });
                 }
@@ -160,7 +160,7 @@
 
         <!-- 特色图片 -->
         <div class="col-md-4 teseimg ">
-            <img src="../resources/img/tese.png" class="img-fluid"/>
+            <img src="${pageContext.request.contextPath}/resources/img/tese.png" class="img-fluid"/>
         </div>
     </div>
 </div>
@@ -260,13 +260,13 @@
                 </ol>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img class="d-block w-100" src="../resources/img/lb1.jpg" alt="First slide">
+                        <img class="d-block w-100" src="${pageContext.request.contextPath}/resources/img/lb1.jpg" alt="First slide">
                     </div>
                     <div class="carousel-item">
-                        <img class="d-block w-100" src="../resources/img/lb2.jpg" alt="Second slide">
+                        <img class="d-block w-100" src="${pageContext.request.contextPath}/resources/img/lb2.jpg" alt="Second slide">
                     </div>
                     <div class="carousel-item">
-                        <img class="d-block w-100" src="../resources/img/lb3.jpg" alt="Third slide">
+                        <img class="d-block w-100" src="${pageContext.request.contextPath}/resources/img/lb3.jpg" alt="Third slide">
                     </div>
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -285,18 +285,18 @@
                 <!-- 用户信息 -->
                 <div class="d-none d-md-block">
                     <div class="user row justify-content-center no-gutters ">
-                        <img src="../resources/img/user.png">
+                        <img src="${pageContext.request.contextPath}/resources/img/user.png">
                         <div class="col-12 text-center info">
                             Hi~欢迎来到Cheng！
                         </div>
                         <div class="col-6">
-                            <a href="../resources/view/user/login.jsp" class="btn btn-primary btn-block">登陆</a>
+                            <a href="${pageContext.request.contextPath}/resources/view/user/login.jsp" class="btn btn-primary btn-block">登陆</a>
                         </div>
                         <div class="col-6">
-                            <a href="../resources/view/user/reg.jsp" class="btn btn-outline-success btn-block">注册</a>
+                            <a href="${pageContext.request.contextPath}/resources/view/user/reg.jsp" class="btn btn-outline-success btn-block">注册</a>
                         </div>
                         <div class="col-12 mt-2 text-center">
-                            <img src="../resources/img/baoz.png" alt="" class="img-fluid">
+                            <img src="${pageContext.request.contextPath}/resources/img/baoz.png" alt="" class="img-fluid">
                         </div>
 
                         <div class="hr"></div>
@@ -354,7 +354,7 @@
 
 <div class="container-fluid  mt-4 mb-4">
     <h3 class="mt-2 mb-2">每日上新
-        <img src="../resources/img/new.png">
+        <img src="${pageContext.request.contextPath}/resources/img/new.png">
     </h3>
     <div class="row no-gutters" id="newProduct">
         <%-- 每个产品是一个div --%>
@@ -409,7 +409,7 @@
     <div class="row module no-gutters">
         <!-- 广告 -->
         <div class="col-md-2 d-none d-md-block">
-            <img src="../resources/img/commodity/b1.png" class="img-fluid">
+            <img src="${pageContext.request.contextPath}/resources/img/commodity/b1.png" class="img-fluid">
         </div>
         <!-- tab栏 -->
         <div class="col-md-10 col-12">
@@ -432,10 +432,10 @@
 <div class="container-fluid">
     <div class="row  no-gutters text-center">
         <div class="col-6">
-            <img src="../resources/img/b1.jpg" class="img-fluid"/>
+            <img src="${pageContext.request.contextPath}/resources/img/b1.jpg" class="img-fluid"/>
         </div>
         <div class="col-6">
-            <img src="../resources/img/b2.png" class="img-fluid"/>
+            <img src="${pageContext.request.contextPath}/resources/img/b2.png" class="img-fluid"/>
         </div>
     </div>
 </div>
@@ -448,7 +448,7 @@
     <div class="row module no-gutters">
         <!-- 广告 -->
         <div class="col-md-2 d-none d-md-block">
-            <img src="../resources/img/commodity/b1.png" class="img-fluid">
+            <img src="${pageContext.request.contextPath}/resources/img/commodity/b1.png" class="img-fluid">
         </div>
         <!-- tab栏 -->
         <div class="col-md-10 col-12" >
@@ -471,10 +471,10 @@
 <div class="container-fluid">
     <div class="row  no-gutters text-center">
         <div class="col-6">
-            <img src="../resources/img/b3.jpg" class="img-fluid"/>
+            <img src="${pageContext.request.contextPath}/resources/img/b3.jpg" class="img-fluid"/>
         </div>
         <div class="col-6">
-            <img src="../resources/img/b4.png" class="img-fluid"/>
+            <img src="${pageContext.request.contextPath}/resources/img/b4.png" class="img-fluid"/>
         </div>
     </div>
 </div>
@@ -487,7 +487,7 @@
     <div class="row module no-gutters">
         <!-- 广告 -->
         <div class="col-md-2 d-none d-md-block">
-            <img src="../resources/img/commodity/b1.png" class="img-fluid">
+            <img src="${pageContext.request.contextPath}/resources/img/commodity/b1.png" class="img-fluid">
         </div>
         <!-- tab栏 -->
         <div class="col-md-10 col-12 ">
@@ -514,7 +514,7 @@
     <div class="row module no-gutters">
         <!-- 广告 -->
         <div class="col-md-2 d-none d-md-block">
-            <img src="../resources/img/commodity/b1.png" class="img-fluid">
+            <img src="${pageContext.request.contextPath}/resources/img/commodity/b1.png" class="img-fluid">
         </div>
         <!-- tab栏 -->
         <div class="col-md-10 col-12 ">
@@ -541,7 +541,7 @@
     <div class="row module no-gutters">
         <!-- 广告 -->
         <div class="col-md-2 d-none d-md-block">
-            <img src="../resources/img/commodity/b1.png" class="img-fluid">
+            <img src="${pageContext.request.contextPath}/resources/img/commodity/b1.png" class="img-fluid">
         </div>
         <!-- tab栏 -->
         <div class="col-md-10 col-12 ">
@@ -568,7 +568,7 @@
     <div class="row module no-gutters">
         <!-- 广告 -->
         <div class="col-md-2 d-none d-md-block">
-            <img src="../resources/img/commodity/b1.png" class="img-fluid">
+            <img src="${pageContext.request.contextPath}/resources/img/commodity/b1.png" class="img-fluid">
         </div>
         <!-- tab栏 -->
         <div class="col-md-10 col-12 ">
@@ -655,10 +655,10 @@
     </div> -->
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS  -->
-<script src="../resources/js/jquery-3.2.1.min.js"></script>
-<script src="../resources/js/popper.min.js"></script>
-<script src="../resources/js/bootstrap.min.js"></script>
-<script src="../resources/js/index.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/popper.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/index.js"></script>
 
 </body>
 

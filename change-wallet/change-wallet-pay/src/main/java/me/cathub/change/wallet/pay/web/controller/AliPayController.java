@@ -5,7 +5,6 @@ import com.alipay.api.request.*;
 import com.alipay.api.response.AlipayFundTransOrderQueryResponse;
 import com.alipay.api.response.AlipayFundTransToaccountTransferResponse;
 import com.alipay.api.response.AlipayTradeQueryResponse;
-import com.alipay.api.response.AlipayTradeRefundResponse;
 import me.cathub.change.wallet.pay.common.AliPayClient;
 import me.cathub.change.wallet.pay.web.bean.PaymentParam;
 import me.cathub.change.wallet.pay.web.bean.TransParam;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.UUID;
 
 /**
  * 支付宝支付
@@ -40,7 +40,7 @@ public class AliPayController {
     //异步通知页面
     private static final String NOTIFY_URL = "";
     //同步通知页面
-    private static final String RETURN_URL = "http://localhost:8080/order/orderCallback";
+    private static final String RETURN_URL = "http://localhost:8080/apply/order/orderCallback";
 
     /**
      * 手机网站支付模板
@@ -126,6 +126,10 @@ public class AliPayController {
         alipayRequest.setReturnUrl(paymentParam.getCallbackUrl());
         alipayRequest.setNotifyUrl(NOTIFY_URL);
 
+        //充值提交过来没有订单号
+        if (paymentParam.getOutTradeNo() == null) {
+            paymentParam.setOutTradeNo(UUID.randomUUID().toString());
+        }
         //业务请求参数，除公共参数外所有请求参数都必须放在这个参数中传递
         alipayRequest.setBizContent(getPcJson(paymentParam));
 
@@ -145,6 +149,7 @@ public class AliPayController {
 
     /**
      * 根据商户订单号查询 (查询充值记录)
+     *
      * @param outTradeNo
      * @return
      * @throws Exception
@@ -163,7 +168,7 @@ public class AliPayController {
         ));
 
         AlipayTradeQueryResponse response = AliPayClient.getAlipayClient().execute(request);
-        if(response.isSuccess()){
+        if (response.isSuccess()) {
             return response.getBody();
         } else {
             return "Request error~";
@@ -172,6 +177,7 @@ public class AliPayController {
 
     /**
      * 转账接口
+     *
      * @throws Exception
      */
     @RequestMapping("/trans")
@@ -189,7 +195,7 @@ public class AliPayController {
         ));
 
         AlipayFundTransToaccountTransferResponse response = AliPayClient.getAlipayClient().execute(request);
-        if(response.isSuccess()){
+        if (response.isSuccess()) {
             return response.getBody();
         } else {
             return "Request error~";
@@ -197,7 +203,6 @@ public class AliPayController {
     }
 
     /**
-     *
      * @param outBizNo
      * @return
      * @throws Exception
@@ -213,7 +218,7 @@ public class AliPayController {
         ));
 
         AlipayFundTransOrderQueryResponse response = AliPayClient.getAlipayClient().execute(request);
-        if(response.isSuccess()){
+        if (response.isSuccess()) {
             return response.getBody();
         } else {
             return "Request error~";
@@ -222,6 +227,7 @@ public class AliPayController {
 
     /**
      * 退款接口 (暂不支持)
+     *
      * @return
      * @throws Exception
      */
@@ -257,7 +263,6 @@ public class AliPayController {
             System.out.println("调用失败");
         }
     }*/
-
     private final static String getPcJson(PaymentParam paymentParam) {
         return TEMPLET_PC_PAYMENT
                 .replace(PARAM_OUT_TRADE_NO, paymentParam.getOutTradeNo())
