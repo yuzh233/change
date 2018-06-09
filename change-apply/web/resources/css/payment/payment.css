@@ -1,0 +1,40 @@
+.info{
+	padding: 20px;
+	background: #fff;
+
+}
+.info p{
+	color: #827d7d;
+	font-size: 14px;
+	margin: 8px;
+}
+
+.pay{
+	padding: 20px;
+	border:3px solid #85a1d4;
+	display: flex;
+	justify-content: space-between;
+}
+.pay b{
+	color: #ff7300;
+}
+
+.status {
+	position: fixed;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background-color: rgba(0,0,0,.1);
+}
+.status .model{
+	padding: 30px;
+	width: 400px;
+	text-align: center;
+	background: #fff;
+	border-radius: 5px;
+	box-shadow: 4px 9px 27px #f8f9fa;
+}
