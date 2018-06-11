@@ -1,0 +1,172 @@
+body {
+    background-color: #f2f2f2!important;
+    font-size: 13px;
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1300px;
+    }
+}
+
+.whitebag {
+    background: #fff;
+}
+
+
+/*导航条*/
+
+.head {
+    background-color: #fff;
+    box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+.navbar {
+    background: #fff;
+}
+
+.nav-item a {
+    padding: 8px 20px !important;
+}
+
+.nav-item>a:hover {
+    color: #FF6000 !important;
+}
+
+.nav-item.active>a {
+    color: #FF6000 !important;
+}
+
+.navbar-brand {
+    font-size: 18px;
+    font-weight: bold;
+    color: #FF6000 !important;
+}
+
+
+
+/*左边操作面板*/
+
+.left-op {
+    padding: 15px 0;
+    min-height: 600px;
+}
+
+.left-op>h6 {
+    margin: 10px 30px;
+    color: #c6c8ca;
+}
+
+.left-op ul li a {
+    display: block;
+    color: #000000;
+    padding: 10px 30px;
+}
+
+.left-op ul li a.active {
+    background-color: #ff6000!important;
+    color: #fff !important;
+}
+
+.left-op ul li a:hover {
+    color: #ff6000;
+}
+
+.graybag {
+    background: #F6F6F6;
+}
+
+
+
+
+/*/////////////////*/
+
+.onlineStoreList .item {
+    display: block;
+    color: #333;
+    text-decoration: none;
+    border: 1px solid #f32;
+    margin-top: 8px;
+}
+
+.onlineStoreList .type {
+    padding: 30px;
+    text-align: center;
+    background: #f32;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.onlineStoreList .info {
+    padding: 10px;
+}
+
+.onlineStoreList .url {
+    margin: 10px 0;
+    height: 40px;
+}
+
+.onlineStoreList .status {
+    color: #695d5d;
+    ;
+}
+
+.onlineStoreList .btn {
+    margin: 10px 0;
+    margin-right: 8px;
+}
+
+.icon-16 {
+    width: 25px;
+    height: 25px;
+}
+
+
+/*订单tab*/
+.order-tab {
+	display:flex;
+	padding: 10px 0;
+}
+.order-tab a{
+	display: block;
+	padding: 20px;
+	color: #333;
+	border-bottom: 2px solid transparent;
+}
+.order-tab a:hover{
+	color: #ff6000;
+}
+.order-tab a.current{
+	color: #ff6000;
+	border-bottom: 2px solid #ff6000;
+}
+.query input,.query select{
+	width: 100%;
+	height: 30px;
+}
+
+
+/*账号信息*/
+.userimg{
+	text-align: center;
+}
+.userimg img{
+	margin: 20px;
+	width: 100px;
+	height: 100px;
+}
+
+.user .info {
+	display: flex;
+}
+.user .info a{
+	flex: 1;
+	text-align: center;
+	color: #495057;
+	font-size: 12px;
+}
+.user .info a img{
+	width: 40px;
+	height: 40px;
+}

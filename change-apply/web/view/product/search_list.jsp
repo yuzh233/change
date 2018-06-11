@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title></title>
-    <link rel="stylesheet" href="../../resources/css/bootstrap4.min.css">
-    <link rel="stylesheet" type="text/css" href="../../resources/css/base.css"/>
-    <link rel="stylesheet" type="text/css" href="../../resources/css/product/search_list.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/product/search_list.css"/>
 </head>
 
 <%-- 分类id --%>
@@ -15,7 +15,7 @@
 <input type="hidden" id="count" value="16">
 <input type="hidden" id="condition" value="16">
 
-<script type="text/javascript" src="../../resources/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
     $(function () {
         var queryHelper = getQueryHelper();
@@ -93,7 +93,7 @@
                 $.each(productList, function (index, value) {
                     var product = value.product;
                     var productImage = value.productImage;
-                    var html = "<div class='col-md-3 '><a href='/product/1/" + product.id + "' class='item'><div class='text-center'><img class='img-fluid' src='http://change-data.oss-cn-shenzhen.aliyuncs.com/" + productImage.url + "?x-oss-process=image/resize,m_lfit,h_700,w_700' alt='" + product.name + "'/></div><div class='info'><span class='priceNum'>¥" + product.price + "<em><h4>" + product.name + "</h4><div class='addr-date'><div class='addr'>企业地址</div></div></div> <div class='user clearfix'> <img src='../../resources/img/user.png'/> <span>企业名</span></div></a></div>";
+                    var html = "<div class='col-md-3 '><a href='/product/1/" + product.id + "' class='item'><div class='text-center'><img class='img-fluid' src='http://change-data.oss-cn-shenzhen.aliyuncs.com/" + productImage.url + "?x-oss-process=image/resize,m_lfit,h_700,w_700' alt='" + product.name + "'/></div><div class='info'><span class='priceNum'>¥" + product.price + "<em><h4>" + product.name + "</h4><div class='addr-date'><div class='addr'>企业地址</div></div></div> <div class='user clearfix'> <img src='${pageContext.request.contextPath}/resources/img/user.png'/> <span>企业名</span></div></a></div>";
                     $("#productList").append(html);
                 });
                 /*
@@ -207,7 +207,7 @@
 
         <!-- 特色图片 -->
         <div class="col-md-4 teseimg ">
-            <img src="../../resources/img/tese.png" class="img-fluid"/>
+            <img src="${pageContext.request.contextPath}/resources/img/tese.png" class="img-fluid"/>
         </div>
     </div>
 </div>
@@ -321,9 +321,9 @@
 </div>
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS  -->
-<script src="../../resources/js/jquery-3.2.1.min.js"></script>
-<script src="../../resources/js/popper.min.js"></script>
-<script src="../../resources/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/popper.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
 
 </body>
 

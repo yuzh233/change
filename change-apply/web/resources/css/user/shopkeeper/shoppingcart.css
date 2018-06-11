@@ -1,0 +1,55 @@
+/* 表头，和表体的基本样式*/
+.table-head,.cart{
+	padding: 15px;
+	background: #fff;
+	color: #3c3c3c;
+	font: 12px/1.5 "microsoft yahei";
+}
+.cart{
+	padding-top: 0;
+}
+/*卖家信息*/
+.cart .brand{
+	padding: 0 0 0px 0;
+	border-bottom: 1px solid #eee;
+}
+.cart .brand a{
+	color: #333;
+}
+.cart .brand a:hover{
+	color: #f40;
+}
+.cart .brand img{
+	margin:-5px 3px 0 10px;
+	width: 16px;
+	height: 16px;
+}
+
+.cart .product{
+	color:#333;
+}
+/*商品图片*/
+.cart .product img{
+	width: 120px;
+	height: 120px;
+	padding: 8px;
+}
+/*人民币变色*/
+.cart b{
+	color: #f40;
+}
+.cart .op a{
+	color: #333;
+}
+/*卖家聊天图标*/
+.liaotian{
+	cursor: pointer;
+}
+/*商品数量*/
+.cart .number{
+	
+}
+.cart .number input{
+	width: 70px;
+	text-align: center;
+}

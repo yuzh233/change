@@ -1,0 +1,34 @@
+.onlineStoreList .item{
+	display: block;
+	color: #333;
+	text-decoration: none;
+	border: 1px solid #f32;
+}
+.onlineStoreList .type{
+	padding: 30px;
+	text-align: center;
+	background: #f32;
+	color: #fff;
+	font-size: 18px;
+	font-weight: bold;
+}
+.onlineStoreList .info{
+	padding: 10px;
+}
+.onlineStoreList .url{
+	margin: 10px 0;
+	height: 40px;
+}
+.onlineStoreList .status{
+	color: #695d5d;;
+}
+
+.onlineStoreList .btn{
+	margin: 10px 0;
+	margin-right: 8px;
+}
+
+.icon-16{
+	width: 25px;
+	height: 25px;
+}

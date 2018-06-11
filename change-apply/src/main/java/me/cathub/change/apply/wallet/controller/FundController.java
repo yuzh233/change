@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -45,7 +47,8 @@ public class FundController {
     @RequestMapping("/recharge")
     @ResponseBody
     public Object recharge(HttpServletResponse response, PaymentParam paymentParam) throws Exception {
-        paymentParam.setCallbackUrl("http://localhost:8080/shopkeeper");
+        paymentParam.setOutTradeNo(UUID.randomUUID().toString());
+        paymentParam.setCallbackUrl("http://localhost:8080/apply/shopkeeper");
         new AliPayController().pcPayment(paymentParam, response);
         return null;
     }
@@ -59,12 +62,11 @@ public class FundController {
     @ResponseBody
     public boolean withdraw(TransParam transParam) throws Exception {
         transParam.setOutBizNo(UUID.randomUUID().toString());
-
         String result = new AliPayController().trans(transParam);
-        if (!"Request error~".equals(result)) {
-            return true;
+        if ("Request error~".equals(result)) {
+            return false;
         }
-        return false;
+        return true;
     }
 
     /**

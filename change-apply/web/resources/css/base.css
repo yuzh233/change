@@ -1,0 +1,48 @@
+
+body{
+	font-family: "Microsoft YaHei",SimHei,"WenQuanYi Micro Hei",STHeiti,sans-serif;
+	margin: 0;
+	padding: 0;
+}
+a{
+	font-family: "Microsoft YaHei",SimHei,"WenQuanYi Micro Hei",STHeiti,sans-serif;
+	text-decoration: none;
+}
+a:hover{
+	text-decoration: none;
+}
+ul,ol{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.btn{
+	border-radius: 0px !important;
+}
+
+@media (max-width: 575.98px) { 
+	.container-fluid {
+		padding:0 !important;
+	}
+	.container{
+		padding:0 !important;
+	}
+}
+
+.whitebag{
+    background: #fff;
+}
+
+.text-orange{
+	color: #FF6000;
+}
+
+.btnb1{
+	border-color: #ff7300;
+	background: #ff500b;
+	color: #fff !important;
+	transition: all 0.5s;
+}
+.btnb1:hover{
+	background-color: #ff733b;
+}
