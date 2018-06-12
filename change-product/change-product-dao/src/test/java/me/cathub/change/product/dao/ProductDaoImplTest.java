@@ -7,14 +7,20 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Semaphore;
 
 import static org.junit.Assert.*;
 
 public class ProductDaoImplTest {
-    ApplicationContext context = new ClassPathXmlApplicationContext("classpath:spring/spring-product-dao.xml");
+    static ApplicationContext context = new ClassPathXmlApplicationContext("classpath:spring/spring-product-dao.xml");
 
-    ProductDao dao = context.getBean(ProductDaoImpl.class);
+    static ProductDao dao = context.getBean(ProductDaoImpl.class);
     Sequence sequence = new Sequence(0 ,1);
 
     @Test
@@ -42,7 +48,7 @@ public class ProductDaoImplTest {
     }
 
     @Test
-    public void list() {
+    public void list() throws Exception {
     }
 
     @Test
@@ -102,7 +108,78 @@ public class ProductDaoImplTest {
     }
 
     @Test
-    public void selectByName() throws Exception {
-        System.out.println(dao.selectByName("厂家批发成人儿童夏威夷草裙花环服装5，6件套淘宝速卖通外贸代发", 0));
+    public void listByName() throws Exception {
+        dao.listByName("儿童", 0, 100, 0).stream()
+                .forEach(System.out::println);
+    }
+
+    @Test
+    public void search() throws Exception {
+//        dao.listBySearch("儿童", 0, 5, new String[] {"price"}, true, 0, 200, 0).stream()
+//                .forEach(System.out::println);
+
+        System.out.println(dao.countBySearch("儿童", 0, 5, 0));
+    }
+
+    public static void main(String[] args) throws Exception {
+//        ExecutorService exec = Executors.newCachedThreadPool();
+//        //只允许5个线程同时访问
+//        final Semaphore semp = new Semaphore(5);
+//
+//        int COUNT = 500;
+//        int page = dao.count(0);
+//        page = page % COUNT == 0 ? page / COUNT : page / COUNT + 1;
+//
+//        for (int i = 0; i < page; i++) {
+//            final int temp = i;
+//            Runnable run = new Runnable() {
+//                public void run() {
+//                    try {
+//                        semp.acquire();
+//
+//                        dao.list(temp, COUNT, 0).stream()
+//                                .forEach(bean -> System.out.println(semp.availablePermits() + " : " + bean));
+//
+//                        semp.release();
+//                    }catch(Exception e){
+//                        e.printStackTrace();
+//                    }
+//                }
+//            };
+//            exec.execute(run);
+//        }
+//        exec.shutdown();
+//        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("C:\\Users\\cheng\\Desktop\\[ CHANGE ]\\productData.txt")));
+//        dao.list(0, Integer.MAX_VALUE, 0).stream()
+//                .map(bean -> {
+//                    writer.write(bean.getId() + ":");
+//                });
+//        System.out.println("END");
+    }
+
+    static class Task extends Thread {
+        private Semaphore semaphore;
+        private int page;
+        private int size;
+        private ProductDao productDao;
+
+        public Task(Semaphore semaphore, int page, int size, ProductDao productDao) {
+            this.semaphore = semaphore;
+            this.page = page;
+            this.size = size;
+            this.productDao = productDao;
+        }
+
+        @Override
+        public void run() {
+            try {
+                semaphore.acquire();
+                productDao.list(page, size, 0).stream()
+                        .forEach(bean -> System.out.println(semaphore.getQueueLength() + " : " + bean));
+                semaphore.release();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

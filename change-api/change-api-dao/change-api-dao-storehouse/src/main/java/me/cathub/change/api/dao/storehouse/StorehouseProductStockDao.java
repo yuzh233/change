@@ -99,6 +99,8 @@ public interface StorehouseProductStockDao extends BaseDao<StorehouseProductStoc
      * 根据仓库和企业得到产品库存列表(某个仓库,某个企业)
      * @param storehouseId
      * @param companyId
+     * @param page
+     * @param count
      * @param tableIndex
      * @return
      * @throws Exception

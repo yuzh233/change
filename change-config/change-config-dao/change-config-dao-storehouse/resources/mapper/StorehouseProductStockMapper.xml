@@ -134,7 +134,7 @@
     </select>
 
     <select id="listByStorehouseIdAndCompanyId" parameterType="map" resultMap="storehouseProductStock">
-        SELECT * FROM storehouseProductStock_${tableIndex} WHERE yn=1 AND storehouse_id=#{storehouse_id, jdbcType=BIGINT} AND company_id=#{company_d, jdbcType=BIGINT}
+        SELECT * FROM storehouseProductStock_${tableIndex} WHERE yn=1 AND storehouse_id=#{storehouse_id, jdbcType=BIGINT} AND company_id=#{company_id, jdbcType=BIGINT}
     </select>
 
     <select id="countByStorehouseIdAndCompanyId" parameterType="int" resultType="int">

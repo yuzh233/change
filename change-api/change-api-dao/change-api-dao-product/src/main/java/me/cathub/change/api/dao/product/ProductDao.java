@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author cheng
  */
-public interface ProductDao extends BaseDao<Product>, DaoSelectByName<Product>, DaoSearchList<Product> {
+public interface ProductDao extends BaseDao<Product>, DaoSearchList<Product> {
     String NAME_SPACE = "Product";
 
     String LIST_BY_COMPANY_ID = ".listByCompanyId";
@@ -23,6 +23,8 @@ public interface ProductDao extends BaseDao<Product>, DaoSelectByName<Product>, 
     String COUNT_BY_PRODUCT_CATEGORY_ID = ".countByProductCategoryId";
     String LIST_BY_BRAND_QUOTIENT_ID = ".listByBrandQuotientId";
     String COUNT_BY_BRAND_QUOTIENT_ID = ".countByBrandQuotientId";
+    String LIST_BY_SEARCH = ".listBySearch";
+    String COUNT_BY_SEARCH = ".countBySearch";
 
     /**
      * 根据品牌商账号获取产品列表
@@ -105,4 +107,30 @@ public interface ProductDao extends BaseDao<Product>, DaoSelectByName<Product>, 
      * @throws Exception
      */
     int countByProductCategoryIdAndCompanyId(long productCategoryId, long companyId, int tableIndex) throws Exception;
+
+    /**
+     * 搜索
+     * @param keyName
+     * @param minPrice
+     * @param maxPrice
+     * @param sorts     排序依据
+     * @param desc      true 升序
+     * @param page
+     * @param count
+     * @param tableIndex
+     * @return
+     * @throws Exception
+     */
+    List<Product> listBySearch(String keyName, float minPrice, float maxPrice, String[] sorts, boolean desc, int page, int count, int tableIndex) throws Exception;
+
+    /**
+     * 搜索数量
+     * @param keyName
+     * @param minPrice
+     * @param maxPrice
+     * @param tableIndex
+     * @return
+     * @throws Exception
+     */
+    int countBySearch(String keyName, float minPrice, float maxPrice, int tableIndex) throws Exception;
 }

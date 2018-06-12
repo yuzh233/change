@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import me.cathub.change.api.dao.product.ProductDao;
 import me.cathub.change.common.base.BaseDaoMyBatisImpl;
 import me.cathub.change.product.bean.Product;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
@@ -150,15 +151,6 @@ public class ProductDaoImpl extends BaseDaoMyBatisImpl<Product> implements Produ
     }
 
     @Override
-    public Product selectByName(String name, int tableIndex) throws Exception {
-        Map<String, Object> map = new HashMap<>(2);
-        map.put("name", name);
-        map.put("tableIndex", tableIndex);
-
-        return searchOne(NAME_SPACE + SELECT_BY_NAME, map);
-    }
-
-    @Override
     public List<Product> listByName(String name, int page, int count, int tableIndex) throws Exception {
         Map<String, Object> map = new HashMap<>(2);
         map.put("name", name);
@@ -174,5 +166,29 @@ public class ProductDaoImpl extends BaseDaoMyBatisImpl<Product> implements Produ
         map.put("tableIndex", tableIndex);
 
         return baseCount(NAME_SPACE + COUNT_BY_NAME, map);
+    }
+
+    @Override
+    public List<Product> listBySearch(String keyName, float minPrice, float maxPrice, String[] sorts, boolean desc, int page, int count, int tableIndex) throws Exception {
+        Map<String, Object> map = new HashMap<>(5);
+        map.put("tableIndex", tableIndex);
+        map.put("keyName", keyName);
+        map.put("minPrice", minPrice);
+        map.put("maxPrice", maxPrice);
+        map.put("sorts", StringUtils.join(sorts, ","));
+        map.put("desc", desc);
+
+        return baseList(NAME_SPACE + LIST_BY_SEARCH, page, count, map);
+    }
+
+    @Override
+    public int countBySearch(String keyName, float minPrice, float maxPrice, int tableIndex) throws Exception {
+        Map<String, Object> map = new HashMap<>(5);
+        map.put("tableIndex", tableIndex);
+        map.put("keyName", keyName);
+        map.put("minPrice", minPrice);
+        map.put("maxPrice", maxPrice);
+
+        return baseCount(NAME_SPACE + COUNT_BY_SEARCH, map);
     }
 }

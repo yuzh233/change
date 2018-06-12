@@ -120,8 +120,9 @@ public class StorehouseProductStockDaoImpl extends BaseDaoMyBatisImpl<Storehouse
 
     @Override
     public List<StorehouseProductStock> listByStorehouseIdAndProductCategoryId(long storehouseId, long productCategoryId, int page, int count, int tableIndex) throws Exception {
-        HashMap<String, Object> map = new HashMap<>(2);
+        HashMap<String, Object> map = new HashMap<>(3);
         map.put("storehouse_id", storehouseId);
+        map.put("productCategory_id", productCategoryId);
         map.put("tableIndex", tableIndex);
 
         return baseList(NAME_SPACE + LIST_BY_STOREHOUSE_ID_AND_PRODUCT_CATEGORY_ID, page, count, map);
@@ -131,6 +132,7 @@ public class StorehouseProductStockDaoImpl extends BaseDaoMyBatisImpl<Storehouse
     public int countByStorehouseIdAndProductCategoryId(long storehouseId, long productCategoryId, int tableIndex) throws Exception {
         Map<String, Object> map = new HashMap<>(3);
         map.put("storehouse_id", storehouseId);
+        map.put("productCategory_id", productCategoryId);
         map.put("tableIndex", tableIndex);
 
         return baseCount(NAME_SPACE + COUNT_BY_STOREHOUSE_ID_AND_PRODUCT_CATEGORY_ID, map);

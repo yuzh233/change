@@ -23,6 +23,7 @@
         <result property="productCategoryId" column="productCategory_id"/>
         <result property="storehouseId" column="storehouse_id"/>
         <result property="companyId" column="company_id"/>
+        <result property="brandQuotientId" column="brandQuotient_id"/>
     </resultMap>
 
     <insert id="insert" parameterType="product">
@@ -147,11 +148,37 @@
         SELECT COUNT(*) FROM product_${tableIndex} WHERE yn=1 AND productCategory_id=#{productCategory_id, jdbcType=BIGINT}
     </select>
 
-    <select id="selectByName" parameterType="map" resultMap="product">
-        SELECT * FROM product_${tableIndex} WHERE yn=1 AND name=#{name, jdbcType=VARCHAR}
+    <select id="listByName" parameterType="map" resultMap="product">
+        SELECT * FROM product_${tableIndex} WHERE yn=1 AND name LIKE '%${name}%'
     </select>
 
-    <select id="searchByName" parameterType="map" resultMap="product">
-        SELECT * FROM product_${tableIndex} WHERE yn=1 AND name=#{name, jdbcType=VARCHAR}
+    <select id="countByName" parameterType="map" resultMap="product">
+        SELECT COUNT(*) FROM product_${tableIndex} WHERE yn=1 AND name LIKE '%${name}%'
+    </select>
+
+    <select id="listBySearch" parameterType="map" resultType="product">
+        SELECT * FROM product_${tableIndex} WHERE yn=1
+        <if test="keyName != null and keyName != ''">
+            AND name LIKE '%${keyName}%'
+        </if>
+        <if test="maxPrice != 0 and maxPrice > minPrice">
+            AND price &gt;= #{minPrice, jdbcType=FLOAT} AND price &lt;= #{maxPrice, jdbcType=FLOAT}
+        </if>
+        <if test="sorts != null and sorts != ''">
+            ORDER BY ${sorts}
+            <if test="desc">
+                DESC
+            </if>
+        </if>
+    </select>
+
+    <select id="countBySearch" parameterType="map" resultType="int">
+        SELECT COUNT(*) FROM product_${tableIndex} WHERE yn=1
+        <if test="keyName != null and keyName != ''">
+            AND name LIKE '%${keyName}%'
+        </if>
+        <if test="maxPrice != 0 and maxPrice > minPrice">
+            AND price &gt;= #{minPrice, jdbcType=FLOAT} AND price &lt;= #{maxPrice, jdbcType=FLOAT}
+        </if>
     </select>
 </mapper>

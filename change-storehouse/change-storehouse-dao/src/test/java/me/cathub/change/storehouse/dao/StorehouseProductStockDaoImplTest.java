@@ -14,8 +14,12 @@ import static org.junit.Assert.*;
  */
 public class StorehouseProductStockDaoImplTest {
 
-    ApplicationContext context = new ClassPathXmlApplicationContext("classpath:/spring/spring-storehouse-dao.xml");
+    ApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"classpath:/spring/spring-storehouse-dao.xml"});
     StorehouseProductStockDao dao = context.getBean(StorehouseProductStockDao.class);
+
+    @Test
+    public void failData() throws Exception {
+    }
 
     @Test
     public void listByDel() throws Exception {
@@ -27,7 +31,8 @@ public class StorehouseProductStockDaoImplTest {
     }
 
     @Test
-    public void selectByStorehouseIdAndProductId() {
+    public void selectByStorehouseIdAndProductId() throws Exception {
+        System.out.println(dao.selectByStorehouseIdAndProductId(27145893731905536L, 21735953211072512L, 0));
 
     }
 
@@ -52,7 +57,9 @@ public class StorehouseProductStockDaoImplTest {
 
     @Test
     public void listByStorehouseIdAndProductCategoryId() throws Exception {
-        assertTrue(dao.listByStorehouseIdAndProductCategoryId(1, 1, 0, 100, 0).size() == dao.countByStorehouseIdAndProductCategoryId(1, 1, 0));
+        dao.listByStorehouseIdAndProductCategoryId(27145893731905536L, 20477805951197184L, 0, 1000, 0).stream()
+                .forEach(System.out::println);
+        System.out.println(dao.countByStorehouseIdAndProductCategoryId(27145893731905536L, 20477805951197184L, 0));
     }
 
     @Test
@@ -61,8 +68,10 @@ public class StorehouseProductStockDaoImplTest {
 
     @Test
     public void listByStorehouseIdAndCompanyId() throws Exception {
-        assertTrue(dao.listByStorehouseIdAndCompanyId(1, 1, 0, 100, 0).size() == dao.countByStorehouseIdAndCompanyId(1, 1, 0));
+        dao.listByStorehouseIdAndCompanyId(27145893731905536L, 21735953194287104L, 0, 1000, 0).stream()
+                .forEach(System.out::println);
 
+//        System.out.println(dao.countByStorehouseIdAndCompanyId(27145893731905536L, 21735953194287104L, 0));
     }
 
     @Test
