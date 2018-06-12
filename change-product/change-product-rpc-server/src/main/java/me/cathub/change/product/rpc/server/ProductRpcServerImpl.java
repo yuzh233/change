@@ -29,14 +29,6 @@ public class ProductRpcServerImpl extends BaseRpcServerImpl<Product, ProductDao>
     @Autowired
     private BrandQuotientRpcServer brandQuotientRpcServer;
 
-    @Override
-    public Product selectByName(String name, int tableIndex, boolean flag) throws Exception {
-        if (flag) {
-            return dao.selectByName(name, tableIndex);
-        } else {
-            return fill(dao.selectByName(name, tableIndex));
-        }
-    }
 
     @Override
     public List<Product> listByBrandQuotientId(long brandQuotientId, int page, int count, int tableIndex, boolean flag) throws Exception {
@@ -116,6 +108,22 @@ public class ProductRpcServerImpl extends BaseRpcServerImpl<Product, ProductDao>
     @Override
     public int countByName(String name, int tableIndex) throws Exception {
         return dao.countByName(name ,tableIndex);
+    }
+
+    @Override
+    public List<Product> listBySearch(String keyName, float minPrice, float maxPrice, String[] sorts, boolean desc, int page, int count, int tableIndex, boolean flag) throws Exception {
+        if (flag) {
+            return dao.listBySearch(keyName, minPrice, maxPrice, sorts, desc, page, count, tableIndex);
+        } else {
+            return dao.listBySearch(keyName, minPrice, maxPrice, sorts, desc, page, count, tableIndex).stream()
+                    .map(bean -> fill(bean))
+                    .collect(toList());
+        }
+    }
+
+    @Override
+    public int countBySearch(String keyName, float minPrice, float maxPrice, int tableIndex) throws Exception {
+        return dao.countBySearch(keyName, minPrice, maxPrice, tableIndex);
     }
 
     @Override

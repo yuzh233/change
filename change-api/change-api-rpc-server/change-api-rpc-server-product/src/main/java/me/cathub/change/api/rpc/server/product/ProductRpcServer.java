@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author cheng
  */
-public interface ProductRpcServer extends BaseRpcServer<Product>, ServerSelectByName<Product>, ServerSearchList<Product> {
+public interface ProductRpcServer extends BaseRpcServer<Product>, ServerSearchList<Product> {
 
     /**
      * 根据品牌商获取产品列表
@@ -100,4 +100,31 @@ public interface ProductRpcServer extends BaseRpcServer<Product>, ServerSelectBy
      * @throws Exception
      */
     int countByProductCategoryIdAndCompanyId(long productCategoryId, long companyId, int tableIndex) throws Exception;
+
+    /**
+     * 搜索
+     * @param keyName
+     * @param minPrice
+     * @param maxPrice
+     * @param sorts     排序依据
+     * @param desc      true 升序
+     * @param page
+     * @param count
+     * @param tableIndex
+     * @param flag
+     * @return
+     * @throws Exception
+     */
+    List<Product> listBySearch(String keyName, float minPrice, float maxPrice, String[] sorts, boolean desc, int page, int count, int tableIndex, boolean flag) throws Exception;
+
+    /**
+     * 搜索数量
+     * @param keyName
+     * @param minPrice
+     * @param maxPrice
+     * @param tableIndex
+     * @return
+     * @throws Exception
+     */
+    int countBySearch(String keyName, float minPrice, float maxPrice, int tableIndex) throws Exception;
 }
