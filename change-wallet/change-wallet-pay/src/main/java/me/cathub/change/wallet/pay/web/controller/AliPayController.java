@@ -122,9 +122,9 @@ public class AliPayController {
         AlipayTradePagePayRequest alipayRequest = new AlipayTradePagePayRequest();
 
         //公共参数
-//        alipayRequest.setReturnUrl(RETURN_URL);
         alipayRequest.setReturnUrl(paymentParam.getCallbackUrl());
-        alipayRequest.setNotifyUrl(NOTIFY_URL);
+        String notifyUrl = paymentParam.getNotifyUrl();
+        alipayRequest.setNotifyUrl(notifyUrl == null ? notifyUrl : NOTIFY_URL);
 
         //充值提交过来没有订单号
         if (paymentParam.getOutTradeNo() == null) {

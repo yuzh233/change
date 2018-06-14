@@ -1,12 +1,18 @@
 package me.cathub.change.apply.wallet.controller;
 
+import me.cathub.change.api.rpc.server.wallet.BalanceRpcServer;
+import me.cathub.change.common.bean.User;
+import me.cathub.change.common.constant.SessionConstant;
+import me.cathub.change.wallet.bean.Balance;
 import me.cathub.change.wallet.pay.web.bean.PaymentParam;
 import me.cathub.change.wallet.pay.web.bean.TransParam;
 import me.cathub.change.wallet.pay.web.controller.AliPayController;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
@@ -39,6 +45,9 @@ import java.util.UUID;
 @RequestMapping("/trans")
 public class FundController {
 
+    @Autowired
+    private BalanceRpcServer balanceRpcServer;
+
     /**
      * 充值
      *
@@ -49,8 +58,16 @@ public class FundController {
     public Object recharge(HttpServletResponse response, PaymentParam paymentParam) throws Exception {
         paymentParam.setOutTradeNo(UUID.randomUUID().toString());
         paymentParam.setCallbackUrl("http://localhost:8080/apply/shopkeeper");
+        paymentParam.setNotifyUrl("http://localhost:8080/trans/recharge_success");
         new AliPayController().pcPayment(paymentParam, response);
         return null;
+    }
+
+    /**
+     * 充值成功异步回调地址
+     */
+    public void recharge_success(HttpServletRequest request){
+        System.out.println("异步回调");
     }
 
     /**
@@ -60,12 +77,17 @@ public class FundController {
      */
     @RequestMapping("/withdraw")
     @ResponseBody
-    public boolean withdraw(TransParam transParam) throws Exception {
+    public boolean withdraw(TransParam transParam, HttpServletRequest request) throws Exception {
         transParam.setOutBizNo(UUID.randomUUID().toString());
         String result = new AliPayController().trans(transParam);
         if ("Request error~".equals(result)) {
             return false;
         }
+        //账户余额减少
+        User user = (User) request.getSession().getAttribute(SessionConstant.CHANGE_LOCAL_USER_INFO);
+        Balance balance = balanceRpcServer.selectByUserId(user.getId(), 0, true);
+        balance.setBalance(balance.getBalance() - Float.parseFloat(transParam.getAmount()));
+        balanceRpcServer.update(balance);
         return true;
     }
 

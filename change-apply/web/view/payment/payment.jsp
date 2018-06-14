@@ -92,7 +92,7 @@
     <%-- 商品描述（交易内容），可选 --%>
     <input type="hidden" name="content" value="">
     <%-- 回调地址 --%>
-    <input type="hidden" name="callBackUrl" value="http://localhost:8080/order/orderCallback">
+    <input type="hidden" name="callbackUrl" value="http://localhost:8080/order/orderCallback">
 </form>
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS  -->

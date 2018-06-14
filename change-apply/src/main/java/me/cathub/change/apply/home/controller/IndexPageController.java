@@ -3,6 +3,7 @@ package me.cathub.change.apply.home.controller;
 import me.cathub.change.api.rpc.server.product.ProductCategoryRpcServer;
 import me.cathub.change.api.rpc.server.product.ProductImageRpcServer;
 import me.cathub.change.api.rpc.server.product.ProductRpcServer;
+import me.cathub.change.api.rpc.server.storehouse.StorehouseProductStockRpcServer;
 import me.cathub.change.api.rpc.server.user.CompanyRpcServer;
 import me.cathub.change.apply.common.ListUtils;
 import me.cathub.change.apply.common.QueryHelper;
@@ -10,6 +11,7 @@ import me.cathub.change.apply.common.ProductPageResult;
 import me.cathub.change.product.bean.Product;
 import me.cathub.change.product.bean.ProductCategory;
 import me.cathub.change.product.bean.ProductImage;
+import me.cathub.change.storehouse.bean.StorehouseProductStock;
 import me.cathub.change.user.bean.Company;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 首页
@@ -49,11 +52,13 @@ public class IndexPageController {
     private ProductImageRpcServer imageRpcServer;
     @Autowired
     private CompanyRpcServer companyRpcServer;
+    @Autowired
+    private StorehouseProductStockRpcServer storehouseProductStockRpcServer;
 
     /**
      * 返回home页面
      */
-    @RequestMapping({"/","/index.jsp"})
+    @RequestMapping({"/", "/index.jsp"})
     public ModelAndView index(ModelAndView modelAndView) throws Exception {
         Map map = (Map) servletContext.getAttribute("oneCategory");
         if (map == null) {
@@ -139,7 +144,7 @@ public class IndexPageController {
      */
     @PostConstruct
     public void initCategoryInfo() throws Exception {
-        System.out.println("【初始化分类信息】");
+        System.out.println("--------->>> 初始化分类信息 <<<----------");
         Map map = (Map) servletContext.getAttribute("oneCategory");
         if (map == null) {
             map = oneLevelCategoryList();
@@ -164,13 +169,17 @@ public class IndexPageController {
     @ResponseBody
     public QueryHelper categoryAndProductData(QueryHelper q) throws Exception {
         //查询总记录数
-        int count = productRpcServer.countByProductCategoryId(q.getCategoryId(), 0);
+        int count = storehouseProductStockRpcServer.countByStorehouseIdAndProductCategoryId(27145893731905536L, q.getCategoryId(), 0);
         q.setTotalCount(count);
         int totalPage = count % q.getCount() == 0 ? count / q.getCount() : count / q.getCount() + 1;
         q.setTotalPage(totalPage);
 
         //查询产品
-        List<Product> productList = productRpcServer.listByProductCategoryId(q.getCategoryId(), q.getPage(), q.getCount(), 0, false);
+        List<StorehouseProductStock> sps = storehouseProductStockRpcServer.listByStorehouseIdAndProductCategoryId(27145893731905536L, q.getCategoryId(), q.getPage(), q.getCount(), 0, false);
+
+
+        //把仓库产品库存对象集合抽取出产品对象生成集合
+        List<Product> productList = sps.stream().map((p) -> p.getProduct()).collect(Collectors.toList());
         List<ProductPageResult> pageResultList = getProductAndImageList(productList);
 
         q.setProductPageResultList(pageResultList);
@@ -183,7 +192,8 @@ public class IndexPageController {
     @RequestMapping("/newProduct")
     @ResponseBody
     public List newProduct() throws Exception {
-        List<Product> productList = productRpcServer.list(1, 12, 0, true);
+        List<StorehouseProductStock> sps = storehouseProductStockRpcServer.list(4, 12, 0, false);
+        List<Product> productList = sps.stream().map((p) -> p.getProduct()).collect(Collectors.toList());
         return getProductAndImageList(productList);
     }
 
@@ -208,7 +218,9 @@ public class IndexPageController {
     @RequestMapping("/rankingList")
     @ResponseBody
     public Map<Integer, ProductPageResult> rankingList() throws Exception {
-        List<Product> productList = productRpcServer.list(5, 12, 0, true);
+
+        List<StorehouseProductStock> sps = storehouseProductStockRpcServer.list(5, 12, 0, false);
+        List<Product> productList = sps.stream().map((p) -> p.getProduct()).collect(Collectors.toList());
 
         Map<Integer, ProductPageResult> map = new LinkedHashMap<>();
         List<ProductPageResult> productPageResultList = getProductAndImageList(productList);
@@ -238,7 +250,8 @@ public class IndexPageController {
         ProductCategory productCategory = productCategoryRpcServer.selectByName(categoryName, 0, true);
         if (productCategory != null) {
             //获取产品列表
-            List<Product> productList = productRpcServer.listByProductCategoryId(productCategory.getId(), 1, 8, 0, true);
+            List<StorehouseProductStock> sps = storehouseProductStockRpcServer.listByStorehouseIdAndProductCategoryId(27145893731905536L, productCategory.getId(),1, 8, 0, false);
+            List<Product> productList = sps.stream().map((p) -> p.getProduct()).collect(Collectors.toList());
             if (productList != null) {
                 //封装产品+图片结果集列表
                 List<ProductPageResult> productPageResultList = getProductAndImageList(productList);

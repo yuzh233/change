@@ -74,7 +74,7 @@ let vue = new Vue({
             var params = new URLSearchParams();
             params.append('url', _this.onlineStore.os.url);
             params.append('type', _this.onlineStore.os.type);
-            axios.post('http://localhost:8080/apply/shopkeeper/onlineStorereg', params)
+            axios.post('http://localhost:8080/shopkeeper/onlineStorereg', params)
                 .then(function (response) {
                     let onlineStore = _this.$refs.onlineStore;
                     if (response.data.status == 1) {
@@ -102,7 +102,7 @@ let vue = new Vue({
             params.append('url', _this.onlineStore.os.url);
             params.append('type', _this.onlineStore.os.type);
             params.append('id', _this.onlineStore.os.id)
-            axios.post('http://localhost:8080/apply/shopkeeper/onlineStoreChange', params)
+            axios.post('http://localhost:8080/shopkeeper/onlineStoreChange', params)
                 .then(function (response) {
                     if (response.data.status == 1) {
                         _this.onlineStore.os = {id: '', url: '', type: 1, createDate: ''}
@@ -122,7 +122,7 @@ let vue = new Vue({
                 });
         },
         onlineStoreDel(id) {
-            axios.get('http://localhost:8080/apply/shopkeeper/onlineStoreDel', {
+            axios.get('http://localhost:8080/shopkeeper/onlineStoreDel', {
                 params: {
                     id: id
                 }
@@ -142,7 +142,7 @@ let vue = new Vue({
             params.append('email', _this.userInfo.user.email);
             params.append('password', _this.userOldPwd)
             params.append('newPwd', _this.userNewPwd)
-            axios.post('http://localhost:8080/apply/shopkeeper/userUpdate', params)
+            axios.post('http://localhost:8080/shopkeeper/userUpdate', params)
                 .then(function (response) {
                     if (response.data.status == 1) {
                         _this.msg = '用户信息更新成功'
@@ -180,7 +180,7 @@ let vue = new Vue({
             var title = "充值";
 
             //填充表单内容
-            $("#form-callbackUrl").attr("value","http://localhost:8080/apply/shopkeeper");
+            $("#form-callbackUrl").attr("value","http://localhost:8080/shopkeeper");
             $("#form-totalAmount").attr("value",number);
             $("#form-title").attr("value",title);
             $("#form-content").attr("value",remark);
@@ -223,7 +223,7 @@ let vue = new Vue({
             };
             //异步转账
             $.ajax({
-                url: "http://localhost:8080/apply/trans/withdraw",
+                url: "http://localhost:8080/trans/withdraw",
                 method: "post",
                 dataType: "json",
                 data: transParam,
@@ -242,7 +242,7 @@ let vue = new Vue({
 })
 
 function onlineStoreGet() {
-    axios.get('http://localhost:8080/apply/shopkeeper/onlineStore')
+    axios.get('http://localhost:8080/shopkeeper/onlineStore')
         .then(function (response) {
             vue.onlineStore.list = response.data;
         })
@@ -252,7 +252,7 @@ function onlineStoreGet() {
 }
 
 function userInfoGet() {
-    axios.get('http://localhost:8080/apply/shopkeeper/userInfo')
+    axios.get('http://localhost:8080/shopkeeper/userInfo')
         .then(function (response) {
             vue.userInfo = response.data;
         })
@@ -262,7 +262,7 @@ function userInfoGet() {
 }
 
 function userOrder() {
-    axios.get('http://localhost:8080/apply/shopkeeper/orderList?page=1&pageSize=10')
+    axios.get('http://localhost:8080/shopkeeper/orderList?page=1&pageSize=10')
         .then(function (response) {
             vue.userOrder = response.data;
         })

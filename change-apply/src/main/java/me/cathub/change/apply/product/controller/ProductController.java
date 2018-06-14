@@ -95,6 +95,7 @@ public class ProductController {
         List<PropertyKeyValue> propertyKeyValues = propertyValueRpcServer.keyValueList(product.getId(), 0);
         // 商品信息
         Product selectProduct = productRpcServer.select(product, true);
+
         //评论数量
         Integer reviewCount = productReviewRpcServer.countByProductId(selectProduct.getId(), 0);
 

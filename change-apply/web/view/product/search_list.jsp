@@ -12,7 +12,7 @@
 <%-- 分类id --%>
 <input type="hidden" id="fl" value="${param.fl}">
 <input type="hidden" id="page" value="1">
-<input type="hidden" id="count" value="16">
+<input type="hidden" id="count" value="20">
 <input type="hidden" id="condition" value="16">
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.min.js"></script>
@@ -93,7 +93,7 @@
                 $.each(productList, function (index, value) {
                     var product = value.product;
                     var productImage = value.productImage;
-                    var html = "<div class='col-md-3 '><a href='/product/1/" + product.id + "' class='item'><div class='text-center'><img class='img-fluid' src='http://change-data.oss-cn-shenzhen.aliyuncs.com/" + productImage.url + "?x-oss-process=image/resize,m_lfit,h_700,w_700' alt='" + product.name + "'/></div><div class='info'><span class='priceNum'>¥" + product.price + "<em><h4>" + product.name + "</h4><div class='addr-date'><div class='addr'>企业地址</div></div></div> <div class='user clearfix'> <img src='${pageContext.request.contextPath}/resources/img/user.png'/> <span>企业名</span></div></a></div>";
+                    var html = "<div class='col-md-3 '><a href='/product/27145893731905536/" + product.id + "' class='item' target='_blank'><div class='text-center'><img class='img-fluid' src='http://change-data.oss-cn-shenzhen.aliyuncs.com/" + productImage.url + "?x-oss-process=image/resize,m_lfit,h_700,w_700' alt='" + product.name + "'/></div><div class='info'><span class='priceNum'>¥" + product.price + "<em><h4>" + product.name + "</h4><div class='addr-date'><div class='addr'>企业地址</div></div></div> <div class='user clearfix'> <img src='${pageContext.request.contextPath}/resources/img/user.png'/> <span>企业名</span></div></a></div>";
                     $("#productList").append(html);
                 });
                 /*
