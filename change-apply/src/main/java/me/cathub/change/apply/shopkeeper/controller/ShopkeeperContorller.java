@@ -14,6 +14,8 @@ import me.cathub.change.apply.common.Messg;
 import me.cathub.change.apply.common.OrderAndItems;
 import me.cathub.change.apply.common.OrderItemP;
 import me.cathub.change.apply.common.ProductPacking;
+import me.cathub.change.apply.order.util.PaymentUtl;
+import me.cathub.change.common.bean.PageResult;
 import me.cathub.change.common.bean.User;
 import me.cathub.change.common.constant.SessionConstant;
 import me.cathub.change.order.bean.Order;
@@ -28,11 +30,16 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -73,6 +80,29 @@ public class ShopkeeperContorller {
     @RequestMapping({"/", ""})
     public String index() {
         return "user/Shopkeeper/center";
+    }
+
+    /**
+     * 充值之后回调地址
+     */
+    @RequestMapping("/rechargeCallBack")
+    public Object rechargeCallBack(HttpServletRequest request) throws Exception {
+        if (PaymentUtl.check(request)) {
+            //商户订单号
+            String out_trade_no = new String(request.getParameter("out_trade_no").getBytes("ISO-8859-1"), "UTF-8");
+            //支付宝交易号
+            String trade_no = new String(request.getParameter("trade_no").getBytes("ISO-8859-1"), "UTF-8");
+            //充值金额
+            String total_amount = new String(request.getParameter("total_amount").getBytes("ISO-8859-1"), "UTF-8");
+
+            //更新账户余额
+            Shopkeeper shopkeeper = (Shopkeeper) request.getSession().getAttribute(SessionConstant.CHANGE_LOCAL_USER_INFO);
+            Balance balance = balanceRpcServer.selectByUserId(shopkeeper.getId(), 0, true);
+            balance.setBalance(balance.getBalance() + Float.parseFloat(total_amount));
+            balanceRpcServer.update(balance);
+        }
+        //重定向到用户中心页，避免重复回调。
+        return new ModelAndView("redirect:/shopkeeper");
     }
 
     /**
@@ -205,23 +235,45 @@ public class ShopkeeperContorller {
      */
     @RequestMapping("/orderList")
     @ResponseBody
-    public List<OrderAndItems> orderList(String status, String oid, String companyName, String date, HttpSession session) throws Exception {
+    public PageResult orderList(@RequestParam(defaultValue = "0") String status, String oid, String companyName, String date, @RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer pageSize, HttpSession session) throws Exception {
         User loginUser = (User) session.getAttribute(SessionConstant.CHANGE_LOCAL_USER_INFO);
 
         List<OrderAndItems> orderAndItems = new ArrayList<>();
         //获取订单
-        List<Order> orders = orderRpcServer.listByShopkeeperId(loginUser.getId(), 1, 10000, 0, true);
+        List<Order> orders = orderRpcServer.listByShopkeeperId(loginUser.getId(), 1, 9999999, 0, true);
 
         OrderAndItems tempOrder = null;
         OrderItemP orderItemP = null;
         Product pd = new Product();
 
-        for (Order order : orders) {
+        Iterator<Order> iterator = orders.iterator();
+        while (iterator.hasNext()) {
+            Order order = iterator.next();
+            if (status.equals("0")) { // 所有订单
+
+            } else if (status.equals("1")) { // 待付款
+                // 判断当前订单的状态，如果和status相同这添加，不相同这跳过这次添加
+                if (!order.getOrderCode().equals(status))
+                    continue;
+            } else if (status.equals("2")) { // 已评价
+                if (!order.getOrderCode().equals(status))
+                    continue;
+            } else if (status.equals("3")) { // 待评价
+                if (!order.getOrderCode().equals(status))
+                    continue;
+            } else if (status.equals("4") || status.equals("5")) { // 4退货中  5退款
+                if (!order.getOrderCode().equals(status) || !order.getOrderCode().equals(status))
+                    continue;
+            } else if (status.equals("6")) { // 已取消
+                if (!order.getOrderCode().equals(status))
+                    continue;
+            }
             // 将订单属性拷到包装订单类上
             tempOrder = new OrderAndItems();
             BeanUtils.copyProperties(order, tempOrder);
             // 添加到订单list里
             orderAndItems.add(tempOrder);
+
 
             List<OrderItem> orderItems = orderItemRpcServer.listByOrderId(order.getId(), 1, 10000, 0, true);
             for (OrderItem orderItem : orderItems) {
@@ -241,9 +293,12 @@ public class ShopkeeperContorller {
                 ProductImage productImage = productImageRpcServer.listByProductIdAndImageType(orderItemP.getProductId(), 0, 1, 1, 0, false).get(0);
                 productPacking.setImg(productImage);
             }
-
         }
-        return orderAndItems;
+        int toIndex = (page - 1) * pageSize + pageSize > orderAndItems.size() ? orderAndItems.size() : (page - 1) * pageSize + pageSize;
+        List<OrderAndItems> resultOrder = orderAndItems.subList((page - 1) * pageSize, toIndex);
+        PageResult pageResult = new PageResult(resultOrder, orderAndItems.size());
+        return pageResult;
     }
+
 
 }

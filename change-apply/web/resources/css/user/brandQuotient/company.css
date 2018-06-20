@@ -1,0 +1,101 @@
+.company{
+	display: flex;
+}
+.company>div{
+	margin: 10px ;
+}
+.logo a{
+	color: #f40;
+	font-size: 35px;
+	font-weight: bold;
+}
+
+.company .info{
+	
+}
+.company .info .companyIcon{
+	width: 16px;
+	height: 16px;
+	margin: -4px 5px 0 0 ;
+}
+.status{
+	display: flex;
+	
+}
+.status>div{
+	text-align: center;
+	padding: 0 15px;
+}
+.serch{
+	border: 3px solid #ef081e;
+}
+.serch *{
+	border: none;
+	outline: none;
+	height: 30px;
+}
+.serch input{
+	font-size: 13px;
+	padding: 0 15px;
+	width: 250px;
+}
+.serch button{
+	background: #ef081e;
+	color: #fff;
+	border: none;
+	outline: none;
+	cursor: pointer;
+}
+
+.navout{
+	background: #f8f9fa;
+}
+
+.carousel-item img{
+	height: 400px;
+}
+
+.products .item{
+	position: relative;
+	top: 0;
+	margin: 15px 0;
+	display: block;
+	color: #333;
+	text-decoration: none;
+	padding: 8px;
+	border: 1px solid #eee;
+	transition: all .3s;
+}
+
+.products .item:hover {
+	top: -10px;
+}
+.js{
+	position: relative;
+}
+.js:hover .detail{
+	opacity: 1;
+	height: 200px;
+	padding:20px;
+}
+.js .detail{
+	transition: all .5s;
+	/*display: none;*/
+	opacity: 0;
+	height: 0;
+	padding: 0;
+	overflow: hidden;
+	position: absolute;
+	min-width: 350px;
+	z-index: 1000;
+	background: #fff;
+	
+}
+.js .detail>div{
+	margin: 10px;
+	color: #4E555B;
+}
+.nav-item.active a,.nav-item a:hover{
+	color: #f40!important;
+	border-bottom: 1px solid #f40;
+}

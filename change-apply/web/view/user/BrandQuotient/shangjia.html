@@ -1,307 +1,504 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title></title>
-    <link rel="stylesheet" href="../../../resources/css/bootstrap4.min.css">
-    <link rel="stylesheet" type="text/css" href="../../../resources/css/base.css"/>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title></title>
+		<link rel="stylesheet" href="../../css/bootstrap4.min.css">
+		<link rel="stylesheet" type="text/css" href="../../css/base.css" />
 
-    <link rel="stylesheet" href="../../../resources/css/user/center.css"/>
-    <link rel="stylesheet" type="text/css" href="../../../resources/css/user/shangjia.css">
-</head>
+		<link rel="stylesheet" href="../../css/user/center.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/user/brandQuotient/center.css">
+		<link rel="stylesheet" type="text/css" href="../../css/user/shopkeeper/shoppingcart.css" />
+	</head>
 
-<body>
-<div class="head">
-    <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-light ">
-            <a class="navbar-brand" href="#">Change 工作平台</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+	<body>
+		<div id="app">
+			<div class="head">
+				<div class="container">
+					<nav class="navbar navbar-expand-lg navbar-light ">
+						<a class="navbar-brand" href="#">Change 工作平台</a>
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item ">
-                        <a class="nav-link" href="center.html">卖家</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="./shangjia.html">商家<span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">设置</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                           data-toggle="dropdown" aria-haspopup="true"
-                           aria-expanded="false">
-                            服务
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </li>
-                </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="请输入你要搜索的服务">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
-                </form>
-            </div>
-        </nav>
-    </div>
-</div>
+						<div class="collapse navbar-collapse" id="navbarSupportedContent">
+							<ul class="navbar-nav mr-auto">
+								<li class="nav-item ">
+									<a class="nav-link" href="center.html">卖家</a>
+								</li>
+								<li class="nav-item active">
+									<a class="nav-link" href="./shangjia.html">商家
+										<span class="sr-only">(current)</span>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="#">设置</a>
+								</li>
+								<li class="nav-item dropdown">
+									<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										服务
+									</a>
+									<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+										<a class="dropdown-item" href="#">Action</a>
+										<a class="dropdown-item" href="#">Another action</a>
+										<div class="dropdown-divider"></div>
+										<a class="dropdown-item" href="#">Something else here</a>
+									</div>
+								</li>
+							</ul>
+							<form class="form-inline my-2 my-lg-0">
+								<input class="form-control mr-sm-2" type="search" placeholder="请输入你要搜索的服务">
+								<button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
+							</form>
+						</div>
+					</nav>
+				</div>
+			</div>
 
-<div class="container mt-3">
-    <div class="row ">
-        <div class="col-md-3 col-12">
-            <div class="whitebag left-op">
+			<div class="container mt-3">
+				<div class="row ">
+					<div class="col-md-3 col-12">
+						<div class="whitebag left-op">
+							<h6>商家快捷入口</h6>
+							<ul>
+								<li>
+									<a href="#0" :class="{active:leftIndex==0}" @click="chageTab(0)">账号信息</a>
+								</li>
+								<li>
+									<a href="#1" :class="{active:leftIndex==1}" @click="chageTab(1)">上架商品</a>
+								</li>
+								<li>
+									<a href="#2" :class="{active:leftIndex==2}" @click="chageTab(2)">订单管理</a>
+								</li>
 
-                <h6>商家快捷入口</h6>
-                <ul>
-                    <li>
-                        <a href="#" class="" data-index='home'>上架商品</a>
-                    </li>
-                    <li>
-                        <a href="#" class="active" data-index='order'>订单管理</a>
-                    </li>
+							</ul>
 
-                </ul>
+							<h6>商家管理</h6>
+							<ul>
+								<li>
+									<a href="#">账号安全</a>
+								</li>
+								<li>
+									<a href="#">交易记录</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-9 whitebag">
+						<div class="tab-content" id="panes">
+							<!-- 用户信息 -->
+							<div class="tab-pane fade" :class="{'show active':leftIndex==0}">
+								<h6 class="p-3">基本信息</h6>
+								<div class="row user">
+									<div class="col-md-6 col-12">
+										<form>
+											<div class="form-group row">
+												<label for="username" class="col-sm-3 col-form-label">用户名</label>
+												<div class="col-sm-9">
+													<input type="text" readonly class="form-control-plaintext" id="username" :value="userInfo!=null?userInfo.user.username:''">
+												</div>
+											</div>
+											<div class="form-group row">
+												<label for="name" class="col-sm-3 col-form-label">姓名</label>
+												<div class="col-sm-9">
+													<input type="text" readonly class="form-control-plaintext" id="name" :value="userInfo!=null?userInfo.user.name:''">
+												</div>
+											</div>
+											<div class="form-group row">
+												<label for="phone" class="col-sm-3 col-form-label">电话</label>
+												<div class="col-sm-9">
+													<input type="text" readonly class="form-control-plaintext" id="phone" :value="userInfo!=null?userInfo.user.phone:''">
+												</div>
+											</div>
+											<div class="form-group row">
+												<label for="email" class="col-sm-3 col-form-label">邮箱</label>
+												<div class="col-sm-9">
+													<input type="text" readonly class="form-control-plaintext" id="email" :value="userInfo!=null?userInfo.user.email:''">
+												</div>
+											</div>
+											<div class="form-group row">
+												<label for="createDate" class="col-sm-3 col-form-label">注册时间</label>
+												<div class="col-sm-9">
+													<input type="text" readonly class="form-control-plaintext" id="createDate" :value="userInfo!=null?userInfo.user.createDate:''">
+												</div>
+											</div>
+											<div class="form-group row">
+												<label for="oldpassword" class="col-sm-3 col-form-label">旧密码</label>
+												<div class="col-sm-9">
+													<input type="password" class="form-control" id="oldpassword" placeholder="请输入旧密码" v-model="userOldPwd">
+												</div>
+											</div>
+											<div class="form-group row">
+												<label for="inputPassword" class="col-sm-3 col-form-label">新密码</label>
+												<div class="col-sm-9">
+													<input type="password" class="form-control" id="inputPassword" placeholder="请输入你的新密码" v-model="userNewPwd">
+												</div>
+											</div>
+											<span class="text-success mx-3">{{msg}}</span>
+											<button class="btn btn-danger float-right" @click="userUpdate">确认修改</button>
+										</form>
+									</div>
+									<div class="col-md-6 col-12">
+										<div class="userimg">
+											<img src="../../img/user.png" alt="">
+										</div>
+										<div class="info">
+											<a href="#1" class="item" @click="chageTab(2)">
+												<img src="../../img/icon/order.png" />
+												<p>我的订单
+													<b>
+                                                    <span class="badge badge-pill badge-primary">123</span>
+                                                </b>
+												</p>
+											</a>
+											<a href="#2" class="item" @click="chageTab(1)">
+												<img src="../../img/icon/onlin.png" />
+												<p>我的商品
+													<b>
+                                                    <span class="badge badge-pill badge-warning">456</span>
+                                                </b>
+												</p>
+											</a>
 
-                <h6>商家管理</h6>
-                <ul>
-                    <li>
-                        <a href="#">账号信息</a>
-                    </li>
-                    <li>
-                        <a href="#">账号安全</a>
-                    </li>
-                    <li>
-                        <a href="#">交易资料管理</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="col-9 whitebag">
-            <div class="tab-content" id="panes">
-                <!-- 上架商品 -->
-                <div class="tab-pane pt-3" id="home">
-                    <nav>
-                      <div class="nav nav-tabs" id="nav-tab-product" role="tablist">
-                        <a class="nav-item nav-link active" id="nav-product-tab" data-toggle="tab" href="#nav-product">
-                            已上架
-                        </a>
-                        <a class="nav-item nav-link" id="nav-productadd-tab" data-toggle="tab" href="#nav-add-product">
-                            上架商品
-                        </a>
-                      </div>
-                    </nav>
-                    <div class="tab-content">
-                      <div class="tab-pane fade show active" id="nav-product">
-                          <div class="row products">
-                              <div class="col-md-4 col-12 mb-2">
-                                <a href="#" class="item">
-                                    <div class="img">
-                                        <img src="../../../../../../change%20web/img/commodity/4.webp.jpg">
-                                    </div>
-                                    <p class="product-name">高清照相机</p>
-                                    <div class="info clearfix">
-                                        <span class="float-left">单价：99.98</span>
-                                        <span class="float-right">库存：99999</span>
-                                    </div>
-                                    <div class="info clearfix">
-                                        <span class="float-left">分类：数码设备</span>
-                                        <span class="float-right">状态：<span class="text-success">可购买</span></span>
-                                    </div>
-                                    <div class="info">仓库：中国 湘潭</div>
-                                    <p class="info">上架时间：2018-5-11 11:15:23</p>
+											<a href="#" class="item">
+												<img src="../../img/icon/money.png" />
+												<p>{{userInfo!=null?userInfo.balance:0.00}} 元</p>
+											</a>
+										</div>
+										<p>
+											支付宝：
+											<a href="#" v-if="userInfo.aliPay==null" data-toggle="modal" data-target="#aliWindow" @click.prevent="aliPayChange(1)">绑定支付宝账号</a>
+											<a href="#" v-if="userInfo.aliPay!=null" data-toggle="modal" data-target="#aliWindow" @click.prevent="aliPayChange(1)">
+												{{userInfo.aliPay.account}}
+											</a>
+										</p>
+										<p>
+											<button class="btn btn-primary " data-toggle="modal" data-target="#aliWindow" :disabled="userInfo.aliPay==null" @click="aliPayChange(2)">提现</button>
+											<button class="btn btn-success " data-toggle="modal" data-target="#aliWindow" :disabled="userInfo.aliPay==null" @click="aliPayChange(3)">充值</button>
+										</p>
+									</div>
 
-                                    <div class="op text-right">
-                                        <button class="btn btn-primary">修改</button>
-                                        <button class="btn btn-danger">下架</button>
-                                    </div>
+								</div>
+							</div>
+							<!-- 上架商品 -->
+							<div class="tab-pane fade" :class="{'show active':leftIndex==1}">
+								<nav>
+									<div class="nav nav-tabs" id="nav-tab-product" role="tablist">
+										<a class="nav-item nav-link active" id="nav-product-tab" data-toggle="tab" href="#nav-product">
+											已上架
+										</a>
+										<a class="nav-item nav-link" id="nav-productadd-tab" data-toggle="tab" href="#nav-add-product">
+											上架商品
+										</a>
+									</div>
+								</nav>
+								<div class="tab-content">
+									<div class="tab-pane fade show active" id="nav-product">
+										<div class="row products">
+											<div class="col-md-4 col-12 ">
+												<a href="#" class="item">
+													<div class="img">
+														<img src="../../img/commodity/4.webp.jpg">
+													</div>
+													<p class="product-name">高清照相机</p>
+													<div class="info clearfix">
+														<span class="float-left">单价：99.98</span>
+														<span class="float-right">库存：99999</span>
+													</div>
+													<div class="info clearfix">
+														<span class="float-left">分类：数码设备</span>
+														<span class="float-right">状态：
+                                                        <span class="text-success">可购买</span>
+														</span>
+													</div>
+													<div class="info">仓库：中国 湘潭</div>
+													<p class="info">上架时间：2018-5-11 11:15:23</p>
 
-                                </a>
-                              </div>
-                              <div class="col-md-4 col-12 mb-2">
-                                <a href="#" class="item">
-                                    <div class="img">
-                                        <img src="../../../../../../change%20web/img/commodity/4.webp.jpg">
-                                    </div>
-                                    <p class="product-name">高清照相机</p>
-                                    <div class="info clearfix">
-                                        <span class="float-left">单价：99.98</span>
-                                        <span class="float-right">库存：99999</span>
-                                    </div>
-                                    <div class="info clearfix">
-                                        <span class="float-left">分类：数码设备</span>
-                                        <span class="float-right">状态：<span class="text-success">可购买</span></span>
-                                    </div>
-                                    <div class="info">仓库：中国 湘潭</div>
-                                    <p class="info">上架时间：2018-5-11 11:15:23</p>
+													<div class="op text-right">
+														<button class="btn btn-primary">修改</button>
+														<button class="btn btn-danger">下架</button>
+													</div>
 
-                                    <div class="op text-right">
-                                        <button class="btn btn-primary">修改</button>
-                                        <button class="btn btn-danger">下架</button>
-                                    </div>
+												</a>
+											</div>
+											<div class="col-md-4 col-12 ">
+												<a href="#" class="item">
+													<div class="img">
+														<img src="../../img/commodity/4.webp.jpg">
+													</div>
+													<p class="product-name">高清照相机</p>
+													<div class="info clearfix">
+														<span class="float-left">单价：99.98</span>
+														<span class="float-right">库存：99999</span>
+													</div>
+													<div class="info clearfix">
+														<span class="float-left">分类：数码设备</span>
+														<span class="float-right">状态：
+                                                        <span class="text-success">可购买</span>
+														</span>
+													</div>
+													<div class="info">仓库：中国 湘潭</div>
+													<p class="info">上架时间：2018-5-11 11:15:23</p>
 
-                                </a>
-                              </div>
-                              <div class="col-md-4 col-12 mb-2">
-                                <a href="#" class="item">
-                                    <div class="img">
-                                        <img src="../../../../../../change%20web/img/commodity/4.webp.jpg">
-                                    </div>
-                                    <p class="product-name">高清照相机</p>
-                                    <div class="info clearfix">
-                                        <span class="float-left">单价：99.98</span>
-                                        <span class="float-right">库存：99999</span>
-                                    </div>
-                                    <div class="info clearfix">
-                                        <span class="float-left">分类：数码设备</span>
-                                        <span class="float-right">状态：<span class="text-success">可购买</span></span>
-                                    </div>
-                                    <div class="info">仓库：中国 湘潭</div>
-                                    <p class="info">上架时间：2018-5-11 11:15:23</p>
+													<div class="op text-right">
+														<button class="btn btn-primary">修改</button>
+														<button class="btn btn-danger">下架</button>
+													</div>
 
-                                    <div class="op text-right">
-                                        <button class="btn btn-primary">修改</button>
-                                        <button class="btn btn-danger">下架</button>
-                                    </div>
+												</a>
+											</div>
+											<div class="col-md-4 col-12 ">
+												<a href="#" class="item">
+													<div class="img">
+														<img src="../../img/commodity/4.webp.jpg">
+													</div>
+													<p class="product-name">高清照相机</p>
+													<div class="info clearfix">
+														<span class="float-left">单价：99.98</span>
+														<span class="float-right">库存：99999</span>
+													</div>
+													<div class="info clearfix">
+														<span class="float-left">分类：数码设备</span>
+														<span class="float-right">状态：
+                                                        <span class="text-success">可购买</span>
+														</span>
+													</div>
+													<div class="info">仓库：中国 湘潭</div>
+													<p class="info">上架时间：2018-5-11 11:15:23</p>
 
-                                </a>
-                              </div>
-                              <div class="col-md-4 col-12 mb-2">
-                                <a href="#" class="item">
-                                    <div class="img">
-                                        <img src="../../../../../../change%20web/img/commodity/4.webp.jpg">
-                                    </div>
-                                    <p class="product-name">高清照相机</p>
-                                    <div class="info clearfix">
-                                        <span class="float-left">单价：99.98</span>
-                                        <span class="float-right">库存：99999</span>
-                                    </div>
-                                    <div class="info clearfix">
-                                        <span class="float-left">分类：数码设备</span>
-                                        <span class="float-right">状态：<span class="text-success">可购买</span></span>
-                                    </div>
-                                    <div class="info">仓库：中国 湘潭</div>
-                                    <p class="info">上架时间：2018-5-11 11:15:23</p>
+													<div class="op text-right">
+														<button class="btn btn-primary">修改</button>
+														<button class="btn btn-danger">下架</button>
+													</div>
 
-                                    <div class="op text-right">
-                                        <button class="btn btn-primary">修改</button>
-                                        <button class="btn btn-danger">下架</button>
-                                    </div>
+												</a>
+											</div>
+											<div class="col-md-4 col-12 ">
+												<a href="#" class="item">
+													<div class="img">
+														<img src="../../img/commodity/4.webp.jpg">
+													</div>
+													<p class="product-name">高清照相机</p>
+													<div class="info clearfix">
+														<span class="float-left">单价：99.98</span>
+														<span class="float-right">库存：99999</span>
+													</div>
+													<div class="info clearfix">
+														<span class="float-left">分类：数码设备</span>
+														<span class="float-right">状态：
+                                                        <span class="text-success">可购买</span>
+														</span>
+													</div>
+													<div class="info">仓库：中国 湘潭</div>
+													<p class="info">上架时间：2018-5-11 11:15:23</p>
 
-                                </a>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="tab-pane fade p-2" id="nav-add-product" >
-                          <form>
-                              <div class="form-group">
-                                <label for="inputAddress">商品名称：</label>
-                                <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-                              </div>
-                            <div class="form-row">
-                              <div class="form-group col-md-6">
-                                <label for="inputEmail4">Email</label>
-                                <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
-                              </div>
-                              <div class="form-group col-md-6">
-                                <label for="inputPassword4">Password</label>
-                                <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
-                              </div>
-                            </div>
-                            <div class="form-group">
-                              <label for="inputAddress">Address</label>
-                              <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-                            </div>
-                            <div class="form-group">
-                              <label for="inputAddress2">Address 2</label>
-                              <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-                            </div>
-                            <div class="form-row">
-                              <div class="form-group col-md-6">
-                                <label for="inputCity">City</label>
-                                <input type="text" class="form-control" id="inputCity">
-                              </div>
-                              <div class="form-group col-md-4">
-                                <label for="inputState">State</label>
-                                <select id="inputState" class="form-control">
-                                  <option selected>Choose...</option>
-                                  <option>...</option>
-                                </select>
-                              </div>
-                              <div class="form-group col-md-2">
-                                <label for="inputZip">Zip</label>
-                                <input type="text" class="form-control" id="inputZip">
-                              </div>
-                            </div>
-                            <div class="form-group">
-                              <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="gridCheck">
-                                <label class="form-check-label" for="gridCheck">
-                                  Check me out
-                                </label>
-                              </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Sign in</button>
-                          </form>
-                      </div>
-                    </div>
-                </div>
-                <!-- 订单管理 -->
-                <div class="tab-pane active" id="order">
-                    <div class="row pt-4">
-                        <div class="col-12">
-                            <nav>
-                              <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                <a class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab" href="#nav-profile">待发货</a>
-                                <a class="nav-item nav-link" id="nav-cehui-tab" data-toggle="tab" href="#nav-contact">撤回中</a>
-                                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact">购买订单</a>
-                              </div>
-                            </nav>
-                            <div class="tab-content" id="nav-tabContent">
-                              <div class="tab-pane fade show active" id="nav-profile">.321</div>
-                              <div class="tab-pane fade" id="nav-contact">..3333.</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+													<div class="op text-right">
+														<button class="btn btn-primary">修改</button>
+														<button class="btn btn-danger" type="button">下架</button>
+													</div>
+												</a>
+											</div>
+										</div>
+									</div>
+									<div class="tab-pane fade p-2" id="nav-add-product">
+										<form>
+											<div class="form-group">
+												<label for="productName">商品名称：</label>
+												<input type="text" class="form-control" id="productName" placeholder="1234 Main St">
+											</div>
+											<div class="form-row">
+												<div class="form-group col-md-6">
+													<label for="inputEmail4">Email</label>
+													<input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+												</div>
+												<div class="form-group col-md-6">
+													<label for="inputPassword4">Password</label>
+													<input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="inputAddress">Address</label>
+												<input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+											</div>
+											<div class="form-group">
+												<label for="inputAddress2">Address 2</label>
+												<input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+											</div>
+											<div class="form-row">
+												<div class="form-group col-md-6">
+													<label for="inputCity">City</label>
+													<input type="text" class="form-control" id="inputCity">
+												</div>
+												<div class="form-group col-md-4">
+													<label for="inputState">State</label>
+													<select id="inputState" class="form-control">
+														<option selected>Choose...</option>
+														<option>...</option>
+													</select>
+												</div>
+												<div class="form-group col-md-2">
+													<label for="inputZip">Zip</label>
+													<input type="text" class="form-control" id="inputZip">
+												</div>
+											</div>
+											<div class="form-group">
+												<div class="form-check">
+													<input class="form-check-input" type="checkbox" id="gridCheck">
+													<label class="form-check-label" for="gridCheck">
+                                                    Check me out
+                                                </label>
+												</div>
+											</div>
+											<button type="submit" class="btn btn-primary">Sign in</button>
+										</form>
+									</div>
+								</div>
+							</div>
+							<!-- 订单管理 -->
+							<div class="tab-pane fade" :class="{'show active':leftIndex==2}">
+								<div class="row">
+									<div class="col-12">
+										<nav>
+											<div class="nav nav-tabs" id="nav-tab" role="tablist">
+												<a class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab" href="#nav-profile">已发货</a>
+												<a class="nav-item nav-link" id="nav-cehui-tab" data-toggle="tab" href="#nav-contact">退货管理</a>
+											</div>
+										</nav>
+										<div class="tab-content" id="nav-tabContent">
+											<!-- 订单信息-->
+											<div class="row justify-content-center no-gutters table-head text-center d-none d-md-flex">
+												<div class="col-md-4">
+													商品信息
+												</div>
+												<div class="col-md-2">单价 (元)</div>
+												<div class="col-md-1">数量</div>
+												<div class="col-md-2">实付款 (元)</div>
+												<div class="col-md-1">交易状态</div>
+												<div class="col-md-2">交易操作</div>
+											</div>
+											<!--<template v-if="userOrder==null">
+										   <a href="#">首页购买商品</a>
+									   </template>-->
+											<template>
+												<div class="cart mb-3">
+													<div class="clearfix brand">
+														<div class=" float-right">
+															<img src="../../resources/img/shangjia.png">店铺：
+															<a :href="'http://localthos/brand/'">YOUJIE</a>
+															<img src="../../resources/img/liaotian.png" class="liaotian" />
+														</div>
+														<div class="orderInfo float-left font-weight-bold">
+															<label>
+                                                            <input type="checkbox" />
+                                                            <span>2018-06-11 11:51:39</span>
+                                                            <span>订单号：1231231223112</span>
+                                                        </label>
+														</div>
+													</div>
+													<div class="row text-center justify-content-center align-items-center">
+														<div class="col-md-4">
+															<a class="d-flex align-items-center product" :href="'../../product/'+oitem.storehouseId+'/'">
+																<img :src="'https://change-data.oss-cn-shenzhen.aliyuncs.com/'">
+																<div style="color:#333;">aaaaaa</div>
+															</a>
+														</div>
+														<div class="col-md-2 col-6">
+															<span class="d-md-none d-inline">单价:</span> ￥：
+															<b>98.20</b>
+														</div>
+														<div class="col-md-1 col-6 d-flex number justify-content-center">
+															5
+														</div>
+														<div class="col-md-2 col-6">
+															<template v-if="pindex==0">
+																<span class="d-md-none d-inline">总价:</span> ￥：
+																<b>123.00</b>
+															</template>
+														</div>
+														<div class="col-md-1 col-6">
+															<template v-if="pindex==0">
+																<span v-if="oitem.orderCode==1">待付款</span>
+																<span v-if="oitem.orderCode==2">已评价</span>
+																<span v-if="oitem.orderCode==3">待评价</span>
+																<span v-if="oitem.orderCode==4">已取消</span>
+																<div></div>
+																<a :href="'../../order/orderDetailView/'+oitem.id">订单详细</a>
+															</template>
+														</div>
+														<div class="col-md-2 op col-6 mt-mo-0 mt-2">
+															<template v-if="pindex==0">
+																<a href="#" class="btn btn-block btn-danger text-white" v-if="oitem.orderCode==1">付款</a>
+																<a href="#" class="btn btn-block btn-info text-white" v-if="oitem.orderCode==2" disabled>已评价</a>
+																<a href="#" class="btn btn-block btn-info text-white" v-if="oitem.orderCode==3">评价</a>
+																<a href="#" class="btn btn-block btn-secondary text-white" v-if="oitem.orderCode==4" disabled>已取消</a>
+																<div></div>
+																<a href="#" v-if="oitem.orderCode==1">关闭订单</a>
+															</template>
+														</div>
+													</div>
 
-                <div class="tab-pane" id="shoppingcart">.32..</div>
-                <div class="tab-pane" id="collection">4...</div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS  -->
-<script src="../../../../../../change%20web/js/jquery-3.2.1.min.js"></script>
-<script src="../../../../../../change%20web/js/popper.min.js"></script>
-<script src="../../../../../../change%20web/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-    $('.left-op').on('click', 'ul li a', function (e) {
-        e.preventDefault();
-        // 左边选择
-        $('.left-op ul li a').removeClass('active');
-        $(this).addClass('active')
-        let index = $(this).data("index");
-        // alert(index)
-        //右边面板改变
-        $('#' + index).siblings().removeClass('active')
-        $('#' + index).addClass('active')
+												</div>
+											</template>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 
-        //window.location.href = window.location.href + '#' + index;
-    })
-</script>
+		<!-- 支付宝 -->
+		<div class="modal fade" id="aliWindow" tabindex="-1" >
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalLabel">支付宝</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		        <form>
+				  <div class="form-group">
+				    <label for="aliUsername">支付宝账号</label>
+				    <input type="text" class="form-control" id="aliUsername" aria-describedby="emailHelp" placeholder="Enter email">
+				  </div>
+				  <div class="form-group">
+				    <label for="name">真实姓名</label>
+				    <input type="text" class="form-control" id="name" placeholder="name" :readonly="isaliPay!=1">
+				  </div>
+				  <div class="form-group" v-if="isaliPay==2">
+				    <label for="txMoney">提现金额</label>
+				    <input type="text" class="form-control" id="txMoney" placeholder="请输入提现金额">
+				  </div>
+				  <div class="form-group" v-if="isaliPay==3">
+				    <label for="czMoney">充值金额</label>
+				    <input type="text" class="form-control" id="czMoney" placeholder="请输入充值金额">
+				  </div>
+				</form>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-info" v-if="isaliPay==1">修改</button>
+		        <button type="button" class="btn btn-primary" v-if="isaliPay==2">提现</button>
+		        <button type="button" class="btn btn-success" v-if="isaliPay==3">充值</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
 
-</body>
+		</div>
+		<!-- Optional JavaScript -->
+		<!-- jQuery first, then Popper.js, then Bootstrap JS  -->
+		<script src="../../js/jquery-3.2.1.min.js"></script>
+		<script src="../../js/popper.min.js"></script>
+		<script src="../../js/bootstrap.min.js"></script>
+		<script src="../../js/vue.min.js"></script>
+		<script type="text/javascript">
+		</script>
+		<script src="../../js/BrandQuotient/index.js"></script>
+	</body>
 
 </html>

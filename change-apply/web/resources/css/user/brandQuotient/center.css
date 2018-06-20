@@ -1,0 +1,46 @@
+body {
+    background-color: #f2f2f2!important;
+    font-size: 13px;
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1300px;
+    }
+}
+/*账号信息*/
+.userimg{
+	text-align: center;
+}
+.userimg img{
+	margin: 20px;
+	width: 100px;
+	height: 100px;
+}
+
+.user .info {
+	display: flex;
+}
+.user .info a{
+	flex: 1;
+	text-align: center;
+	color: #495057;
+	font-size: 12px;
+}
+.user .info a img{
+	width: 40px;
+	height: 40px;
+}
+
+.products .item{
+	display: block;
+	color: #333;
+	text-decoration: none;
+	border: 1px solid #eee;
+	padding: 8px;
+	margin: 20px 0 0 0;
+}
+.products .item img{
+	width: 100%;
+	height: auto;	
+}

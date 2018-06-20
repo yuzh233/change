@@ -27,7 +27,9 @@ let vue = new Vue({
             ],
             os: {id: '', url: '', type: 1, createDate: ''},
             type: 0
-        }
+        },
+        //订单状态
+        orderStatus:0,
     },
     mounted() {
         let url = window.location.href
@@ -46,13 +48,24 @@ let vue = new Vue({
                 var display = "bottom";
                 var lang = "zh";
                 let date = this.$refs.date;
-                console.log(date)
-                $('#demo_datetime').mobiscroll().date({
-                    theme: theme,
-                    mode: mode,
-                    display: display,
-                    lang: lang
-                });
+                // console.log(date)
+                // $('#demo_datetime').mobiscroll().date({
+                //     theme: theme,
+                //     mode: mode,
+                //     display: display,
+                //     lang: lang
+                // });
+
+                new Mdate(date, { //"dateShowBtn"为你点击触发Mdate的id，必填项
+                    acceptId: "dateSelectorTwo", //此项为你要显示选择后的日期的input，不填写默认为上一行的"dateShowBtn"
+                    beginYear: "2000",//此项为Mdate的初始年份，不填写默认为2000
+                    beginMonth: "1",//此项为Mdate的初始月份，不填写默认为1
+                    beginDay: "1",//此项为Mdate的初始日期，不填写默认为1
+                    endYear: "2020",//此项为Mdate的结束年份，不填写默认为当年
+                    endMonth: "1",//此项为Mdate的结束月份，不填写默认为当月
+                    endDay: "1",//此项为Mdate的结束日期，不填写默认为当天
+                    format: "-"//此项为Mdate需要显示的格式，可填写"/"或"-"或".",不填写默认为年月日
+                })
             }
         },
         // 预览网店
@@ -82,8 +95,8 @@ let vue = new Vue({
                         onlineStoreGet()
                         setTimeout(() => {
                             $(onlineStore).modal('hide')
-                        _this.msg = '';
-                    },1000)
+                            _this.msg = '';
+                        },1000)
 
                     } else {
 
@@ -109,8 +122,8 @@ let vue = new Vue({
                         onlineStoreGet()
                         setTimeout(() => {
                             $(onlineStore).modal('hide')
-                        _this.msg = '';
-                    },1000)
+                            _this.msg = '';
+                        },1000)
                     } else {
 
                     }
@@ -180,7 +193,7 @@ let vue = new Vue({
             var title = "充值";
 
             //填充表单内容
-            $("#form-callbackUrl").attr("value","http://localhost:8080/shopkeeper");
+            $("#form-callbackUrl").attr("value","http://localhost:8080/shopkeeper/rechargeCallBack");
             $("#form-totalAmount").attr("value",number);
             $("#form-title").attr("value",title);
             $("#form-content").attr("value",remark);
@@ -236,6 +249,18 @@ let vue = new Vue({
                     }
                 }
             });
+        },
+        //根据订单状态查询订单
+        orderStatusList(index){
+            console.log("status------------------"+index)
+            this.orderStatus = index;
+            axios.get('http://localhost:8080/shopkeeper/orderList?page=1&pageSize=1000&status='+index)
+                .then(function (response) {
+                    vue.userOrder = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
         }
 
     }
@@ -270,3 +295,4 @@ function userOrder() {
             console.log(error);
         });
 }
+

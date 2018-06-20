@@ -109,7 +109,7 @@ public class ProductController {
         // 所属企业
         Company company = companyRpcServer.select(new Company(selectProduct.getCompanyId()), true);
         // 品牌商
-        BrandQuotient brandQuotient = brandQuotientRpcServer.select(new BrandQuotient(21735953194287104L), true);
+        BrandQuotient brandQuotient = brandQuotientRpcServer.select(new BrandQuotient(selectProduct.getBrandQuotientId()), true);
 
         data.put("productCover",productImages.get(0));
         data.put("productImages",productImages);
