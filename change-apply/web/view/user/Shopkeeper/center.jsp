@@ -16,8 +16,8 @@
     <link rel="stylesheet" href="<%=webapp%>/resources/css/user/shopkeeper/center.css" />
     <link rel="stylesheet" type="text/css" href="<%=webapp%>/resources/css/user/shopkeeper/shoppingcart.css" />
 
-    <link href="http://www.jq22.com/demo/jqueryMobiscroll201803142314/css/mobiscroll.custom.min.css" rel="stylesheet" type="text/css"
-    />
+    <link rel="stylesheet" type="text/css" href="<%=webapp%>/resources/css/Mdate.css" />
+
 </head>
 
 <body>
@@ -240,11 +240,13 @@
                 <div class="tab-pane fade" :class="{'show active':leftIndex==2}">
                     <!--筛选条件-->
                     <div class="order-tab">
-                        <a href="#" class="current">所有订单</a>
-                        <a href="#">待付款</a>
-                        <a href="#">待评价</a>
-                        <a href="#">退货处理</a>
-                        <a href="#">推送商品</a>
+                        <a href="javascript:;" :class="{'current':orderStatus==0}" @click.prevent="orderStatusList(0)">所有订单</a>
+                        <a href="javascript:;" :class="{'current':orderStatus==1}" @click.prevent="orderStatusList(1)">待付款 </a>
+                        <a href="javascript:;" :class="{'current':orderStatus==2}" @click.prevent="orderStatusList(2)">已付款 </a>
+                        <a href="javascript:;" :class="{'current':orderStatus==3}" @click.prevent="orderStatusList(3)">待评价</a>
+                        <a href="javascript:;" :class="{'current':orderStatus==4}" @click.prevent="orderStatusList(4)">退货处理</a>
+                        <a href="javascript:;" :class="{'current':orderStatus==6}" @click.prevent="orderStatusList(6)">已取消</a>
+                        <a href="javascript:;">推送商品</a>
                     </div>
                     <div class="query">
                         <div class="row p-2">
@@ -326,7 +328,7 @@
                                         <span v-if="oitem.orderCode==1">待付款</span>
                                         <span v-if="oitem.orderCode==2">已评价</span>
                                         <span v-if="oitem.orderCode==3">待评价</span>
-                                        <span v-if="oitem.orderCode==4">已取消</span>
+                                        <span v-if="oitem.orderCode==6">已取消</span>
                                         <div></div>
                                         <a :href="'<%=webapp%>/order/orderDetailView/'+oitem.id">订单详细</a>
                                     </template>
@@ -406,12 +408,12 @@
                             <input type="text" class="form-control" placeholder="请输入你的真实姓名" v-model="aliPay.realName" :readonly="isaliPay!=1">
                         </div>
                         <div class="form-group" v-show="isaliPay==3">
-                            <label for="onlineStoreUrl">充值金额</label>
+                            <label for="onlineStoreUrl">充值金额（单笔交易最多2W）</label>
                             <input type="text" class="form-control" placeholder="" v-model="aliPay.czMoney">
                             <p id="tishi1" style="color: red"></p>
                         </div>
                         <div class="form-group" v-show="isaliPay==2">
-                            <label for="onlineStoreUrl">提现金额 (最大<span id="span">{{userInfo.balance.balance}}</span>)</label>
+                            <label for="onlineStoreUrl">提现金额 (单笔交易最多2W，最大<span id="span">{{userInfo.balance.balance}}</span>)</label>
                             <input type="text" class="form-control" placeholder="" v-model="aliPay.txMoney">
                             <p id="tishi2" style="color: red"></p>
                         </div>
@@ -446,7 +448,8 @@
 <script src="<%=webapp%>/resources/js/popper.min.js"></script>
 <script src="<%=webapp%>/resources/js/bootstrap.min.js"></script>
 
-<script src="<%=webapp%>/resources/js/mobiscroll.custom.min.js"></script>
+<script src="<%=webapp%>/resources/js/iScroll.js"></script>
+<script src="<%=webapp%>/resources/js/Mdate.js"></script>
 
 <script src="<%=webapp%>/resources/js/vue.js"></script>
 <script src="<%=webapp%>/resources/js/axios.min.js"></script>

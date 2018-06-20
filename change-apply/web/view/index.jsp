@@ -36,7 +36,8 @@
                     $.each(data, function (index, option) {
                         var product = option.product;
                         var productImage = option.productImage;
-                        var productDiv = "<div class='col-6 col-md-3'><a href='http://www.baidu.com' class='commodity' target='_blank'><img class='img-fluid' src='http://change-data.oss-cn-shenzhen.aliyuncs.com/" + productImage.url + "?x-oss-process=image/resize,m_lfit,h_300,w_300' alt=''><p class='name'>" + product.name + "</p><div class='info clearfix'><span class='money'>￥:" + product.price + "</span><span class='number'>10010件</span></div><button type='button' class='btn btn-primary btn-lg btn-block'>立即抢批</button></a></div>";
+                        var href = "http://localhost:8080/product/27145893731905536/" + product.id + "";
+                        var productDiv = "<div class='col-6 col-md-3'><a href='" + href + "' class='commodity' target='_blank'><img class='img-fluid' src='http://change-data.oss-cn-shenzhen.aliyuncs.com/" + productImage.url + "?x-oss-process=image/resize,m_lfit,h_300,w_300' alt=''><p class='name'>" + product.name + "</p><div class='info clearfix'><span class='money'>￥:" + product.price + "</span><span class='number'>10010件</span></div><button type='button' class='btn btn-primary btn-lg btn-block'>立即抢批</button></a></div>";
                         $("#newProduct").append(productDiv);
                     });
                 }
@@ -54,7 +55,8 @@
                     $.each(data, function (key, value) {
                         var product = value.product;
                         var productImage = value.productImage;
-                        var productDiv = "<a href='http://www.baidu.com' class='item' target='_blank'><div class='row no-gutters'><div class='col-3 img-fluid text-center'><img src='http://change-data.oss-cn-shenzhen.aliyuncs.com/" + productImage.url + "?x-oss-process=image/resize,m_lfit,h_80,w_80'></div><div class='col-9 name'><div class='number'>" + key + "</div><div>" + product.name + "</div></div></div> </a>";
+                        var href = "http://localhost:8080/product/27145893731905536/" + product.id + "";
+                        var productDiv = "<a href='" + href + "' class='item' target='_blank'><div class='row no-gutters'><div class='col-3 img-fluid text-center'><img src='http://change-data.oss-cn-shenzhen.aliyuncs.com/" + productImage.url + "?x-oss-process=image/resize,m_lfit,h_80,w_80'></div><div class='col-9 name'><div class='number'>" + key + "</div><div>" + product.name + "</div></div></div> </a>";
                         if (i > 0 && i < 5) $("#rankingList1").append(productDiv);
                         if (i > 4 && i < 9) $("#rankingList2").append(productDiv);
                         if (i > 8 && i < 13) $("#rankingList3").append(productDiv);
@@ -91,7 +93,8 @@
                     $.each(data, function (key, value) {
                         var product = value.product;
                         var productImage = value.productImage;
-                        var htmlDiv = "<div class='col-md-3 col-6 text-center'><a href='http://www.baidu.com' class='module-commodity' target='_blank'><img src='http://change-data.oss-cn-shenzhen.aliyuncs.com/" + productImage.url + "?x-oss-process=image/resize,m_lfit,h_300,w_300' class='img-fluid'><p>" + product.name + "</p><div>¥:" + product.price + "</div></a></div>";
+                        var href = "http://localhost:8080/product/27145893731905536/" + product.id + "";
+                        var htmlDiv = "<div class='col-md-3 col-6 text-center'><a href='" + href + "' class='module-commodity' target='_blank'><img src='http://change-data.oss-cn-shenzhen.aliyuncs.com/" + productImage.url + "?x-oss-process=image/resize,m_lfit,h_300,w_300' class='img-fluid'><p>" + product.name + "</p><div>¥:" + product.price + "</div></a></div>";
                         $("#" + idName + "").append(htmlDiv);
                     });
                     // htmlDiv =
@@ -241,7 +244,7 @@
                         $.each(data, function (key, value) {
                             html += "<h6>" + key + "</h6>";
                             $.each(value, function (index, option) {
-                                html += "<a href='${pageContext.request.contextPath}/view/product/search_list.jsp?fl="+option.id+"' style='margin-bottom: 30px;' target='_blank'>" + option.name + "</a>";
+                                html += "<a href='${pageContext.request.contextPath}/view/product/search_list.jsp?fl=" + option.id + "' style='margin-bottom: 30px;' target='_blank'>" + option.name + "</a>";
                             })
                         });
                         $("#twoLevelCategory").html(html);
@@ -260,13 +263,16 @@
                 </ol>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img class="d-block w-100" src="${pageContext.request.contextPath}/resources/img/lb1.jpg" alt="First slide">
+                        <img class="d-block w-100" src="${pageContext.request.contextPath}/resources/img/lb1.jpg"
+                             alt="First slide">
                     </div>
                     <div class="carousel-item">
-                        <img class="d-block w-100" src="${pageContext.request.contextPath}/resources/img/lb2.jpg" alt="Second slide">
+                        <img class="d-block w-100" src="${pageContext.request.contextPath}/resources/img/lb2.jpg"
+                             alt="Second slide">
                     </div>
                     <div class="carousel-item">
-                        <img class="d-block w-100" src="${pageContext.request.contextPath}/resources/img/lb3.jpg" alt="Third slide">
+                        <img class="d-block w-100" src="${pageContext.request.contextPath}/resources/img/lb3.jpg"
+                             alt="Third slide">
                     </div>
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -290,13 +296,16 @@
                             Hi~欢迎来到Cheng！
                         </div>
                         <div class="col-6">
-                            <a href="${pageContext.request.contextPath}/resources/view/user/login.jsp" class="btn btn-primary btn-block">登陆</a>
+                            <a href="${pageContext.request.contextPath}/resources/view/user/login.jsp"
+                               class="btn btn-primary btn-block">登陆</a>
                         </div>
                         <div class="col-6">
-                            <a href="${pageContext.request.contextPath}/resources/view/user/reg.jsp" class="btn btn-outline-success btn-block">注册</a>
+                            <a href="${pageContext.request.contextPath}/resources/view/user/reg.jsp"
+                               class="btn btn-outline-success btn-block">注册</a>
                         </div>
                         <div class="col-12 mt-2 text-center">
-                            <img src="${pageContext.request.contextPath}/resources/img/baoz.png" alt="" class="img-fluid">
+                            <img src="${pageContext.request.contextPath}/resources/img/baoz.png" alt=""
+                                 class="img-fluid">
                         </div>
 
                         <div class="hr"></div>
@@ -451,7 +460,7 @@
             <img src="${pageContext.request.contextPath}/resources/img/commodity/b1.png" class="img-fluid">
         </div>
         <!-- tab栏 -->
-        <div class="col-md-10 col-12" >
+        <div class="col-md-10 col-12">
             <div class="row tab justify-content-center no-gutters">
                 <a href="#" class="col active">潮流配饰</a>
                 <a href="#" class="col">运动户外</a>

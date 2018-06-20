@@ -2,6 +2,7 @@ package me.cathub.change.apply.common;
 
 import me.cathub.change.product.bean.Product;
 import me.cathub.change.product.bean.ProductImage;
+import me.cathub.change.storehouse.bean.StorehouseProductStock;
 
 /**
  * @Author: z.yu
@@ -20,6 +21,8 @@ public class ProductPageResult {
         this.productImage = productImage;
     }
 
+
+
     @Override
     public String toString() {
         return "ProductPageResult{" +
@@ -27,6 +30,7 @@ public class ProductPageResult {
                 ", productImage=" + productImage +
                 '}';
     }
+
 
     public Product getProduct() {
         return product;

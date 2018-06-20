@@ -89,8 +89,8 @@ public class OrderController {
 
             /** 封装支付成功的显示信息对象 **/
             order = orderRpcServer.select(new Order(Long.parseLong(out_trade_no)), false);
-            //把支付宝返回交易号更新到order表的订单号字段（暂时）
-            order.setOrderCode(trade_no);
+            //订单状态更新为已支付：orderCode=2 -> 已支付
+            order.setOrderCode("2");
             orderRpcServer.update(order);
 
             orderItemList = orderItemRpcServer.listByOrderId(Long.parseLong(out_trade_no), 0, 100, 0, false);

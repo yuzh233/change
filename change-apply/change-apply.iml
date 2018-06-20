@@ -131,8 +131,11 @@
     <orderEntry type="module" module-name="change-wallet-bean" />
     <orderEntry type="library" name="Maven: junit:junit:4.0" level="project" />
     <orderEntry type="module" module-name="change-api-rpc-server-order" />
-    <orderEntry type="library" name="Maven: com.alipay.sdk:alipay-sdk-java:3.0.52.ALL" level="project" />
+    <orderEntry type="library" name="Maven: com.alipay.sdk:alipay-sdk-java:3.1.0" level="project" />
     <orderEntry type="library" name="Maven: commons-logging:commons-logging:1.1.1" level="project" />
     <orderEntry type="module" module-name="change-wallet-pay" />
+    <orderEntry type="module" module-name="change-wallet" />
+    <orderEntry type="module" module-name="change-wallet-dao" />
+    <orderEntry type="module" module-name="change-wallet-rpc-server" />
   </component>
 </module>
